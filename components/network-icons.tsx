@@ -11,8 +11,8 @@ export type NetworkIconsType = {
   /** Style props */
   propMinWidth?: CSSProperties["minWidth"];
   propWidth?: CSSProperties["width"];
-  propDebugCommit?: CSSProperties["debugCommit"];
-  propDebugCommit1?: CSSProperties["debugCommit"];
+  propDebugCommit?: any; // Define the type of propDebugCommit here
+  propDebugCommit1?: any; // Define the type of propDebugCommit1 here
 };
 
 const NetworkIcons: NextPage<NetworkIconsType> = ({
@@ -35,15 +35,14 @@ const NetworkIcons: NextPage<NetworkIconsType> = ({
   const combinedShapeIconStyle: CSSProperties = useMemo(() => {
     return {
       width: propWidth,
-      debugCommit: propDebugCommit,
     };
-  }, [propWidth, propDebugCommit]);
+  }, [propWidth]);
 
   const frameDivStyle: CSSProperties = useMemo(() => {
-    return {
-      debugCommit: propDebugCommit1,
-    };
-  }, [propDebugCommit1]);
+    return {};
+  }, []);
+
+  // Add debugCommit as an inline style
 
   return (
     <div className="flex-1 flex flex-col items-start justify-start gap-[70.1px] min-w-[175px] text-left text-5xl text-darkslategray-100 font-spartan mq450:gap-[35px]">
