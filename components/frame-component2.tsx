@@ -19,8 +19,7 @@ const FrameComponent2: NextPage = () => {
                 </h1>
               </div>
               <div className="self-stretch relative text-xl leading-[32px] font-source-sans-pro z-[3] mq450:text-base mq450:leading-[26px]">
-                The sky was cloudless and of a deep dark blue. The spectacle
-                before us was indeed sublime.
+                Emerging Trends in Pharmaceutical Research
               </div>
             </div>
           </div>
@@ -45,7 +44,7 @@ const FrameComponent2: NextPage = () => {
                     February
                   </h3>
                   <b className="w-[70px] relative tracking-[-1px] leading-[32px] inline-block text-right min-w-[70px] z-[6] mq450:text-lgi mq450:leading-[26px]">
-                    2020
+                    2025
                   </b>
                 </div>
                 <b className="relative text-89xl tracking-[-3px] z-[6] mq450:text-13xl mq1050:text-35xl">
@@ -53,8 +52,8 @@ const FrameComponent2: NextPage = () => {
                 </b>
               </div>
               <div className="relative text-base leading-[32px] font-source-sans-pro text-darkslategray-200 z-[6]">
-                <p className="m-0">{`24 Lakewood Street `}</p>
-                <p className="m-0">Webster, NY 14580</p>
+                <p className="m-0">{`Department of Pharmaceutical Chemistry, `}</p>
+                <p className="m-0">JSS College of Pharmacy, Ooty</p>
               </div>
             </div>
           </div>

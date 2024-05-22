@@ -24,17 +24,14 @@ const Event1: NextPage = () => {
       <FrameComponent3 />
       <section className="w-[968px] flex flex-row items-start justify-start pt-0 px-12 pb-[134px] box-border max-w-full text-left text-lg text-darksalmon-100 font-spartan mq750:pb-[87px] mq750:box-border mq1050:pl-6 mq1050:pr-6 mq1050:box-border">
         <div className="flex-1 flex flex-col items-start justify-start gap-[37px] max-w-full mq450:gap-[18px]">
-          <b className="relative tracking-[2px] leading-[32px] uppercase z-[1]">
-            Design meetup
-          </b>
           <div className="self-stretch flex flex-row items-end justify-start gap-[59px] max-w-full text-53xl text-darkslategray-100 mq450:gap-[29px] mq1050:flex-wrap">
             <div className="flex-1 flex flex-col items-start justify-end pt-0 px-0 pb-6 box-border max-w-full mq750:min-w-full">
               <div className="self-stretch flex flex-col items-start justify-start gap-[34px] max-w-full mq750:gap-[17px]">
                 <div className="self-stretch flex flex-col items-start justify-start gap-[28px] max-w-full">
                   <div className="self-stretch flex flex-row items-start justify-start relative max-w-full">
                     <h1 className="m-0 flex-1 relative text-inherit tracking-[-2px] leading-[80px] font-bold font-inherit inline-block max-w-full z-[2] mq450:text-24xl mq450:leading-[48px] mq1050:text-39xl mq1050:leading-[64px]">
-                      <p className="m-0">{`Most Creative `}</p>
-                      <p className="m-0">Conference</p>
+                      <p className="m-0">{`EMERGING TRENDS IN `}</p>
+                      <p className="m-0">PHARMACEUTICAL RESEARCH</p>
                     </h1>
                     <div className="h-[893px] w-[1084px] absolute !m-[0] right-[-764px] bottom-[-415px]">
                       <img
@@ -52,27 +49,33 @@ const Event1: NextPage = () => {
                       </div>
                     </div>
                   </div>
-                  <div className="w-[470px] relative text-base leading-[32px] font-source-sans-pro text-darkslategray-200 inline-block max-w-full z-[2]">
-                    The sky was cloudless and of a deep dark blue. The spectacle
-                    before us was indeed sublime.
+
+                  <div className="w-[470px] relative text-base leading-[32px] font-source-sans-pro  inline-block max-w-full z-[2]">
+                    <b className="relative  text-black font-black uppercase z-[1]">
+                      Organised By
+                    </b>
+                    <p className="text-black text-4xl font-bold ">
+                      Department of Pharmaceutical Chemistry, JSS College of
+                      Pharmacy, Ooty
+                    </p>
                   </div>
                 </div>
                 <div className="flex flex-row items-start justify-start gap-[30px] max-w-full text-5xl mq750:flex-wrap">
                   <div className="flex flex-col items-start justify-start pt-1 px-0 pb-0">
-                    <button className="cursor-pointer [border:none] pt-4 px-12 pb-3.5 bg-[transparent] flex flex-row items-start justify-start relative z-[1]">
-                      <div className="h-full w-full absolute !m-[0] top-[0px] right-[0px] bottom-[0px] left-[0px] rounded bg-royalblue" />
-                      <b className="w-[73px] relative text-base tracking-[-1px] inline-block font-spartan text-white text-center min-w-[73px] z-[1]">
+                    <button className="cursor-pointer [border:none] pt-4 px-12 pb-3.5 bg-[transparent] flex flex-row items-start justify-start relative z-[1] hover:bg-blue-950">
+                      <div className="h-full w-full absolute !m-[0] top-[0px] right-[0px] bottom-[0px] left-[0px] rounded bg-royalblue hover:bg-blue-950" />
+                      <b className="w-[73px] relative text-base tracking-[-1px] inline-block font-spartan text-white text-center  min-w-[73px] z-[1]">
                         Schedule
                       </b>
                     </button>
                   </div>
                   <div className="flex flex-col items-start justify-start">
                     <b className="relative tracking-[-1px] leading-[32px] shrink-0 [debug_commit:bf4bc93] z-[2] mq450:text-lgi mq450:leading-[26px]">
-                      12-14 February, 2020
+                      12-14 February, 2025
                     </b>
                     <div className="h-[29px] flex flex-row items-start justify-start pt-0 px-0 pb-0 box-border text-base text-darkslategray-200 font-source-sans-pro">
                       <div className="mt-[-3px] relative leading-[32px] inline-block min-w-[97px] shrink-0 [debug_commit:bf4bc93] z-[2]">
-                        New York, USA
+                        JSS College of Pharmacy, Ooty
                       </div>
                     </div>
                   </div>
@@ -92,51 +95,7 @@ const Event1: NextPage = () => {
       <FrameComponent1 />
       <FrameComponent />
       <EventScheduleContainer />
-      <section className="self-stretch flex flex-col items-start justify-start pt-0 px-0 pb-[66px] box-border gap-[53px] max-w-full text-left text-lg text-darksalmon-100 font-spartan mq450:pb-7 mq450:box-border mq750:gap-[26px] mq1050:pb-[43px] mq1050:box-border">
-        <div className="self-stretch flex flex-row items-start justify-start py-0 px-12 box-border max-w-full lg:pl-6 lg:pr-6 lg:box-border">
-          <FirstScheduleDetailsContain />
-        </div>
-        <div className="self-stretch shadow-[0px_20px_40px_rgba(0,_0,_0,_0.1)] rounded bg-white flex flex-row items-end justify-between pt-[54px] px-12 pb-[52px] box-border max-w-full gap-[20px] z-[3] lg:flex-wrap lg:pl-6 lg:pr-6 lg:box-border">
-          <div className="h-44 w-[1266px] relative shadow-[0px_20px_40px_rgba(0,_0,_0,_0.1)] rounded bg-white hidden max-w-full" />
-          <div className="w-[708px] flex flex-row items-start justify-start gap-[30px] max-w-full mq750:flex-wrap">
-            <div className="flex flex-col items-start justify-start pt-[19px] pb-0 pr-[9px] pl-0">
-              <b className="relative tracking-[2px] leading-[32px] uppercase inline-block min-w-[61px] whitespace-nowrap z-[4]">
-                11:00
-              </b>
-            </div>
-            <img
-              className="h-[70px] w-[70px] relative object-cover min-h-[70px] z-[4]"
-              alt=""
-              src="/bitmap-10@2x.png"
-            />
-            <div className="flex-1 flex flex-col items-start justify-start pt-px px-0 pb-0 box-border min-w-[330px] max-w-full text-5xl text-darkslategray-100">
-              <div className="self-stretch flex flex-col items-start justify-start gap-[3px]">
-                <h3 className="m-0 relative text-inherit tracking-[-1px] leading-[32px] font-bold font-inherit z-[4] mq450:text-lgi mq450:leading-[26px]">
-                  How to Make a Clipping Mask in InDesign
-                </h3>
-                <div className="relative text-base leading-[32px] font-source-sans-pro text-darkslategray-200 inline-block min-w-[85px] z-[4]">
-                  Kevin Noboa
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="w-[181px] flex flex-col items-start justify-end pt-0 px-0 pb-4 box-border text-right text-base text-darkslategray-100 font-source-sans-pro">
-            <div className="self-stretch flex flex-row items-start justify-between gap-[20px]">
-              <div className="relative leading-[32px] inline-block min-w-[81px] z-[4]">
-                Small Room
-              </div>
-              <div className="flex flex-col items-start justify-start pt-0.5 px-0 pb-0">
-                <img
-                  className="w-8 h-8 relative z-[4]"
-                  alt=""
-                  src="/combined-shape-4.svg"
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-        <ThirdSchedule />
-      </section>
+
       <DecorativeWave />
       <SponsorContainer />
       <SponsorGallery />

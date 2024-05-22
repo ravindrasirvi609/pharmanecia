@@ -6,7 +6,7 @@ const FrameComponent3: NextPage = () => {
     <header className="self-stretch flex flex-row items-center justify-between py-4 px-6 max-w-full text-left text-21xl text-darkslategray-100 font-spartan lg:px-6 bg-darkslategray-900 relative z-10">
       <div className="flex-1 flex flex-row items-center justify-between max-w-full">
         <h1 className="m-0 text-inherit tracking-[-2px] leading-[48px] font-bold text-darksalmon-200">
-          Pharmanecia
+          Pharmanecia 4.E
         </h1>
         <nav className="flex-1 flex flex-row items-center justify-end gap-6 text-base text-white font-source-sans-pro">
           <Link href="/about">
@@ -22,8 +22,8 @@ const FrameComponent3: NextPage = () => {
             <span className="hover:text-darksalmon-200">Contact</span>
           </Link>
           <div className="relative text-center font-spartan">
-            <Link href="/get-ticket">
-              <span className="inline-block px-4 py-2 rounded bg-darksalmon-200 text-white font-bold">
+            <Link href="https://pages.razorpay.com/pl_L0UEF2LTH8MR0F/view">
+              <span className="inline-block px-4 py-2 rounded-full cursor-pointer bg-green-500 text-black hover:bg-black hover:text-white transition-colors duration-900 font-bold">
                 Get Ticket
               </span>
             </Link>
