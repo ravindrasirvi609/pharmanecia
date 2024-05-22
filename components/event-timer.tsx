@@ -1,10 +1,17 @@
 import { useEffect, useState } from "react";
 import type { NextPage } from "next";
 
+interface TimeLeft {
+  days: number;
+  hours: number;
+  minutes: number;
+  seconds: number;
+}
+
 const EventTimer: NextPage = () => {
-  const calculateTimeLeft = () => {
-    const difference = +new Date("2025-02-01") - +new Date();
-    let timeLeft = {};
+  const calculateTimeLeft = (): TimeLeft => {
+    const difference = +new Date("2024-06-01") - +new Date();
+    let timeLeft: TimeLeft = { days: 0, hours: 0, minutes: 0, seconds: 0 };
 
     if (difference > 0) {
       timeLeft = {
@@ -18,7 +25,7 @@ const EventTimer: NextPage = () => {
     return timeLeft;
   };
 
-  const [timeLeft, setTimeLeft] = useState(calculateTimeLeft());
+  const [timeLeft, setTimeLeft] = useState<TimeLeft>(calculateTimeLeft());
 
   useEffect(() => {
     const timer = setTimeout(() => {
