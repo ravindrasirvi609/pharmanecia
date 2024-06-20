@@ -7,9 +7,9 @@ import Footer from "@/components/Footer";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Pharmanecia - Pharma Conference and Research Publications",
+  title: "Pharmanecia - EMERGING TRENDS IN PHARMACEUTICAL RESEARCH",
   description:
-    "Join us for Pharmanecia, the 4th Annual International Convention of the Hosted by Operant Pharmacy Federation. Explore the latest innovations and advancements in pharmacy education and practice.",
+    "Join us for Pharmanecia, the 4th Annual International Convention of the Hosted by Operant BioMedical Researsh Federation. Explore the latest innovations and advancements in pharmacy education and practice.",
 };
 
 export default function RootLayout({

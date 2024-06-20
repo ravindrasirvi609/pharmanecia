@@ -11,11 +11,11 @@ const Navbar = () => {
     setMenuOpen(!menuOpen);
   };
   return (
-    <header className="bg-white text-black px-4 py-8 pt-1">
+    <header className="bg-white text-black px-4 py-6 pt-1 fixed w-full z-10">
       <div className="container mx-auto flex justify-between items-center">
         <Link href={"/"}>
-          <h1 className="font-black text-3xl text-blue-700 my-auto mt-4">
-            Pharmanecia
+          <h1 className="font-black text-3xl text-black my-auto mt-4">
+            PHARMANECIA
           </h1>
         </Link>
 
@@ -29,9 +29,8 @@ const Navbar = () => {
             <AiOutlineMenu size={24} />
           )}
         </button>
-        {/* Large Devices Navigation */}
         <nav className="hidden lg:flex">
-          <ul className="flex space-x-4">
+          <ul className="flex space-x-4 mt-4">
             <li>
               <Link href="/" className="hover:text-ochre">
                 Home
@@ -41,7 +40,7 @@ const Navbar = () => {
               <Link href="/#about" className="hover:text-ochre">
                 About
               </Link>
-              <ul className="absolute left-0 mt-2 space-y-2 bg-white text-black px-2 py-1 rounded-md group-hover:block hidden">
+              <ul className="absolute left-0 space-y-2 bg-white text-black px-2 py-1 rounded-md group-hover:block hidden">
                 <li>
                   <Link href="/host" className="hover:text-ochre">
                     About Host
@@ -82,7 +81,6 @@ const Navbar = () => {
           </ul>
         </nav>
       </div>
-      {/* Mobile Menu */}
       {menuOpen && (
         <nav className="lg:hidden mt-4 pb-4">
           <ul className="flex flex-col space-y-4">

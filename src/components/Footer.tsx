@@ -9,21 +9,19 @@ const Footer = () => {
           <h2 className="text-xl font-bold mb-4">Contact Information</h2>
           <p>
             Email:{" "}
-            <a href="mailto:info@conference.com" className="text-accent">
-              info@conference.com
+            <a href="mailto:info@pharmanecia.com" className="text-light">
+              info@pharmanecia.com
             </a>
           </p>
           <p>
             Phone:{" "}
-            <a href="tel:+1234567890" className="text-accent">
-              +123 456 7890
+            <a href="tel:+91 94609-71652" className="text-light">
+              +91 94609-71652
             </a>
           </p>
           <p>
             Address:{" "}
-            <span className="text-accent">
-              123 Conference St, City, Country
-            </span>
+            <span className="text-light">JSS College of Pharmacy, Ooty</span>
           </p>
         </div>
 
@@ -72,17 +70,17 @@ const Footer = () => {
           <h2 className="text-xl font-bold mb-4">Legal</h2>
           <ul className="text-lg">
             <li>
-              <a href="#" className="text-accent hover:underline">
+              <a href="#" className="text-light hover:underline">
                 Terms of Service
               </a>
             </li>
             <li>
-              <a href="#" className="text-accent hover:underline mt-2 block">
+              <a href="#" className="text-light hover:underline mt-2 block">
                 Privacy Policy
               </a>
             </li>
             <li>
-              <a href="#" className="text-accent hover:underline mt-2 block">
+              <a href="#" className="text-light hover:underline mt-2 block">
                 Cookie Policy
               </a>
             </li>
@@ -90,7 +88,7 @@ const Footer = () => {
         </div>
       </div>
       <div className="mt-8 text-center text-sm text-gray-400">
-        &copy; 2024 Conference Name. All rights reserved.
+        &copy; 2024 Pharmanecia. All rights reserved.
       </div>
     </footer>
   );

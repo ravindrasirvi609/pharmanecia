@@ -13,9 +13,12 @@ const Schedule = () => {
         <div className="mb-12">
           <h2 className="text-3xl font-semibold mb-6 text-secondary">Day 1</h2>
           {schedule.day1.map((item, index) => (
-            <div key={index} className="mb-6">
+            <div
+              key={index}
+              className="mb-6 flex flex-center bg-danger p-4 rounded-md"
+            >
               <h3 className="text-xl font-bold mb-2">{item.time}</h3>
-              <p className="text-lg">{item.event}</p>
+              <p className="text-lg mx-auto">{item.event}</p>
               {item.speakers.length > 0 && (
                 <ul className="list-disc list-inside mt-2 text-lg">
                   {item.speakers.map((speaker, idx) => (
@@ -33,9 +36,12 @@ const Schedule = () => {
         <div>
           <h2 className="text-3xl font-semibold mb-6 text-secondary">Day 2</h2>
           {schedule.day2.map((item, index) => (
-            <div key={index} className="mb-6">
+            <div
+              key={index}
+              className="mb-6 flex flex-center bg-danger p-4 rounded-md"
+            >
               <h3 className="text-xl font-bold mb-2">{item.time}</h3>
-              <p className="text-lg">{item.event}</p>
+              <p className="text-lg mx-auto">{item.event}</p>
               {item.speakers.length > 0 && (
                 <ul className="list-disc list-inside mt-2 text-lg">
                   {item.speakers.map((speaker, idx) => (

@@ -22,11 +22,11 @@ const HomePage = () => {
             Pharmanecia 4.E
           </h1>
           <h2 className="text-2xl font-semibold mb-4 text-secondary">
-            Organised By
+            Jointly Organised By{" "}
           </h2>
           <h3 className="text-xl font-medium mb-6 text-primary">
             Department of Pharmaceutical Chemistry, JSS College of Pharmacy,
-            Ooty
+            Ooty and Operant Pharmacy Federation
           </h3>
           <p className="text-lg mb-8 text-accent">
             THEME : EMERGING TRENDS IN PHARMACEUTICAL RESEARCH
