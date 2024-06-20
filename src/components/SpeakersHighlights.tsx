@@ -1,3 +1,4 @@
+import Image from "next/image";
 import React from "react";
 
 const SpeakersHighlights = () => {
@@ -15,10 +16,12 @@ const SpeakersHighlights = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {/* Speaker 1 */}
             <div className="bg-white shadow-lg rounded-lg p-6 text-center">
-              <img
+              <Image
                 src="https://via.placeholder.com/150"
                 alt="Speaker 1"
                 className="w-32 h-32 mx-auto rounded-full mb-4"
+                height={150}
+                width={150}
               />
               <h3 className="text-xl font-semibold text-primary">
                 Dr. John Doe
@@ -31,10 +34,12 @@ const SpeakersHighlights = () => {
 
             {/* Speaker 2 */}
             <div className="bg-white shadow-lg rounded-lg p-6 text-center">
-              <img
+              <Image
                 src="https://via.placeholder.com/150"
                 alt="Speaker 2"
                 className="w-32 h-32 mx-auto rounded-full mb-4"
+                height={150}
+                width={150}
               />
               <h3 className="text-xl font-semibold text-primary">
                 Dr. Jane Smith
@@ -47,10 +52,12 @@ const SpeakersHighlights = () => {
 
             {/* Speaker 3 */}
             <div className="bg-white shadow-lg rounded-lg p-6 text-center">
-              <img
+              <Image
                 src="https://via.placeholder.com/150"
                 alt="Speaker 3"
                 className="w-32 h-32 mx-auto rounded-full mb-4"
+                height={150}
+                width={150}
               />
               <h3 className="text-xl font-semibold text-primary">
                 Dr. Emily Johnson

@@ -55,42 +55,27 @@ const Navbar = () => {
               </ul>
             </li>
             <li>
-              <Link href="/#schedule" className="hover:text-ochre">
+              <Link href="/Schedule" className="hover:text-ochre">
                 Schedule
               </Link>
             </li>
-            <li className="relative group">
-              <Link href="/#speakers" className="hover:text-ochre">
+            <li>
+              <Link href="/Speakers" className="hover:text-ochre">
                 Speakers
               </Link>
-              <ul className="absolute left-0 mt-2 space-y-2 bg-white text-black px-2 py-1 rounded-md group-hover:block hidden">
-                <li>
-                  <Link href="/#national-speakers" className="hover:text-ochre">
-                    National Speakers
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/#international-speakers"
-                    className="hover:text-ochre"
-                  >
-                    International Speakers
-                  </Link>
-                </li>
-              </ul>
             </li>
             <li>
-              <Link href="/#sponsors" className="hover:text-ochre">
+              <Link href="/Sponsors" className="hover:text-ochre">
                 Sponsors
               </Link>
             </li>
             <li>
-              <Link href="/#registration" className="hover:text-ochre">
+              <Link href="/Registration" className="hover:text-ochre">
                 Registration
               </Link>
             </li>
             <li>
-              <Link href="/#contact" className="hover:text-ochre">
+              <Link href="/Contact" className="hover:text-ochre">
                 Contact
               </Link>
             </li>
@@ -124,42 +109,27 @@ const Navbar = () => {
               </ul>
             </li>
             <li>
-              <Link href="/#schedule" className="hover:text-ochre">
+              <Link href="/Schedule" className="hover:text-ochre">
                 Schedule
               </Link>
             </li>
             <li>
-              <Link href="/#speakers" className="hover:text-ochre">
+              <Link href="/Speakers" className="hover:text-ochre">
                 Speakers
               </Link>
-              <ul className="ml-4 space-y-2">
-                <li>
-                  <Link href="/#national-speakers" className="hover:text-ochre">
-                    National Speakers
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/#international-speakers"
-                    className="hover:text-ochre"
-                  >
-                    International Speakers
-                  </Link>
-                </li>
-              </ul>
             </li>
             <li>
-              <Link href="/#sponsors" className="hover:text-ochre">
+              <Link href="/Sponsors" className="hover:text-ochre">
                 Sponsors
               </Link>
             </li>
             <li>
-              <Link href="/registration" className="hover:text-ochre">
+              <Link href="/Registration" className="hover:text-ochre">
                 Registration
               </Link>
             </li>
             <li>
-              <Link href="/#contact" className="hover:text-ochre">
+              <Link href="/Contact" className="hover:text-ochre">
                 Contact
               </Link>
             </li>

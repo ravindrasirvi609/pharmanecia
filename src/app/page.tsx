@@ -1,6 +1,10 @@
 import AboutConference from "@/components/About";
+import LatestNews from "@/components/LatestNews";
 import ScheduleOverview from "@/components/ScheduleOverview";
 import SpeakersHighlights from "@/components/SpeakersHighlights";
+import SponsorsPartners from "@/components/SponsorsPartners";
+import Testimonials from "@/components/Testimonials";
+import VenueAccommodations from "@/components/VenueAccommodations";
 import React from "react";
 
 const HomePage = () => {
@@ -43,6 +47,10 @@ const HomePage = () => {
       <AboutConference />
       <SpeakersHighlights />
       <ScheduleOverview />
+      <SponsorsPartners />
+      <VenueAccommodations />
+      <Testimonials />
+      <LatestNews />
     </main>
   );
 };
