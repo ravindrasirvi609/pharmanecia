@@ -5,6 +5,7 @@ import SpeakersHighlights from "@/components/SpeakersHighlights";
 import SponsorsPartners from "@/components/SponsorsPartners";
 import Testimonials from "@/components/Testimonials";
 import VenueAccommodations from "@/components/VenueAccommodations";
+import OpfModel from "@/components/opfModel";
 import Head from "next/head";
 import React from "react";
 
@@ -62,6 +63,7 @@ const HomePage = () => {
       <VenueAccommodations />
       <Testimonials />
       <LatestNews />
+      <OpfModel />
     </main>
   );
 };
