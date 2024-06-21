@@ -1,6 +1,32 @@
-import React from "react";
+"use client";
+import { StaticImport } from "next/dist/shared/lib/get-img-props";
+import Image from "next/image";
+import React, { useState } from "react";
 
 const Contact = () => {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
+  const [registrationInfo, setRegistrationInfo] = useState<{
+    url: string | undefined;
+    qrCodeUrl: string | StaticImport;
+    registrationId: string;
+  } | null>(null);
+
+  const handleSubmit = async (e: { preventDefault: () => void }) => {
+    e.preventDefault();
+
+    const res = await fetch("/api/contact", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ name, email, message }),
+    });
+
+    const data = await res.json();
+    setRegistrationInfo(data);
+  };
   return (
     <div className="bg-light text-primary px-6 py-12">
       <div className="max-w-7xl mx-auto">
@@ -30,7 +56,7 @@ const Contact = () => {
           <h2 className="text-3xl font-semibold mb-6 text-secondary text-center">
             Contact Form
           </h2>
-          <form className="max-w-xl mx-auto">
+          <form className="max-w-xl mx-auto" onSubmit={handleSubmit}>
             <div className="mb-4">
               <label
                 htmlFor="name"
@@ -41,6 +67,9 @@ const Contact = () => {
               <input
                 type="text"
                 id="name"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                required
                 className="w-full p-2 mt-1 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-accent"
               />
             </div>
@@ -54,6 +83,9 @@ const Contact = () => {
               <input
                 type="email"
                 id="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
                 className="w-full p-2 mt-1 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-accent"
               />
             </div>
@@ -66,6 +98,9 @@ const Contact = () => {
               </label>
               <textarea
                 id="message"
+                value={message}
+                onChange={(e) => setMessage(e.target.value)}
+                required
                 className="w-full p-2 mt-1 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-accent"
                 rows={5}
               ></textarea>
@@ -77,6 +112,31 @@ const Contact = () => {
               Send Message
             </button>
           </form>
+          {registrationInfo && (
+            <div className="bg-purple-400 p-6 rounded-lg shadow-lg text-white">
+              <h2 className="text-2xl font-bold mb-4">Registration Details</h2>
+              <p className="mb-4">
+                Registration ID:{" "}
+                <span className="font-semibold">
+                  {registrationInfo.registrationId}
+                </span>
+              </p>
+              <p className="bg-red-500 p-2 rounded-md text-white mb-4">
+                <a href={registrationInfo.url} className="underline text-white">
+                  Click Here
+                </a>
+              </p>
+              <div className="flex justify-center">
+                <Image
+                  src={registrationInfo.qrCodeUrl}
+                  alt="QR Code"
+                  width={300}
+                  height={300}
+                  className="rounded-md"
+                />
+              </div>
+            </div>
+          )}
         </div>
 
         {/* Map */}
