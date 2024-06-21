@@ -16,10 +16,7 @@ const HomePage = () => {
         <title>Pharmanecia 4.E</title>
         <meta name="description" content="Pharmanecia 4.E" />
         <link rel="icon" href="/favicon.ico" />
-        <meta
-          property="og:image"
-          content="https://play-lh.googleusercontent.com/ZyWNGIfzUyoajtFcD7NhMksHEZh37f-MkHVGr5Yfefa-IX7yj9SMfI82Z7a2wpdKCA"
-        />
+        <meta property="og:image" content="/opflogo.png" />
         <meta name="twitter:card" content="summary_large_image" />
       </Head>
       <div
