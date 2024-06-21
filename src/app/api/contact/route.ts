@@ -14,7 +14,7 @@ export async function POST(req: NextRequest) {
     const registrationId = new mongoose.Types.ObjectId().toString();
 
     // Create a unique URL for the student
-    const url = `${process.env.NEXT_PUBLIC_BASE_URL}/student/${registrationId}`;
+    const url = `${process.env.NEXT_PUBLIC_BASE_URL}/Contact/${registrationId}`;
 
     const qrCodeUrl = await QRCode.toDataURL(url);
 
