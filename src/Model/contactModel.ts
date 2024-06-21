@@ -7,6 +7,11 @@ const contactSchema = new mongoose.Schema({
   message: { type: String },
   registrationId: { type: String },
   qrCodeUrl: { type: String },
+  kitTaken: { type: Boolean, default: false },
+  idCardTaken: { type: Boolean, default: false },
+  breakfastTaken: { type: Boolean, default: false },
+  lunchTaken: { type: Boolean, default: false },
+  certificateTaken: { type: Boolean, default: false },
 });
 
 const Contact =

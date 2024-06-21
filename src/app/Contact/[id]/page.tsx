@@ -8,6 +8,11 @@ interface Student {
   email: string;
   message: string;
   qrCodeUrl: string;
+  kitTaken: boolean;
+  idCardTaken: boolean;
+  breakfastTaken: boolean;
+  lunchTaken: boolean;
+  certificateTaken: boolean;
 }
 
 interface StudentPageProps {
@@ -24,6 +29,11 @@ const StudentPage: React.FC<StudentPageProps> = ({ params }) => {
     email: "",
     message: "",
     qrCodeUrl: "",
+    kitTaken: false,
+    idCardTaken: false,
+    breakfastTaken: false,
+    lunchTaken: false,
+    certificateTaken: false,
   });
 
   useEffect(() => {
@@ -41,6 +51,27 @@ const StudentPage: React.FC<StudentPageProps> = ({ params }) => {
 
     fetchData();
   }, [id]);
+
+  const handleCheckboxChange = async (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    const { name, checked } = event.target;
+    setStudent((prevState) => ({
+      ...prevState,
+      [name]: checked,
+    }));
+
+    await fetch("/api/updateStudent", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        id,
+        [name]: checked,
+      }),
+    });
+  };
 
   return (
     <div className="container mx-auto p-4">
@@ -64,6 +95,58 @@ const StudentPage: React.FC<StudentPageProps> = ({ params }) => {
             </h1>
             <p className="mt-2 text-gray-500">Email: {student.email}</p>
             <p className="mt-2 text-gray-500">Message: {student.message}</p>
+            <div className="mt-4">
+              <label className="flex items-center space-x-3">
+                <input
+                  type="checkbox"
+                  name="kitTaken"
+                  checked={student.kitTaken}
+                  onChange={handleCheckboxChange}
+                  className="form-checkbox h-5 w-5 text-indigo-600"
+                />
+                <span className="text-gray-700">Kit Taken</span>
+              </label>
+              <label className="flex items-center space-x-3">
+                <input
+                  type="checkbox"
+                  name="idCardTaken"
+                  checked={student.idCardTaken}
+                  onChange={handleCheckboxChange}
+                  className="form-checkbox h-5 w-5 text-indigo-600"
+                />
+                <span className="text-gray-700">ID Card Taken</span>
+              </label>
+              <label className="flex items-center space-x-3">
+                <input
+                  type="checkbox"
+                  name="breakfastTaken"
+                  checked={student.breakfastTaken}
+                  onChange={handleCheckboxChange}
+                  className="form-checkbox h-5 w-5 text-indigo-600"
+                />
+                <span className="text-gray-700">Breakfast Taken</span>
+              </label>
+              <label className="flex items-center space-x-3">
+                <input
+                  type="checkbox"
+                  name="lunchTaken"
+                  checked={student.lunchTaken}
+                  onChange={handleCheckboxChange}
+                  className="form-checkbox h-5 w-5 text-indigo-600"
+                />
+                <span className="text-gray-700">Lunch Taken</span>
+              </label>
+              <label className="flex items-center space-x-3">
+                <input
+                  type="checkbox"
+                  name="certificateTaken"
+                  checked={student.certificateTaken}
+                  onChange={handleCheckboxChange}
+                  className="form-checkbox h-5 w-5 text-indigo-600"
+                />
+                <span className="text-gray-700">Certificate Taken</span>
+              </label>
+            </div>
           </div>
         </div>
       </div>
