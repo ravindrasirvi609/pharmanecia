@@ -12,13 +12,26 @@ import React from "react";
 const HomePage = () => {
   return (
     <main>
-      <Head>
+      <head>
         <title>Pharmanecia 4.E</title>
         <meta name="description" content="Pharmanecia 4.E" />
         <link rel="icon" href="/favicon.ico" />
-        <meta property="og:image" content="/opflogo.png" />
+        <meta property="og:title" content="Pharmanecia 4.E" />
+        <meta property="og:description" content="Pharmanecia 4.E" />
+        <meta
+          property="og:image"
+          content="https://www.adobe.com/content/dam/cc/en/ax-gnav-images/0_AEx.svg"
+        />
+        <meta property="og:url" content="https://yourwebsite.com" />
         <meta name="twitter:card" content="summary_large_image" />
-      </Head>
+        <meta name="twitter:title" content="Pharmanecia 4.E" />
+        <meta name="twitter:description" content="Pharmanecia 4.E" />
+        <meta
+          name="twitter:image"
+          content="https://www.adobe.com/content/dam/cc/en/ax-gnav-images/0_AEx.svg"
+        />
+      </head>
+
       <div
         className="min-h-screen flex items-center justify-center bg-cover bg-center"
         style={{
