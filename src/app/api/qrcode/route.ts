@@ -4,18 +4,16 @@ import { NextRequest, NextResponse } from "next/server";
 
 connect();
 
-export async function POST(req: NextRequest) {
+export async function POST(req: NextRequest): Promise<Response> {
   if (req.method === "POST") {
     const { id } = await req.json();
     const student = await Contact.findOne({ registrationId: id }).lean();
     if (!student) {
-      return {
-        notFound: true,
-      };
+      return new Response(null, { status: 404 });
     }
 
-    return NextResponse.json({ props: { student } });
+    return new Response(JSON.stringify({ props: { student } }));
   } else {
-    return NextResponse.json({ message: "Method not allowed" });
+    return new Response("Method not allowed", { status: 405 });
   }
 }
