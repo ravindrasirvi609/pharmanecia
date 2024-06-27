@@ -50,7 +50,7 @@ export function AbstractForm() {
   const [pincode, setPincode] = useState("");
   const [errors, setErrors] = useState<Errors>({});
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const newErrors: Errors = {};
     if (!email) {
@@ -104,20 +104,37 @@ export function AbstractForm() {
     }
     setErrors(newErrors);
     if (Object.keys(newErrors).length === 0) {
-      console.log({
-        email,
-        whatsappNumber,
-        name,
-        affiliation,
-        coAuthor,
-        title,
-        subject,
-        abstractFile,
-        address,
-        city,
-        state,
-        pincode,
-      });
+      const formData = new FormData();
+      formData.append("email", email);
+      formData.append("whatsappNumber", whatsappNumber);
+      formData.append("name", name);
+      formData.append("affiliation", affiliation);
+      formData.append("coAuthor", coAuthor);
+      formData.append("title", title);
+      formData.append("subject", subject);
+      if (abstractFile) {
+        formData.append("abstractFile", abstractFile);
+      }
+      formData.append("address", address);
+      formData.append("city", city);
+      formData.append("state", state);
+      formData.append("pincode", pincode);
+
+      try {
+        const response = await fetch("/api/submitAbstract", {
+          method: "POST",
+          body: formData,
+        });
+
+        if (!response.ok) {
+          throw new Error("Failed to submit abstract");
+        }
+
+        const result = await response.json();
+        console.log("Success:", result);
+      } catch (error) {
+        console.error("Error:", error);
+      }
     }
   };
 
