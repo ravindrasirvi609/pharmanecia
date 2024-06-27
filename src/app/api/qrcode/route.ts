@@ -9,12 +9,19 @@ export async function POST(req: NextRequest): Promise<Response> {
     const { id } = await req.json();
     console.log(id);
 
-    const student = await AbstractModel.findOne({ _id: id }).lean();
+    let student = await AbstractModel.findOne({ _id: id }).lean();
     if (!student) {
-      return new Response(null, { status: 404 });
+      student = await AbstractModel.findOne({
+        temporaryAbstractCode: id,
+      }).lean();
+      if (!student) {
+        return new Response(null, { status: 404 });
+      }
     }
 
-    return new Response(JSON.stringify({ props: { student } }));
+    return new Response(JSON.stringify({ props: { student } }), {
+      status: 200,
+    });
   } else {
     return new Response("Method not allowed", { status: 405 });
   }
