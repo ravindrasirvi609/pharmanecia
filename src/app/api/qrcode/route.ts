@@ -1,6 +1,7 @@
 import AbstractModel from "@/Model/AbstractModel";
 import { NextRequest, NextResponse } from "next/server";
 import { connect } from "@/dbConfig/dbConfig";
+import mongoose from "mongoose";
 
 connect();
 
@@ -9,14 +10,27 @@ export async function POST(req: NextRequest): Promise<Response> {
     const { id } = await req.json();
     console.log(id);
 
-    let student = await AbstractModel.findOne({ _id: id }).lean();
+    let student;
+
+    // Check if id is a valid ObjectId
+    if (mongoose.Types.ObjectId.isValid(id)) {
+      console.log("Valid Image");
+
+      student = await AbstractModel.findOne({ _id: id }).lean();
+    }
+
+    // If not found by _id or id is not a valid ObjectId, try with temporaryAbstractCode
     if (!student) {
+      console.log("Invalid Image");
+
       student = await AbstractModel.findOne({
-        temporaryAbstractCode: id,
+        temporyAbstractCode: id,
       }).lean();
-      if (!student) {
-        return new Response(null, { status: 404 });
-      }
+      console.log(student);
+    }
+
+    if (!student) {
+      return new Response(null, { status: 404 });
     }
 
     return new Response(JSON.stringify({ props: { student } }), {
