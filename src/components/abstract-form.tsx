@@ -131,6 +131,13 @@ export function AbstractForm() {
         }
 
         const result = await response.json();
+        console.log(result);
+
+        if (result.newAbstract) {
+          window.location.href = `/abstractForm/${result.newAbstract._id}`;
+        } else {
+          throw new Error("Failed to submit abstract");
+        }
         console.log("Success:", result);
       } catch (error) {
         console.error("Error:", error);

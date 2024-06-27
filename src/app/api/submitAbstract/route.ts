@@ -4,6 +4,7 @@ import { v4 as uuidv4 } from "uuid";
 import { promises as fs } from "fs";
 import path from "path";
 import AbstractModel from "@/Model/AbstractModel";
+import QRCode from "qrcode";
 
 connect();
 
@@ -42,12 +43,15 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    // Save the abstract file to a directory
     const fileName = `${uuidv4()}-${abstractFile.name}`;
     const filePath = path.join(process.cwd(), "public/uploads", fileName);
 
     const fileBuffer = Buffer.from(await abstractFile.arrayBuffer());
     await fs.writeFile(filePath, fileBuffer);
+
+    const temporyAbstractCode = await abstractCodeGenration();
+    const url = `${process.env.NEXT_PUBLIC_BASE_URL}/abstractForm/${temporyAbstractCode}`;
+    const qrCodeUrl = await QRCode.toDataURL(url);
 
     const abstractData = {
       email,
@@ -62,13 +66,17 @@ export async function POST(req: NextRequest) {
       city,
       state,
       pincode,
+      qrCodeUrl,
+      temporyAbstractCode,
     };
-    console.log("abstractData", abstractData);
 
     const newAbstract = new AbstractModel(abstractData);
     await newAbstract.save();
 
-    return NextResponse.json({ message: "Abstract submitted successfully" });
+    return NextResponse.json({
+      message: "Abstract submitted successfully",
+      newAbstract,
+    });
   } catch (error: any) {
     console.error("Error:", error);
     return NextResponse.json(
@@ -76,4 +84,8 @@ export async function POST(req: NextRequest) {
       { status: 500 }
     );
   }
+}
+
+async function abstractCodeGenration(): Promise<string> {
+  return uuidv4();
 }

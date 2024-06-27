@@ -1,13 +1,15 @@
-import Contact from "@/Model/contactModel";
-import { connect } from "@/dbConfig/dbConfig";
+import AbstractModel from "@/Model/AbstractModel";
 import { NextRequest, NextResponse } from "next/server";
+import { connect } from "@/dbConfig/dbConfig";
 
 connect();
 
 export async function POST(req: NextRequest): Promise<Response> {
   if (req.method === "POST") {
     const { id } = await req.json();
-    const student = await Contact.findOne({ registrationId: id }).lean();
+    console.log(id);
+
+    const student = await AbstractModel.findOne({ _id: id }).lean();
     if (!student) {
       return new Response(null, { status: 404 });
     }
