@@ -3,9 +3,19 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/nav";
 import Footer from "@/components/Footer";
+import { cn } from "@/lib/utils";
 
-const inter = Inter({ subsets: ["latin"] });
+const fontHeading = Inter({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-heading",
+});
 
+const fontBody = Inter({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-body",
+});
 export const metadata: Metadata = {
   title: "Pharmanecia - EMERGING TRENDS IN PHARMACEUTICAL RESEARCH",
   description:
@@ -24,7 +34,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body
+        className={cn("antialiased", fontHeading.variable, fontBody.variable)}
+      >
         <Navbar />
         <div className="mt-20">{children}</div>
         <Footer />

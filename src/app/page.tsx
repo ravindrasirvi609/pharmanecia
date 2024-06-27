@@ -11,8 +11,8 @@ import React from "react";
 
 const HomePage = () => {
   return (
-    <main>
-      <head>
+    <>
+      <Head>
         <title>Pharmanecia 4.E</title>
         <meta name="description" content="Pharmanecia 4.E" />
         <link rel="icon" href="/favicon.ico" />
@@ -30,7 +30,7 @@ const HomePage = () => {
           name="twitter:image"
           content="https://www.adobe.com/content/dam/cc/en/ax-gnav-images/0_AEx.svg"
         />
-      </head>
+      </Head>
 
       <div
         className="min-h-screen flex items-center justify-center bg-cover bg-center"
@@ -39,7 +39,10 @@ const HomePage = () => {
             "url('https://images.unsplash.com/photo-1579723798913-390e4be1d6ae?q=80&w=3270&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')",
         }}
       >
-        <div className="bg-white bg-opacity-75 p-6 rounded-lg max-w-3xl text-center">
+        <div
+          className="bg-white bg-opacity-75 p-6 rounded-lg max-w-3xl text-center"
+          id="home"
+        >
           <h1 className="text-4xl font-bold mb-4 text-primary">
             Pharmanecia 4.E
           </h1>
@@ -74,7 +77,7 @@ const HomePage = () => {
       <Testimonials />
       <LatestNews />
       <OpfModel />
-    </main>
+    </>
   );
 };
 
