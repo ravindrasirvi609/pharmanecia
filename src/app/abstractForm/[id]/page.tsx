@@ -44,20 +44,25 @@ const AbstractForm: React.FC<StudentPageProps> = ({ params }) => {
       {" "}
       {registrationInfo && (
         <div className="bg-purple-400 p-6 rounded-lg shadow-lg text-white">
-          <h2 className="text-2xl font-bold mb-4">Registration Details</h2>
+          <h2 className="text-2xl font-bold mb-4 items-center">
+            Registration Details
+          </h2>
+          <p className=" text-green font-semibold p-4 rounded-md text-2xl">
+            Your form is successfully submitted. Here is the temporary abstract
+            code and details.
+          </p>{" "}
           <p className="mb-4">
             Temporary Abstract Code:{" "}
             <span className="font-semibold">
               {registrationInfo.temporyAbstractCode}
             </span>
           </p>
-          <p className="mb-4 bg-white p-2 text-black borderRadius-sm">
+          <p className="mb-4 bg-white p-2 text-black rounded-md">
             <span className="font-bold text-2xl">Status: </span>
-            <span className="font-semibold text-green">
+            <span className="font-semibold text-green text-2xl">
               {registrationInfo.Status}
             </span>
           </p>
-
           <div className="flex justify-center">
             <Image
               src={registrationInfo.qrCodeUrl}
