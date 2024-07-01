@@ -7,6 +7,7 @@ import Testimonials from "@/components/Testimonials";
 import VenueAccommodations from "@/components/VenueAccommodations";
 import OpfModel from "@/components/opfModel";
 import Head from "next/head";
+import Link from "next/link";
 import React from "react";
 
 const HomePage = () => {
@@ -63,9 +64,11 @@ const HomePage = () => {
             <button className="bg-primary text-light px-6 py-3 rounded-md hover:bg-secondary transition duration-300">
               Register Now
             </button>
-            <button className="bg-accent text-light px-6 py-3 rounded-md hover:bg-secondary transition duration-300">
-              Submit Abstract
-            </button>
+            <Link href="/abstractForm">
+              <button className="bg-accent text-light px-6 py-3 rounded-md hover:bg-secondary transition duration-300">
+                Submit Abstract
+              </button>
+            </Link>
           </div>
         </div>
       </div>

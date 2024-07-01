@@ -1,16 +1,30 @@
 import { connect } from "@/dbConfig/dbConfig";
 import { NextRequest, NextResponse } from "next/server";
 import { v4 as uuidv4 } from "uuid";
-import { promises as fs } from "fs";
-import path from "path";
 import AbstractModel from "@/Model/AbstractModel";
 import QRCode from "qrcode";
+import { uploadToCloudinary } from "@/cloudinaryConfig/cloudinaryConfig";
 
 connect();
 
 export async function POST(req: NextRequest) {
   try {
     const formData = await req.formData();
+    const file = formData.get("abstractFile") as File;
+    const fileBuffer = await file.arrayBuffer();
+    const mimeType = file.type;
+    const encoding = "base64";
+    const base64Data = Buffer.from(fileBuffer).toString("base64");
+    const fileUri = "data:" + mimeType + ";" + encoding + "," + base64Data;
+    const res = await uploadToCloudinary(fileUri, file.name);
+
+    let message = "failure";
+    let imgUrl = "";
+    if (res.success && res.result) {
+      message = "success";
+      imgUrl = res.result.secure_url;
+    }
+
     const email = formData.get("email");
     const whatsappNumber = formData.get("whatsappNumber");
     const name = formData.get("name");
@@ -43,12 +57,6 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    const fileName = `${uuidv4()}-${abstractFile.name}`;
-    const filePath = path.join(process.cwd(), "public/uploads", fileName);
-
-    const fileBuffer = Buffer.from(await abstractFile.arrayBuffer());
-    await fs.writeFile(filePath, fileBuffer);
-
     const temporyAbstractCode = await abstractCodeGenration();
     const url = `${process.env.NEXT_PUBLIC_BASE_URL}/abstractForm/${temporyAbstractCode}`;
     const qrCodeUrl = await QRCode.toDataURL(url);
@@ -61,7 +69,7 @@ export async function POST(req: NextRequest) {
       coAuthor,
       title,
       subject,
-      abstractFileUrl: `/uploads/${fileName}`,
+      abstractFileUrl: imgUrl,
       address,
       city,
       state,

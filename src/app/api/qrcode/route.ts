@@ -8,7 +8,6 @@ connect();
 export async function POST(req: NextRequest): Promise<Response> {
   if (req.method === "POST") {
     const { id } = await req.json();
-    console.log(id);
 
     let student;
 
