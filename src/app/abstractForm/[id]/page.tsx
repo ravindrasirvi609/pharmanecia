@@ -1,20 +1,34 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
-import { StaticImport } from "next/dist/shared/lib/get-img-props";
+
 interface StudentPageProps {
   params: {
     id: string;
   };
 }
+
 const AbstractForm: React.FC<StudentPageProps> = ({ params }) => {
   const { id } = params;
 
   const [registrationInfo, setRegistrationInfo] = useState<{
-    url: string | undefined;
-    qrCodeUrl: string | StaticImport;
+    url: string;
+    qrCodeUrl: string;
     temporyAbstractCode: string;
     Status: string;
+    title: string;
+    name: string;
+    email: string;
+    affiliation: string;
+    coAuthor: string;
+    address: string;
+    city: string;
+    state: string;
+    pincode: string;
+    whatsappNumber: string;
+    abstractFileUrl: string;
+    createdAt: string;
+    updatedAt: string;
   } | null>(null);
 
   useEffect(() => {
@@ -40,40 +54,90 @@ const AbstractForm: React.FC<StudentPageProps> = ({ params }) => {
   }
 
   return (
-    <div className="flex flex-col items-center justify-center h-screen bg-primary">
-      {" "}
-      {registrationInfo && (
-        <div className="bg-purple-400 p-6 rounded-lg shadow-lg text-white">
-          <h2 className="text-2xl font-bold mb-4 items-center">
+    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-500">
+      <div className="bg-purple-800 p-6 m-3 rounded-lg shadow-lg text-white w-11/12 max-w-4xl flex">
+        <div className="flex-1 mr-6">
+          <h2 className="text-2xl font-bold mb-4 text-center">
             Registration Details
           </h2>
-          <p className=" text-green font-semibold p-4 rounded-md text-2xl">
-            Your form is successfully submitted. Here is the temporary abstract
-            code and details.
-          </p>{" "}
           <p className="mb-4">
-            Temporary Abstract Code:{" "}
-            <span className="font-semibold">
-              {registrationInfo.temporyAbstractCode}
-            </span>
+            <span className="font-bold">Temporary Abstract Code: </span>
+            {registrationInfo.temporyAbstractCode}
           </p>
-          <p className="mb-4 bg-white p-2 text-black rounded-md">
-            <span className="font-bold text-2xl">Status: </span>
-            <span className="font-semibold text-green text-2xl">
-              {registrationInfo.Status}
-            </span>
+          <p className="mb-4">
+            <span className="font-bold">Status: </span>
+            {registrationInfo.Status}
           </p>
-          <div className="flex justify-center">
-            <Image
-              src={registrationInfo.qrCodeUrl}
-              alt="QR Code"
-              width={300}
-              height={300}
-              className="rounded-md"
-            />
-          </div>
+          <p className="mb-4">
+            <span className="font-bold">Title: </span>
+            {registrationInfo.title}
+          </p>
+          <p className="mb-4">
+            <span className="font-bold">Name: </span>
+            {registrationInfo.name}
+          </p>
+          <p className="mb-4">
+            <span className="font-bold">Email: </span>
+            {registrationInfo.email}
+          </p>
+          <p className="mb-4">
+            <span className="font-bold">Affiliation: </span>
+            {registrationInfo.affiliation}
+          </p>
+          <p className="mb-4">
+            <span className="font-bold">Co-Author: </span>
+            {registrationInfo.coAuthor}
+          </p>
+          <p className="mb-4">
+            <span className="font-bold">Address: </span>
+            {registrationInfo.address}
+          </p>
+          <p className="mb-4">
+            <span className="font-bold">City: </span>
+            {registrationInfo.city}
+          </p>
+          <p className="mb-4">
+            <span className="font-bold">State: </span>
+            {registrationInfo.state}
+          </p>
+          <p className="mb-4">
+            <span className="font-bold">Pincode: </span>
+            {registrationInfo.pincode}
+          </p>
+          <p className="mb-4">
+            <span className="font-bold">WhatsApp Number: </span>
+            {registrationInfo.whatsappNumber}
+          </p>
+          <p className="mb-4">
+            <span className="font-bold">Abstract File URL: </span>
+            <a
+              href={registrationInfo.abstractFileUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-blue-200 underline"
+            >
+              Download Abstract
+            </a>
+          </p>
+          <p className="mb-4">
+            <span className="font-bold">Created At: </span>
+            {new Date(registrationInfo.createdAt).toLocaleString()}
+          </p>
+          <p className="mb-4">
+            <span className="font-bold">Updated At: </span>
+            {new Date(registrationInfo.updatedAt).toLocaleString()}
+          </p>
         </div>
-      )}
+        <div className="flex-1 flex justify-center items-center">
+          <Image
+            src={registrationInfo.qrCodeUrl}
+            alt="QR Code"
+            width={300}
+            height={300}
+            className="rounded-md"
+          />
+        </div>
+      </div>
     </div>
   );
 };
