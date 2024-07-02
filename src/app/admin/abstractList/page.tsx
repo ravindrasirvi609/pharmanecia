@@ -3,7 +3,7 @@ import React from "react";
 
 const Abstract = () => {
   return (
-    <div className="bg-gray-800">
+    <div className="">
       <AbstractList />
     </div>
   );
