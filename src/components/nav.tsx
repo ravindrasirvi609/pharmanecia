@@ -51,6 +51,14 @@ const Navbar = () => {
                     About Organisation
                   </Link>
                 </li>
+                <li>
+                  <Link
+                    href="/organisingCommittee"
+                    className="hover:text-ochre"
+                  >
+                    Organising Committee
+                  </Link>
+                </li>
               </ul>
             </li>
             <li>
