@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React from "react";
 
 const Sponsors = () => {
@@ -50,9 +51,11 @@ const Sponsors = () => {
                 on all materials, and more.
               </p>
               <p className="text-lg font-semibold mb-6">$10,000</p>
-              <button className="bg-accent text-light px-6 py-2 rounded-md hover:bg-secondary transition duration-300">
-                Become a Platinum Sponsor
-              </button>
+              <Link href="/Sponsors/SponsorForm">
+                <button className="bg-accent text-light px-6 py-2 rounded-md hover:bg-secondary transition duration-300">
+                  Become a Platinum Sponsor
+                </button>
+              </Link>
             </div>
 
             {/* Gold Sponsor */}
@@ -64,9 +67,11 @@ const Sponsors = () => {
                 Includes premium booth space, logo on materials, and more.
               </p>
               <p className="text-lg font-semibold mb-6">$7,500</p>
-              <button className="bg-accent text-light px-6 py-2 rounded-md hover:bg-secondary transition duration-300">
-                Become a Gold Sponsor
-              </button>
+              <Link href="/Sponsors/SponsorForm">
+                <button className="bg-accent text-light px-6 py-2 rounded-md hover:bg-secondary transition duration-300">
+                  Become a Gold Sponsor
+                </button>
+              </Link>
             </div>
 
             {/* Silver Sponsor */}
@@ -78,9 +83,11 @@ const Sponsors = () => {
                 Includes standard booth space, logo on materials, and more.
               </p>
               <p className="text-lg font-semibold mb-6">$5,000</p>
-              <button className="bg-accent text-light px-6 py-2 rounded-md hover:bg-secondary transition duration-300">
-                Become a Silver Sponsor
-              </button>
+              <Link href="/Sponsors/SponsorForm">
+                <button className="bg-accent text-light px-6 py-2 rounded-md hover:bg-secondary transition duration-300">
+                  Become a Silver Sponsor
+                </button>
+              </Link>
             </div>
 
             {/* Bronze Sponsor */}
@@ -92,9 +99,11 @@ const Sponsors = () => {
                 Includes booth space, logo on materials, and more.
               </p>
               <p className="text-lg font-semibold mb-6">$2,500</p>
-              <button className="bg-accent text-light px-6 py-2 rounded-md hover:bg-secondary transition duration-300">
-                Become a Bronze Sponsor
-              </button>
+              <Link href="/Sponsors/SponsorForm">
+                <button className="bg-accent text-light px-6 py-2 rounded-md hover:bg-secondary transition duration-300">
+                  Become a Bronze Sponsor
+                </button>
+              </Link>
             </div>
 
             {/* Supporter Sponsor */}
@@ -106,9 +115,11 @@ const Sponsors = () => {
                 Includes logo on materials and website.
               </p>
               <p className="text-lg font-semibold mb-6">$1,000</p>
-              <button className="bg-accent text-light px-6 py-2 rounded-md hover:bg-secondary transition duration-300">
-                Become a Supporter Sponsor
-              </button>
+              <Link href="/Sponsors/SponsorForm">
+                <button className="bg-accent text-light px-6 py-2 rounded-md hover:bg-secondary transition duration-300">
+                  Become a Supporter Sponsor
+                </button>
+              </Link>
             </div>
           </div>
         </div>
