@@ -54,7 +54,7 @@ const AbstractForm: React.FC<StudentPageProps> = ({ params }) => {
   }
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-500">
+    <div className="flex flex-col items-center justify-center min-h-screen bg-danger">
       <div className="bg-purple-800 p-6 m-3 rounded-lg shadow-lg text-white w-11/12 max-w-4xl flex">
         <div className="flex-1 mr-6">
           <h2 className="text-2xl font-bold mb-4 text-center">
