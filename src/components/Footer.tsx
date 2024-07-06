@@ -70,17 +70,23 @@ const Footer = () => {
           <h2 className="text-xl font-bold mb-4">Legal</h2>
           <ul className="text-lg">
             <li>
-              <a href="#" className="text-light hover:underline">
+              <a href="/TermsOfService" className="text-light hover:underline">
                 Terms of Service
               </a>
             </li>
             <li>
-              <a href="#" className="text-light hover:underline mt-2 block">
+              <a
+                href="/PrivacyPolicy"
+                className="text-light hover:underline mt-2 block"
+              >
                 Privacy Policy
               </a>
             </li>
             <li>
-              <a href="#" className="text-light hover:underline mt-2 block">
+              <a
+                href="/CookiePolicy"
+                className="text-light hover:underline mt-2 block"
+              >
                 Cookie Policy
               </a>
             </li>
