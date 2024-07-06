@@ -1,3 +1,4 @@
+"use client";
 import AboutConference from "@/components/About";
 import LatestNews from "@/components/LatestNews";
 import ScheduleOverview from "@/components/ScheduleOverview";
@@ -8,9 +9,19 @@ import VenueAccommodations from "@/components/VenueAccommodations";
 import OpfModel from "@/components/opfModel";
 import Head from "next/head";
 import Link from "next/link";
-import React from "react";
+import React, { useEffect, useRef } from "react";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
+gsap.registerPlugin(useGSAP);
 
 const HomePage = () => {
+  const boxRef = useRef<HTMLHeadingElement>(null);
+  useGSAP(() => {
+    gsap.from(boxRef.current, {
+      opacity: 0,
+      duration: 2,
+    });
+  });
   return (
     <>
       <Head>
@@ -43,6 +54,7 @@ const HomePage = () => {
         <div
           className="bg-white bg-opacity-75 p-6 rounded-lg max-w-3xl text-center"
           id="home"
+          ref={boxRef}
         >
           <h1 className="text-4xl font-bold mb-4 text-primary">
             Pharmanecia 4.E

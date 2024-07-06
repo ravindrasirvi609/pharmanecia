@@ -1,70 +1,43 @@
+import { committee } from "@/data";
 import Image from "next/image";
 import React from "react";
 
-type CommitteeMember = {
+export interface CommitteeMember {
   name: string;
-  role: string;
-  imageUrl: string;
-};
-
-const committeeMembers: CommitteeMember[] = [
-  {
-    name: "Dr. John Smith",
-    role: "Chairperson",
-    imageUrl: "https://via.placeholder.com/150",
-  },
-  {
-    name: "Dr. Jane Doe",
-    role: "Co-Chairperson",
-    imageUrl: "https://via.placeholder.com/150",
-  },
-  {
-    name: "Dr. Alice Brown",
-    role: "Secretary",
-    imageUrl: "https://via.placeholder.com/150",
-  },
-  {
-    name: "Dr. Bob Johnson",
-    role: "Treasurer",
-    imageUrl: "https://via.placeholder.com/150",
-  },
-  {
-    name: "Dr. Emily White",
-    role: "Member",
-    imageUrl: "https://via.placeholder.com/150",
-  },
-];
+  designation: string;
+  bio: string;
+  image: string;
+}
 
 const OrganisingCommittee: React.FC = () => {
   return (
-    <div className="max-w-4xl mx-auto p-6 bg-white shadow-lg rounded-lg">
-      <h1 className="text-4xl font-bold mb-4 text-center text-blue-600">
-        PharmaNecia 4.E Conference
-      </h1>
-
-      <h2 className="text-2xl font-semibold mb-6 text-center text-gray-800">
-        Organising Committee
-      </h2>
-      <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
-        {committeeMembers.map((member, index) => (
-          <li
-            key={index}
-            className="flex flex-col items-center bg-gray-50 p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300"
-          >
-            <Image
-              src={member.imageUrl}
-              alt={member.name}
-              className="w-24 h-24 rounded-full mb-4"
-              width={96}
-              height={96}
-            />
-            <div className="text-center">
-              <p className="text-xl font-medium text-gray-900">{member.name}</p>
-              <p className="text-gray-600">{member.role}</p>
+    <div className="bg-light text-primary px-6 py-12">
+      <div className="max-w-7xl mx-auto">
+        <h1 className="text-4xl font-bold mb-8 text-center">
+          Organising Committee
+        </h1>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {committee.map((member, index) => (
+            <div
+              key={index}
+              className="bg-white shadow-lg rounded-lg p-6 text-center"
+            >
+              <Image
+                src={member.image}
+                alt={member.name}
+                className="w-32 h-32 mx-auto rounded-full mb-4"
+                width={32}
+                height={32}
+              />
+              <h3 className="text-2xl font-bold mb-2">{member.name}</h3>
+              <p className="text-lg font-semibold mb-2">{member.designation}</p>
+              <p className="text-lg leading-relaxed text-justify">
+                {member.bio}
+              </p>
             </div>
-          </li>
-        ))}
-      </ul>
+          ))}
+        </div>
+      </div>
     </div>
   );
 };

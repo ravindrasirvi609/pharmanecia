@@ -55,9 +55,8 @@ const Testimonials = () => {
               <iframe
                 width="300"
                 height="200"
-                src="https://www.youtube.com/embed/sample_video1"
+                src="https://www.youtube.com/embed/5L7WbNHzcRw?si=YqKsHBxRR6z3Ee3V"
                 title="Video Testimonial 1"
-                frameBorder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowFullScreen
                 className="w-full h-full"
@@ -68,9 +67,8 @@ const Testimonials = () => {
               <iframe
                 width="300"
                 height="200"
-                src="https://www.youtube.com/embed/sample_video2"
+                src="https://www.youtube.com/embed/l0Uw3pRS0yI?si=sTjre_d6FhPt_-Gl"
                 title="Video Testimonial 2"
-                frameBorder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowFullScreen
                 className="w-full h-full"
@@ -81,9 +79,8 @@ const Testimonials = () => {
               <iframe
                 width="300"
                 height="200"
-                src="https://www.youtube.com/embed/sample_video3"
+                src="https://www.youtube.com/embed/8rMsdkDeqfc?si=zOpoUlShDoHq7O4B"
                 title="Video Testimonial 3"
-                frameBorder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowFullScreen
                 className="w-full h-full"

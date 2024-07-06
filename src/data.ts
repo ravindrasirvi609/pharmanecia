@@ -86,3 +86,30 @@ export const speakers = [
     image: "https://via.placeholder.com/150",
   },
 ];
+
+export const committee = [
+  {
+    name: "Dr. R. Kalirajan",
+    designation: "Organizing Secretary",
+    bio: "Dr. R. Kalirajan is a distinguished professor with extensive experience in pharmaceutical research and education. He has been instrumental in organizing several national and international conferences.",
+    image: "https://via.placeholder.com/150",
+  },
+  {
+    name: "Dr. B. Gowramma",
+    designation: "Organizing Secretary",
+    bio: "Dr. B. Gowramma is a renowned clinical pharmacist and educator. She has a passion for improving patient outcomes through innovative therapies and has organized numerous workshops and seminars.",
+    image: "https://via.placeholder.com/150",
+  },
+  {
+    name: "Mr. John Doe",
+    designation: "Enquiry & Registration Committee",
+    bio: "Mr. John Doe has been a vital part of the Operant Pharmacy Federation, assisting in various capacities, including handling enquiries and registrations for major events.",
+    image: "https://via.placeholder.com/150",
+  },
+  {
+    name: "Ms. Jane Smith",
+    designation: "Enquiry & Registration Committee",
+    bio: "Ms. Jane Smith is dedicated to providing seamless registration and enquiry handling. Her organizational skills have been key to the success of multiple conferences.",
+    image: "https://via.placeholder.com/150",
+  },
+];

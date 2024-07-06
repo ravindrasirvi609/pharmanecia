@@ -1,9 +1,30 @@
+"use client";
 import Image from "next/image";
-import React from "react";
+import React, { useEffect, useRef } from "react";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
+import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
+
+gsap.registerPlugin(useGSAP);
+gsap.registerPlugin(ScrollTrigger);
 
 const SpeakersHighlights = () => {
+  const boxRef = useRef<HTMLHeadingElement>(null);
+  useGSAP(() => {
+    gsap.from(boxRef.current, {
+      y: 50,
+      opacity: 0,
+      scrollTrigger: {
+        trigger: boxRef.current,
+        start: "top 70%",
+        end: "top 10%",
+        scrub: true,
+        markers: true,
+      },
+    });
+  });
   return (
-    <div className="bg-danger text-primary px-6 py-12">
+    <div className="bg-danger text-primary px-6 py-12" ref={boxRef}>
       <div className="max-w-7xl mx-auto">
         <h1 className="text-4xl font-bold mb-8 text-center">
           Speakers Highlights

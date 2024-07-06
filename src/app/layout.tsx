@@ -38,7 +38,7 @@ export default function RootLayout({
         className={cn("antialiased", fontHeading.variable, fontBody.variable)}
       >
         <Navbar />
-        <div className="mt-20">{children}</div>
+        <div className="mt-20 bg-light">{children}</div>
         <Footer />
       </body>
     </html>
