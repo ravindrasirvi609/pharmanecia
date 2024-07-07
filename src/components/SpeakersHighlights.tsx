@@ -19,7 +19,6 @@ const SpeakersHighlights = () => {
         start: "top 70%",
         end: "top 10%",
         scrub: true,
-        markers: true,
       },
     });
   });

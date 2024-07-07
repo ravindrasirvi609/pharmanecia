@@ -31,11 +31,11 @@ const PharmaneciaScroll: React.FC = () => {
   return (
     <div
       ref={containerRef}
-      className="h-[110vh] bg-danger overflow-hidden relative"
+      className="h-[80vh] sm:h-[100vh] md:h-[110vh] bg-danger overflow-hidden relative"
     >
       <div
         ref={textRef}
-        className="text-[30vw] font-bold whitespace-nowrap absolute top-1/2 left-0 transform -translate-y-1/2 px-[50vw]"
+        className="text-[30vw] sm:text-[35vw] md:text-[40vw] font-bold whitespace-nowrap absolute top-1/2 left-0 transform -translate-y-1/2 px-[20vw] sm:px-[30vw] md:px-[50vw]"
       >
         PHARMANECIA
       </div>
