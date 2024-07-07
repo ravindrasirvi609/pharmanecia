@@ -12,6 +12,7 @@ import Link from "next/link";
 import React, { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
+import PharmaneciaScroll from "@/components/pharmanecia";
 gsap.registerPlugin(useGSAP);
 
 const HomePage = () => {
@@ -84,6 +85,8 @@ const HomePage = () => {
           </div>
         </div>
       </div>
+      <PharmaneciaScroll />
+
       <AboutConference />
       <SpeakersHighlights />
       <ScheduleOverview />
