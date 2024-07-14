@@ -37,7 +37,7 @@ const PharmaneciaScroll: React.FC = () => {
         ref={textRef}
         className="text-[30vw] sm:text-[35vw] md:text-[40vw] font-bold whitespace-nowrap absolute top-1/2 left-0 transform -translate-y-1/2 px-[20vw] sm:px-[30vw] md:px-[50vw]"
       >
-        PHARMANECIA
+        PHARMANECIA 4.E
       </div>
     </div>
   );
