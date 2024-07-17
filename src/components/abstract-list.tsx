@@ -320,7 +320,7 @@ export function AbstractList() {
                           </button>
                           <div
                             id={`status-dropdown-${abstract._id}`}
-                            className="absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 hidden z-50"
+                            className="fixed right-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 hidden z-50"
                           >
                             <div
                               className="py-1 z-50"
