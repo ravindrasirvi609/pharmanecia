@@ -18,6 +18,49 @@ interface Errors {
   pincode?: string;
 }
 
+export const subjectOptions = [
+  { value: "pharmaceuticalTechnology", label: "Pharmaceutical Technology" },
+  {
+    value: "pharmacognosy",
+    label:
+      "Pharmacognosy, Indigenous Drugs, Herbal Formulations, and Phytochemistry",
+  },
+  {
+    value: "pharmacologyToxicology",
+    label: "Pharmacology and Toxicology, Clinical Research & Pharmacovigilance",
+  },
+  {
+    value: "pharmaceuticalAnalysis",
+    label: "Pharmaceutical Analysis and Quality Assurance",
+  },
+  {
+    value: "biopharmaceutics",
+    label: "Biopharmaceutics, Pharmacokinetics & Drug Metabolism",
+  },
+  { value: "biotechnology", label: "Biotechnology and Biotherapeutics" },
+  {
+    value: "clinicalPharmacy",
+    label: "Hospital, Community, and Clinical Pharmacy",
+  },
+  { value: "regulatoryAffairs", label: "Regulatory Affairs" },
+  {
+    value: "pharmaceuticalEducation",
+    label: "Pharmaceutical Education and Professional Pharmacy",
+  },
+  {
+    value: "drugRegulatoryAffairs",
+    label: "Drug Regulatory Affairs & Pharmaceutical Management",
+  },
+  {
+    value: "pharmacoeconomics",
+    label: "Pharmacoeconomics and Pharmacoepidemiology",
+  },
+  {
+    value: "aiBioinformatics",
+    label: "Artificial Intelligence / Bioinformatics / Data Analytics",
+  },
+];
+
 export function AbstractForm() {
   const {
     uploadFile,
@@ -312,15 +355,14 @@ export function AbstractForm() {
             id="subject"
             className="w-full px-3 py-2 border border-[#CACACA] rounded-md focus:outline-none focus:ring-2 focus:ring-[#034C8C]"
             value={subject}
-            onChange={(e: ChangeEvent<HTMLSelectElement>) =>
-              setSubject(e.target.value)
-            }
+            onChange={(e) => setSubject(e.target.value)}
           >
             <option value="">Select a subject</option>
-            <option value="subject1">Subject 1</option>
-            <option value="subject2">Subject 2</option>
-            <option value="subject3">Subject 3</option>
-            <option value="subject4">Subject 4</option>
+            {subjectOptions.map((option) => (
+              <option key={option.value} value={option.value}>
+                {option.label}
+              </option>
+            ))}
           </select>
           {errors.subject && (
             <p className="text-[#D94814] text-sm mt-1">{errors.subject}</p>

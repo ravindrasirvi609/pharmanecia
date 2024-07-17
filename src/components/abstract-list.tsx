@@ -5,7 +5,7 @@ import React, { useState, useMemo, useEffect } from "react";
 interface Abstract {
   _id: string;
   title: string;
-  author: string;
+  name: string;
   email: string;
   Status: string;
   abstractFileUrl: string;
@@ -42,9 +42,7 @@ export function AbstractList() {
       filtered = filtered.filter(
         (abstract) =>
           abstract.title.toLowerCase().includes(filters.search.toLowerCase()) ||
-          abstract.author
-            .toLowerCase()
-            .includes(filters.search.toLowerCase()) ||
+          abstract.name.toLowerCase().includes(filters.search.toLowerCase()) ||
           abstract.email.toLowerCase().includes(filters.search.toLowerCase())
       );
     }
@@ -243,7 +241,7 @@ export function AbstractList() {
                   <td className="py-3 px-6 text-left whitespace-nowrap">
                     {abstract.title}
                   </td>
-                  <td className="py-3 px-6 text-left">{abstract.author}</td>
+                  <td className="py-3 px-6 text-left">{abstract.name}</td>
                   <td className="py-3 px-6 text-left">{abstract.email}</td>
                   <td className="py-3 px-6 text-left">
                     <span
