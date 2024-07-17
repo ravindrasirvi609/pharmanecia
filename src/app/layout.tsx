@@ -4,6 +4,7 @@ import "./globals.css";
 import Navbar from "@/components/nav";
 import Footer from "@/components/Footer";
 import { cn } from "@/lib/utils";
+import { Analytics } from "@vercel/analytics/react";
 
 const fontHeading = Inter({
   subsets: ["latin"],
@@ -38,7 +39,10 @@ export default function RootLayout({
         className={cn("antialiased", fontHeading.variable, fontBody.variable)}
       >
         <Navbar />
-        <div className="mt-20 bg-light">{children}</div>
+        <div className="mt-20 bg-light">
+          {children}
+          <Analytics />
+        </div>
         <Footer />
       </body>
     </html>

@@ -26,11 +26,17 @@ export async function PATCH(req: NextRequest) {
       );
     }
 
-    // Update the status and save the abstract
-    abstract.status = status;
+    // Update the status
+    abstract.Status = status;
+
+    // If the status is "Accepted", generate and set the AbstractCode
+    if (status === "Accepted" && !abstract.AbstractCode) {
+      const abstractCode = await generateAbstractCode(abstract.subject);
+      abstract.AbstractCode = abstractCode;
+    }
+
     await abstract.save();
 
-    // Log the successful update
     console.log("Status updated successfully for _id:", _id);
 
     return NextResponse.json({
@@ -38,11 +44,45 @@ export async function PATCH(req: NextRequest) {
       abstract,
     });
   } catch (error: any) {
-    // Log the error
     console.error("Error updating status:", error);
     return NextResponse.json(
-      { message: "Internal server error", error },
+      { message: "Internal server error", error: error.toString() },
       { status: 500 }
     );
   }
+}
+
+async function generateAbstractCode(subject: string): Promise<string> {
+  const subjectCodes: { [key: string]: string } = {
+    pharmaceuticalTechnology: "PT",
+    pharmacognosy: "PG",
+    pharmacologyToxicology: "PH",
+    pharmaceuticalAnalysis: "PA",
+    biopharmaceutics: "BP",
+    biotechnology: "BT",
+    clinicalPharmacy: "CP",
+    regulatoryAffairs: "RA",
+    pharmaceuticalEducation: "PE",
+    drugRegulatoryAffairs: "DR",
+    pharmacoeconomics: "PC",
+    aiBioinformatics: "AI",
+  };
+
+  const subjectCode = subjectCodes[subject] || "XX";
+
+  const lastAbstract = await AbstractModel.findOne({
+    subject: subject,
+    AbstractCode: { $regex: `^${subjectCode}` },
+  }).sort({ AbstractCode: -1 });
+
+  let sequenceNumber = 1;
+
+  if (lastAbstract && lastAbstract.AbstractCode) {
+    const lastSequence = parseInt(lastAbstract.AbstractCode.slice(-3), 10);
+    sequenceNumber = lastSequence + 1;
+  }
+
+  const paddedSequence = sequenceNumber.toString().padStart(3, "0");
+
+  return `${subjectCode}${paddedSequence}`;
 }
