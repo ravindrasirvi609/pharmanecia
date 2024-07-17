@@ -6,6 +6,7 @@ const abstractSchema = new Schema({
   name: { type: String },
   affiliation: { type: String },
   coAuthor: { type: String },
+  designation: { type: String },
   title: { type: String },
   subject: { type: String },
   abstractFileUrl: { type: String },

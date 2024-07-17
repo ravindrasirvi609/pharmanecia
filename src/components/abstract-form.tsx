@@ -1,6 +1,7 @@
 "use client";
 
 import { useFirebaseStorage } from "@/app/hooks/useFirebaseStorage";
+import { designationOptions, subjectOptions } from "@/data";
 import { useState, ChangeEvent, useCallback } from "react";
 import { useDropzone } from "react-dropzone";
 
@@ -9,6 +10,7 @@ interface Errors {
   whatsappNumber?: string;
   name?: string;
   affiliation?: string;
+  Designation?: string;
   title?: string;
   subject?: string;
   abstractFile?: string;
@@ -17,49 +19,6 @@ interface Errors {
   state?: string;
   pincode?: string;
 }
-
-export const subjectOptions = [
-  { value: "pharmaceuticalTechnology", label: "Pharmaceutical Technology" },
-  {
-    value: "pharmacognosy",
-    label:
-      "Pharmacognosy, Indigenous Drugs, Herbal Formulations, and Phytochemistry",
-  },
-  {
-    value: "pharmacologyToxicology",
-    label: "Pharmacology and Toxicology, Clinical Research & Pharmacovigilance",
-  },
-  {
-    value: "pharmaceuticalAnalysis",
-    label: "Pharmaceutical Analysis and Quality Assurance",
-  },
-  {
-    value: "biopharmaceutics",
-    label: "Biopharmaceutics, Pharmacokinetics & Drug Metabolism",
-  },
-  { value: "biotechnology", label: "Biotechnology and Biotherapeutics" },
-  {
-    value: "clinicalPharmacy",
-    label: "Hospital, Community, and Clinical Pharmacy",
-  },
-  { value: "regulatoryAffairs", label: "Regulatory Affairs" },
-  {
-    value: "pharmaceuticalEducation",
-    label: "Pharmaceutical Education and Professional Pharmacy",
-  },
-  {
-    value: "drugRegulatoryAffairs",
-    label: "Drug Regulatory Affairs & Pharmaceutical Management",
-  },
-  {
-    value: "pharmacoeconomics",
-    label: "Pharmacoeconomics and Pharmacoepidemiology",
-  },
-  {
-    value: "aiBioinformatics",
-    label: "Artificial Intelligence / Bioinformatics / Data Analytics",
-  },
-];
 
 export function AbstractForm() {
   const {
@@ -73,6 +32,7 @@ export function AbstractForm() {
   const [whatsappNumber, setWhatsappNumber] = useState("");
   const [name, setName] = useState("");
   const [affiliation, setAffiliation] = useState("");
+  const [Designation, setDesignation] = useState("");
   const [coAuthor, setCoAuthor] = useState("");
   const [title, setTitle] = useState("");
   const [subject, setSubject] = useState("");
@@ -162,6 +122,7 @@ export function AbstractForm() {
       formData.append("whatsappNumber", whatsappNumber);
       formData.append("name", name);
       formData.append("affiliation", affiliation);
+      formData.append("designation", Designation);
       formData.append("coAuthor", coAuthor);
       formData.append("title", title);
       formData.append("subject", subject);
@@ -249,6 +210,7 @@ export function AbstractForm() {
                 onChange={(e: ChangeEvent<HTMLInputElement>) =>
                   setWhatsappNumber(e.target.value)
                 }
+                maxLength={10}
               />
             </div>
             {errors.whatsappNumber && (
@@ -264,7 +226,7 @@ export function AbstractForm() {
             htmlFor="name"
             className="block text-sm font-medium text-[#022873] mb-1"
           >
-            Name
+            Author Full Name
           </label>
           <input
             id="name"
@@ -278,6 +240,31 @@ export function AbstractForm() {
           />
           {errors.name && (
             <p className="text-[#D94814] text-sm mt-1">{errors.name}</p>
+          )}
+        </div>
+
+        <div>
+          <label
+            htmlFor="Designation"
+            className="block text-sm font-medium text-[#022873] mb-1"
+          >
+            Designation
+          </label>
+          <select
+            id="Designation"
+            className="w-full px-3 py-2 border border-[#CACACA] rounded-md focus:outline-none focus:ring-2 focus:ring-[#034C8C]"
+            value={Designation}
+            onChange={(e) => setDesignation(e.target.value)}
+          >
+            <option value="">Select a Designation</option>
+            {designationOptions.map((option) => (
+              <option key={option.value} value={option.value}>
+                {option.label}
+              </option>
+            ))}
+          </select>
+          {errors.subject && (
+            <p className="text-[#D94814] text-sm mt-1">{errors.subject}</p>
           )}
         </div>
 
@@ -324,28 +311,6 @@ export function AbstractForm() {
 
         <div>
           <label
-            htmlFor="title"
-            className="block text-sm font-medium text-[#022873] mb-1"
-          >
-            Title of Abstract
-          </label>
-          <input
-            id="title"
-            type="text"
-            className="w-full px-3 py-2 border border-[#CACACA] rounded-md focus:outline-none focus:ring-2 focus:ring-[#034C8C]"
-            placeholder="Enter the title of your abstract"
-            value={title}
-            onChange={(e: ChangeEvent<HTMLInputElement>) =>
-              setTitle(e.target.value)
-            }
-          />
-          {errors.title && (
-            <p className="text-[#D94814] text-sm mt-1">{errors.title}</p>
-          )}
-        </div>
-
-        <div>
-          <label
             htmlFor="subject"
             className="block text-sm font-medium text-[#022873] mb-1"
           >
@@ -366,6 +331,28 @@ export function AbstractForm() {
           </select>
           {errors.subject && (
             <p className="text-[#D94814] text-sm mt-1">{errors.subject}</p>
+          )}
+        </div>
+
+        <div>
+          <label
+            htmlFor="title"
+            className="block text-sm font-medium text-[#022873] mb-1"
+          >
+            Title of Abstract
+          </label>
+          <input
+            id="title"
+            type="text"
+            className="w-full px-3 py-2 border border-[#CACACA] rounded-md focus:outline-none focus:ring-2 focus:ring-[#034C8C]"
+            placeholder="Enter the title of your abstract"
+            value={title}
+            onChange={(e: ChangeEvent<HTMLInputElement>) =>
+              setTitle(e.target.value)
+            }
+          />
+          {errors.title && (
+            <p className="text-[#D94814] text-sm mt-1">{errors.title}</p>
           )}
         </div>
 

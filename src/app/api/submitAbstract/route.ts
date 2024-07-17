@@ -21,6 +21,7 @@ export async function POST(req: NextRequest) {
     const email = formData.get("email");
     const whatsappNumber = formData.get("whatsappNumber");
     const name = formData.get("name");
+    const designation = formData.get("designation");
     const affiliation = formData.get("affiliation");
     const coAuthor = formData.get("coAuthor");
     const title = formData.get("title");
@@ -60,6 +61,7 @@ export async function POST(req: NextRequest) {
       name,
       affiliation,
       coAuthor,
+      designation,
       title,
       subject,
       abstractFileUrl: file,

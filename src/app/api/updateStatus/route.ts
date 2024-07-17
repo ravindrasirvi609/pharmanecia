@@ -55,13 +55,13 @@ export async function PATCH(req: NextRequest) {
 async function generateAbstractCode(subject: string): Promise<string> {
   const subjectCodes: { [key: string]: string } = {
     pharmaceuticalTechnology: "PT",
+    medChem: "PC",
     pharmacognosy: "PG",
     pharmacologyToxicology: "PH",
     pharmaceuticalAnalysis: "PA",
     biopharmaceutics: "BP",
     biotechnology: "BT",
     clinicalPharmacy: "CP",
-    regulatoryAffairs: "RA",
     pharmaceuticalEducation: "PE",
     drugRegulatoryAffairs: "DR",
     pharmacoeconomics: "PC",
