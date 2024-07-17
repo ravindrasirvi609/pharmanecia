@@ -1,30 +1,7 @@
 "use client";
 
-import React, { useState, useMemo, useEffect, JSX, SVGProps } from "react";
-import {
-  DropdownMenu,
-  DropdownMenuTrigger,
-  DropdownMenuContent,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuCheckboxItem,
-  DropdownMenuRadioGroup,
-  DropdownMenuRadioItem,
-  DropdownMenuItem,
-} from "@/components/ui/dropdown-menu";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import {
-  Table,
-  TableHeader,
-  TableRow,
-  TableHead,
-  TableBody,
-  TableCell,
-} from "@/components/ui/table";
-import { Badge } from "@/components/ui/badge";
+import React, { useState, useMemo, useEffect } from "react";
 
-// Define types for the abstract and filters
 interface Abstract {
   _id: string;
   title: string;
@@ -45,13 +22,14 @@ export function AbstractList() {
   const [abstracts, setAbstracts] = useState<Abstract[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
-
   const [filters, setFilters] = useState<Filters>({
     Status: "all",
     search: "",
     sortBy: "title",
     sortOrder: "asc",
   });
+  const [isFilterOpen, setIsFilterOpen] = useState(false);
+  const [isSortOpen, setIsSortOpen] = useState(false);
 
   const filteredAbstracts = useMemo(() => {
     let filtered = abstracts;
@@ -116,7 +94,7 @@ export function AbstractList() {
   }
 
   if (error) {
-    return <p className="text-red-500 text-center mt-4 ">Error: {error}</p>;
+    return <p className="text-red-500 text-center mt-4">Error: {error}</p>;
   }
 
   const handleDownload = (abstract: Abstract) => {
@@ -136,7 +114,7 @@ export function AbstractList() {
       if (response.ok) {
         setAbstracts((prevAbstracts) =>
           prevAbstracts.map((a) =>
-            a._id === abstract._id ? { ...a, status: newStatus } : a
+            a._id === abstract._id ? { ...a, Status: newStatus } : a
           )
         );
       } else {
@@ -149,284 +127,198 @@ export function AbstractList() {
   };
 
   return (
-    <div className="flex flex-col h-screen">
-      <header className="bg-background border-b px-6 py-4 flex items-center justify-between">
+    <div className="flex flex-col h-screen bg-[#F2F2F2]">
+      <header className="bg-[#021373] text-white px-6 py-4 flex items-center justify-between shadow-md">
         <h1 className="text-2xl font-bold">Abstract Management</h1>
         <div className="flex items-center gap-4">
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button
-                variant="outline"
-                size="sm"
-                className="flex items-center gap-2"
-              >
-                <FilterIcon className="w-4 h-4" />
-                <span>Filter</span>
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end" className="w-[200px]">
-              <DropdownMenuLabel>Filter by status</DropdownMenuLabel>
-              <DropdownMenuSeparator />
-              <DropdownMenuCheckboxItem
-                checked={filters.Status === "all"}
-                onCheckedChange={(checked) =>
-                  setFilters((prev) => ({
-                    ...prev,
-                    Status: checked ? "all" : prev.Status,
-                  }))
-                }
-              >
-                All
-              </DropdownMenuCheckboxItem>
-              <DropdownMenuCheckboxItem
-                checked={filters.Status === "Pending"}
-                onCheckedChange={(checked) =>
-                  setFilters((prev) => ({
-                    ...prev,
-                    Status: checked ? "Pending" : prev.Status,
-                  }))
-                }
-              >
-                Pending
-              </DropdownMenuCheckboxItem>
-              <DropdownMenuCheckboxItem
-                checked={filters.Status === "InReview"}
-                onCheckedChange={(checked) =>
-                  setFilters((prev) => ({
-                    ...prev,
-                    Status: checked ? "InReview" : prev.Status,
-                  }))
-                }
-              >
-                In Review
-              </DropdownMenuCheckboxItem>
-              <DropdownMenuCheckboxItem
-                checked={filters.Status === "Rejected"}
-                onCheckedChange={(checked) =>
-                  setFilters((prev) => ({
-                    ...prev,
-                    Status: checked ? "Rejected" : prev.Status,
-                  }))
-                }
-              >
-                Rejected
-              </DropdownMenuCheckboxItem>
-              <DropdownMenuCheckboxItem
-                checked={filters.Status === "Accepted"}
-                onCheckedChange={(checked) =>
-                  setFilters((prev) => ({
-                    ...prev,
-                    Status: checked ? "Accepted" : prev.Status,
-                  }))
-                }
-              >
-                Accepted
-              </DropdownMenuCheckboxItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
           <div className="relative">
-            <SearchIcon className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
-            <Input
-              type="search"
-              placeholder="Search abstracts..."
-              className="pl-8 w-[200px]"
-              value={filters.search}
-              onChange={(e) =>
-                setFilters((prev) => ({ ...prev, search: e.target.value }))
-              }
-            />
+            <button
+              onClick={() => setIsFilterOpen(!isFilterOpen)}
+              className="px-4 py-2 bg-[#034C8C] text-white rounded-md text-sm font-medium hover:bg-[#022873] transition duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#034C8C]"
+            >
+              Filter
+            </button>
+            {isFilterOpen && (
+              <div className="absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
+                <div
+                  className="py-1"
+                  role="menu"
+                  aria-orientation="vertical"
+                  aria-labelledby="options-menu"
+                >
+                  {["all", "Pending", "InReview", "Rejected", "Accepted"].map(
+                    (status) => (
+                      <button
+                        key={status}
+                        onClick={() => {
+                          setFilters((prev) => ({ ...prev, Status: status }));
+                          setIsFilterOpen(false);
+                        }}
+                        className="block px-4 py-2 text-sm text-[#021373] hover:bg-[#F2F2F2] hover:text-[#034C8C] w-full text-left transition duration-300 ease-in-out"
+                        role="menuitem"
+                      >
+                        {status === "all" ? "All" : status}
+                      </button>
+                    )
+                  )}
+                </div>
+              </div>
+            )}
           </div>
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button
-                variant="outline"
-                size="sm"
-                className="flex items-center gap-2"
-              >
-                <ListOrderedIcon className="w-4 h-4" />
-                <span>Sort</span>
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end" className="w-[200px]">
-              <DropdownMenuLabel>Sort by</DropdownMenuLabel>
-              <DropdownMenuSeparator />
-              <DropdownMenuRadioGroup
-                value={filters.sortBy}
-                onValueChange={(value) =>
-                  setFilters((prev) => ({ ...prev, sortBy: value }))
-                }
-              >
-                <DropdownMenuRadioItem value="title">
-                  Title
-                </DropdownMenuRadioItem>
-                <DropdownMenuRadioItem value="author">
-                  Author
-                </DropdownMenuRadioItem>
-                <DropdownMenuRadioItem value="email">
-                  Email
-                </DropdownMenuRadioItem>
-                <DropdownMenuRadioItem value="Status">
-                  Status
-                </DropdownMenuRadioItem>
-              </DropdownMenuRadioGroup>
-              <DropdownMenuSeparator />
-              <DropdownMenuRadioGroup
-                value={filters.sortOrder}
-                onValueChange={(value) =>
-                  setFilters((prev) => ({ ...prev, sortOrder: value }))
-                }
-              >
-                <DropdownMenuRadioItem value="asc">
-                  Ascending
-                </DropdownMenuRadioItem>
-                <DropdownMenuRadioItem value="desc">
-                  Descending
-                </DropdownMenuRadioItem>
-              </DropdownMenuRadioGroup>
-            </DropdownMenuContent>
-          </DropdownMenu>
+          <input
+            type="search"
+            placeholder="Search abstracts..."
+            className="px-4 py-2 border border-[#CACACA] rounded-md focus:ring-[#034C8C] focus:border-[#034C8C] bg-white text-[#021373]"
+            value={filters.search}
+            onChange={(e) =>
+              setFilters((prev) => ({ ...prev, search: e.target.value }))
+            }
+          />
+          <div className="relative">
+            <button
+              onClick={() => setIsSortOpen(!isSortOpen)}
+              className="px-4 py-2 bg-[#034C8C] text-white rounded-md text-sm font-medium hover:bg-[#022873] transition duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#034C8C]"
+            >
+              Sort
+            </button>
+            {isSortOpen && (
+              <div className="absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
+                <div
+                  className="py-1"
+                  role="menu"
+                  aria-orientation="vertical"
+                  aria-labelledby="options-menu"
+                >
+                  {["title", "author", "email", "Status"].map((sortOption) => (
+                    <button
+                      key={sortOption}
+                      onClick={() => {
+                        setFilters((prev) => ({ ...prev, sortBy: sortOption }));
+                        setIsSortOpen(false);
+                      }}
+                      className="block px-4 py-2 text-sm text-[#021373] hover:bg-[#F2F2F2] hover:text-[#034C8C] w-full text-left transition duration-300 ease-in-out"
+                      role="menuitem"
+                    >
+                      {sortOption.charAt(0).toUpperCase() + sortOption.slice(1)}
+                    </button>
+                  ))}
+                  <hr className="my-1 border-[#CACACA]" />
+                  <button
+                    onClick={() => {
+                      setFilters((prev) => ({
+                        ...prev,
+                        sortOrder: prev.sortOrder === "asc" ? "desc" : "asc",
+                      }));
+                      setIsSortOpen(false);
+                    }}
+                    className="block px-4 py-2 text-sm text-[#021373] hover:bg-[#F2F2F2] hover:text-[#034C8C] w-full text-left transition duration-300 ease-in-out"
+                    role="menuitem"
+                  >
+                    {filters.sortOrder === "asc" ? "Descending" : "Ascending"}
+                  </button>
+                </div>
+              </div>
+            )}
+          </div>
         </div>
       </header>
       <main className="flex-1 overflow-auto">
-        <div className="grid gap-4 p-6">
-          <Table>
-            <TableHeader>
-              <TableRow>
-                <TableHead>Title</TableHead>
-                <TableHead>Author</TableHead>
-                <TableHead>Email</TableHead>
-                <TableHead>Status</TableHead>
-                <TableHead>Actions</TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
+        <div className="container mx-auto py-6">
+          <table className="min-w-full bg-white shadow-md rounded-lg overflow-hidden">
+            <thead>
+              <tr className="bg-[#022873] text-white uppercase text-sm leading-normal">
+                <th className="py-3 px-6 text-left">Title</th>
+                <th className="py-3 px-6 text-left">Author</th>
+                <th className="py-3 px-6 text-left">Email</th>
+                <th className="py-3 px-6 text-left">Status</th>
+                <th className="py-3 px-6 text-center">Actions</th>
+              </tr>
+            </thead>
+            <tbody className="text-[#021373] text-sm">
               {filteredAbstracts.map((abstract) => (
-                <TableRow key={abstract._id}>
-                  <TableCell>{abstract.title}</TableCell>
-                  <TableCell>{abstract.author}</TableCell>
-                  <TableCell>{abstract.email}</TableCell>
-                  <TableCell>
-                    <Badge variant="outline">{abstract.Status}</Badge>
-                  </TableCell>
-                  <TableCell>
-                    <div className="flex items-center gap-2">
-                      <Button
-                        variant="outline"
-                        size="sm"
+                <tr
+                  key={abstract._id}
+                  className="border-b border-[#CACACA] hover:bg-[#F2F2F2] transition duration-300 ease-in-out"
+                >
+                  <td className="py-3 px-6 text-left whitespace-nowrap">
+                    {abstract.title}
+                  </td>
+                  <td className="py-3 px-6 text-left">{abstract.author}</td>
+                  <td className="py-3 px-6 text-left">{abstract.email}</td>
+                  <td className="py-3 px-6 text-left">
+                    <span
+                      className={`py-1 px-3 rounded-full text-xs ${
+                        abstract.Status === "Accepted"
+                          ? "bg-green-200 text-green-800"
+                          : abstract.Status === "Rejected"
+                          ? "bg-[#D94814] text-white"
+                          : "bg-yellow-200 text-yellow-800"
+                      }`}
+                    >
+                      {abstract.Status}
+                    </span>
+                  </td>
+                  <td className="py-3 px-6 text-center">
+                    <div className="flex item-center justify-center">
+                      <button
                         onClick={() => handleDownload(abstract)}
+                        className="bg-[#034C8C] hover:bg-[#022873] text-white font-bold py-1 px-3 rounded mr-2 transition duration-300 ease-in-out"
                       >
                         Download
-                      </Button>
-                      <DropdownMenu>
-                        <DropdownMenuTrigger asChild>
-                          <Button variant="outline" size="sm">
-                            Update Status
-                          </Button>
-                        </DropdownMenuTrigger>
-                        <DropdownMenuContent align="end" className="w-[200px]">
-                          <DropdownMenuLabel>Update Status</DropdownMenuLabel>
-                          <DropdownMenuSeparator />
-                          <DropdownMenuItem
-                            onClick={() =>
-                              handleStatusUpdate(abstract, "Pending")
-                            }
+                      </button>
+                      <div className="relative">
+                        <button
+                          onClick={() => {
+                            const elem = document.getElementById(
+                              `status-dropdown-${abstract._id}`
+                            );
+                            if (elem) elem.classList.toggle("hidden");
+                          }}
+                          className="bg-[#021373] hover:bg-[#022873] text-white font-bold py-1 px-3 rounded transition duration-300 ease-in-out"
+                        >
+                          Update Status
+                        </button>
+                        <div
+                          id={`status-dropdown-${abstract._id}`}
+                          className="absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 hidden"
+                        >
+                          <div
+                            className="py-1"
+                            role="menu"
+                            aria-orientation="vertical"
                           >
-                            Pending
-                          </DropdownMenuItem>
-                          <DropdownMenuItem
-                            onClick={() =>
-                              handleStatusUpdate(abstract, "InReview")
-                            }
-                          >
-                            In Review
-                          </DropdownMenuItem>
-                          <DropdownMenuItem
-                            onClick={() =>
-                              handleStatusUpdate(abstract, "Rejected")
-                            }
-                          >
-                            Rejected
-                          </DropdownMenuItem>
-                          <DropdownMenuItem
-                            onClick={() =>
-                              handleStatusUpdate(abstract, "Accepted")
-                            }
-                          >
-                            Accepted
-                          </DropdownMenuItem>
-                        </DropdownMenuContent>
-                      </DropdownMenu>
+                            {[
+                              "Pending",
+                              "InReview",
+                              "Rejected",
+                              "Accepted",
+                            ].map((status) => (
+                              <button
+                                key={status}
+                                onClick={() => {
+                                  handleStatusUpdate(abstract, status);
+                                  const elem = document.getElementById(
+                                    `status-dropdown-${abstract._id}`
+                                  );
+                                  if (elem) elem.classList.add("hidden");
+                                }}
+                                className="block w-full text-left px-4 py-2 text-sm text-[#021373] hover:bg-[#F2F2F2] hover:text-[#034C8C] transition duration-300 ease-in-out"
+                                role="menuitem"
+                              >
+                                {status}
+                              </button>
+                            ))}
+                          </div>
+                        </div>
+                      </div>
                     </div>
-                  </TableCell>
-                </TableRow>
+                  </td>
+                </tr>
               ))}
-            </TableBody>
-          </Table>
+            </tbody>
+          </table>
         </div>
       </main>
     </div>
-  );
-}
-
-// Icons
-function FilterIcon(props: JSX.IntrinsicAttributes & SVGProps<SVGSVGElement>) {
-  return (
-    <svg
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="1.5"
-      viewBox="0 0 24 24"
-      xmlns="http://www.w3.org/2000/svg"
-      aria-hidden="true"
-      {...props}
-    >
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        d="M12 3c2.755 0 4.552 0 5.828.586a5 5 0 0 1 2.586 2.586C21 7.448 21 9.245 21 12s0 4.552-.586 5.828a5 5 0 0 1-2.586 2.586C16.552 21 14.755 21 12 21s-4.552 0-5.828-.586a5 5 0 0 1-2.586-2.586C3 16.552 3 14.755 3 12s0-4.552.586-5.828a5 5 0 0 1 2.586-2.586C7.448 3 9.245 3 12 3z"
-      ></path>
-    </svg>
-  );
-}
-
-function SearchIcon(props: JSX.IntrinsicAttributes & SVGProps<SVGSVGElement>) {
-  return (
-    <svg
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      viewBox="0 0 24 24"
-      xmlns="http://www.w3.org/2000/svg"
-      aria-hidden="true"
-      {...props}
-    >
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        d="M21 21l-4.35-4.35m2.475-5.025a8.5 8.5 0 1 1-17 0 8.5 8.5 0 0 1 17 0z"
-      ></path>
-    </svg>
-  );
-}
-
-function ListOrderedIcon(
-  props: JSX.IntrinsicAttributes & SVGProps<SVGSVGElement>
-) {
-  return (
-    <svg
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="1.5"
-      viewBox="0 0 24 24"
-      xmlns="http://www.w3.org/2000/svg"
-      aria-hidden="true"
-      {...props}
-    >
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        d="M8.25 6.75h12m-12 5.25h12m-12 5.25h12M3 7.5l1.5-1.5V12m-1.5 9h3m-3-3h2.25"
-      ></path>
-    </svg>
   );
 }
