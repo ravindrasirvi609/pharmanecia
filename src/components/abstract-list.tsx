@@ -32,6 +32,9 @@ export function AbstractList() {
   });
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [isSortOpen, setIsSortOpen] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+  const itemsPerPage = 10;
 
   const filteredAbstracts = useMemo(() => {
     let filtered = abstracts;
@@ -58,27 +61,30 @@ export function AbstractList() {
     return filtered;
   }, [abstracts, filters]);
 
-  useEffect(() => {
-    const fetchAbstracts = async () => {
-      try {
-        const response = await fetch("/api/abstractList");
-        const data = await response.json();
+  const fetchAbstracts = async (page: number) => {
+    try {
+      setLoading(true);
+      const response = await fetch(
+        `/api/abstractList?page=${page}&limit=${itemsPerPage}`
+      );
+      const data = await response.json();
 
-        if (response.ok) {
-          setAbstracts(data.abstracts);
-        } else {
-          throw new Error(data.message);
-        }
-      } catch (err) {
-        setError("An error occurred while fetching abstracts.");
-        toast.error("Failed to load abstracts. Please try again later.");
-      } finally {
-        setLoading(false);
+      if (response.ok) {
+        setAbstracts(data.abstracts);
+        setTotalPages(data.totalPages);
+      } else {
+        throw new Error(data.message);
       }
-    };
-
-    fetchAbstracts();
-  }, []);
+    } catch (err) {
+      setError("An error occurred while fetching abstracts.");
+      toast.error("Failed to load abstracts. Please try again later.");
+    } finally {
+      setLoading(false);
+    }
+  };
+  useEffect(() => {
+    fetchAbstracts(currentPage);
+  }, [currentPage]);
 
   const handleDownload = (abstract: Abstract) => {
     window.open(abstract.abstractFileUrl, "_blank");
@@ -116,6 +122,28 @@ export function AbstractList() {
       {[...Array(5)].map((_, index) => (
         <div key={index} className="h-16 bg-gray-300 rounded mb-2"></div>
       ))}
+    </div>
+  );
+
+  const Pagination = () => (
+    <div className="flex justify-center mt-4">
+      <button
+        onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+        disabled={currentPage === 1}
+        className="px-4 py-2 mr-2 bg-[#034C8C] text-white rounded-md disabled:bg-gray-300"
+      >
+        Previous
+      </button>
+      <span className="px-4 py-2">
+        Page {currentPage} of {totalPages}
+      </span>
+      <button
+        onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
+        disabled={currentPage === totalPages}
+        className="px-4 py-2 ml-2 bg-[#034C8C] text-white rounded-md disabled:bg-gray-300"
+      >
+        Next
+      </button>
     </div>
   );
 
@@ -330,6 +358,7 @@ export function AbstractList() {
               </tbody>
             </table>
           )}
+          <Pagination />
         </div>
       </main>
     </div>

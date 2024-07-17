@@ -6,8 +6,22 @@ connect();
 
 export async function GET(req: NextRequest) {
   try {
-    // Fetch all abstracts from the database
-    const abstracts = await AbstractModel.find({});
+    // Get page and limit from query parameters
+    const url = new URL(req.url);
+    const page = parseInt(url.searchParams.get("page") || "1");
+    const limit = parseInt(url.searchParams.get("limit") || "10");
+
+    // Calculate skip value for pagination
+    const skip = (page - 1) * limit;
+
+    // Fetch total count of abstracts
+    const total = await AbstractModel.countDocuments();
+
+    // Fetch paginated abstracts from the database
+    const abstracts = await AbstractModel.find({})
+      .skip(skip)
+      .limit(limit)
+      .lean();
 
     // Check if abstracts exist
     if (!abstracts || abstracts.length === 0) {
@@ -17,15 +31,19 @@ export async function GET(req: NextRequest) {
       );
     }
 
-    // Return the list of abstracts
+    // Return the list of abstracts with pagination info
     return NextResponse.json({
       message: "Abstracts fetched successfully",
       abstracts,
+      total,
+      page,
+      limit,
+      totalPages: Math.ceil(total / limit),
     });
   } catch (error: any) {
     console.error("Error:", error);
     return NextResponse.json(
-      { message: "Internal server error", error },
+      { message: "Internal server error", error: error.toString() },
       { status: 500 }
     );
   }
