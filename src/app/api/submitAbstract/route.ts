@@ -3,7 +3,6 @@ import { NextRequest, NextResponse } from "next/server";
 import { v4 as uuidv4 } from "uuid";
 import AbstractModel from "@/Model/AbstractModel";
 import QRCode from "qrcode";
-import { uploadToCloudinary } from "@/cloudinaryConfig/cloudinaryConfig";
 
 connect();
 
@@ -11,18 +10,12 @@ export async function POST(req: NextRequest) {
   try {
     const formData = await req.formData();
     const file = formData.get("abstractFile") as File;
-    const fileBuffer = await file.arrayBuffer();
-    const mimeType = file.type;
-    const encoding = "base64";
-    const base64Data = Buffer.from(fileBuffer).toString("base64");
-    const fileUri = "data:" + mimeType + ";" + encoding + "," + base64Data;
-    const res = await uploadToCloudinary(fileUri, file.name);
 
-    let message = "failure";
-    let imgUrl = "";
-    if (res.success && res.result) {
-      message = "success";
-      imgUrl = res.result.secure_url;
+    if (!file) {
+      return NextResponse.json(
+        { message: "Abstract file is required" },
+        { status: 400 }
+      );
     }
 
     const email = formData.get("email");
@@ -69,7 +62,7 @@ export async function POST(req: NextRequest) {
       coAuthor,
       title,
       subject,
-      abstractFileUrl: imgUrl,
+      abstractFileUrl: file,
       address,
       city,
       state,
