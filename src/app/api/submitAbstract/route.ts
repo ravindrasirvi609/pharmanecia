@@ -88,7 +88,12 @@ export async function POST(req: NextRequest) {
     );
   }
 }
+let sequenceCounter = 1;
 
 async function abstractCodeGenration(): Promise<string> {
-  return uuidv4();
+  const opfPrefix = "OPF";
+  const year = new Date().getFullYear().toString().slice(-2);
+  const sequenceNumber = sequenceCounter.toString().padStart(4, "0");
+  sequenceCounter++;
+  return `${opfPrefix}${year}${sequenceNumber}`;
 }
