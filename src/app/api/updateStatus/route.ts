@@ -1,5 +1,6 @@
 import AbstractModel from "@/Model/AbstractModel";
 import { connect } from "@/dbConfig/dbConfig";
+import { sendEmail } from "@/lib/mailer";
 import { NextRequest, NextResponse } from "next/server";
 
 connect();
@@ -37,8 +38,10 @@ export async function PATCH(req: NextRequest) {
 
     await abstract.save();
 
-    console.log("Status updated successfully for _id:", _id);
-
+    await sendEmail({
+      email: abstract.email,
+      emailType: "UPDATE_STATUS",
+    });
     return NextResponse.json({
       message: "Status updated successfully",
       abstract,
