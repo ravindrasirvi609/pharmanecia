@@ -103,16 +103,17 @@ const AbstractForm: React.FC<StudentPageProps> = ({ params }) => {
               </p>
               <div className="mt-6 text-center">
                 <p className="text-lg font-semibold mb-2">
-                  Successfully submitted Abstract!
+                  Your Abstract has been Successfully Submitted !
                 </p>
                 <p className="text-sm">
-                  You can access and update your abstract using this QR code.
+                  You can check updates regarding your abstract using this QR
+                  code.
                 </p>
               </div>
             </div>
             <div className="md:w-2/3 p-8">
               <h2 className="text-3xl font-bold mb-6 text-purple-800">
-                Registration Details
+                Scientific Abstact Details
               </h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-4">
                 <InfoItem
@@ -186,7 +187,7 @@ const AbstractForm: React.FC<StudentPageProps> = ({ params }) => {
         <div className="mt-8 text-center text-gray-600">
           <p>
             For any queries, please contact our support team at
-            support@example.com
+            ssc@pharmanecia.org
           </p>
         </div>
       </div>
