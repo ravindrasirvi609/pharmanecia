@@ -1,4 +1,3 @@
-import { Resend } from "resend";
 import AbstractModel from "@/Model/AbstractModel";
 
 const createEmailTemplate = (content: any) => `
@@ -35,7 +34,7 @@ const createEmailTemplate = (content: any) => `
             color: #F2F2F2;
             text-decoration: none;
             border-radius: 5px;
-            
+
         }
         .footer {
             margin-top: 20px;
