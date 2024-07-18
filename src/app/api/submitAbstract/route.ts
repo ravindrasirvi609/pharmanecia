@@ -3,6 +3,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { v4 as uuidv4 } from "uuid";
 import AbstractModel from "@/Model/AbstractModel";
 import QRCode from "qrcode";
+import { sendEmail } from "@/lib/mailer";
 
 connect();
 
@@ -75,6 +76,10 @@ export async function POST(req: NextRequest) {
 
     const newAbstract = new AbstractModel(abstractData);
     await newAbstract.save();
+    await sendEmail({
+      _id: newAbstract._id,
+      emailType: "SUBMMITED",
+    });
 
     return NextResponse.json({
       message: "Abstract submitted successfully",

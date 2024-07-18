@@ -39,7 +39,7 @@ export async function PATCH(req: NextRequest) {
     await abstract.save();
 
     await sendEmail({
-      email: abstract.email,
+      _id: abstract._id,
       emailType: "UPDATE_STATUS",
     });
     return NextResponse.json({

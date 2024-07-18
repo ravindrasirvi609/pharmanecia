@@ -63,17 +63,15 @@ const createEmailTemplate = (content: string) => `
 
 export const sendEmail = async (
   {
-    email,
+    _id,
     emailType,
   }: {
-    email: string;
+    _id: string;
     emailType: "SUBMMITED" | "UPDATE_STATUS";
   },
   p0?: string
 ) => {
   try {
-    console.log("email", email, "emailType", emailType);
-
     if (emailType !== "SUBMMITED" && emailType !== "UPDATE_STATUS") {
       throw new Error(
         "Invalid emailType. It should be either 'SUBMMITED' or 'UPDATE_STATUS'."
@@ -81,14 +79,14 @@ export const sendEmail = async (
     }
     const resend = new Resend(process.env.RESEND_API_KEY!);
 
-    const abstract = await AbstractModel.findOne({ email });
+    const abstract = await AbstractModel.findOne({ _id });
 
     if (!abstract) {
-      throw new Error(`No abstract found for email: ${email}`);
+      throw new Error(`No abstract found for email`);
     }
 
     const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
-    const submissionDetailsUrl = `${baseUrl}/abstract/${abstract._id}`;
+    const submissionDetailsUrl = `${baseUrl}/abstractForm/${abstract._id}`;
 
     if (emailType === "SUBMMITED") {
       const content = `
@@ -106,7 +104,7 @@ export const sendEmail = async (
 
       const mailresponse = await resend.emails.send({
         from: "dev@ravindrachoudhary.in",
-        to: email,
+        to: abstract.email,
         subject: `Abstract Submission Confirmation - ${abstract.temporyAbstractCode}`,
         html: createEmailTemplate(content),
       });
@@ -132,7 +130,7 @@ export const sendEmail = async (
 
       const mailOptions = await resend.emails.send({
         from: "dev@ravindrachoudhary.in",
-        to: email,
+        to: abstract.email,
         subject: `Abstract Status Update - ${
           abstract.abstractCode || abstract.temporyAbstractCode
         }`,
