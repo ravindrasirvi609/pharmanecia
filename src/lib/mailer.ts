@@ -31,10 +31,11 @@ const createEmailTemplate = (content: any) => `
         .button {
             display: inline-block;
             padding: 10px 20px;
-            background-color: #034C8C;
+            background-color: #D94814;
             color: #F2F2F2;
             text-decoration: none;
             border-radius: 5px;
+            
         }
         .footer {
             margin-top: 20px;
