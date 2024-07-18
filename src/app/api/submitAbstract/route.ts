@@ -93,7 +93,7 @@ let sequenceCounter = 1;
 async function abstractCodeGenration(): Promise<string> {
   const opfPrefix = "OPF";
   const year = new Date().getFullYear().toString().slice(-2);
-  const sequenceNumber = sequenceCounter.toString().padStart(4, "0");
+  const sequenceNumber = sequenceCounter.toString().padStart(3, "0");
   sequenceCounter++;
-  return `${opfPrefix}${year}${sequenceNumber}`;
+  return `${opfPrefix}${sequenceNumber}${year}`;
 }
