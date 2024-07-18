@@ -121,17 +121,17 @@ const AbstractForm: React.FC<StudentPageProps> = ({ params }) => {
     value: string | ReactNode;
   }) => (
     <div className="mb-4">
-      <span className="font-semibold text-purple-700">{label}:</span>
+      <span className="font-semibold text-danger">{label}:</span>
       <span className="ml-2 text-gray-800">{value}</span>
     </div>
   );
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-100 to-indigo-200 py-8 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-gradient-to-br from-orange-100 to-indigo-200 py-8 px-4 sm:px-6 lg:px-8">
       <div className="max-w-5xl mx-auto">
         <div className="bg-white rounded-xl shadow-2xl overflow-hidden">
           <div className="md:flex flex-col md:flex-row">
-            <div className="md:w-1/3 bg-purple-700 text-white p-8 flex flex-col items-center justify-center">
+            <div className="md:w-1/3 bg-danger text-white p-8 flex flex-col items-center justify-center">
               <h2 className="text-3xl font-bold mb-4 text-center">
                 Abstract QR Code
               </h2>
@@ -157,7 +157,7 @@ const AbstractForm: React.FC<StudentPageProps> = ({ params }) => {
               </div>
             </div>
             <div className="md:w-2/3 p-8">
-              <h2 className="text-3xl font-bold mb-6 text-purple-800">
+              <h2 className="text-3xl font-bold mb-6 text-danger">
                 Scientific Abstact Details
               </h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-4">
@@ -228,7 +228,7 @@ const AbstractForm: React.FC<StudentPageProps> = ({ params }) => {
               </div>
               {registrationInfo.Status === "Rejected" && (
                 <div className="mt-8">
-                  <h3 className="text-xl font-bold mb-4 text-purple-800">
+                  <h3 className="text-xl font-bold mb-4 text-danger">
                     Update Abstract File
                   </h3>
                   <div className="space-y-4">
