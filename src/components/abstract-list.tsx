@@ -314,7 +314,7 @@ export function AbstractList() {
                               );
                               if (elem) elem.classList.toggle("hidden");
                             }}
-                            className="bg-[#021373] hover:bg-[#022873] text-white font-bold py-1 px-3 rounded transition duration-300 ease-in-out"
+                            className="bg-danger hover:bg-[#022873] text-white font-bold py-1 px-3 rounded transition duration-300 ease-in-out"
                           >
                             Update Status
                           </button>
