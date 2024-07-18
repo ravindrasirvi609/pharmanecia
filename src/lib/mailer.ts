@@ -1,7 +1,7 @@
 import { Resend } from "resend";
 import AbstractModel from "@/Model/AbstractModel";
 
-const createEmailTemplate = (content: string) => `
+const createEmailTemplate = (content: any) => `
 <!DOCTYPE html>
 <html>
 <head>
@@ -77,7 +77,13 @@ export const sendEmail = async (
         "Invalid emailType. It should be either 'SUBMMITED' or 'UPDATE_STATUS'."
       );
     }
-    const resend = new Resend(process.env.RESEND_API_KEY!);
+
+    const apiKey = process.env.RESEND_API_KEY;
+    if (!apiKey) {
+      throw new Error(
+        "Missing Resend API key. Set the RESEND_API_KEY environment variable."
+      );
+    }
 
     const abstract = await AbstractModel.findOne({ _id });
 
@@ -88,8 +94,10 @@ export const sendEmail = async (
     const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
     const submissionDetailsUrl = `${baseUrl}/abstractForm/${abstract._id}`;
 
+    let content, subject;
+
     if (emailType === "SUBMMITED") {
-      const content = `
+      content = `
         <h2>Thank you for your submission!</h2>
         <p>Your abstract has been successfully submitted. Your temporary abstract code is: <strong>${abstract.temporyAbstractCode}</strong></p>
         <p>You can use the QR code below to check for updates on your submission status:</p>
@@ -101,16 +109,9 @@ export const sendEmail = async (
             <a href="${submissionDetailsUrl}" class="button">View Submission Details</a>
         </p>
       `;
-
-      const mailresponse = await resend.emails.send({
-        from: "dev@ravindrachoudhary.in",
-        to: abstract.email,
-        subject: `Abstract Submission Confirmation - ${abstract.temporyAbstractCode}`,
-        html: createEmailTemplate(content),
-      });
-      return mailresponse;
+      subject = `Abstract Submission Confirmation - ${abstract.temporyAbstractCode}`;
     } else if (emailType === "UPDATE_STATUS") {
-      const content = `
+      content = `
         <h2>Your Abstract Status Has Been Updated</h2>
         <p>There has been an update to your abstract submission (Code: <strong>${
           abstract.abstractCode || abstract.temporyAbstractCode
@@ -127,18 +128,30 @@ export const sendEmail = async (
             <a href="${submissionDetailsUrl}" class="button">View Submission Details</a>
         </p>
       `;
+      subject = `Abstract Status Update - ${
+        abstract.abstractCode || abstract.temporyAbstractCode
+      }`;
+    }
 
-      const mailOptions = await resend.emails.send({
+    const response = await fetch("https://api.resend.com/emails", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${apiKey}`,
+      },
+      body: JSON.stringify({
         from: "dev@ravindrachoudhary.in",
         to: abstract.email,
-        subject: `Abstract Status Update - ${
-          abstract.abstractCode || abstract.temporyAbstractCode
-        }`,
+        subject: subject,
         html: createEmailTemplate(content),
-      });
+      }),
+    });
 
-      return mailOptions;
+    if (!response.ok) {
+      throw new Error(`Error sending email: ${response.status}`);
     }
+
+    return await response.json();
   } catch (error: any) {
     console.error("Error sending email:", error);
     throw new Error(`Failed to send email: ${error.message}`);
