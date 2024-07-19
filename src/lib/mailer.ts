@@ -111,23 +111,30 @@ export const sendEmail = async (
       `;
       subject = `Abstract Submission Confirmation - ${abstract.temporyAbstractCode}`;
     } else if (emailType === "UPDATE_STATUS") {
+      let statusSpecificContent = "";
+      if (abstract.Status === "Rejected" && abstract.rejectionComment) {
+        statusSpecificContent = `
+      <p>Reason for rejection: ${abstract.rejectionComment}</p>
+    `;
+      }
       content = `
-        <h2>Your Abstract Status Has Been Updated</h2>
-        <p>There has been an update to your abstract submission (Code: <strong>${
-          abstract.abstractCode || abstract.temporyAbstractCode
-        }</strong>).</p>
-        <p>Current Status: <strong>${abstract.Status}</strong></p>
-        <p>Please scan the QR code below or click the button to view the current status of your submission:</p>
-        <div class="qr-code">
-            <img src="${
-              abstract.qrCodeUrl
-            }" alt="QR Code" style="max-width: 200px;">
-        </div>
-        <p>If you have any questions about this update, please contact our support team.</p>
-        <p>
-            <a href="${submissionDetailsUrl}" class="button">View Submission Details</a>
-        </p>
-      `;
+    <h2>Your Abstract Status Has Been Updated</h2>
+    <p>There has been an update to your abstract submission (Code: <strong>${
+      abstract.abstractCode || abstract.temporyAbstractCode
+    }</strong>).</p>
+    <p>Current Status: <strong>${abstract.Status}</strong></p>
+    ${statusSpecificContent}
+    <p>Please scan the QR code below or click the button to view the current status of your submission:</p>
+    <div class="qr-code">
+        <img src="${
+          abstract.qrCodeUrl
+        }" alt="QR Code" style="max-width: 200px;">
+    </div>
+    <p>If you have any questions about this update, please contact our support team.</p>
+    <p>
+        <a href="${submissionDetailsUrl}" class="button">View Submission Details</a>
+    </p>
+  `;
       subject = `Abstract Status Update - ${
         abstract.abstractCode || abstract.temporyAbstractCode
       }`;

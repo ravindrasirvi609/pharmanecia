@@ -7,7 +7,7 @@ connect();
 
 export async function PATCH(req: NextRequest) {
   try {
-    const { status, _id } = await req.json();
+    const { status, _id, comment } = await req.json();
 
     if (!_id || !status) {
       console.error("Missing _id or status in the request");
@@ -27,8 +27,11 @@ export async function PATCH(req: NextRequest) {
       );
     }
 
-    // Update the status
+    // Update the status and add comment if status is Rejected
     abstract.Status = status;
+    if (status === "Rejected") {
+      abstract.rejectionComment = comment;
+    }
 
     // If the status is "Accepted", generate and set the AbstractCode
     if (status === "Accepted" && !abstract.AbstractCode) {

@@ -29,6 +29,7 @@ interface RegistrationInfo {
   pincode: string;
   whatsappNumber: string;
   abstractFileUrl: string;
+  rejectionComment: string;
   createdAt: string;
   updatedAt: string;
 }
@@ -228,6 +229,12 @@ const AbstractForm: React.FC<StudentPageProps> = ({ params }) => {
               </div>
               {registrationInfo.Status === "Rejected" && (
                 <div className="mt-8">
+                  <h3 className="text-xl font-bold mb-4 text-danger">
+                    Rejection Comment
+                  </h3>
+                  <p className="text-gray-800">
+                    {registrationInfo.rejectionComment}
+                  </p>
                   <h3 className="text-xl font-bold mb-4 text-danger">
                     Update Abstract File
                   </h3>

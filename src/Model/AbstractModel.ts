@@ -17,6 +17,7 @@ const abstractSchema = new Schema({
   qrCodeUrl: { type: String },
   temporyAbstractCode: { type: String },
   AbstractCode: { type: String },
+  rejectionComment: { type: String },
   Status: { type: String, default: "Pending" },
   createdAt: { type: Date, default: Date.now },
   updatedAt: { type: Date, default: Date.now },
