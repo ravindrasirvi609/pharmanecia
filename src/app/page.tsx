@@ -61,17 +61,18 @@ const HomePage = () => {
             Pharmanecia 4.E
           </h1>
           <h2 className="text-2xl font-semibold mb-4 text-secondary">
-            Jointly Organised By{" "}
+            International Conference on
           </h2>
-          <h3 className="text-xl font-medium mb-6 text-primary">
-            Department of Pharmaceutical Chemistry, JSS College of Pharmacy,
-            Ooty and Operant Pharmacy Federation
+          <h3 className="text-xl font-medium mb-4 text-primary">
+            &quot;Recent Advances in Artificial Intelligence and Machine
+            learning driven drug discovery&quot;
           </h3>
-          <p className="text-lg mb-8 text-accent">
-            THEME : EMERGING TRENDS IN PHARMACEUTICAL RESEARCH
+          <p className="text-lg mb-4 text-accent font-bold">
+            7th and 8th March, 2025
           </p>
-          <p className="text-lg mb-12 text-danger">
-            SUBMISSION OF ABSTRACTS IS OPEN SOON
+          <p className="text-lg mb-8 text-primary">
+            Organized by Department of Pharmaceutical Chemistry, JSS College of
+            Pharmacy, Ooty in Association with Operant Pharmacy Federation
           </p>
           <div className="space-x-4">
             <button className="bg-primary text-light px-6 py-3 rounded-md hover:bg-secondary transition duration-300">

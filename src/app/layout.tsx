@@ -18,7 +18,8 @@ const fontBody = Inter({
   variable: "--font-body",
 });
 export const metadata: Metadata = {
-  title: "Pharmanecia - EMERGING TRENDS IN PHARMACEUTICAL RESEARCH",
+  title:
+    "Pharmanecia - Recent Advances in Artificial Intelligence and Machine learning driven drug discovery",
   description:
     "Join us for Pharmanecia, the 4th Annual International Convention of the Hosted by Operant BioMedical Researsh Federation. Explore the latest innovations and advancements in pharmacy education and practice.",
   icons: {
