@@ -61,14 +61,14 @@ const HomePage = () => {
             Pharmanecia 4.E
           </h1>
           <h2 className="text-2xl font-semibold mb-4 text-secondary">
-            International Conference on
+            International Research Conference on
           </h2>
           <h3 className="text-xl font-medium mb-4 text-primary">
             &quot;Recent Advances in Artificial Intelligence and Machine
             learning driven drug discovery&quot;
           </h3>
           <p className="text-lg mb-4 text-accent font-bold">
-            7th and 8th March, 2025
+            7<sup>th</sup> and 8<sup>th</sup> March, 2025
           </p>
           <p className="text-lg mb-8 text-primary">
             Organized by Department of Pharmaceutical Chemistry, JSS College of

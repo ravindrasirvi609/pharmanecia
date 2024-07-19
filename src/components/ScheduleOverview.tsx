@@ -40,25 +40,8 @@ const ScheduleOverview = () => {
                 <li>11:00 AM - 12:30 PM: Technical Session 2</li>
                 <li>12:30 PM - 1:30 PM: Networking Lunch</li>
                 <li>1:30 PM - 3:00 PM: Workshop on Clinical Pharmacy</li>
-                <li>3:00 PM - 5:00 PM: Technical Session 3</li>
-              </ul>
-            </div>
-
-            {/* Day 3 */}
-            <div className="bg-white shadow-lg rounded-lg p-6">
-              <h3 className="text-2xl font-semibold text-primary mb-2">
-                Day 3: Closing Ceremony & Farewell
-              </h3>
-              <ul className="list-disc list-inside text-lg text-justify">
-                <li>9:00 AM - 10:30 AM: Technical Session 4</li>
-                <li>10:30 AM - 11:00 AM: Coffee Break</li>
-                <li>11:00 AM - 12:30 PM: Technical Session 5</li>
-                <li>12:30 PM - 1:30 PM: Networking Lunch</li>
-                <li>
-                  1:30 PM - 3:00 PM: Workshop on Pharmaceutical Innovations
-                </li>
                 <li>3:00 PM - 4:00 PM: Closing Ceremony</li>
-                <li>4:00 PM - 5:00 PM: Farewell Reception</li>
+                <li>4:00 PM - 5:00 PM: Farewell Reception</li>{" "}
               </ul>
             </div>
           </div>

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useMemo, useEffect } from "react";
+import React, { useState, useMemo, useEffect, useRef } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -34,6 +34,14 @@ export function AbstractList() {
   const [isSortOpen, setIsSortOpen] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
+  const [rejectPopup, setRejectPopup] = useState<{
+    isOpen: boolean;
+    abstractId: string | null;
+  }>({
+    isOpen: false,
+    abstractId: null,
+  });
+  const [rejectComment, setRejectComment] = useState("");
   const itemsPerPage = 10;
 
   const filteredAbstracts = useMemo(() => {
@@ -82,6 +90,7 @@ export function AbstractList() {
       setLoading(false);
     }
   };
+
   useEffect(() => {
     fetchAbstracts(currentPage);
   }, [currentPage]);
@@ -91,19 +100,31 @@ export function AbstractList() {
   };
 
   const handleStatusUpdate = async (abstract: Abstract, newStatus: string) => {
+    if (newStatus === "Rejected") {
+      setRejectPopup({ isOpen: true, abstractId: abstract._id });
+    } else {
+      await updateStatus(abstract._id, newStatus);
+    }
+  };
+
+  const updateStatus = async (
+    abstractId: string,
+    newStatus: string,
+    comment?: string
+  ) => {
     try {
-      const response = await fetch(`/api/updateStatus?id=${abstract._id}`, {
+      const response = await fetch(`/api/updateStatus?id=${abstractId}`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ status: newStatus, _id: abstract._id }),
+        body: JSON.stringify({ status: newStatus, _id: abstractId, comment }),
       });
 
       if (response.ok) {
         setAbstracts((prevAbstracts) =>
           prevAbstracts.map((a) =>
-            a._id === abstract._id ? { ...a, Status: newStatus } : a
+            a._id === abstractId ? { ...a, Status: newStatus } : a
           )
         );
         toast.success(`Status updated to ${newStatus}`);
@@ -146,6 +167,61 @@ export function AbstractList() {
       </button>
     </div>
   );
+
+  const RejectPopup = () => {
+    const textareaRef = useRef<HTMLTextAreaElement>(null);
+
+    useEffect(() => {
+      if (textareaRef.current) {
+        textareaRef.current.focus();
+      }
+    }, []);
+
+    return (
+      <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+        <div
+          className="bg-white p-6 rounded-lg shadow-lg w-96"
+          onClick={(e) => e.stopPropagation()}
+        >
+          <h2 className="text-xl font-bold mb-4">Reject Abstract</h2>
+          <textarea
+            ref={textareaRef}
+            className="w-full h-32 p-2 border rounded mb-4"
+            placeholder="Enter rejection reason..."
+            value={rejectComment}
+            onChange={(e) => setRejectComment(e.target.value)}
+          ></textarea>
+          <div className="flex justify-end">
+            <button
+              className="bg-gray-300 hover:bg-gray-400 text-black font-bold py-2 px-4 rounded mr-2"
+              onClick={() => {
+                setRejectPopup({ isOpen: false, abstractId: null });
+                setRejectComment("");
+              }}
+            >
+              Cancel
+            </button>
+            <button
+              className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded"
+              onClick={async () => {
+                if (rejectPopup.abstractId) {
+                  await updateStatus(
+                    rejectPopup.abstractId,
+                    "Rejected",
+                    rejectComment
+                  );
+                  setRejectPopup({ isOpen: false, abstractId: null });
+                  setRejectComment("");
+                }
+              }}
+            >
+              Confirm Reject
+            </button>
+          </div>
+        </div>
+      </div>
+    );
+  };
 
   return (
     <div className="flex flex-col h-screen bg-[#F2F2F2]">
@@ -361,6 +437,7 @@ export function AbstractList() {
           <Pagination />
         </div>
       </main>
+      {rejectPopup.isOpen && <RejectPopup />}
     </div>
   );
 }
