@@ -1,3 +1,4 @@
+import RegistrationPlans from "@/components/RegistrationPlans";
 import React from "react";
 
 const Registration = () => {
@@ -55,55 +56,7 @@ const Registration = () => {
         </div>
 
         {/* Registration Plans */}
-        <div className="mb-12">
-          <h2 className="text-3xl font-semibold mb-6 text-secondary text-center">
-            Registration Plans
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {/* Plan 1 */}
-            <div className="bg-white shadow-lg rounded-lg p-6 text-center">
-              <h3 className="text-2xl font-bold mb-4 text-primary">
-                Basic Plan
-              </h3>
-              <p className="text-lg mb-4">
-                Includes entry to all sessions and conference kit.
-              </p>
-              <p className="text-lg font-semibold mb-6">$100</p>
-              <button className="bg-accent text-light px-6 py-2 rounded-md hover:bg-secondary transition duration-300">
-                Pay Now
-              </button>
-            </div>
-
-            {/* Plan 2 */}
-            <div className="bg-white shadow-lg rounded-lg p-6 text-center">
-              <h3 className="text-2xl font-bold mb-4 text-primary">
-                Standard Plan
-              </h3>
-              <p className="text-lg mb-4">
-                Includes entry to all sessions, conference kit, and lunch.
-              </p>
-              <p className="text-lg font-semibold mb-6">$150</p>
-              <button className="bg-accent text-light px-6 py-2 rounded-md hover:bg-secondary transition duration-300">
-                Pay Now
-              </button>
-            </div>
-
-            {/* Plan 3 */}
-            <div className="bg-white shadow-lg rounded-lg p-6 text-center">
-              <h3 className="text-2xl font-bold mb-4 text-primary">
-                Premium Plan
-              </h3>
-              <p className="text-lg mb-4">
-                Includes entry to all sessions, conference kit, lunch, and
-                accommodation.
-              </p>
-              <p className="text-lg font-semibold mb-6">$200</p>
-              <button className="bg-accent text-light px-6 py-2 rounded-md hover:bg-secondary transition duration-300">
-                Pay Now
-              </button>
-            </div>
-          </div>
-        </div>
+        <RegistrationPlans />
       </div>
     </div>
   );
