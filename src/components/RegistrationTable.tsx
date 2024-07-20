@@ -83,7 +83,7 @@ function getPaymentStatusColor(status: string): string {
 function getRegistrationStatusColor(status: string): string {
   switch (status) {
     case "Confirmed":
-      return "bg-Completed text-white";
+      return "bg-primary text-white";
     case "Pending":
       return "bg-yellow-500 text-white";
     default:
