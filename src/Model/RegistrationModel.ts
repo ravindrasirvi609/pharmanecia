@@ -3,11 +3,18 @@ import { Schema, model, models } from "mongoose";
 const registrationSchema = new Schema({
   // Personal Information
   email: { type: String, required: true },
-  whatsappNumber: { type: String },
+  whatsappNumber: {
+    type: String,
+    enum: ["Mr.", "Ms.", "Mrs.", "Dr.", "Prof."],
+  },
+  Salutations: { type: String },
   name: { type: String, required: true },
   affiliation: { type: String },
   designation: { type: String },
   imageUrl: { type: String },
+  gender: { type: String, enum: ["Male", "Female", "Other"] },
+  dob: { type: Date },
+  AadharNumber: { type: Number },
 
   // Address Information
   address: { type: String },
@@ -15,6 +22,7 @@ const registrationSchema = new Schema({
   state: { type: String },
   pincode: { type: String },
   country: { type: String },
+  institute: { type: String },
 
   // Conference-specific Information
   registrationType: {

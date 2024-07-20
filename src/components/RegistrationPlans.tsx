@@ -1,29 +1,12 @@
 "use client";
 import React, { useState } from "react";
 import axios from "axios";
-import RegistrationForm from "./RegistrationForm";
+import RegistrationForm, { RegistrationFormData } from "./RegistrationForm";
 
 interface Plan {
   name: string;
   description: string;
   price: number;
-}
-
-interface RegistrationFormData {
-  email: string;
-  whatsappNumber: string;
-  name: string;
-  affiliation: string;
-  designation: string;
-  address: string;
-  city: string;
-  state: string;
-  pincode: string;
-  country: string;
-  registrationType: "Student" | "Professional" | "Academician";
-  needAccommodation: boolean;
-  dietaryRequirements: string;
-  specialAssistance: string;
 }
 
 const plans: Plan[] = [
@@ -47,6 +30,7 @@ const plans: Plan[] = [
 
 const RegistrationPlans: React.FC = () => {
   const [selectedPlan, setSelectedPlan] = useState<Plan | null>(null);
+  const [showModal, setShowModal] = useState(false);
   const [formData, setFormData] = useState<RegistrationFormData>({
     email: "",
     whatsappNumber: "",
@@ -62,6 +46,13 @@ const RegistrationPlans: React.FC = () => {
     needAccommodation: false,
     dietaryRequirements: "",
     specialAssistance: "",
+    Salutations: "Mr.",
+    imageUrl: "",
+    dob: "",
+    AadharNumber: "",
+    institute: "",
+    gender: "Male",
+    abstractSubmitted: false,
   });
 
   const initializeRazorpay = () => {
@@ -167,6 +158,15 @@ const RegistrationPlans: React.FC = () => {
     }
   };
 
+  const openModal = (plan: Plan) => {
+    setSelectedPlan(plan);
+    setShowModal(true);
+  };
+
+  const closeModal = () => {
+    setShowModal(false);
+  };
+
   return (
     <div>
       <div className="mb-12">
@@ -187,7 +187,7 @@ const RegistrationPlans: React.FC = () => {
               <p className="text-lg mb-4">{plan.description}</p>
               <p className="text-lg font-semibold mb-6">{plan.price}₹</p>
               <button
-                onClick={() => setSelectedPlan(plan)}
+                onClick={() => openModal(plan)}
                 className="bg-accent text-light px-6 py-2 rounded-md hover:bg-secondary transition duration-300"
               >
                 Select Plan
@@ -196,12 +196,25 @@ const RegistrationPlans: React.FC = () => {
           ))}
         </div>
 
-        {selectedPlan && (
-          <RegistrationForm
-            formData={formData}
-            onInputChange={handleInputChange}
-            onSubmit={handleSubmit}
-          />
+        {showModal && (
+          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+            <div className="bg-white rounded-lg p-8 max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+              <h2 className="text-2xl font-bold mb-4">
+                Register for {selectedPlan?.name}
+              </h2>
+              <RegistrationForm
+                formData={formData}
+                onInputChange={handleInputChange}
+                onSubmit={handleSubmit}
+              />
+              <button
+                onClick={closeModal}
+                className="mt-4 bg-gray-300 text-gray-800 px-4 py-2 rounded-md hover:bg-gray-400 transition duration-300"
+              >
+                Close
+              </button>
+            </div>
+          </div>
         )}
       </div>
     </div>
