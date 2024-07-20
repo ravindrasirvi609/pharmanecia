@@ -205,6 +205,10 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({
           required
           className="w-full p-2 border rounded"
         />
+        <p className="text-sm text-gray-600 mt-1">
+          Spelling should be correct. The same name will be printed on the
+          certificate and cannot be changed after submission.
+        </p>
       </div>
 
       <div className="mb-4">
@@ -228,6 +232,7 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({
           onChange={onInputChange}
           required
           className="w-full p-2 border rounded"
+          maxLength={10}
         />
       </div>
 
@@ -256,6 +261,10 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({
           required
           className="w-full p-2 border rounded"
         />
+        <p className="text-sm text-gray-600 mt-1">
+          Kindly enter correct Date of Birth to receive E-Certificate of
+          conference on your Digilocker account linked with your Aadhar.
+        </p>
       </div>
 
       <div className="mb-4">
@@ -266,7 +275,12 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({
           value={formData.AadharNumber}
           onChange={onInputChange}
           className="w-full p-2 border rounded"
+          maxLength={12}
         />
+        <p className="text-sm text-gray-600 mt-1">
+          Kindly enter correct Aadhar Number to receive E-Certificate of
+          conference on your Digilocker account linked with your Aadhar.
+        </p>
       </div>
 
       <div className="mb-4">
@@ -348,6 +362,7 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({
           onChange={onInputChange}
           required
           className="w-full p-2 border rounded"
+          maxLength={6}
         />
       </div>
 
