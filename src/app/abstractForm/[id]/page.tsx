@@ -16,7 +16,7 @@ interface RegistrationInfo {
   url: string;
   qrCodeUrl: string;
   temporyAbstractCode: string;
-  abstractCode: string;
+  AbstractCode: string;
   Status: string;
   title: string;
   name: string;
@@ -144,7 +144,7 @@ const AbstractForm: React.FC<StudentPageProps> = ({ params }) => {
                 className="rounded-lg shadow-lg"
               />
               <p className="mt-4 text-lg font-semibold text-center">
-                {registrationInfo.abstractCode ||
+                {registrationInfo.AbstractCode ||
                   registrationInfo.temporyAbstractCode}
               </p>
               <div className="mt-6 text-center">
