@@ -5,9 +5,8 @@ const registrationSchema = new Schema({
   email: { type: String, required: true },
   whatsappNumber: {
     type: String,
-    enum: ["Mr.", "Ms.", "Mrs.", "Dr.", "Prof."],
   },
-  Salutations: { type: String },
+  Salutations: { type: String, enum: ["Mr.", "Ms.", "Mrs.", "Dr.", "Prof."] },
   name: { type: String, required: true },
   affiliation: { type: String },
   designation: { type: String },
