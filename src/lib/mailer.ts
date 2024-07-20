@@ -94,7 +94,7 @@ export const sendEmail = async (
 
     if (emailType === "REGISTRATION_SUCCESS") {
       registration = await RegistrationModel.findOne({ _id });
-      submissionDetailsUrl = `${baseUrl}/abstractForm/${registration.abstractId}`;
+      submissionDetailsUrl = `${baseUrl}/abstractForm/${registration._id}`;
 
       if (!registration) {
         throw new Error(`No registration found for email`);
