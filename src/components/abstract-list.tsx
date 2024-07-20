@@ -9,6 +9,9 @@ interface Abstract {
   title: string;
   name: string;
   email: string;
+  temporyAbstractCode: string;
+  registrationCompleted: boolean;
+  registrationCode: string;
   Status: string;
   abstractFileUrl: string;
 }
@@ -365,6 +368,9 @@ export function AbstractList() {
                   <th className="py-3 px-6 text-left">Title</th>
                   <th className="py-3 px-6 text-left">Author</th>
                   <th className="py-3 px-6 text-left">Email</th>
+                  <th className="py-3 px-6 text-left">Abstact Code</th>
+                  <th className="py-3 px-6 text-left">Registration Status</th>
+                  <th className="py-3 px-6 text-left">Registration Code</th>
                   <th className="py-3 px-6 text-left">Status</th>
                   <th className="py-3 px-6 text-center">Actions</th>
                 </tr>
@@ -380,6 +386,25 @@ export function AbstractList() {
                     </td>
                     <td className="py-3 px-6 text-left">{abstract.name}</td>
                     <td className="py-3 px-6 text-left">{abstract.email}</td>
+                    <td className="py-3 px-6 text-left">
+                      {abstract.temporyAbstractCode}
+                    </td>
+
+                    <td className="py-3 px-6 text-left">
+                      <span
+                        className={`py-1 px-3 rounded-full text-xs ${
+                          abstract.registrationCompleted === true
+                            ? "bg-green-200 text-green-800"
+                            : "bg-[#D94814] text-white"
+                        }`}
+                      >
+                        {abstract.registrationCompleted === true
+                          ? "Registration Complete"
+                          : "Not Complete"}
+                      </span>
+                    </td>
+                    <td className="py-3 px-6 text-left">{abstract.email}</td>
+
                     <td className="py-3 px-6 text-left">
                       <span
                         className={`py-1 px-3 rounded-full text-xs ${

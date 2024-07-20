@@ -57,7 +57,7 @@ const AbstractForm: React.FC<StudentPageProps> = ({ params }) => {
         body: JSON.stringify({ id }),
       });
       const data = await res.json();
-      setRegistrationInfo(data.props.student);
+      setRegistrationInfo(data.props.abstract);
     };
 
     fetchData();

@@ -116,10 +116,10 @@ export const sendEmail = async (
       let statusForSubject = abstract.Status;
 
       if (abstract.Status === "Accepted") {
-        codeToShow = abstract.abstractCode;
+        codeToShow = abstract.AbstractCode;
         statusSpecificContent = `
       <p>Congratulations! Your abstract has been accepted.</p>
-      <p>Your official abstract code is: <strong>${abstract.abstractCode}</strong></p>
+      <p>Your official abstract code is: <strong>${abstract.AbstractCode}</strong></p>
     `;
       } else if (abstract.Status === "Rejected" && abstract.rejectionComment) {
         statusSpecificContent = `

@@ -3,6 +3,7 @@ import { connect } from "@/dbConfig/dbConfig";
 import Transaction from "@/Model/TransactionModel";
 import Registration from "@/Model/RegistrationModel";
 import RegistrationModel from "@/Model/RegistrationModel";
+import AbstractModel from "@/Model/AbstractModel";
 
 connect();
 
@@ -39,6 +40,11 @@ export async function POST(req: NextRequest) {
       },
       { new: true }
     );
+
+    await AbstractModel.findByIdAndUpdate(updatedRegistration.abstractId, {
+      registrationCompleted: true,
+      registrationCode: updatedRegistration.registrationCode,
+    });
 
     if (!updatedRegistration) {
       console.error(

@@ -19,6 +19,9 @@ const abstractSchema = new Schema({
   AbstractCode: { type: String },
   rejectionComment: { type: String },
   Status: { type: String, default: "Pending" },
+  registrationCompleted: { type: Boolean, default: false },
+  registrationCode: { type: String },
+
   createdAt: { type: Date, default: Date.now },
   updatedAt: { type: Date, default: Date.now },
 });
