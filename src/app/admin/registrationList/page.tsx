@@ -1,5 +1,6 @@
 "use client";
 import RegistrationTable from "@/components/RegistrationTable";
+import { exportToExcel } from "@/lib/excelExport";
 import { useState, useEffect } from "react";
 
 export default function RegistrationList() {
@@ -22,13 +23,23 @@ export default function RegistrationList() {
     fetchRegistrations();
   }, []);
 
+  const handleExport = () => {
+    exportToExcel(registrations, "Registrations");
+  };
+
   if (loading) return <div>Loading...</div>;
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <h1 className="text-3xl font-bold mb-6 text-primary">
-        Registration List
-      </h1>
+      <div className="flex justify-between items-center mb-6">
+        <h1 className="text-3xl font-bold text-primary">Registration List</h1>
+        <button
+          onClick={handleExport}
+          className="bg-primary text-white px-4 py-2 rounded hover:bg-primary-dark"
+        >
+          Export to Excel
+        </button>
+      </div>
       <RegistrationTable registrations={registrations} />
     </div>
   );

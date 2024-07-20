@@ -72,12 +72,15 @@ const HomePage = () => {
           </p>
           <p className="text-lg mb-8 text-primary">
             Organized by Department of Pharmaceutical Chemistry, JSS College of
-            Pharmacy, Ooty in Association with Operant Pharmacy Federation
+            Pharmacy, Ooty in Hosted with Operant Pharmacy Federation
           </p>
           <div className="space-x-4">
-            <button className="bg-primary text-light px-6 py-3 rounded-md hover:bg-secondary transition duration-300">
-              Register Now
-            </button>
+            <Link href="/Registration">
+              <button className="bg-primary text-light px-6 py-3 rounded-md hover:bg-secondary transition duration-300">
+                Register Now
+              </button>
+            </Link>
+
             <Link href="/abstractForm">
               <button className="bg-accent text-light px-6 py-3 rounded-md hover:bg-secondary transition duration-300">
                 Submit Abstract
