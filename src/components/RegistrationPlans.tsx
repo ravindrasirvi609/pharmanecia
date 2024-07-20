@@ -14,7 +14,7 @@ const plans: Plan[] = [
   {
     name: "Basic Plan",
     description: "Includes entry to all sessions and conference kit.",
-    price: 100,
+    price: 1,
   },
   {
     name: "Standard Plan",
@@ -111,7 +111,9 @@ const RegistrationPlans: React.FC = () => {
 
       if (registrationResponse.ok) {
         const registration = await registrationResponse.json();
-        await makePayment(selectedPlan, registration);
+        console.log("Registration saved:", registration.registration);
+
+        await makePayment(selectedPlan, registration.registration);
       } else {
         throw new Error("Failed to save registration");
       }

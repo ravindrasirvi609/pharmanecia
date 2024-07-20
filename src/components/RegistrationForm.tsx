@@ -68,6 +68,12 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({
         onInputChange({
           target: { name: "pincode", value: response.data.pincode },
         } as React.ChangeEvent<HTMLInputElement>);
+        onInputChange({
+          target: { name: "abstractId", value: response.data._id },
+        } as React.ChangeEvent<HTMLInputElement>);
+        onInputChange({
+          target: { name: "abstractSubmitted", value: true },
+        } as unknown as React.ChangeEvent<HTMLInputElement>);
       }
     } catch (error) {
       console.error("Error fetching abstract details:", error);
