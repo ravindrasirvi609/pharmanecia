@@ -403,7 +403,9 @@ export function AbstractList() {
                           : "Not Complete"}
                       </span>
                     </td>
-                    <td className="py-3 px-6 text-left">{abstract.email}</td>
+                    <td className="py-3 px-6 text-left">
+                      {abstract.registrationCode || "-"}
+                    </td>
 
                     <td className="py-3 px-6 text-left">
                       <span

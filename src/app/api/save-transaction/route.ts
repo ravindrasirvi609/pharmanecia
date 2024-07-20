@@ -41,10 +41,20 @@ export async function POST(req: NextRequest) {
       { new: true }
     );
 
-    await AbstractModel.findByIdAndUpdate(updatedRegistration.abstractId, {
-      registrationCompleted: true,
-      registrationCode: updatedRegistration.registrationCode,
-    });
+    console.log("Updated registration:", updatedRegistration);
+
+    try {
+      await AbstractModel.findByIdAndUpdate(updatedRegistration.abstractId, {
+        registrationCompleted: true,
+        registrationCode: updatedRegistration.registrationCode,
+      });
+    } catch (error) {
+      console.error("Failed to update Abstract Model:", error);
+      return NextResponse.json(
+        { error: "Failed to update Abstract" },
+        { status: 500 }
+      );
+    }
 
     if (!updatedRegistration) {
       console.error(
