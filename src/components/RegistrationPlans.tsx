@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import RegistrationForm from "./RegistrationForm";
 import { RegistrationFormData } from "@/lib/interface";
+import { useFirebaseStorage } from "@/app/hooks/useFirebaseStorage";
 
 interface Plan {
   name: string;
@@ -29,6 +30,7 @@ const plans: Plan[] = [
 ];
 
 const RegistrationPlans: React.FC = () => {
+  const { uploadFile } = useFirebaseStorage();
   const [selectedPlan, setSelectedPlan] = useState<Plan | null>(null);
   const [showModal, setShowModal] = useState(false);
   const [formData, setFormData] = useState<RegistrationFormData>({
@@ -75,6 +77,19 @@ const RegistrationPlans: React.FC = () => {
       [name]:
         type === "checkbox" ? (e.target as HTMLInputElement).checked : value,
     }));
+  };
+
+  const handleImageUpload = async (file: File) => {
+    try {
+      const imageUrl = await uploadFile(file);
+      setFormData((prevState) => ({
+        ...prevState,
+        imageUrl: imageUrl,
+      }));
+    } catch (error) {
+      console.error("Failed to upload image:", error);
+      alert("Failed to upload image. Please try again.");
+    }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -230,6 +245,7 @@ const RegistrationPlans: React.FC = () => {
                 formData={formData}
                 onInputChange={handleInputChange}
                 onSubmit={handleSubmit}
+                onImageUpload={handleImageUpload}
               />
               <button
                 onClick={closeModal}

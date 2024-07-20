@@ -11,12 +11,14 @@ interface RegistrationFormProps {
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => void;
   onSubmit: (e: React.FormEvent) => void;
+  onImageUpload: (file: File) => Promise<void>;
 }
 
 const RegistrationForm: React.FC<RegistrationFormProps> = ({
   formData,
   onInputChange,
   onSubmit,
+  onImageUpload,
 }) => {
   const {
     uploadFile,
@@ -75,11 +77,15 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({
     }
   };
 
-  const onDrop = useCallback((acceptedFiles: File[]) => {
-    if (acceptedFiles[0]) {
-      setImageFile(acceptedFiles[0]);
-    }
-  }, []);
+  const onDrop = useCallback(
+    (acceptedFiles: File[]) => {
+      if (acceptedFiles[0]) {
+        setImageFile(acceptedFiles[0]);
+        onImageUpload(acceptedFiles[0]);
+      }
+    },
+    [onImageUpload]
+  );
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop,
