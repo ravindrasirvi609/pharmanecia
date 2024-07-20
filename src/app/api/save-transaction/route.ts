@@ -4,6 +4,7 @@ import Transaction from "@/Model/TransactionModel";
 import Registration from "@/Model/RegistrationModel";
 import RegistrationModel from "@/Model/RegistrationModel";
 import AbstractModel from "@/Model/AbstractModel";
+import { sendEmail } from "@/lib/mailer";
 
 connect();
 
@@ -66,6 +67,11 @@ export async function POST(req: NextRequest) {
         { status: 404 }
       );
     }
+
+    await sendEmail({
+      emailType: "REGISTRATION_SUCCESS",
+      _id: updatedRegistration._id,
+    });
 
     return NextResponse.json(
       {

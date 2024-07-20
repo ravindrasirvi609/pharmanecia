@@ -1,4 +1,5 @@
 import AbstractModel from "@/Model/AbstractModel";
+import RegistrationModel from "@/Model/RegistrationModel";
 
 const createEmailTemplate = (content: any) => `
 <!DOCTYPE html>
@@ -48,14 +49,11 @@ const createEmailTemplate = (content: any) => `
     </style>
 </head>
 <body>
-    <div class="header">
-        <h1>Abstract Submission</h1>
-    </div>
     <div class="content">
         ${content}
     </div>
     <div class="footer">
-        <p>© 2024 Your Organization. All rights reserved.</p>
+        <p>© 2024 Operant Pharmacy Federation. All rights reserved.</p>
     </div>
 </body>
 </html>
@@ -67,14 +65,18 @@ export const sendEmail = async (
     emailType,
   }: {
     _id: string;
-    emailType: "SUBMMITED" | "UPDATE_STATUS";
+    emailType: "SUBMMITED" | "UPDATE_STATUS" | "REGISTRATION_SUCCESS";
   },
   p0?: string
 ) => {
   try {
-    if (emailType !== "SUBMMITED" && emailType !== "UPDATE_STATUS") {
+    if (
+      emailType !== "SUBMMITED" &&
+      emailType !== "UPDATE_STATUS" &&
+      emailType !== "REGISTRATION_SUCCESS"
+    ) {
       throw new Error(
-        "Invalid emailType. It should be either 'SUBMMITED' or 'UPDATE_STATUS'."
+        "Invalid emailType. It should be either 'SUBMMITED', 'UPDATE_STATUS', or 'REGISTRATION_SUCCESS'."
       );
     }
 
@@ -85,14 +87,26 @@ export const sendEmail = async (
       );
     }
 
-    const abstract = await AbstractModel.findOne({ _id });
-
-    if (!abstract) {
-      throw new Error(`No abstract found for email`);
-    }
-
+    let abstract;
+    let registration;
+    let submissionDetailsUrl;
     const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
-    const submissionDetailsUrl = `${baseUrl}/abstractForm/${abstract._id}`;
+
+    if (emailType === "REGISTRATION_SUCCESS") {
+      registration = await RegistrationModel.findOne({ _id });
+      submissionDetailsUrl = `${baseUrl}/abstractForm/${registration.abstractId}`;
+
+      if (!registration) {
+        throw new Error(`No registration found for email`);
+      }
+    } else {
+      abstract = await AbstractModel.findOne({ _id });
+      submissionDetailsUrl = `${baseUrl}/abstractForm/${abstract._id}`;
+
+      if (!abstract) {
+        throw new Error(`No abstract found for email`);
+      }
+    }
 
     let content, subject;
 
@@ -143,6 +157,30 @@ export const sendEmail = async (
     </p>
   `;
       subject = `Abstract ${statusForSubject} - ${codeToShow}`;
+    } else if (emailType === "REGISTRATION_SUCCESS") {
+      content = `
+        <h2>Registration Successful!</h2>
+        <p>Dear ${registration.name},</p>
+        <p>We are pleased to inform you that your registration for the conference has been successfully completed.</p>
+        <p>Your registration details:</p>
+        <ul>
+          <li>Registration Code: <strong>${registration.registrationCode}</strong></li>
+          <li>Registration Type: <strong>${registration.registrationType}</strong></li>
+          <li>Payment Status: <strong>Completed</strong></li>
+        </ul>
+        <p>You can use the QR code below to access your registration information:</p>
+        <div class="qr-code">
+            <img src="${abstract.qrCodeUrl}" alt="QR Code" style="max-width: 200px;">
+        </div>
+        <p>If you have any questions or need further assistance, please don't hesitate to contact us.</p>
+        <p>We look forward to seeing you at the conference!</p>
+        <p>
+            <a href="${submissionDetailsUrl}" class="button">View Registration Details</a>
+        </p>
+      `;
+      subject = `Registration Successful - ${
+        abstract.AbstractCode || abstract.temporyAbstractCode
+      }`;
     }
 
     const response = await fetch("https://api.resend.com/emails", {
