@@ -13,25 +13,61 @@ interface StudentPageProps {
 }
 
 interface RegistrationInfo {
-  url: string;
-  qrCodeUrl: string;
-  temporyAbstractCode: string;
-  AbstractCode: string;
-  Status: string;
-  title: string;
-  name: string;
-  email: string;
-  affiliation: string;
-  coAuthor: string;
-  address: string;
-  city: string;
-  state: string;
-  pincode: string;
-  whatsappNumber: string;
-  abstractFileUrl: string;
-  rejectionComment: string;
-  createdAt: string;
-  updatedAt: string;
+  abstract: {
+    url: string;
+    qrCodeUrl: string;
+    temporyAbstractCode: string;
+    AbstractCode: string;
+    Status: string;
+    title: string;
+    name: string;
+    email: string;
+    affiliation: string;
+    coAuthor: string;
+    address: string;
+    city: string;
+    state: string;
+    pincode: string;
+    whatsappNumber: string;
+    abstractFileUrl: string;
+    rejectionComment: string;
+    createdAt: string;
+    updatedAt: string;
+  };
+
+  registration: {
+    _id: string;
+    email: string;
+    whatsappNumber: string;
+    Salutations: string;
+    name: string;
+    affiliation: string;
+    designation: string;
+    imageUrl: string;
+    gender: string;
+    dob: string;
+    AadharNumber: number;
+    address: string;
+    city: string;
+    state: string;
+    pincode: string;
+    country: string;
+    institute: string;
+    registrationType: string;
+    abstractSubmitted: boolean;
+    abstractId: string;
+    paymentStatus: string;
+    needAccommodation: boolean;
+    dietaryRequirements: string;
+    specialAssistance: string;
+    registrationStatus: string;
+    createdAt: string;
+    updatedAt: string;
+    paymentAmount: number;
+    paymentDate: string;
+    registrationCode: string;
+    transactionId: string;
+  };
 }
 
 const AbstractForm: React.FC<StudentPageProps> = ({ params }) => {
@@ -57,7 +93,7 @@ const AbstractForm: React.FC<StudentPageProps> = ({ params }) => {
         body: JSON.stringify({ id }),
       });
       const data = await res.json();
-      setRegistrationInfo(data.props.abstract);
+      setRegistrationInfo(data.props);
     };
 
     fetchData();
@@ -127,6 +163,8 @@ const AbstractForm: React.FC<StudentPageProps> = ({ params }) => {
     </div>
   );
 
+  const { abstract, registration } = registrationInfo;
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-orange-100 to-indigo-200 py-8 px-4 sm:px-6 lg:px-8">
       <div className="max-w-5xl mx-auto">
@@ -137,15 +175,15 @@ const AbstractForm: React.FC<StudentPageProps> = ({ params }) => {
                 Abstract QR Code
               </h2>
               <Image
-                src={registrationInfo.qrCodeUrl}
+                src={registrationInfo.abstract.qrCodeUrl}
                 alt="QR Code"
                 width={200}
                 height={200}
                 className="rounded-lg shadow-lg"
               />
               <p className="mt-4 text-lg font-semibold text-center">
-                {registrationInfo.AbstractCode ||
-                  registrationInfo.temporyAbstractCode}
+                {registrationInfo.abstract.AbstractCode ||
+                  registrationInfo.abstract.temporyAbstractCode}
               </p>
               <div className="mt-6 text-center">
                 <p className="text-lg font-semibold mb-2">
@@ -167,40 +205,26 @@ const AbstractForm: React.FC<StudentPageProps> = ({ params }) => {
                   value={
                     <span
                       className={`px-2 py-1 rounded ${
-                        registrationInfo.Status === "Pending"
+                        abstract.Status === "Pending"
                           ? "bg-yellow-200 text-yellow-800"
                           : "bg-green-200 text-green-800"
                       }`}
                     >
-                      {registrationInfo.Status}
+                      {abstract.Status}
                     </span>
                   }
                 />
-                <InfoItem label="Title" value={registrationInfo.title} />
-                <InfoItem label="Name" value={registrationInfo.name} />
-                <InfoItem label="Email" value={registrationInfo.email} />
-                <InfoItem
-                  label="Affiliation"
-                  value={registrationInfo.affiliation}
-                />
+                <InfoItem label="Title" value={abstract.title} />
                 <InfoItem
                   label="Co-Author"
-                  value={registrationInfo.coAuthor || "N/A"}
-                />
-                <InfoItem label="Address" value={registrationInfo.address} />
-                <InfoItem label="City" value={registrationInfo.city} />
-                <InfoItem label="State" value={registrationInfo.state} />
-                <InfoItem label="Pincode" value={registrationInfo.pincode} />
-                <InfoItem
-                  label="WhatsApp Number"
-                  value={registrationInfo.whatsappNumber}
+                  value={abstract.coAuthor || "N/A"}
                 />
                 <div className="col-span-2">
                   <InfoItem
                     label="Abstract File"
                     value={
                       <a
-                        href={registrationInfo.abstractFileUrl}
+                        href={abstract.abstractFileUrl}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="text-blue-600 hover:text-blue-800 underline flex items-center"
@@ -224,16 +248,16 @@ const AbstractForm: React.FC<StudentPageProps> = ({ params }) => {
                 </div>
                 <InfoItem
                   label="Submitted On"
-                  value={formatDate(registrationInfo.createdAt)}
+                  value={formatDate(abstract.createdAt)}
                 />
               </div>
-              {registrationInfo.Status === "Rejected" && (
+              {registrationInfo.abstract.Status === "Rejected" && (
                 <div className="mt-8">
                   <h3 className="text-xl font-bold mb-4 text-danger">
                     Rejection Comment
                   </h3>
                   <p className="text-gray-800">
-                    {registrationInfo.rejectionComment}
+                    {registrationInfo.abstract.rejectionComment}
                   </p>
                   <h3 className="text-xl font-bold mb-4 text-danger">
                     Update Abstract File
@@ -323,6 +347,82 @@ const AbstractForm: React.FC<StudentPageProps> = ({ params }) => {
                   </div>
                 </div>
               )}
+              <h2 className="text-3xl font-bold mt-8 mb-6 text-danger">
+                Registration Details
+              </h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-4">
+                <InfoItem
+                  label="Registration Code"
+                  value={registration.registrationCode}
+                />
+                <InfoItem label="Salutation" value={registration.Salutations} />
+                <InfoItem label="Name" value={registration.name} />
+                <InfoItem label="Email" value={registration.email} />
+                <InfoItem
+                  label="Affiliation"
+                  value={registration.affiliation}
+                />
+                <InfoItem
+                  label="Designation"
+                  value={registration.designation}
+                />
+                <InfoItem label="Gender" value={registration.gender} />
+                <InfoItem
+                  label="Date of Birth"
+                  value={formatDate(registration.dob)}
+                />
+                <InfoItem label="Institute" value={registration.institute} />
+                <InfoItem
+                  label="Registration Type"
+                  value={registration.registrationType}
+                />
+                <InfoItem
+                  label="Payment Status"
+                  value={registration.paymentStatus}
+                />
+                <InfoItem
+                  label="Payment Amount"
+                  value={`₹${registration.paymentAmount}`}
+                />
+                <InfoItem
+                  label="Payment Date"
+                  value={formatDate(registration.paymentDate)}
+                />
+                <InfoItem
+                  label="Need Accommodation"
+                  value={registration.needAccommodation ? "Yes" : "No"}
+                />
+                <InfoItem
+                  label="Dietary Requirements"
+                  value={registration.dietaryRequirements}
+                />
+                <InfoItem
+                  label="Special Assistance"
+                  value={registration.specialAssistance}
+                />
+                <InfoItem label="Address" value={registration.address} />
+                <InfoItem label="City" value={registration.city} />
+                <InfoItem label="State" value={registration.state} />
+                <InfoItem label="Pincode" value={registration.pincode} />
+                <InfoItem label="Country" value={registration.country} />
+                <InfoItem
+                  label="WhatsApp Number"
+                  value={registration.whatsappNumber}
+                />
+              </div>
+
+              <div className="mt-8">
+                <h3 className="text-xl font-bold mb-4 text-danger">
+                  Participant Image
+                </h3>
+                <Image
+                  src={registration.imageUrl}
+                  alt="Participant"
+                  width={200}
+                  height={200}
+                  className="rounded-lg shadow-lg"
+                />
+              </div>
             </div>
           </div>
         </div>
