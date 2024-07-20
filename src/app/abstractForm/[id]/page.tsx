@@ -206,7 +206,7 @@ const AbstractForm: React.FC<StudentPageProps> = ({ params }) => {
               <h2 className="text-3xl font-bold mb-4 text-center">
                 Abstract QR Code
               </h2>
-              {(abstract.qrCodeUrl || registration.qrCodeUrl) && (
+              {(abstract?.qrCodeUrl || registration?.qrCodeUrl) && (
                 <Image
                   src={abstract.qrCodeUrl ?? registration.qrCodeUrl ?? ""}
                   alt="QR Code"
@@ -216,11 +216,13 @@ const AbstractForm: React.FC<StudentPageProps> = ({ params }) => {
                 />
               )}
               <p className="mt-4 text-lg font-semibold text-center">
-                {abstract.AbstractCode || abstract.temporyAbstractCode || "N/A"}
+                {abstract?.AbstractCode ||
+                  abstract?.temporyAbstractCode ||
+                  "N/A"}
               </p>
               <div className="mt-6 text-center">
                 <p className="text-lg font-semibold mb-2">
-                  {abstract.Status === "Pending"
+                  {abstract?.Status === "Pending"
                     ? "Abstract Submitted Successfully!"
                     : "Abstract Status"}
                 </p>
@@ -231,160 +233,167 @@ const AbstractForm: React.FC<StudentPageProps> = ({ params }) => {
               </div>
             </div>
             <div className="md:w-2/3 p-8">
-              <h2 className="text-3xl font-bold mb-6 text-danger">
-                Scientific Abstract Details
-              </h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-4">
-                <InfoItem
-                  label="Status"
-                  value={
-                    abstract.Status && (
-                      <span
-                        className={`px-2 py-1 rounded ${
-                          abstract.Status === "Pending"
-                            ? "bg-yellow-200 text-yellow-800"
-                            : "bg-green-200 text-green-800"
-                        }`}
-                      >
-                        {abstract.Status}
-                      </span>
-                    )
-                  }
-                />
-                <InfoItem label="Title" value={abstract.title} />
-                <InfoItem label="Co-Author" value={abstract.coAuthor} />
-                <div className="col-span-2">
-                  <InfoItem
-                    label="Abstract File"
-                    value={
-                      abstract.abstractFileUrl ? (
-                        <a
-                          href={abstract.abstractFileUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="text-blue-600 hover:text-blue-800 underline flex items-center"
-                        >
-                          <svg
-                            className="w-4 h-4 mr-2"
-                            fill="currentColor"
-                            viewBox="0 0 20 20"
-                            xmlns="http://www.w3.org/2000/svg"
+              {abstract && (
+                <div>
+                  <h2 className="text-3xl font-bold mb-6 text-danger">
+                    Scientific Abstract Details
+                  </h2>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-4">
+                    <InfoItem
+                      label="Status"
+                      value={
+                        abstract?.Status && (
+                          <span
+                            className={`px-2 py-1 rounded ${
+                              abstract?.Status === "Pending"
+                                ? "bg-yellow-200 text-yellow-800"
+                                : "bg-green-200 text-green-800"
+                            }`}
                           >
-                            <path
-                              fillRule="evenodd"
-                              d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z"
-                              clipRule="evenodd"
-                            />
-                          </svg>
-                          Download Abstract
-                        </a>
-                      ) : (
-                        "Not uploaded"
-                      )
-                    }
-                  />
-                </div>
-                <InfoItem
-                  label="Submitted On"
-                  value={abstract.createdAt && formatDate(abstract.createdAt)}
-                />
-              </div>
-              {abstract.Status === "Rejected" && (
-                <div className="mt-8">
-                  <h3 className="text-xl font-bold mb-4 text-danger">
-                    Rejection Comment
-                  </h3>
-                  <p className="text-gray-800">
-                    {abstract.rejectionComment || "No comment provided"}
-                  </p>
-                  <h3 className="text-xl font-bold mb-4 text-danger mt-8">
-                    Update Abstract File
-                  </h3>
-                  <div className="space-y-4">
-                    <div
-                      {...getRootProps()}
-                      className={`w-full p-6 border-2 border-dashed rounded-lg text-center cursor-pointer transition-colors duration-200 ease-in-out ${
-                        isDragActive
-                          ? "border-[#034C8C] bg-[#F0F7FF]"
-                          : "border-[#CACACA] hover:border-[#034C8C] hover:bg-[#F7FAFC]"
-                      }`}
-                    >
-                      <input {...getInputProps()} id="abstractFile" />
-                      <p className="text-[#022873]">
-                        {isDragActive
-                          ? "Drop the file here..."
-                          : "Drag & drop your abstract file here, or click to select"}
-                      </p>
-                      <p className="text-sm text-[#6B7280] mt-2">
-                        Supported formats: .doc, .docx (Max size: 5MB)
-                      </p>
+                            {abstract?.Status}
+                          </span>
+                        )
+                      }
+                    />
+                    <InfoItem label="Title" value={abstract?.title} />
+                    <InfoItem label="Co-Author" value={abstract?.coAuthor} />
+                    <div className="col-span-2">
+                      <InfoItem
+                        label="Abstract File"
+                        value={
+                          abstract?.abstractFileUrl ? (
+                            <a
+                              href={abstract?.abstractFileUrl}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="text-blue-600 hover:text-blue-800 underline flex items-center"
+                            >
+                              <svg
+                                className="w-4 h-4 mr-2"
+                                fill="currentColor"
+                                viewBox="0 0 20 20"
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <path
+                                  fillRule="evenodd"
+                                  d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z"
+                                  clipRule="evenodd"
+                                />
+                              </svg>
+                              Download Abstract
+                            </a>
+                          ) : (
+                            "Not uploaded"
+                          )
+                        }
+                      />
                     </div>
-                    {abstractFile && (
-                      <div className="flex items-center space-x-2 text-sm text-[#022873]">
-                        <svg
-                          className="w-5 h-5 text-[#034C8C]"
-                          fill="none"
-                          stroke="currentColor"
-                          viewBox="0 0 24 24"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth={2}
-                            d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-                          />
-                        </svg>
-                        <span>{abstractFile.name}</span>
-                      </div>
-                    )}
-                    {isUploading && (
-                      <div className="mt-4">
-                        <div className="flex justify-between mb-1">
-                          <span className="text-sm font-medium text-[#022873]">
-                            Uploading
-                          </span>
-                          <span className="text-sm font-medium text-[#022873]">
-                            {uploadProgress}%
-                          </span>
-                        </div>
-                        <div className="w-full bg-[#F2F2F2] rounded-full h-2.5">
-                          <div
-                            className="bg-[#034C8C] h-2.5 rounded-full transition-all duration-300 ease-in-out"
-                            style={{ width: `${uploadProgress}%` }}
-                          ></div>
-                        </div>
-                      </div>
-                    )}
-                    {uploadError && (
-                      <div className="flex items-center space-x-2 text-[#D94814] mt-2">
-                        <svg
-                          className="w-5 h-5"
-                          fill="none"
-                          stroke="currentColor"
-                          viewBox="0 0 24 24"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth={2}
-                            d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                          />
-                        </svg>
-                        <span>{uploadError}</span>
-                      </div>
-                    )}
-                    <button
-                      onClick={handleFileUpload}
-                      disabled={!abstractFile || isUploading}
-                      className="w-full bg-[#034C8C] text-white py-2 px-4 rounded-md hover:bg-[#022873] transition-colors duration-200 ease-in-out disabled:opacity-50 disabled:cursor-not-allowed"
-                    >
-                      {isUploading ? "Uploading..." : "Upload New Abstract"}
-                    </button>
+                    <InfoItem
+                      label="Submitted On"
+                      value={
+                        abstract?.createdAt && formatDate(abstract.createdAt)
+                      }
+                    />
                   </div>
+                  {abstract?.Status === "Rejected" && (
+                    <div className="mt-8">
+                      <h3 className="text-xl font-bold mb-4 text-danger">
+                        Rejection Comment
+                      </h3>
+                      <p className="text-gray-800">
+                        {abstract?.rejectionComment || "No comment provided"}
+                      </p>
+                      <h3 className="text-xl font-bold mb-4 text-danger mt-8">
+                        Update Abstract File
+                      </h3>
+                      <div className="space-y-4">
+                        <div
+                          {...getRootProps()}
+                          className={`w-full p-6 border-2 border-dashed rounded-lg text-center cursor-pointer transition-colors duration-200 ease-in-out ${
+                            isDragActive
+                              ? "border-[#034C8C] bg-[#F0F7FF]"
+                              : "border-[#CACACA] hover:border-[#034C8C] hover:bg-[#F7FAFC]"
+                          }`}
+                        >
+                          <input {...getInputProps()} id="abstractFile" />
+                          <p className="text-[#022873]">
+                            {isDragActive
+                              ? "Drop the file here..."
+                              : "Drag & drop your abstract file here, or click to select"}
+                          </p>
+                          <p className="text-sm text-[#6B7280] mt-2">
+                            Supported formats: .doc, .docx (Max size: 5MB)
+                          </p>
+                        </div>
+                        {abstractFile && (
+                          <div className="flex items-center space-x-2 text-sm text-[#022873]">
+                            <svg
+                              className="w-5 h-5 text-[#034C8C]"
+                              fill="none"
+                              stroke="currentColor"
+                              viewBox="0 0 24 24"
+                              xmlns="http://www.w3.org/2000/svg"
+                            >
+                              <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth={2}
+                                d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                              />
+                            </svg>
+                            <span>{abstractFile.name}</span>
+                          </div>
+                        )}
+                        {isUploading && (
+                          <div className="mt-4">
+                            <div className="flex justify-between mb-1">
+                              <span className="text-sm font-medium text-[#022873]">
+                                Uploading
+                              </span>
+                              <span className="text-sm font-medium text-[#022873]">
+                                {uploadProgress}%
+                              </span>
+                            </div>
+                            <div className="w-full bg-[#F2F2F2] rounded-full h-2.5">
+                              <div
+                                className="bg-[#034C8C] h-2.5 rounded-full transition-all duration-300 ease-in-out"
+                                style={{ width: `${uploadProgress}%` }}
+                              ></div>
+                            </div>
+                          </div>
+                        )}
+                        {uploadError && (
+                          <div className="flex items-center space-x-2 text-[#D94814] mt-2">
+                            <svg
+                              className="w-5 h-5"
+                              fill="none"
+                              stroke="currentColor"
+                              viewBox="0 0 24 24"
+                              xmlns="http://www.w3.org/2000/svg"
+                            >
+                              <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth={2}
+                                d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                              />
+                            </svg>
+                            <span>{uploadError}</span>
+                          </div>
+                        )}
+                        <button
+                          onClick={handleFileUpload}
+                          disabled={!abstractFile || isUploading}
+                          className="w-full bg-[#034C8C] text-white py-2 px-4 rounded-md hover:bg-[#022873] transition-colors duration-200 ease-in-out disabled:opacity-50 disabled:cursor-not-allowed"
+                        >
+                          {isUploading ? "Uploading..." : "Upload New Abstract"}
+                        </button>
+                      </div>
+                    </div>
+                  )}
                 </div>
               )}
+
               <h2 className="text-3xl font-bold mt-8 mb-6 text-danger">
                 Registration Details
               </h2>

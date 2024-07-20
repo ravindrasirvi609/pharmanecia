@@ -90,11 +90,13 @@ export const sendEmail = async (
     let abstract;
     let registration;
     let submissionDetailsUrl;
+    let EMAIL;
     const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
 
     if (emailType === "REGISTRATION_SUCCESS") {
       registration = await RegistrationModel.findOne({ _id });
       submissionDetailsUrl = `${baseUrl}/abstractForm/${registration._id}`;
+      EMAIL = registration.email;
 
       if (!registration) {
         throw new Error(`No registration found for email`);
@@ -102,6 +104,7 @@ export const sendEmail = async (
     } else {
       abstract = await AbstractModel.findOne({ _id });
       submissionDetailsUrl = `${baseUrl}/abstractForm/${abstract._id}`;
+      EMAIL = abstract.email;
 
       if (!abstract) {
         throw new Error(`No abstract found for email`);
@@ -170,7 +173,7 @@ export const sendEmail = async (
         </ul>
         <p>You can use the QR code below to access your registration information:</p>
         <div class="qr-code">
-            <img src="${abstract.qrCodeUrl}" alt="QR Code" style="max-width: 200px;">
+            <img src="${registration.qrCodeUrl}" alt="QR Code" style="max-width: 200px;">
         </div>
         <p>If you have any questions or need further assistance, please don't hesitate to contact us.</p>
         <p>We look forward to seeing you at the conference!</p>
@@ -178,9 +181,7 @@ export const sendEmail = async (
             <a href="${submissionDetailsUrl}" class="button">View Registration Details</a>
         </p>
       `;
-      subject = `Registration Successful - ${
-        abstract.AbstractCode || abstract.temporyAbstractCode
-      }`;
+      subject = `Registration Successful - ${registration.registrationCode}`;
     }
 
     const response = await fetch("https://api.resend.com/emails", {
@@ -191,7 +192,7 @@ export const sendEmail = async (
       },
       body: JSON.stringify({
         from: "dev@ravindrachoudhary.in",
-        to: abstract.email,
+        to: EMAIL,
         subject: subject,
         html: createEmailTemplate(content),
       }),
