@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { connect } from "@/dbConfig/dbConfig";
 import Transaction from "@/Model/TransactionModel";
 import Registration from "@/Model/RegistrationModel";
+import RegistrationModel from "@/Model/RegistrationModel";
 
 connect();
 
@@ -24,6 +25,8 @@ export async function POST(req: NextRequest) {
     const savedTransaction = await newTransaction.save();
 
     // Find the corresponding registration and update its payment status
+    const registrationCode = await getNextRegistrationCode();
+
     const updatedRegistration = await Registration.findOneAndUpdate(
       { email: transactionDetails.customerEmail },
       {
@@ -32,6 +35,7 @@ export async function POST(req: NextRequest) {
         paymentDate: new Date(),
         transactionId: savedTransaction._id,
         registrationStatus: "Confirmed",
+        registrationCode,
       },
       { new: true }
     );
@@ -61,4 +65,18 @@ export async function POST(req: NextRequest) {
       { status: 500 }
     );
   }
+}
+
+async function getNextRegistrationCode(): Promise<string> {
+  const lastRegistration = await RegistrationModel.findOne().sort({
+    registrationCode: -1,
+  });
+
+  if (!lastRegistration || !lastRegistration.registrationCode) {
+    return "P1201";
+  }
+
+  const lastNumber = parseInt(lastRegistration.registrationCode.slice(1), 10);
+  const nextNumber = lastNumber + 1;
+  return `P${nextNumber.toString().padStart(4, "0")}`;
 }

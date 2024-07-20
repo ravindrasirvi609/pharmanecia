@@ -55,9 +55,6 @@ export async function POST(req: NextRequest) {
       needAccommodation,
       dietaryRequirements,
       specialAssistance,
-      registrationCode: `OPF-${Date.now()}-${Math.random()
-        .toString(36)
-        .substr(2, 5)}`,
     });
 
     const savedRegistration = await newRegistration.save();

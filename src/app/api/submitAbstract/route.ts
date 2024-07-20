@@ -1,6 +1,5 @@
 import { connect } from "@/dbConfig/dbConfig";
 import { NextRequest, NextResponse } from "next/server";
-import { v4 as uuidv4 } from "uuid";
 import AbstractModel from "@/Model/AbstractModel";
 import QRCode from "qrcode";
 import { sendEmail } from "@/lib/mailer";
@@ -93,12 +92,28 @@ export async function POST(req: NextRequest) {
     );
   }
 }
-let sequenceCounter = 1;
 
 async function abstractCodeGenration(): Promise<string> {
   const opfPrefix = "OPF";
   const year = new Date().getFullYear().toString().slice(-2);
-  const sequenceNumber = sequenceCounter.toString().padStart(3, "0");
-  sequenceCounter++;
+
+  // Find the last abstract and get its sequence number
+  const lastAbstract = await AbstractModel.findOne().sort({
+    temporyAbstractCode: -1,
+  });
+
+  let sequenceNumber;
+  if (lastAbstract && lastAbstract.temporyAbstractCode) {
+    // Extract the sequence number from the last abstract code
+    const lastSequence = parseInt(
+      lastAbstract.temporyAbstractCode.slice(3, 6),
+      10
+    );
+    sequenceNumber = (lastSequence + 1).toString().padStart(3, "0");
+  } else {
+    // If no abstracts exist, start from 001
+    sequenceNumber = "001";
+  }
+
   return `${opfPrefix}${sequenceNumber}${year}`;
 }

@@ -77,15 +77,4 @@ function getPaymentStatusColor(status: string): string {
   }
 }
 
-function getRegistrationStatusColor(status: string): string {
-  switch (status) {
-    case "Confirmed":
-      return "bg-primary text-white";
-    case "Pending":
-      return "bg-yellow-500 text-white";
-    default:
-      return "bg-gray-500 text-white";
-  }
-}
-
 export default RegistrationTable;

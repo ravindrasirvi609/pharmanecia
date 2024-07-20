@@ -112,32 +112,37 @@ export const sendEmail = async (
       subject = `Abstract Submission Confirmation - ${abstract.temporyAbstractCode}`;
     } else if (emailType === "UPDATE_STATUS") {
       let statusSpecificContent = "";
-      if (abstract.Status === "Rejected" && abstract.rejectionComment) {
+      let codeToShow = abstract.temporyAbstractCode;
+      let statusForSubject = abstract.Status;
+
+      if (abstract.Status === "Accepted") {
+        codeToShow = abstract.abstractCode;
         statusSpecificContent = `
+      <p>Congratulations! Your abstract has been accepted.</p>
+      <p>Your official abstract code is: <strong>${abstract.abstractCode}</strong></p>
+    `;
+      } else if (abstract.Status === "Rejected" && abstract.rejectionComment) {
+        statusSpecificContent = `
+      <p>We regret to inform you that your abstract has not been accepted.</p>
       <p>Reason for rejection: ${abstract.rejectionComment}</p>
     `;
       }
+
       content = `
     <h2>Your Abstract Status Has Been Updated</h2>
-    <p>There has been an update to your abstract submission (Code: <strong>${
-      abstract.abstractCode || abstract.temporyAbstractCode
-    }</strong>).</p>
+    <p>There has been an update to your abstract submission (Code: <strong>${codeToShow}</strong>).</p>
     <p>Current Status: <strong>${abstract.Status}</strong></p>
     ${statusSpecificContent}
     <p>Please scan the QR code below or click the button to view the current status of your submission:</p>
     <div class="qr-code">
-        <img src="${
-          abstract.qrCodeUrl
-        }" alt="QR Code" style="max-width: 200px;">
+        <img src="${abstract.qrCodeUrl}" alt="QR Code" style="max-width: 200px;">
     </div>
     <p>If you have any questions about this update, please contact our support team.</p>
     <p>
         <a href="${submissionDetailsUrl}" class="button">View Submission Details</a>
     </p>
   `;
-      subject = `Abstract Status Update - ${
-        abstract.abstractCode || abstract.temporyAbstractCode
-      }`;
+      subject = `Abstract ${statusForSubject} - ${codeToShow}`;
     }
 
     const response = await fetch("https://api.resend.com/emails", {
