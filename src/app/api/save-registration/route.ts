@@ -1,6 +1,7 @@
 import { connect } from "@/dbConfig/dbConfig";
 import RegistrationModel from "@/Model/RegistrationModel";
 import { NextRequest, NextResponse } from "next/server";
+import QRCode from "qrcode";
 
 connect();
 
@@ -59,10 +60,23 @@ export async function POST(req: NextRequest) {
 
     const savedRegistration = await newRegistration.save();
 
+    let qrCodeUrl = "";
+    if (!abstractId) {
+      const url = `${process.env.NEXT_PUBLIC_BASE_URL}/abstractForm/${savedRegistration._id}`;
+      qrCodeUrl = await QRCode.toDataURL(url);
+    }
+
+    const newSavedRegistration = await RegistrationModel.findByIdAndUpdate(
+      savedRegistration._id,
+      {
+        qrCodeUrl,
+      }
+    );
+
     return NextResponse.json(
       {
         message: "Registration saved successfully",
-        registration: savedRegistration,
+        registration: newSavedRegistration,
       },
       { status: 201 }
     );

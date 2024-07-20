@@ -14,59 +14,60 @@ interface StudentPageProps {
 
 interface RegistrationInfo {
   abstract: {
-    url: string;
-    qrCodeUrl: string;
-    temporyAbstractCode: string;
-    AbstractCode: string;
-    Status: string;
-    title: string;
-    name: string;
-    email: string;
-    affiliation: string;
-    coAuthor: string;
-    address: string;
-    city: string;
-    state: string;
-    pincode: string;
-    whatsappNumber: string;
-    abstractFileUrl: string;
-    rejectionComment: string;
-    createdAt: string;
-    updatedAt: string;
+    url?: string;
+    qrCodeUrl?: string;
+    temporyAbstractCode?: string;
+    AbstractCode?: string;
+    Status?: string;
+    title?: string;
+    name?: string;
+    email?: string;
+    affiliation?: string;
+    coAuthor?: string;
+    address?: string;
+    city?: string;
+    state?: string;
+    pincode?: string;
+    whatsappNumber?: string;
+    abstractFileUrl?: string;
+    rejectionComment?: string;
+    createdAt?: string;
+    updatedAt?: string;
   };
 
   registration: {
-    _id: string;
-    email: string;
-    whatsappNumber: string;
-    Salutations: string;
-    name: string;
-    affiliation: string;
-    designation: string;
-    imageUrl: string;
-    gender: string;
-    dob: string;
-    AadharNumber: number;
-    address: string;
-    city: string;
-    state: string;
-    pincode: string;
-    country: string;
-    institute: string;
-    registrationType: string;
-    abstractSubmitted: boolean;
-    abstractId: string;
-    paymentStatus: string;
-    needAccommodation: boolean;
-    dietaryRequirements: string;
-    specialAssistance: string;
-    registrationStatus: string;
-    createdAt: string;
-    updatedAt: string;
-    paymentAmount: number;
-    paymentDate: string;
-    registrationCode: string;
-    transactionId: string;
+    _id?: string;
+    email?: string;
+    whatsappNumber?: string;
+    Salutations?: string;
+    name?: string;
+    affiliation?: string;
+    designation?: string;
+    imageUrl?: string;
+    gender?: string;
+    dob?: string;
+    AadharNumber?: number;
+    address?: string;
+    city?: string;
+    state?: string;
+    pincode?: string;
+    country?: string;
+    institute?: string;
+    registrationType?: string;
+    abstractSubmitted?: boolean;
+    abstractId?: string;
+    paymentStatus?: string;
+    needAccommodation?: boolean;
+    dietaryRequirements?: string;
+    specialAssistance?: string;
+    registrationStatus?: string;
+    createdAt?: string;
+    updatedAt?: string;
+    paymentAmount?: number;
+    paymentDate?: string;
+    registrationCode?: string;
+    transactionId?: string;
+    qrCodeUrl?: string;
   };
 }
 
@@ -133,7 +134,10 @@ const AbstractForm: React.FC<StudentPageProps> = ({ params }) => {
 
       if (updateRes.ok) {
         const updatedData = await updateRes.json();
-        setRegistrationInfo(updatedData.abstract);
+        setRegistrationInfo((prevState) => ({
+          ...prevState!,
+          abstract: updatedData.abstract,
+        }));
       } else {
         throw new Error("Failed to update abstract");
       }
@@ -155,11 +159,11 @@ const AbstractForm: React.FC<StudentPageProps> = ({ params }) => {
     value,
   }: {
     label: string;
-    value: string | ReactNode;
+    value: string | ReactNode | undefined;
   }) => (
     <div className="mb-4">
       <span className="font-semibold text-danger">{label}:</span>
-      <span className="ml-2 text-gray-800">{value}</span>
+      <span className="ml-2 text-gray-800">{value || "N/A"}</span>
     </div>
   );
 
@@ -169,25 +173,56 @@ const AbstractForm: React.FC<StudentPageProps> = ({ params }) => {
     <div className="min-h-screen bg-gradient-to-br from-orange-100 to-indigo-200 py-8 px-4 sm:px-6 lg:px-8">
       <div className="max-w-5xl mx-auto">
         <div className="bg-white rounded-xl shadow-2xl overflow-hidden">
-          <div className="md:flex flex-col md:flex-row">
+          <div className="p-8">
+            <h2 className="text-3xl font-bold mb-6 text-danger text-center">
+              Participant Information
+            </h2>
+            {registration.imageUrl && (
+              <div className="flex justify-center mb-8">
+                <Image
+                  src={registration.imageUrl}
+                  alt="Participant"
+                  width={200}
+                  height={200}
+                  className="rounded-lg shadow-lg"
+                />
+              </div>
+            )}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-4">
+              <InfoItem label="Name" value={registration.name} />
+              <InfoItem label="Email" value={registration.email} />
+              <InfoItem
+                label="Registration Code"
+                value={registration.registrationCode}
+              />
+              <InfoItem
+                label="Registration Type"
+                value={registration.registrationType}
+              />
+            </div>
+          </div>
+          <div className="md:flex">
             <div className="md:w-1/3 bg-danger text-white p-8 flex flex-col items-center justify-center">
               <h2 className="text-3xl font-bold mb-4 text-center">
                 Abstract QR Code
               </h2>
-              <Image
-                src={registrationInfo.abstract.qrCodeUrl}
-                alt="QR Code"
-                width={200}
-                height={200}
-                className="rounded-lg shadow-lg"
-              />
+              {(abstract.qrCodeUrl || registration.qrCodeUrl) && (
+                <Image
+                  src={abstract.qrCodeUrl ?? registration.qrCodeUrl ?? ""}
+                  alt="QR Code"
+                  width={200}
+                  height={200}
+                  className="rounded-lg shadow-lg"
+                />
+              )}
               <p className="mt-4 text-lg font-semibold text-center">
-                {registrationInfo.abstract.AbstractCode ||
-                  registrationInfo.abstract.temporyAbstractCode}
+                {abstract.AbstractCode || abstract.temporyAbstractCode || "N/A"}
               </p>
               <div className="mt-6 text-center">
                 <p className="text-lg font-semibold mb-2">
-                  Your Abstract has been Successfully Submitted !
+                  {abstract.Status === "Pending"
+                    ? "Abstract Submitted Successfully!"
+                    : "Abstract Status"}
                 </p>
                 <p className="text-sm">
                   You can check updates regarding your abstract using this QR
@@ -197,69 +232,72 @@ const AbstractForm: React.FC<StudentPageProps> = ({ params }) => {
             </div>
             <div className="md:w-2/3 p-8">
               <h2 className="text-3xl font-bold mb-6 text-danger">
-                Scientific Abstact Details
+                Scientific Abstract Details
               </h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-4">
                 <InfoItem
                   label="Status"
                   value={
-                    <span
-                      className={`px-2 py-1 rounded ${
-                        abstract.Status === "Pending"
-                          ? "bg-yellow-200 text-yellow-800"
-                          : "bg-green-200 text-green-800"
-                      }`}
-                    >
-                      {abstract.Status}
-                    </span>
+                    abstract.Status && (
+                      <span
+                        className={`px-2 py-1 rounded ${
+                          abstract.Status === "Pending"
+                            ? "bg-yellow-200 text-yellow-800"
+                            : "bg-green-200 text-green-800"
+                        }`}
+                      >
+                        {abstract.Status}
+                      </span>
+                    )
                   }
                 />
                 <InfoItem label="Title" value={abstract.title} />
-                <InfoItem
-                  label="Co-Author"
-                  value={abstract.coAuthor || "N/A"}
-                />
+                <InfoItem label="Co-Author" value={abstract.coAuthor} />
                 <div className="col-span-2">
                   <InfoItem
                     label="Abstract File"
                     value={
-                      <a
-                        href={abstract.abstractFileUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-blue-600 hover:text-blue-800 underline flex items-center"
-                      >
-                        <svg
-                          className="w-4 h-4 mr-2"
-                          fill="currentColor"
-                          viewBox="0 0 20 20"
-                          xmlns="http://www.w3.org/2000/svg"
+                      abstract.abstractFileUrl ? (
+                        <a
+                          href={abstract.abstractFileUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-blue-600 hover:text-blue-800 underline flex items-center"
                         >
-                          <path
-                            fillRule="evenodd"
-                            d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z"
-                            clipRule="evenodd"
-                          />
-                        </svg>
-                        Download Abstract
-                      </a>
+                          <svg
+                            className="w-4 h-4 mr-2"
+                            fill="currentColor"
+                            viewBox="0 0 20 20"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              fillRule="evenodd"
+                              d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z"
+                              clipRule="evenodd"
+                            />
+                          </svg>
+                          Download Abstract
+                        </a>
+                      ) : (
+                        "Not uploaded"
+                      )
                     }
                   />
                 </div>
                 <InfoItem
                   label="Submitted On"
-                  value={formatDate(abstract.createdAt)}
+                  value={abstract.createdAt && formatDate(abstract.createdAt)}
                 />
               </div>
-              {registrationInfo.abstract.Status === "Rejected" && (
+              {abstract.Status === "Rejected" && (
                 <div className="mt-8">
                   <h3 className="text-xl font-bold mb-4 text-danger">
                     Rejection Comment
                   </h3>
                   <p className="text-gray-800">
-                    {registrationInfo.abstract.rejectionComment}
+                    {abstract.rejectionComment || "No comment provided"}
                   </p>
-                  <h3 className="text-xl font-bold mb-4 text-danger">
+                  <h3 className="text-xl font-bold mb-4 text-danger mt-8">
                     Update Abstract File
                   </h3>
                   <div className="space-y-4">
@@ -351,13 +389,7 @@ const AbstractForm: React.FC<StudentPageProps> = ({ params }) => {
                 Registration Details
               </h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-4">
-                <InfoItem
-                  label="Registration Code"
-                  value={registration.registrationCode}
-                />
                 <InfoItem label="Salutation" value={registration.Salutations} />
-                <InfoItem label="Name" value={registration.name} />
-                <InfoItem label="Email" value={registration.email} />
                 <InfoItem
                   label="Affiliation"
                   value={registration.affiliation}
@@ -369,24 +401,27 @@ const AbstractForm: React.FC<StudentPageProps> = ({ params }) => {
                 <InfoItem label="Gender" value={registration.gender} />
                 <InfoItem
                   label="Date of Birth"
-                  value={formatDate(registration.dob)}
+                  value={registration.dob && formatDate(registration.dob)}
                 />
                 <InfoItem label="Institute" value={registration.institute} />
-                <InfoItem
-                  label="Registration Type"
-                  value={registration.registrationType}
-                />
                 <InfoItem
                   label="Payment Status"
                   value={registration.paymentStatus}
                 />
                 <InfoItem
                   label="Payment Amount"
-                  value={`₹${registration.paymentAmount}`}
+                  value={
+                    registration.paymentAmount !== undefined
+                      ? `₹${registration.paymentAmount}`
+                      : undefined
+                  }
                 />
                 <InfoItem
                   label="Payment Date"
-                  value={formatDate(registration.paymentDate)}
+                  value={
+                    registration.paymentDate &&
+                    formatDate(registration.paymentDate)
+                  }
                 />
                 <InfoItem
                   label="Need Accommodation"
@@ -408,19 +443,6 @@ const AbstractForm: React.FC<StudentPageProps> = ({ params }) => {
                 <InfoItem
                   label="WhatsApp Number"
                   value={registration.whatsappNumber}
-                />
-              </div>
-
-              <div className="mt-8">
-                <h3 className="text-xl font-bold mb-4 text-danger">
-                  Participant Image
-                </h3>
-                <Image
-                  src={registration.imageUrl}
-                  alt="Participant"
-                  width={200}
-                  height={200}
-                  className="rounded-lg shadow-lg"
                 />
               </div>
             </div>

@@ -22,6 +22,7 @@ const registrationSchema = new Schema({
   pincode: { type: String },
   country: { type: String },
   institute: { type: String },
+  qrCodeUrl: { type: String },
 
   // Conference-specific Information
   registrationType: {
