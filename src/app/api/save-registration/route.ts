@@ -8,6 +8,11 @@ export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
     const {
+      Salutations,
+      dob,
+      AadharNumber,
+      institute,
+      gender,
       email,
       whatsappNumber,
       name,
@@ -28,6 +33,11 @@ export async function POST(req: NextRequest) {
     } = body;
 
     const newRegistration = new RegistrationModel({
+      Salutations,
+      dob,
+      AadharNumber,
+      institute,
+      gender,
       email,
       whatsappNumber,
       name,

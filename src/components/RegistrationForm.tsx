@@ -1,31 +1,9 @@
 import { useFirebaseStorage } from "@/app/hooks/useFirebaseStorage";
+import { RegistrationFormData } from "@/lib/interface";
+import axios from "axios";
 import Image from "next/image";
 import React, { useCallback, useState } from "react";
 import { useDropzone } from "react-dropzone";
-
-export interface RegistrationFormData {
-  email: string;
-  whatsappNumber: string;
-  Salutations: "Mr." | "Ms." | "Mrs." | "Dr." | "Prof.";
-  name: string;
-  affiliation: string;
-  designation: string;
-  gender: "Male" | "Female" | "Other";
-  imageUrl: string;
-  dob: string;
-  AadharNumber: string;
-  address: string;
-  city: string;
-  state: string;
-  pincode: string;
-  country: string;
-  institute: string;
-  registrationType: "Student" | "Professional" | "Academician";
-  abstractSubmitted: boolean;
-  needAccommodation: boolean;
-  dietaryRequirements: string;
-  specialAssistance: string;
-}
 
 interface RegistrationFormProps {
   formData: RegistrationFormData;
@@ -47,6 +25,55 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({
     error: uploadError,
   } = useFirebaseStorage();
   const [imageFile, setImageFile] = useState<File | null>(null);
+
+  const [abstractSubmitted, setAbstractSubmitted] = useState(false);
+  const [abstractCode, setAbstractCode] = useState("");
+  const [abstractDetails, setAbstractDetails] = useState(null);
+
+  const handleAbstractSubmission = async () => {
+    try {
+      const response = await axios.get(`/api/abstract/${abstractCode}`);
+      if (response.data) {
+        setAbstractDetails(response.data);
+        // Pre-fill form data
+        onInputChange({
+          target: { name: "email", value: response.data.email },
+        } as React.ChangeEvent<HTMLInputElement>);
+        onInputChange({
+          target: {
+            name: "whatsappNumber",
+            value: response.data.whatsappNumber,
+          },
+        } as React.ChangeEvent<HTMLInputElement>);
+        onInputChange({
+          target: { name: "name", value: response.data.name },
+        } as React.ChangeEvent<HTMLInputElement>);
+        onInputChange({
+          target: { name: "affiliation", value: response.data.affiliation },
+        } as React.ChangeEvent<HTMLInputElement>);
+        onInputChange({
+          target: { name: "designation", value: response.data.designation },
+        } as React.ChangeEvent<HTMLInputElement>);
+        onInputChange({
+          target: { name: "address", value: response.data.address },
+        } as React.ChangeEvent<HTMLInputElement>);
+        onInputChange({
+          target: { name: "city", value: response.data.city },
+        } as React.ChangeEvent<HTMLInputElement>);
+        onInputChange({
+          target: { name: "state", value: response.data.state },
+        } as React.ChangeEvent<HTMLInputElement>);
+        onInputChange({
+          target: { name: "pincode", value: response.data.pincode },
+        } as React.ChangeEvent<HTMLInputElement>);
+      }
+    } catch (error) {
+      console.error("Error fetching abstract details:", error);
+      alert(
+        "Failed to fetch abstract details. Please check your abstract code."
+      );
+    }
+  };
 
   const onDrop = useCallback((acceptedFiles: File[]) => {
     if (acceptedFiles[0]) {
@@ -115,6 +142,37 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({
             <p className="text-sm text-gray-600 mt-1">
               Uploading: {uploadProgress}%
             </p>
+          </div>
+        )}
+      </div>
+
+      {/* Abstract Submission */}
+      <div className="mb-6">
+        <label className="flex items-center mb-2">
+          <input
+            type="checkbox"
+            checked={abstractSubmitted}
+            onChange={(e) => setAbstractSubmitted(e.target.checked)}
+            className="mr-2"
+          />
+          I have submitted an abstract
+        </label>
+        {abstractSubmitted && (
+          <div>
+            <input
+              type="text"
+              value={abstractCode}
+              onChange={(e) => setAbstractCode(e.target.value)}
+              placeholder="Enter your abstract code"
+              className="w-full p-2 border rounded mb-2"
+            />
+            <button
+              type="button"
+              onClick={handleAbstractSubmission}
+              className="bg-accent text-light px-4 py-2 rounded-md hover:bg-secondary transition duration-300"
+            >
+              Fetch Abstract Details
+            </button>
           </div>
         )}
       </div>
@@ -319,19 +377,6 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({
           <option value="Professional">Professional</option>
           <option value="Academician">Academician</option>
         </select>
-      </div>
-
-      <div className="mb-4">
-        <label className="flex items-center">
-          <input
-            type="checkbox"
-            name="abstractSubmitted"
-            checked={formData.abstractSubmitted}
-            onChange={onInputChange}
-            className="mr-2"
-          />
-          Abstract Submitted
-        </label>
       </div>
 
       <div className="mb-4">

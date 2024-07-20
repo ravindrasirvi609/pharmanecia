@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
-import axios from "axios";
-import RegistrationForm, { RegistrationFormData } from "./RegistrationForm";
+import RegistrationForm from "./RegistrationForm";
+import { RegistrationFormData } from "@/lib/interface";
 
 interface Plan {
   name: string;
@@ -53,6 +53,7 @@ const RegistrationPlans: React.FC = () => {
     institute: "",
     gender: "Male",
     abstractSubmitted: false,
+    abstractId: null,
   });
 
   const initializeRazorpay = () => {
@@ -85,14 +86,19 @@ const RegistrationPlans: React.FC = () => {
 
     try {
       // Save registration data
-      const registrationResponse = await axios.post(
-        "/api/save-registration",
-        formData
-      );
+      const registrationResponse = await fetch("/api/save-registration", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
 
-      // If registration is successful, proceed to payment
-      if (registrationResponse.data.registration) {
-        await makePayment(selectedPlan, registrationResponse.data.registration);
+      if (registrationResponse.ok) {
+        const registration = await registrationResponse.json();
+        await makePayment(selectedPlan, registration);
+      } else {
+        throw new Error("Failed to save registration");
       }
     } catch (error) {
       console.error("Registration failed:", error);
@@ -110,32 +116,52 @@ const RegistrationPlans: React.FC = () => {
 
     try {
       // Create Razorpay order
-      const orderData = await axios.post("/api/razorpay-order", {
-        amount: plan.price,
+      const orderResponse = await fetch("/api/razorpay-order", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ amount: plan.price }),
       });
-      console.log(orderData, orderData.data.currency);
+
+      if (!orderResponse.ok) {
+        throw new Error("Failed to create Razorpay order");
+      }
+
+      const orderData = await orderResponse.json();
 
       const options = {
         name: "Operant Pharmacy Federation",
-        currency: orderData.data.currency,
-        amount: orderData.data.amount,
-        order_id: orderData.data.id,
+        currency: orderData.currency,
+        amount: orderData.amount,
+        order_id: orderData.id,
         description: `Payment for ${plan.name}`,
         handler: async function (response: any) {
           try {
-            const transactionData = await axios.post("/api/save-transaction", {
-              razorpay_order_id: response.razorpay_order_id,
-              razorpay_payment_id: response.razorpay_payment_id,
-              razorpay_signature: response.razorpay_signature,
-              amount: orderData.data.amount / 100,
-              currency: orderData.data.currency,
-              planName: plan.name,
-              customerName: registration.name,
-              customerEmail: registration.email,
-              customerPhone: registration.contact,
+            const transactionResponse = await fetch("/api/save-transaction", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                razorpay_order_id: response.razorpay_order_id,
+                razorpay_payment_id: response.razorpay_payment_id,
+                razorpay_signature: response.razorpay_signature,
+                amount: orderData.amount / 100,
+                currency: orderData.currency,
+                planName: plan.name,
+                customerName: registration.name,
+                customerEmail: registration.email,
+                customerPhone: registration.whatsappNumber,
+              }),
             });
 
-            alert("Payment Successful");
+            if (transactionResponse.ok) {
+              alert("Payment Successful");
+              closeModal();
+            } else {
+              throw new Error("Failed to save transaction");
+            }
           } catch (error) {
             console.error("Failed to save transaction:", error);
             alert(
@@ -177,9 +203,7 @@ const RegistrationPlans: React.FC = () => {
           {plans.map((plan, index) => (
             <div
               key={index}
-              className={`bg-white shadow-lg rounded-lg p-6 text-center ${
-                selectedPlan === plan ? "border-4 border-accent" : ""
-              }`}
+              className="bg-white shadow-lg rounded-lg p-6 text-center"
             >
               <h3 className="text-2xl font-bold mb-4 text-primary">
                 {plan.name}
