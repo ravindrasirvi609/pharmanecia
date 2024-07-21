@@ -142,6 +142,11 @@ export function AbstractForm() {
           method: "POST",
           body: formData,
         });
+        console.log("Response:", response);
+
+        if (response.status === 409) {
+          throw new Error("An abstract with this email already exists");
+        }
 
         if (!response.ok) {
           throw new Error("Failed to submit abstract");
@@ -150,12 +155,14 @@ export function AbstractForm() {
         const result = await response.json();
         console.log(result);
 
-        if (result.newAbstract) {
-          window.location.href = `/abstractForm/${result.newAbstract._id}`;
+        if (result.UpdatedAbstract) {
+          window.location.href = `/abstractForm/${result.UpdatedAbstract._id}`;
         } else {
           throw new Error("Failed to submit abstract");
         }
       } catch (error: any) {
+        console.log("Error:", error);
+
         setSubmitError(error.message);
       } finally {
         setIsSubmitting(false);
@@ -536,7 +543,7 @@ export function AbstractForm() {
         </div>
 
         {submitError && (
-          <div className="mb-4 p-3 bg-red-100 border border-red-400 text-red-700 rounded">
+          <div className="mb-4 p-3 bg-[#fa9e9e] border border-red-400 text-red-700 rounded">
             {submitError}
           </div>
         )}
