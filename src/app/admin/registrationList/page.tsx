@@ -1,6 +1,7 @@
 "use client";
 import RegistrationTable from "@/components/RegistrationTable";
 import { exportToExcel } from "@/lib/excelExport";
+import Link from "next/link";
 import { useState, useEffect } from "react";
 
 export default function RegistrationList() {
@@ -39,6 +40,11 @@ export default function RegistrationList() {
         >
           Export to Excel
         </button>
+        <Link href={"/admin/abstractList"}>
+          <button className="bg-primary text-white px-4 py-2 rounded hover:bg-primary-dark">
+            Abstract List
+          </button>
+        </Link>
       </div>
       <RegistrationTable registrations={registrations} />
     </div>

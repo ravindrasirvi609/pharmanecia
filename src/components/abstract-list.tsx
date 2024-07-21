@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import React, { useState, useMemo, useEffect, useRef } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -251,6 +252,11 @@ export function AbstractList() {
       <header className="bg-[#021373] text-white px-6 py-4 flex items-center justify-between shadow-md">
         <h1 className="text-2xl font-bold">Abstract Management</h1>
         <div className="flex items-center gap-4">
+          <Link href={"/admin/registrationList"} className="">
+            <button className="bg-danger text-white px-4 py-2 text-sm font-medium rounded hover:bg-primary-dark">
+              Registration List
+            </button>
+          </Link>
           <div className="relative">
             <button
               onClick={() => setIsFilterOpen(!isFilterOpen)}
@@ -351,7 +357,7 @@ export function AbstractList() {
             <SkeletonLoader />
           ) : error ? (
             <div className="text-center py-10">
-              <p className="text-red-500 text-xl mb-4">
+              <p className="text-danger text-xl mb-4">
                 Oops! Something went wrong.
               </p>
               <button
@@ -360,6 +366,11 @@ export function AbstractList() {
               >
                 Retry
               </button>
+              <Link href={"/admin/registrationList"}>
+                <button className="bg-primary text-white px-4 py-2 rounded hover:bg-primary-dark">
+                  Registration List
+                </button>
+              </Link>
             </div>
           ) : (
             <table className="min-w-full bg-white shadow-md rounded-lg overflow-hidden">
