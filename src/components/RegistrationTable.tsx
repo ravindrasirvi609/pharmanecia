@@ -37,7 +37,10 @@ const RegistrationTable: React.FC<RegistrationTableProps> = ({
         </thead>
         <tbody>
           {registrations.map((registration) => (
-            <tr key={registration._id} className="border-b hover:bg-light">
+            <tr
+              key={registration._id}
+              className="border-b hover:bg-light text-black"
+            >
               <td className="px-4 py-2">{registration.registrationCode}</td>
               <td className="px-4 py-2">{registration.name}</td>
               <td className="px-4 py-2">{registration.email}</td>

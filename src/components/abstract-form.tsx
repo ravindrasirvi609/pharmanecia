@@ -265,7 +265,7 @@ export function AbstractForm() {
           </label>
           <select
             id="Designation"
-            className="w-full px-3 py-2 border border-[#CACACA] rounded-md focus:outline-none focus:ring-2 focus:ring-[#034C8C]"
+            className="w-full px-3 py-2 border border-[#CACACA] text-black rounded-md focus:outline-none focus:ring-2 focus:ring-[#034C8C]"
             value={Designation}
             onChange={(e) => setDesignation(e.target.value)}
           >
@@ -291,7 +291,7 @@ export function AbstractForm() {
           <input
             id="affiliation"
             type="text"
-            className="w-full px-3 py-2 border border-[#CACACA] rounded-md focus:outline-none focus:ring-2 focus:ring-[#034C8C]"
+            className="w-full px-3 py-2 border text-black border-[#CACACA] rounded-md focus:outline-none focus:ring-2 focus:ring-[#034C8C]"
             placeholder="Enter your affiliation"
             value={affiliation}
             onChange={(e: ChangeEvent<HTMLInputElement>) =>
@@ -313,7 +313,7 @@ export function AbstractForm() {
           <input
             id="coAuthor"
             type="text"
-            className="w-full px-3 py-2 border border-[#CACACA] rounded-md focus:outline-none focus:ring-2 focus:ring-[#034C8C]"
+            className="w-full px-3 py-2 border text-black border-[#CACACA] rounded-md focus:outline-none focus:ring-2 focus:ring-[#034C8C]"
             placeholder="Enter co-author's name"
             value={coAuthor}
             onChange={(e: ChangeEvent<HTMLInputElement>) =>
@@ -331,7 +331,7 @@ export function AbstractForm() {
           </label>
           <select
             id="subject"
-            className="w-full px-3 py-2 border border-[#CACACA] rounded-md focus:outline-none focus:ring-2 focus:ring-[#034C8C]"
+            className="w-full px-3 py-2 border text-black border-[#CACACA] rounded-md focus:outline-none focus:ring-2 focus:ring-[#034C8C]"
             value={subject}
             onChange={(e) => setSubject(e.target.value)}
           >
@@ -357,7 +357,7 @@ export function AbstractForm() {
           <input
             id="title"
             type="text"
-            className="w-full px-3 py-2 border border-[#CACACA] rounded-md focus:outline-none focus:ring-2 focus:ring-[#034C8C]"
+            className="w-full px-3 py-2 border text-black border-[#CACACA] rounded-md focus:outline-none focus:ring-2 focus:ring-[#034C8C]"
             placeholder="Enter the title of your abstract"
             value={title}
             onChange={(e: ChangeEvent<HTMLInputElement>) =>
@@ -463,7 +463,7 @@ export function AbstractForm() {
           </label>
           <textarea
             id="address"
-            className="w-full px-3 py-2 border border-[#CACACA] rounded-md focus:outline-none focus:ring-2 focus:ring-[#034C8C]"
+            className="w-full px-3 py-2 border text-black border-[#CACACA] rounded-md focus:outline-none focus:ring-2 focus:ring-[#034C8C]"
             rows={3}
             placeholder="Enter your address"
             value={address}
@@ -487,7 +487,7 @@ export function AbstractForm() {
             <input
               id="city"
               type="text"
-              className="w-full px-3 py-2 border border-[#CACACA] rounded-md focus:outline-none focus:ring-2 focus:ring-[#034C8C]"
+              className="w-full px-3 py-2 border text-black border-[#CACACA] rounded-md focus:outline-none focus:ring-2 focus:ring-[#034C8C]"
               placeholder="Enter your city"
               value={city}
               onChange={(e: ChangeEvent<HTMLInputElement>) =>
@@ -508,7 +508,7 @@ export function AbstractForm() {
             <input
               id="state"
               type="text"
-              className="w-full px-3 py-2 border border-[#CACACA] rounded-md focus:outline-none focus:ring-2 focus:ring-[#034C8C]"
+              className="w-full px-3 py-2 border text-black border-[#CACACA] rounded-md focus:outline-none focus:ring-2 focus:ring-[#034C8C]"
               placeholder="Enter your state"
               value={state}
               onChange={(e: ChangeEvent<HTMLInputElement>) =>
@@ -529,7 +529,7 @@ export function AbstractForm() {
             <input
               id="pincode"
               type="text"
-              className="w-full px-3 py-2 border border-[#CACACA] rounded-md focus:outline-none focus:ring-2 focus:ring-[#034C8C]"
+              className="w-full px-3 py-2 border text-black border-[#CACACA] rounded-md focus:outline-none focus:ring-2 focus:ring-[#034C8C]"
               placeholder="Enter your pincode"
               value={pincode}
               onChange={(e: ChangeEvent<HTMLInputElement>) =>
