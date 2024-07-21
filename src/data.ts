@@ -1,4 +1,5 @@
 import { CommitteeMember } from "./app/organisingCommittee/page";
+import { Plan } from "./lib/interface";
 
 export const schedule = {
   day1: [
@@ -223,5 +224,24 @@ export const designationOptions = [
   {
     value: "FD",
     label: "Faculty",
+  },
+];
+
+export const plans: Plan[] = [
+  {
+    name: "Basic Plan",
+    description: "Includes entry to all sessions and conference kit.",
+    price: 1,
+  },
+  {
+    name: "Standard Plan",
+    description: "Includes entry to all sessions, conference kit, and lunch.",
+    price: 150,
+  },
+  {
+    name: "Premium Plan",
+    description:
+      "Includes entry to all sessions, conference kit, lunch, and accommodation.",
+    price: 200,
   },
 ];

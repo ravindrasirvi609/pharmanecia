@@ -1,7 +1,7 @@
 import { Schema, model, models } from "mongoose";
 
 const abstractSchema = new Schema({
-  email: { type: String },
+  email: { type: String, required: true, unique: true },
   whatsappNumber: { type: String },
   name: { type: String },
   affiliation: { type: String },

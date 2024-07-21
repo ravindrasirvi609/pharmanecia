@@ -19,7 +19,7 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    const email = formData.get("email");
+    const email = formData.get("email") as string;
     const whatsappNumber = formData.get("whatsappNumber");
     const name = formData.get("name");
     const designation = formData.get("designation");
@@ -49,6 +49,15 @@ export async function POST(req: NextRequest) {
       return NextResponse.json(
         { message: "All required fields must be provided" },
         { status: 400 }
+      );
+    }
+
+    // Check if an abstract with this email already exists
+    const existingAbstract = await AbstractModel.findOne({ email });
+    if (existingAbstract) {
+      return NextResponse.json(
+        { message: "An abstract with this email already exists" },
+        { status: 409 } // 409 Conflict status code
       );
     }
 

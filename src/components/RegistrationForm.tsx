@@ -10,15 +10,15 @@ interface RegistrationFormProps {
   onInputChange: (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => void;
-  onSubmit: (e: React.FormEvent) => void;
   onImageUpload: (file: File) => Promise<void>;
+  errors: { [key: string]: string };
 }
 
 const RegistrationForm: React.FC<RegistrationFormProps> = ({
   formData,
   onInputChange,
-  onSubmit,
   onImageUpload,
+  errors,
 }) => {
   const {
     uploadFile,
@@ -27,12 +27,15 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({
     error: uploadError,
   } = useFirebaseStorage();
   const [imageFile, setImageFile] = useState<File | null>(null);
-
+  const [abstractError, setAbstractError] = useState("");
+  const [isAbstractFetching, setIsAbstractFetching] = useState(false);
   const [abstractSubmitted, setAbstractSubmitted] = useState(false);
   const [abstractCode, setAbstractCode] = useState("");
   const [abstractDetails, setAbstractDetails] = useState(null);
 
   const handleAbstractSubmission = async () => {
+    setIsAbstractFetching(true);
+    setAbstractError("");
     try {
       const response = await axios.get(`/api/abstract/${abstractCode}`);
       if (response.data) {
@@ -77,9 +80,11 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({
       }
     } catch (error) {
       console.error("Error fetching abstract details:", error);
-      alert(
+      setAbstractError(
         "Failed to fetch abstract details. Please check your abstract code."
       );
+    } finally {
+      setIsAbstractFetching(false);
     }
   };
 
@@ -103,7 +108,7 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({
   });
 
   return (
-    <form onSubmit={onSubmit} className="max-w-2xl mx-auto">
+    <form className="max-w-2xl mx-auto">
       <h3 className="text-2xl font-semibold mb-4">Registration Form</h3>
 
       {/* Image Uploader */}
@@ -141,7 +146,10 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({
           )}
         </div>
         {uploadError && (
-          <p className="text-red-500 text-sm mt-2">{uploadError}</p>
+          <p className="text-danger text-sm mt-2">{uploadError}</p>
+        )}
+        {errors.imageUrl && (
+          <p className="text-danger text-sm mt-1">{errors.imageUrl}</p>
         )}
         {isUploading && (
           <div className="mt-2">
@@ -178,13 +186,20 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({
               placeholder="Enter your abstract code"
               className="w-full p-2 border rounded mb-2"
             />
+
             <button
               type="button"
               onClick={handleAbstractSubmission}
-              className="bg-accent text-light px-4 py-2 rounded-md hover:bg-secondary transition duration-300"
+              disabled={isAbstractFetching}
+              className={`bg-accent text-light px-4 py-2 rounded-md hover:bg-secondary transition duration-300 ${
+                isAbstractFetching ? "opacity-50 cursor-not-allowed" : ""
+              }`}
             >
-              Fetch Abstract Details
+              {isAbstractFetching ? "Fetching..." : "Fetch Abstract Details"}
             </button>
+            {abstractError && (
+              <p className="text-danger mt-2">{abstractError}</p>
+            )}
           </div>
         )}
       </div>
@@ -217,6 +232,9 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({
           required
           className="w-full p-2 border rounded"
         />
+        {errors.name && (
+          <p className="text-danger text-sm mt-1">{errors.name}</p>
+        )}
         <p className="text-sm text-gray-600 mt-1">
           Spelling should be correct. The same name will be printed on the
           certificate and cannot be changed after submission.
@@ -233,6 +251,9 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({
           required
           className="w-full p-2 border rounded"
         />
+        {errors.email && (
+          <p className="text-danger text-sm mt-1">{errors.email}</p>
+        )}
       </div>
 
       <div className="mb-4">
@@ -246,6 +267,9 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({
           className="w-full p-2 border rounded"
           maxLength={10}
         />
+        {errors.whatsappNumber && (
+          <p className="text-danger text-sm mt-1">{errors.whatsappNumber}</p>
+        )}
       </div>
 
       <div className="mb-4">
@@ -261,6 +285,9 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({
           <option value="Female">Female</option>
           <option value="Other">Other</option>
         </select>
+        {errors.gender && (
+          <p className="text-danger text-sm mt-1">{errors.gender}</p>
+        )}
       </div>
 
       <div className="mb-4">
@@ -273,6 +300,7 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({
           required
           className="w-full p-2 border rounded"
         />
+        {errors.dob && <p className="text-danger text-sm mt-1">{errors.dob}</p>}
         <p className="text-sm text-gray-600 mt-1">
           Kindly enter correct Date of Birth to receive E-Certificate of
           conference on your Digilocker account linked with your Aadhar.
@@ -289,6 +317,10 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({
           className="w-full p-2 border rounded"
           maxLength={12}
         />
+        {errors.AadharNumber && (
+          <p className="text-danger text-sm mt-1">{errors.AadharNumber}</p>
+        )}
+
         <p className="text-sm text-gray-600 mt-1">
           Kindly enter correct Aadhar Number to receive E-Certificate of
           conference on your Digilocker account linked with your Aadhar.
@@ -304,6 +336,9 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({
           onChange={onInputChange}
           className="w-full p-2 border rounded"
         />
+        {errors.affiliation && (
+          <p className="text-danger text-sm mt-1">{errors.affiliation}</p>
+        )}
       </div>
 
       <div className="mb-4">
@@ -315,6 +350,9 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({
           onChange={onInputChange}
           className="w-full p-2 border rounded"
         />
+        {errors.designation && (
+          <p className="text-danger text-sm mt-1">{errors.designation}</p>
+        )}
       </div>
 
       <div className="mb-4">
@@ -326,6 +364,9 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({
           onChange={onInputChange}
           className="w-full p-2 border rounded"
         />
+        {errors.institute && (
+          <p className="text-danger text-sm mt-1">{errors.institute}</p>
+        )}
       </div>
 
       {/* Address Information */}
@@ -339,6 +380,9 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({
           required
           className="w-full p-2 border rounded"
         />
+        {errors.address && (
+          <p className="text-danger text-sm mt-1">{errors.address}</p>
+        )}
       </div>
 
       <div className="mb-4">
@@ -351,6 +395,9 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({
           required
           className="w-full p-2 border rounded"
         />
+        {errors.city && (
+          <p className="text-danger text-sm mt-1">{errors.city}</p>
+        )}
       </div>
 
       <div className="mb-4">
@@ -363,6 +410,9 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({
           required
           className="w-full p-2 border rounded"
         />
+        {errors.state && (
+          <p className="text-danger text-sm mt-1">{errors.state}</p>
+        )}
       </div>
 
       <div className="mb-4">
@@ -376,6 +426,9 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({
           className="w-full p-2 border rounded"
           maxLength={6}
         />
+        {errors.pincode && (
+          <p className="text-danger text-sm mt-1">{errors.pincode}</p>
+        )}
       </div>
 
       <div className="mb-4">
@@ -388,6 +441,9 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({
           required
           className="w-full p-2 border rounded"
         />
+        {errors.country && (
+          <p className="text-danger text-sm mt-1">{errors.country}</p>
+        )}
       </div>
 
       {/* Conference-specific Information */}
@@ -404,6 +460,9 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({
           <option value="Professional">Professional</option>
           <option value="Academician">Academician</option>
         </select>
+        {errors.registrationType && (
+          <p className="text-danger text-sm mt-1">{errors.registrationType}</p>
+        )}
       </div>
 
       <div className="mb-4">
@@ -440,13 +499,6 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({
           className="w-full p-2 border rounded"
         />
       </div>
-
-      <button
-        type="submit"
-        className="bg-accent text-light px-6 py-2 rounded-md hover:bg-secondary transition duration-300"
-      >
-        Register and Pay
-      </button>
     </form>
   );
 };
