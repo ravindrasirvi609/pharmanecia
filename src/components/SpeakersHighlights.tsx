@@ -25,67 +25,61 @@ const SpeakersHighlights = () => {
   return (
     <div className="bg-danger text-primary px-6 py-12" ref={boxRef}>
       <div className="max-w-7xl mx-auto">
-        <h1 className="text-4xl font-bold mb-8 text-center">
-          Speakers Highlights
-        </h1>
+        {/* <h1 className="text-4xl font-bold mb-8 text-center">Chief Patron</h1> */}
 
         <div className="mb-12">
           <h2 className="text-3xl font-semibold mb-6 text-secondary text-center">
-            Keynote Speakers
+            Chief Patron{" "}
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {/* Speaker 1 */}
             <div className="bg-white shadow-lg rounded-lg p-6 text-center">
               <Image
-                src="https://via.placeholder.com/150"
+                src="https://lh3.googleusercontent.com/Psk9RZBzv4T_rszcVrHU2oQHKIUvbU_hdBzHtbw2o9tBryc5PyhQxLHE5-pZl_ICeig0kz2KFKzRYb7vG_qqOeqaeh0wNpKbPhF5RkzCKBBIs246K4EBeiZRbFaTnyMNdg=w1280"
                 alt="Speaker 1"
                 className="w-32 h-32 mx-auto rounded-full mb-4"
                 height={150}
                 width={150}
               />
               <h3 className="text-xl font-semibold text-primary">
-                Dr. John Doe
+                Dr. B. Suresh
               </h3>
               <p className="text-sm text-gray-700 mt-2">
-                Dr. John Doe is a renowned expert in pharmaceutical research
-                with over 20 years of experience in the field.
+                Pro Chancellor, JSSAHER, Mysuru
               </p>
             </div>
 
             {/* Speaker 2 */}
             <div className="bg-white shadow-lg rounded-lg p-6 text-center">
               <Image
-                src="https://via.placeholder.com/150"
+                src="https://lh6.googleusercontent.com/xmvCM2RyHjPF7rY0giATC2DVhQZI8wJnANve_kTqKzhVC90HsApl5bREdae2GEW5wP-rGhLCj_tEXVtAM87ecQDhQwFlsr5y7ueG810_NfTTpMN7V8egME9TmSMlF24yVQ=w1280"
                 alt="Speaker 2"
                 className="w-32 h-32 mx-auto rounded-full mb-4"
                 height={150}
                 width={150}
               />
               <h3 className="text-xl font-semibold text-primary">
-                Dr. Jane Smith
+                Dr. Surinder Singh
               </h3>
               <p className="text-sm text-gray-700 mt-2">
-                Dr. Jane Smith is an industry leader in clinical pharmacy and
-                therapeutics, with numerous publications to her name.
+                Vice Chancellor, JSSAHER, Mysuru
               </p>
             </div>
 
             {/* Speaker 3 */}
             <div className="bg-white shadow-lg rounded-lg p-6 text-center">
               <Image
-                src="https://via.placeholder.com/150"
+                src="https://lh5.googleusercontent.com/NswNLKmcMHFEZoeCa5HIq39glOmqpCJ0IAicxRU1-5csW3wP4wl7OcwUxoUq-qCkkYNG6Fuo90hpLB7L5-V4x2Q8zcaLDdn6GwsxDeQryh3K26xJZACubDXPq0X6MZ04jA=w1280"
                 alt="Speaker 3"
                 className="w-32 h-32 mx-auto rounded-full mb-4"
                 height={150}
                 width={150}
               />
               <h3 className="text-xl font-semibold text-primary">
-                Dr. Emily Johnson
+                Vikram Choudhary
               </h3>
               <p className="text-sm text-gray-700 mt-2">
-                Dr. Emily Johnson is a leading researcher in pharmaceutical
-                technology and innovation, with a focus on regulatory
-                challenges.
+                Founder, Operant Pharmacy Federation
               </p>
             </div>
           </div>
@@ -107,7 +101,7 @@ const SpeakersHighlights = () => {
                 the field.
               </p>
               <p className="text-sm text-gray-500 mt-2">
-                Speakers: Dr. John Doe, Dr. Sarah Williams
+                Speakers: Annaounching Soon
               </p>
             </div>
 
@@ -121,7 +115,7 @@ const SpeakersHighlights = () => {
                 future of pharmaceuticals in this insightful session.
               </p>
               <p className="text-sm text-gray-500 mt-2">
-                Speakers: Dr. Jane Smith, Dr. Michael Brown
+                Speakers: Annaounching Soon
               </p>
             </div>
 
@@ -135,7 +129,7 @@ const SpeakersHighlights = () => {
                 addressing challenges and proposing innovative solutions.
               </p>
               <p className="text-sm text-gray-500 mt-2">
-                Speakers: Dr. Emily Johnson, Dr. Robert Davis
+                Speakers: Annaounching Soon
               </p>
             </div>
           </div>

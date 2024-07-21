@@ -75,12 +75,14 @@ const AboutConference: React.FC = () => {
             Brief Introduction
           </h2>
           <p className="text-lg leading-relaxed">
-            Pharmanecia 4.E is an esteemed conference organized by the
-            Department of Pharmaceutical Chemistry at JSS College of Pharmacy,
-            Ooty. This event aims to explore the latest trends and advancements
-            in pharmaceutical research, bringing together a diverse group of
-            professionals, academics, and students to engage in meaningful
-            discussions and collaborations.
+            The International Research Conference on &quot;Recent Advances in
+            Artificial Intelligence and Machine Learning Driven Drug
+            Discovery&quot; is an esteemed event organized by the Department of
+            Pharmaceutical Chemistry at JSS College of Pharmacy, Ooty. This
+            conference aims to explore the cutting-edge intersection of AI,
+            machine learning, and drug discovery, bringing together a diverse
+            group of researchers, data scientists, pharmaceutical experts, and
+            students to engage in groundbreaking discussions and collaborations.
           </p>
         </div>
 
@@ -89,22 +91,30 @@ const AboutConference: React.FC = () => {
             Themes and Objectives
           </h2>
           <p className="text-lg leading-relaxed mb-4">
-            The conference will cover a wide range of topics related to
-            pharmaceutical research, including but not limited to:
+            The conference will cover a wide range of topics related to AI and
+            ML in drug discovery, including but not limited to:
           </p>
           <ul className="list-disc list-inside mb-6 text-lg space-y-2 pl-4">
-            <li>Emerging trends in drug discovery and development</li>
-            <li>Innovations in pharmaceutical technology</li>
-            <li>Advancements in clinical pharmacy and therapeutics</li>
+            <li>AI-driven target identification and validation</li>
             <li>
-              Regulatory challenges and solutions in the pharmaceutical industry
+              Machine learning models for predicting drug-target interactions
+            </li>
+            <li>Deep learning approaches in de novo drug design</li>
+            <li>
+              AI applications in high-throughput screening and lead optimization
+            </li>
+            <li>Predictive modeling for ADMET properties</li>
+            <li>
+              Ethical considerations and regulatory challenges in AI-driven drug
+              discovery
             </li>
           </ul>
           <p className="text-lg leading-relaxed">
             The main objective of this event is to foster a collaborative
-            environment where scientists, industry experts, and students can
-            share their insights and engage in fruitful discussions about the
-            new era of pharmaceutical research.
+            environment where AI researchers, data scientists, pharmaceutical
+            experts, and students can share their insights and engage in
+            fruitful discussions about the transformative potential of AI and
+            machine learning in revolutionizing the drug discovery process.
           </p>
         </div>
 
@@ -113,9 +123,9 @@ const AboutConference: React.FC = () => {
           className="bg-accent text-white p-6 rounded-lg shadow-lg"
         >
           <p className="text-xl font-bold text-center">
-            THE GOAL OF THIS EVENT IS TO BRING SCIENTISTS, INDUSTRY EXPERTS, AND
-            STUDENTS ON THE SAME PLATFORM FOR FRUITFUL DISCUSSIONS ON THE NEW
-            ERA.
+            THE GOAL OF THIS CONFERENCE IS TO BRIDGE THE GAP BETWEEN ARTIFICIAL
+            INTELLIGENCE, MACHINE LEARNING, AND PHARMACEUTICAL RESEARCH, PAVING
+            THE WAY FOR INNOVATIVE APPROACHES IN DRUG DISCOVERY AND DEVELOPMENT.
           </p>
         </div>
       </div>

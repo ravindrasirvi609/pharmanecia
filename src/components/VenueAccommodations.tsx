@@ -45,21 +45,21 @@ const VenueAccommodations = () => {
             <li>
               <strong>Hotel A:</strong> Located 1 km from the venue, Hotel A
               offers luxurious rooms and amenities.
-              <a href="https://hotel-a.com" className="text-accent ml-2">
+              <a href="#" className="text-accent ml-2">
                 Visit Website
               </a>
             </li>
             <li className="mt-2">
               <strong>Hotel B:</strong> Situated 2 km from the venue, Hotel B
               provides affordable accommodations with excellent service.
-              <a href="https://hotel-b.com" className="text-accent ml-2">
+              <a href="#" className="text-accent ml-2">
                 Visit Website
               </a>
             </li>
             <li className="mt-2">
               <strong>Hotel C:</strong> 3 km from the venue, Hotel C offers a
               range of facilities including a gym and a restaurant.
-              <a href="https://hotel-c.com" className="text-accent ml-2">
+              <a href="#" className="text-accent ml-2">
                 Visit Website
               </a>
             </li>

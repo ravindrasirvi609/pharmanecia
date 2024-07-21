@@ -66,11 +66,11 @@ const Navbar = () => {
                 Schedule
               </Link>
             </li>
-            <li>
+            {/* <li>
               <Link href="/Speakers" className="hover:text-ochre">
                 Speakers
               </Link>
-            </li>
+            </li> */}
             <li>
               <Link href="/Sponsors" className="hover:text-ochre">
                 Sponsors
@@ -119,11 +119,11 @@ const Navbar = () => {
                 Schedule
               </Link>
             </li>
-            <li>
+            {/* <li>
               <Link href="/Speakers" className="hover:text-ochre">
                 Speakers
               </Link>
-            </li>
+            </li> */}
             <li>
               <Link href="/Sponsors" className="hover:text-ochre">
                 Sponsors

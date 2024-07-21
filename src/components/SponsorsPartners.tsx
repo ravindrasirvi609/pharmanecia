@@ -18,7 +18,7 @@ const SponsorsPartners = () => {
             {/* Sponsor 1 */}
             <div className="flex justify-center">
               <Image
-                src="https://via.placeholder.com/150"
+                src="/operant.png"
                 alt="Sponsor 1"
                 className="h-24"
                 height={150}
@@ -28,7 +28,7 @@ const SponsorsPartners = () => {
             {/* Sponsor 2 */}
             <div className="flex justify-center">
               <Image
-                src="https://via.placeholder.com/150"
+                src="/nextgen.png"
                 alt="Sponsor 2"
                 className="h-24"
                 height={150}
@@ -38,7 +38,7 @@ const SponsorsPartners = () => {
             {/* Sponsor 3 */}
             <div className="flex justify-center">
               <Image
-                src="https://via.placeholder.com/150"
+                src="/arpb.png"
                 alt="Sponsor 3"
                 className="h-24"
                 height={150}
