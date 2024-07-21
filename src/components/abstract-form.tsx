@@ -2,6 +2,7 @@
 
 import { useFirebaseStorage } from "@/app/hooks/useFirebaseStorage";
 import { designationOptions, subjectOptions } from "@/data";
+import axios from "axios";
 import { useState, ChangeEvent, useCallback } from "react";
 import { useDropzone } from "react-dropzone";
 
@@ -114,12 +115,14 @@ export function AbstractForm() {
       newErrors.pincode = "Invalid pincode format";
     }
     setErrors(newErrors);
+
     if (Object.keys(newErrors).length === 0) {
       let downloadURL;
       if (abstractFile) {
         downloadURL = await uploadFile(abstractFile);
         console.log("File uploaded successfully. URL:", downloadURL);
       }
+
       const formData = new FormData();
       formData.append("email", email);
       formData.append("whatsappNumber", whatsappNumber);
@@ -138,32 +141,47 @@ export function AbstractForm() {
       formData.append("pincode", pincode);
 
       try {
-        const response = await fetch("/api/submitAbstract", {
-          method: "POST",
-          body: formData,
+        const response = await axios.post("/api/submitAbstract", formData, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
         });
+
         console.log("Response:", response);
 
-        if (response.status === 409) {
-          throw new Error("An abstract with this email already exists");
-        }
+        if (response.status === 200) {
+          const result = response.data;
+          console.log(result);
+          console.log("result.abstract", result.abstract, result.abstract._id);
 
-        if (!response.ok) {
-          throw new Error("Failed to submit abstract");
-        }
-
-        const result = await response.json();
-        console.log(result);
-
-        if (result.UpdatedAbstract) {
-          window.location.href = `/abstractForm/${result.UpdatedAbstract._id}`;
+          if (result.abstract) {
+            window.location.href = `/abstractForm/${result.abstract._id}`;
+          } else {
+            throw new Error("Failed to submit abstract");
+          }
         } else {
           throw new Error("Failed to submit abstract");
         }
       } catch (error: any) {
         console.log("Error:", error);
 
-        setSubmitError(error.message);
+        if (error.response) {
+          // The request was made and the server responded with a status code
+          // that falls out of the range of 2xx
+          if (error.response.status === 409) {
+            setSubmitError("An abstract with this email already exists");
+          } else {
+            setSubmitError(
+              error.response.data.message || "Failed to submit abstract"
+            );
+          }
+        } else if (error.request) {
+          // The request was made but no response was received
+          setSubmitError("No response received from server");
+        } else {
+          // Something happened in setting up the request that triggered an Error
+          setSubmitError(error.message);
+        }
       } finally {
         setIsSubmitting(false);
       }
@@ -192,7 +210,7 @@ export function AbstractForm() {
             <input
               id="email"
               type="email"
-              className="w-full px-3 py-2 border border-[#CACACA] rounded-md focus:outline-none focus:ring-2 focus:ring-[#034C8C]"
+              className="w-full px-3 py-2 border text-black border-[#CACACA] rounded-md focus:outline-none focus:ring-2 focus:ring-[#034C8C]"
               placeholder="Enter your email"
               value={email}
               onChange={(e: ChangeEvent<HTMLInputElement>) =>
@@ -217,7 +235,7 @@ export function AbstractForm() {
               <input
                 id="whatsappNumber"
                 type="tel"
-                className="flex-1 px-3 py-2 border border-[#CACACA] rounded-r-md focus:outline-none focus:ring-2 focus:ring-[#034C8C]"
+                className="flex-1 px-3 py-2 border text-black border-[#CACACA] rounded-r-md focus:outline-none focus:ring-2 focus:ring-[#034C8C]"
                 placeholder="Enter your WhatsApp number"
                 value={whatsappNumber}
                 onChange={(e: ChangeEvent<HTMLInputElement>) =>
@@ -244,7 +262,7 @@ export function AbstractForm() {
           <input
             id="name"
             type="text"
-            className="w-full px-3 py-2 border border-[#CACACA] rounded-md focus:outline-none focus:ring-2 focus:ring-[#034C8C]"
+            className="w-full px-3 py-2 border text-black border-[#CACACA] rounded-md focus:outline-none focus:ring-2 focus:ring-[#034C8C]"
             placeholder="Enter your name"
             value={name}
             onChange={(e: ChangeEvent<HTMLInputElement>) =>

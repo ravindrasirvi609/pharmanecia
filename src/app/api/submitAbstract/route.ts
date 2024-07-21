@@ -1,10 +1,10 @@
 import { connect } from "@/dbConfig/dbConfig";
 import { NextRequest, NextResponse } from "next/server";
 import AbstractModel from "@/Model/AbstractModel";
+import RegistrationModel from "@/Model/RegistrationModel";
 import QRCode from "qrcode";
 import { sendEmail } from "@/lib/mailer";
 import { uploadQRCodeToFirebase } from "@/lib/firebase";
-import RegistrationModel from "@/Model/RegistrationModel";
 
 connect();
 
@@ -21,18 +21,17 @@ export async function POST(req: NextRequest) {
     }
 
     const email = formData.get("email") as string;
-    const whatsappNumber = formData.get("whatsappNumber");
-    const name = formData.get("name");
-    const designation = formData.get("designation");
-    const affiliation = formData.get("affiliation");
-    const coAuthor = formData.get("coAuthor");
-    const title = formData.get("title");
-    const subject = formData.get("subject");
-    const abstractFile = formData.get("abstractFile") as File;
-    const address = formData.get("address");
-    const city = formData.get("city");
-    const state = formData.get("state");
-    const pincode = formData.get("pincode");
+    const whatsappNumber = formData.get("whatsappNumber") as string;
+    const name = formData.get("name") as string;
+    const designation = formData.get("designation") as string;
+    const affiliation = formData.get("affiliation") as string;
+    const coAuthor = formData.get("coAuthor") as string;
+    const title = formData.get("title") as string;
+    const subject = formData.get("subject") as string;
+    const address = formData.get("address") as string;
+    const city = formData.get("city") as string;
+    const state = formData.get("state") as string;
+    const pincode = formData.get("pincode") as string;
 
     if (
       !email ||
@@ -41,7 +40,7 @@ export async function POST(req: NextRequest) {
       !affiliation ||
       !title ||
       !subject ||
-      !abstractFile ||
+      !file ||
       !address ||
       !city ||
       !state ||
@@ -58,16 +57,14 @@ export async function POST(req: NextRequest) {
     if (existingAbstract) {
       return NextResponse.json(
         { message: "An abstract with this email already exists" },
-        { status: 409 } // 409 Conflict status code
+        { status: 409 }
       );
     }
 
-    const temporyAbstractCode = await abstractCodeGenration();
-    let qrCodeUrl = "";
-
+    const temporyAbstractCode = await abstractCodeGeneration();
     const url = `${process.env.NEXT_PUBLIC_BASE_URL}/abstractForm/${temporyAbstractCode}`;
     const qrCodeBuffer = await QRCode.toBuffer(url);
-    qrCodeUrl = await uploadQRCodeToFirebase(
+    const qrCodeUrl = await uploadQRCodeToFirebase(
       qrCodeBuffer,
       `${temporyAbstractCode}.png`
     );
@@ -93,22 +90,28 @@ export async function POST(req: NextRequest) {
     const newAbstract = new AbstractModel(abstractData);
     await newAbstract.save();
 
-    const registration = await RegistrationModel.findOneAndUpdate({ email });
+    const registration = await RegistrationModel.findOne({ email });
+    let updatedAbstract = newAbstract;
+
     if (registration) {
+      // Update the registration
       registration.abstractSubmitted = true;
       registration.abstractId = newAbstract._id;
       await registration.save();
-    }
 
-    let UpdatedAbstract;
-    if (registration.paymentStatus) {
-      UpdatedAbstract = await AbstractModel.findOneAndUpdate(
-        { email },
-        {
-          registrationCompleted: true,
-          registrationCode: registration.registrationCode,
-        }
-      );
+      // Only update the abstract if registration exists and payment is completed
+      if (registration.paymentStatus === "Completed") {
+        updatedAbstract = await AbstractModel.findOneAndUpdate(
+          { email },
+          {
+            registrationCompleted: true,
+            registrationCode: registration.registrationCode,
+          },
+          { new: true }
+        );
+      }
+    } else {
+      console.log(`No registration found for email: ${email}`);
     }
 
     await sendEmail({
@@ -118,18 +121,18 @@ export async function POST(req: NextRequest) {
 
     return NextResponse.json({
       message: "Abstract submitted successfully",
-      UpdatedAbstract,
+      abstract: updatedAbstract,
     });
   } catch (error: any) {
     console.error("Error:", error);
     return NextResponse.json(
-      { message: "Internal server error", error },
+      { message: "Internal server error", error: error.message },
       { status: 500 }
     );
   }
 }
 
-async function abstractCodeGenration(): Promise<string> {
+async function abstractCodeGeneration(): Promise<string> {
   const opfPrefix = "OPF";
   const year = new Date().getFullYear().toString().slice(-2);
 
