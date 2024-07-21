@@ -158,7 +158,6 @@ const RegistrationPlans: React.FC = () => {
       if (registrationResponse.ok) {
         const registration = await registrationResponse.json();
         await makePayment(selectedPlan, registration.registration);
-        window.location.href = `/abstractForm/${registration.registration._id}`;
       } else {
         throw new Error("Failed to save registration");
       }
@@ -233,6 +232,8 @@ const RegistrationPlans: React.FC = () => {
             alert(
               "Payment successful, but failed to save transaction details."
             );
+          } finally {
+            window.location.href = `/abstractForm/${registration.registration._id}`;
           }
         },
         prefill: {
