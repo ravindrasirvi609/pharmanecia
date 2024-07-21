@@ -63,20 +63,21 @@ export async function POST(req: NextRequest) {
     let qrCodeUrl = "";
     if (!abstractId) {
       const url = `${process.env.NEXT_PUBLIC_BASE_URL}/abstractForm/${savedRegistration._id}`;
-      qrCodeUrl = await QRCode.toDataURL(url);
+      const qrCodeBuffer = await QRCode.toBuffer(url);
+      qrCodeUrl = `data:image/png;base64,${qrCodeBuffer.toString("base64")}`;
     }
 
-    const newSavedRegistration = await RegistrationModel.findByIdAndUpdate(
+    // Use findByIdAndUpdate with the `new` option to return the updated document
+    const updatedRegistration = await RegistrationModel.findByIdAndUpdate(
       savedRegistration._id,
-      {
-        qrCodeUrl,
-      }
+      { qrCodeUrl },
+      { new: true }
     );
 
     return NextResponse.json(
       {
         message: "Registration saved successfully",
-        registration: newSavedRegistration,
+        registration: updatedRegistration,
       },
       { status: 201 }
     );

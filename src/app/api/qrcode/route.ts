@@ -21,10 +21,12 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
     if (mongoose.Types.ObjectId.isValid(id)) {
       // Try to find in AbstractModel
       abstract = await AbstractModel.findById(id).lean();
+      console.log("abstract----1", abstract);
 
       // If not found in AbstractModel, try RegistrationModel
       if (!abstract) {
         registration = await RegistrationModel.findById(id).lean();
+        console.log("registration----1", registration);
       }
     }
 
@@ -33,25 +35,30 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
       abstract = await AbstractModel.findOne({
         temporaryAbstractCode: id,
       }).lean();
+      console.log("abstract----2", abstract);
       if (!abstract) {
         registration = await RegistrationModel.findOne({
           registrationCode: id,
         }).lean();
+        console.log("registration----2", registration);
       }
     }
 
     // If we found a registration but not an abstract, try to find the corresponding abstract
-    if (registration && !abstract) {
-      abstract = await AbstractModel.findOne({
-        registrationCode: registration.registrationCode,
-      }).lean();
-    }
+    // if (registration && !abstract) {
+    //   abstract = await AbstractModel.findOne({
+    //     registrationCode: registration.registrationCode,
+    //   }).lean();
+    //   console.log("abstract----3", abstract);
+    // }
 
     // If we found an abstract but not a registration, try to find the corresponding registration
-    if (abstract && !registration) {
+
+    if (abstract && !registration && abstract.registrationCode) {
       registration = await RegistrationModel.findOne({
         registrationCode: abstract.registrationCode,
       }).lean();
+      console.log("registration----3", registration);
     }
 
     if (!abstract && !registration) {
