@@ -48,7 +48,7 @@ const SponsorsPartners = () => {
             {/* Sponsor 4 */}
             <div className="flex justify-center">
               <Image
-                src="https://via.placeholder.com/150"
+                src="/jssnewlogo.png"
                 alt="Sponsor 4"
                 className="h-24"
                 height={150}
