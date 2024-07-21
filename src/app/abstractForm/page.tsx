@@ -80,7 +80,7 @@ const AbstractFormPage: React.FC = () => {
                     into the designated space on the submission portal.
                   </li>
                   <li>Abstracts must be submitted online only.</li>
-                  <li>The deadline for submission is 31 July, 2024.</li>
+                  <li>The deadline for submission is 31 August, 2024.</li>
                   <li>
                     A model abstract is available for reference on the website.
                   </li>

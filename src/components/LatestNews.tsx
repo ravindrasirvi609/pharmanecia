@@ -46,7 +46,7 @@ const LatestNews = () => {
             </h2>
             <p className="text-lg leading-relaxed text-justify mb-4">
               Good news for researchers! The abstract submission deadline for
-              Pharmanecia 4.E has been extended to July 31. Submit your
+              Pharmanecia 4.E has been extended to August 31. Submit your
               abstracts now.
             </p>
             <a href="#" className="text-accent hover:text-secondary">
