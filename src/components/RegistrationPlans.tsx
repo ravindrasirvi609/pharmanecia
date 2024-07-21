@@ -157,9 +157,8 @@ const RegistrationPlans: React.FC = () => {
 
       if (registrationResponse.ok) {
         const registration = await registrationResponse.json();
-        console.log("Registration saved:", registration.registration);
-
         await makePayment(selectedPlan, registration.registration);
+        window.location.href = `/abstractForm/${registration.registration._id}`;
       } else {
         throw new Error("Failed to save registration");
       }
