@@ -4,6 +4,7 @@ import RegistrationForm from "./RegistrationForm";
 import { Plan, RegistrationFormData } from "@/lib/interface";
 import { useFirebaseStorage } from "@/app/hooks/useFirebaseStorage";
 import { plans } from "@/data";
+import axios from "axios";
 
 const RegistrationPlans: React.FC = () => {
   const { uploadFile } = useFirebaseStorage();
@@ -203,12 +204,9 @@ const RegistrationPlans: React.FC = () => {
         description: `Payment for ${plan.name}`,
         handler: async function (response: any) {
           try {
-            const transactionResponse = await fetch("/api/save-transaction", {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-              },
-              body: JSON.stringify({
+            const transactionResponse = await axios.post(
+              "/api/save-transaction",
+              {
                 razorpay_order_id: response.razorpay_order_id,
                 razorpay_payment_id: response.razorpay_payment_id,
                 razorpay_signature: response.razorpay_signature,
@@ -218,17 +216,14 @@ const RegistrationPlans: React.FC = () => {
                 customerName: registration.name,
                 customerEmail: registration.email,
                 customerPhone: registration.whatsappNumber,
-              }),
-            });
+              }
+            );
 
-            if (transactionResponse.ok) {
-              closeModal();
-              window.location.href = `/abstractForm/${registration.registration._id}`;
-            } else {
-              throw new Error("Failed to save transaction");
-            }
+            window.location.href = `/abstractForm/${transactionResponse.data.registration._id}`;
           } catch (error) {
             console.error("Failed to save transaction:", error);
+          } finally {
+            closeModal();
           }
         },
         prefill: {
