@@ -222,7 +222,6 @@ const RegistrationPlans: React.FC = () => {
             });
 
             if (transactionResponse.ok) {
-              alert("Payment Successful");
               closeModal();
               window.location.href = `/abstractForm/${registration.registration._id}`;
             } else {
@@ -230,9 +229,6 @@ const RegistrationPlans: React.FC = () => {
             }
           } catch (error) {
             console.error("Failed to save transaction:", error);
-            alert(
-              "Payment successful, but failed to save transaction details."
-            );
           }
         },
         prefill: {
