@@ -65,18 +65,18 @@ export const sendEmail = async (
     emailType,
   }: {
     _id: string;
-    emailType: "SUBMMITED" | "UPDATE_STATUS" | "REGISTRATION_SUCCESS";
+    emailType: "SUBMITTED" | "UPDATE_STATUS" | "REGISTRATION_SUCCESS";
   },
   p0?: string
 ) => {
   try {
     if (
-      emailType !== "SUBMMITED" &&
+      emailType !== "SUBMITTED" &&
       emailType !== "UPDATE_STATUS" &&
       emailType !== "REGISTRATION_SUCCESS"
     ) {
       throw new Error(
-        "Invalid emailType. It should be either 'SUBMMITED', 'UPDATE_STATUS', or 'REGISTRATION_SUCCESS'."
+        "Invalid emailType. It should be either 'SUBMITTED', 'UPDATE_STATUS', or 'REGISTRATION_SUCCESS'."
       );
     }
 
@@ -113,7 +113,7 @@ export const sendEmail = async (
 
     let content, subject;
 
-    if (emailType === "SUBMMITED") {
+    if (emailType === "SUBMITTED") {
       content = `
         <h2>Thank you for your submission!</h2>
         <p>Your abstract has been successfully submitted. Your temporary abstract code is: <strong>${abstract.temporyAbstractCode}</strong></p>

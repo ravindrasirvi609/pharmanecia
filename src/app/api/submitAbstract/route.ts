@@ -4,6 +4,7 @@ import AbstractModel from "@/Model/AbstractModel";
 import QRCode from "qrcode";
 import { sendEmail } from "@/lib/mailer";
 import { uploadQRCodeToFirebase } from "@/lib/firebase";
+import RegistrationModel from "@/Model/RegistrationModel";
 
 connect();
 
@@ -91,14 +92,33 @@ export async function POST(req: NextRequest) {
 
     const newAbstract = new AbstractModel(abstractData);
     await newAbstract.save();
+
+    const registration = await RegistrationModel.findOneAndUpdate({ email });
+    if (registration) {
+      registration.abstractSubmitted = true;
+      registration.abstractId = newAbstract._id;
+      await registration.save();
+    }
+
+    let UpdatedAbstract;
+    if (registration.paymentStatus) {
+      UpdatedAbstract = await AbstractModel.findOneAndUpdate(
+        { email },
+        {
+          registrationCompleted: true,
+          registrationCode: registration.registrationCode,
+        }
+      );
+    }
+
     await sendEmail({
       _id: newAbstract._id,
-      emailType: "SUBMMITED",
+      emailType: "SUBMITTED",
     });
 
     return NextResponse.json({
       message: "Abstract submitted successfully",
-      newAbstract,
+      UpdatedAbstract,
     });
   } catch (error: any) {
     console.error("Error:", error);
