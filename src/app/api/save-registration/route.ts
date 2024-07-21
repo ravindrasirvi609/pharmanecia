@@ -1,4 +1,5 @@
 import { connect } from "@/dbConfig/dbConfig";
+import { uploadQRCodeToFirebase } from "@/lib/firebase";
 import RegistrationModel from "@/Model/RegistrationModel";
 import { NextRequest, NextResponse } from "next/server";
 import QRCode from "qrcode";
@@ -64,7 +65,10 @@ export async function POST(req: NextRequest) {
     if (!abstractId) {
       const url = `${process.env.NEXT_PUBLIC_BASE_URL}/abstractForm/${savedRegistration._id}`;
       const qrCodeBuffer = await QRCode.toBuffer(url);
-      qrCodeUrl = `data:image/png;base64,${qrCodeBuffer.toString("base64")}`;
+      qrCodeUrl = await uploadQRCodeToFirebase(
+        qrCodeBuffer,
+        `${savedRegistration._id}.png`
+      );
     }
 
     // Use findByIdAndUpdate with the `new` option to return the updated document

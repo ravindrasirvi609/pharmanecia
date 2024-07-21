@@ -3,6 +3,7 @@ import { NextRequest, NextResponse } from "next/server";
 import AbstractModel from "@/Model/AbstractModel";
 import QRCode from "qrcode";
 import { sendEmail } from "@/lib/mailer";
+import { uploadQRCodeToFirebase } from "@/lib/firebase";
 
 connect();
 
@@ -52,8 +53,14 @@ export async function POST(req: NextRequest) {
     }
 
     const temporyAbstractCode = await abstractCodeGenration();
+    let qrCodeUrl = "";
+
     const url = `${process.env.NEXT_PUBLIC_BASE_URL}/abstractForm/${temporyAbstractCode}`;
-    const qrCodeUrl = await QRCode.toDataURL(url);
+    const qrCodeBuffer = await QRCode.toBuffer(url);
+    qrCodeUrl = await uploadQRCodeToFirebase(
+      qrCodeBuffer,
+      `${temporyAbstractCode}.png`
+    );
 
     const abstractData = {
       email,

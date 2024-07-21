@@ -1,5 +1,6 @@
 import { initializeApp, getApps, FirebaseApp } from "firebase/app";
 import { getStorage } from "firebase/storage";
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
 const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
@@ -21,3 +22,13 @@ if (!getApps().length) {
 const storage = getStorage(firebaseApp);
 
 export { storage };
+
+export async function uploadQRCodeToFirebase(
+  qrCodeBuffer: Buffer,
+  fileName: string
+): Promise<string> {
+  const storageRef = ref(storage, `qr-codes/${fileName}`);
+  const snapshot = await uploadBytes(storageRef, qrCodeBuffer);
+  const downlo = await getDownloadURL(snapshot.ref);
+  return downlo;
+}
