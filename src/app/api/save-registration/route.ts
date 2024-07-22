@@ -1,5 +1,6 @@
 import { connect } from "@/dbConfig/dbConfig";
 import { uploadQRCodeToFirebase } from "@/lib/firebase";
+import AbstractModel from "@/Model/AbstractModel";
 import RegistrationModel from "@/Model/RegistrationModel";
 import { NextRequest, NextResponse } from "next/server";
 import QRCode from "qrcode";
@@ -70,6 +71,20 @@ export async function POST(req: NextRequest) {
         `${savedRegistration._id}.png`
       );
     }
+
+    // Search for the email in the abstract model
+    const abstract = await AbstractModel.findOne({ email: email });
+
+    let foundAbstractId = null;
+    if (abstract) {
+      foundAbstractId = abstract._id;
+    }
+
+    // Update the registration with the abstract ID if found
+    const registrationUpdate = {
+      qrCodeUrl,
+      ...(foundAbstractId && { abstractId: foundAbstractId }),
+    };
 
     // Use findByIdAndUpdate with the `new` option to return the updated document
     const updatedRegistration = await RegistrationModel.findByIdAndUpdate(

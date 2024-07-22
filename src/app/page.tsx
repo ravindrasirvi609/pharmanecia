@@ -35,7 +35,7 @@ const HomePage = () => {
           property="og:image"
           content="https://www.adobe.com/content/dam/cc/en/ax-gnav-images/0_AEx.svg"
         />
-        <meta property="og:url" content="https://yourwebsite.com" />
+        <meta property="og:url" content="https://www.pharmanecia.org/" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Pharmanecia 4.E" />
         <meta name="twitter:description" content="Pharmanecia 4.E" />

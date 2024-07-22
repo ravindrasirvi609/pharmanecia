@@ -39,10 +39,8 @@ export async function POST(req: NextRequest) {
         registrationStatus: "Confirmed",
         registrationCode,
       },
-      { new: true }
+      { new: true, sort: { createdAt: -1 } } // Assuming 'createdAt' is the field to sort by. Use 'updatedAt' if that's more appropriate.
     );
-
-    console.log("Updated registration:", updatedRegistration);
 
     try {
       await AbstractModel.findByIdAndUpdate(updatedRegistration.abstractId, {
