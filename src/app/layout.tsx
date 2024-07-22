@@ -17,15 +17,39 @@ const fontBody = Inter({
   display: "swap",
   variable: "--font-body",
 });
+
 export const metadata: Metadata = {
   title:
-    "Pharmanecia - Recent Advances in Artificial Intelligence and Machine learning driven drug discovery",
+    "Pharmanecia 4.E - International Research Conference on AI and ML in Drug Discovery",
   description:
-    "Join us for Pharmanecia, the 4th Annual International Convention of the Hosted by Operant BioMedical Researsh Federation. Explore the latest innovations and advancements in pharmacy education and practice.",
-  icons: {
-    icon: "/favicon.ico",
-    apple: "/apple-touch-icon.png",
-    shortcut: "/favicon.ico",
+    "Join us for the Pharmanecia 4.E International Research Conference on Recent Advances in Artificial Intelligence and Machine Learning Driven Drug Discovery, March 7-8, 2025.",
+  keywords:
+    "Pharmanecia, AI in drug discovery, machine learning, pharmaceutical research, conference",
+  alternates: {
+    canonical: "https://www.pharmanecia.org",
+  },
+  openGraph: {
+    title: "Pharmanecia 4.E Conference",
+    description:
+      "International Research Conference on AI and ML in Drug Discovery",
+    url: "https://www.pharmanecia.org",
+    siteName: "Pharmanecia 4.E",
+    images: [
+      {
+        url: "https://www.pharmanecia.org/og-image.png", // Create this image
+        width: 1200,
+        height: 630,
+      },
+    ],
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Pharmanecia 4.E Conference",
+    description:
+      "International Research Conference on AI and ML in Drug Discovery",
+    images: ["https://www.pharmanecia.org/og-image.png"], // Create this image
   },
 };
 

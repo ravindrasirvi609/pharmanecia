@@ -13,8 +13,16 @@ import React, { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import PharmaneciaScroll from "@/components/pharmanecia";
+import { Metadata } from "next";
 gsap.registerPlugin(useGSAP);
 
+export const generateMetadata = async (): Promise<Metadata> => {
+  return {
+    title: "Home | Pharmanecia 4.E Conference",
+    description:
+      "Welcome to Pharmanecia 4.E, exploring AI and ML in drug discovery. Join us on March 7-8, 2025 at JSS College of Pharmacy, Ooty.",
+  };
+};
 const HomePage = () => {
   const boxRef = useRef<HTMLHeadingElement>(null);
   useGSAP(() => {
