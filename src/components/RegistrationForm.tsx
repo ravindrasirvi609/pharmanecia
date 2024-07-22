@@ -328,7 +328,9 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({
       </div>
 
       <div className="mb-4">
-        <label className="block mb-2">Affiliation</label>
+        <label className="block mb-2">
+          Affiliation/Organization/Institution
+        </label>
         <input
           type="text"
           name="affiliation"
@@ -352,20 +354,6 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({
         />
         {errors.designation && (
           <p className="text-danger text-sm mt-1">{errors.designation}</p>
-        )}
-      </div>
-
-      <div className="mb-4">
-        <label className="block mb-2">Institute</label>
-        <input
-          type="text"
-          name="institute"
-          value={formData.institute}
-          onChange={onInputChange}
-          className="w-full p-2 border rounded"
-        />
-        {errors.institute && (
-          <p className="text-danger text-sm mt-1">{errors.institute}</p>
         )}
       </div>
 
@@ -446,25 +434,6 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({
         )}
       </div>
 
-      {/* Conference-specific Information */}
-      <div className="mb-4">
-        <label className="block mb-2">Registration Type</label>
-        <select
-          name="registrationType"
-          value={formData.registrationType}
-          onChange={onInputChange}
-          required
-          className="w-full p-2 border rounded"
-        >
-          <option value="Student">Student</option>
-          <option value="Professional">Professional</option>
-          <option value="Academician">Academician</option>
-        </select>
-        {errors.registrationType && (
-          <p className="text-danger text-sm mt-1">{errors.registrationType}</p>
-        )}
-      </div>
-
       <div className="mb-4">
         <label className="flex items-center">
           <input
@@ -476,28 +445,6 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({
           />
           Need Accommodation
         </label>
-      </div>
-
-      <div className="mb-4">
-        <label className="block mb-2">Dietary Requirements</label>
-        <input
-          type="text"
-          name="dietaryRequirements"
-          value={formData.dietaryRequirements}
-          onChange={onInputChange}
-          className="w-full p-2 border rounded"
-        />
-      </div>
-
-      <div className="mb-4">
-        <label className="block mb-2">Special Assistance</label>
-        <input
-          type="text"
-          name="specialAssistance"
-          value={formData.specialAssistance}
-          onChange={onInputChange}
-          className="w-full p-2 border rounded"
-        />
       </div>
     </form>
   );

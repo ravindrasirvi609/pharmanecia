@@ -90,7 +90,6 @@ const HomePage = () => {
         </div>
       </div>
       <PharmaneciaScroll />
-
       <AboutConference />
       <SpeakersHighlights />
       <ScheduleOverview />
