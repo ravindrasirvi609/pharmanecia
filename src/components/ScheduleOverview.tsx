@@ -51,7 +51,7 @@ const ScheduleOverview = () => {
 
         <div className="text-center">
           <Link
-            href="/schedule"
+            href="/Schedule"
             className="text-lg text-accent underline hover:text-secondary"
           >
             View Detailed Program
