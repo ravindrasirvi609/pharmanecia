@@ -54,7 +54,7 @@ const ClientHomePage = () => {
           </p>
           <p className="text-lg mb-8 text-primary">
             Organized by Department of Pharmaceutical Chemistry, JSS College of
-            Pharmacy, Ooty in Hosted with Operant Pharmacy Federation
+            Pharmacy, Ooty Hosted by, Operant Pharmacy Federation
           </p>
           <div className="space-x-4">
             <Link href="/Registration">

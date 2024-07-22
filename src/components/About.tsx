@@ -78,11 +78,12 @@ const AboutConference: React.FC = () => {
             The International Research Conference on &quot;Recent Advances in
             Artificial Intelligence and Machine Learning Driven Drug
             Discovery&quot; is an esteemed event organized by the Department of
-            Pharmaceutical Chemistry at JSS College of Pharmacy, Ooty. This
-            conference aims to explore the cutting-edge intersection of AI,
-            machine learning, and drug discovery, bringing together a diverse
-            group of researchers, data scientists, pharmaceutical experts, and
-            students to engage in groundbreaking discussions and collaborations.
+            Pharmaceutical Chemistry at JSS College of Pharmacy, Ooty and Hosted
+            by Operant Pharmacy Federation. This conference aims to explore the
+            cutting-edge intersection of AI, machine learning, and drug
+            discovery, bringing together a diverse group of researchers, data
+            scientists, pharmaceutical experts, and students to engage in
+            groundbreaking discussions and collaborations.
           </p>
         </div>
 

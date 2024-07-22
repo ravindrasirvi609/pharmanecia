@@ -15,7 +15,7 @@ const Navbar = () => {
       <div className="container mx-auto flex justify-between items-center">
         <Link href={"/"}>
           <h1 className="font-black text-3xl text-black my-auto mt-4">
-            PHARMANECIA
+            PHARMANECIA 4.E
           </h1>
         </Link>
 

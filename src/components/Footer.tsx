@@ -1,7 +1,40 @@
+"use client";
 import Link from "next/link";
-import React from "react";
+import React, { useState } from "react";
 
 const Footer = () => {
+  const [email, setEmail] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const [message, setMessage] = useState("");
+
+  const handleSubscribe = async (e: { preventDefault: () => void }) => {
+    e.preventDefault();
+    setIsLoading(true);
+    setMessage("");
+
+    try {
+      const response = await fetch("/api/subscribe", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        setMessage("Successfully subscribed to the newsletter!");
+        setEmail("");
+      } else {
+        setMessage(data.message || "An error occurred. Please try again.");
+      }
+    } catch (error) {
+      setMessage("An error occurred. Please try again.");
+    } finally {
+      setIsLoading(false);
+    }
+  };
   return (
     <footer className="bg-primary text-light px-6 py-12 mt-auto">
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -30,40 +63,97 @@ const Footer = () => {
         <div>
           <h2 className="text-xl font-bold mb-4">Follow Us</h2>
           <div className="flex space-x-4">
-            <a href="#" className="text-light hover:text-accent">
-              <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M22.675 0h-21.35c-.733 0-1.325.592-1.325 1.325v21.351c0 .733.592 1.325 1.325 1.325h11.525v-9.294h-3.123v-3.622h3.123v-2.67c0-3.1 1.893-4.787 4.656-4.787 1.325 0 2.463.099 2.794.143v3.24l-1.917.001c-1.505 0-1.796.716-1.796 1.764v2.309h3.59l-.467 3.622h-3.123v9.294h6.116c.733 0 1.325-.592 1.325-1.325v-21.351c0-.733-.592-1.325-1.325-1.325z" />
+            <Link
+              href="https://www.facebook.com/your-page"
+              className="text-light hover:text-accent"
+            >
+              <svg
+                className="w-6 h-6"
+                fill="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
               </svg>
-            </a>
-            <a href="#" className="text-light hover:text-accent">
-              <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M23.994 4.569c-.883.392-1.833.656-2.828.775 1.016-.608 1.794-1.572 2.163-2.723-.951.564-2.005.974-3.127 1.196-.897-.956-2.173-1.555-3.591-1.555-2.717 0-4.92 2.203-4.92 4.919 0 .385.044.76.127 1.121-4.088-.205-7.715-2.164-10.141-5.144-.424.725-.666 1.562-.666 2.456 0 1.696.865 3.191 2.182 4.065-.803-.026-1.56-.246-2.222-.614v.062c0 2.367 1.684 4.342 3.918 4.788-.411.111-.844.171-1.292.171-.316 0-.623-.03-.923-.086.623 1.945 2.432 3.36 4.575 3.398-1.675 1.313-3.786 2.096-6.078 2.096-.394 0-.785-.023-1.17-.067 2.166 1.389 4.738 2.202 7.507 2.202 9.007 0 13.934-7.459 13.934-13.934 0-.211 0-.422-.015-.632.959-.693 1.79-1.558 2.448-2.548l-.047-.02z" />
+            </Link>
+            <Link
+              href="https://www.linkedin.com/your-profile"
+              className="text-light hover:text-accent"
+            >
+              <svg
+                className="w-6 h-6"
+                fill="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
               </svg>
-            </a>
-            <a href="#" className="text-light hover:text-accent">
-              <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M12.004 0.227c-6.623 0-12.003 5.383-12.003 12.007 0 5.307 3.439 9.77 8.192 11.351.599.109.82-.263.82-.58 0-.286-.011-1.247-.017-2.265-3.337.727-4.042-1.616-4.042-1.616-.545-1.378-1.333-1.746-1.333-1.746-1.09-.746.084-.731.084-.731 1.202.085 1.833 1.234 1.833 1.234 1.07 1.835 2.805 1.305 3.492.998.108-.775.418-1.306.761-1.607-2.665-.304-5.466-1.335-5.466-5.931 0-1.31.469-2.382 1.235-3.222-.124-.303-.536-1.521.117-3.171 0 0 1.008-.321 3.303 1.229.957-.267 1.983-.401 3.005-.406 1.02.005 2.048.139 3.008.406 2.29-1.55 3.295-1.229 3.295-1.229.656 1.65.244 2.868.119 3.171.77.84 1.232 1.912 1.232 3.222 0 4.61-2.804 5.623-5.477 5.921.43.37.814 1.1.814 2.22 0 1.602-.015 2.898-.015 3.293 0 .321.217.696.825.579 4.757-1.581 8.195-6.044 8.195-11.351 0-6.624-5.38-12.007-12.003-12.007z" />
+            </Link>
+            <Link
+              href="https://wa.me/your-whatsapp-number"
+              className="text-light hover:text-accent"
+            >
+              <svg
+                className="w-6 h-6"
+                fill="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z" />
               </svg>
-            </a>
+            </Link>
           </div>
         </div>
 
         {/* Newsletter Signup */}
         <div>
           <h2 className="text-xl font-bold mb-4">Newsletter Signup</h2>
-          <form>
+          <form onSubmit={handleSubscribe}>
             <input
               type="email"
               placeholder="Enter your email"
-              className="w-full p-2 mb-4 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-accent"
+              className="w-full p-2 mb-4 rounded-md border text-black border-gray-300 focus:outline-none focus:ring-2 focus:ring-accent"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
             />
             <button
               type="submit"
-              className="w-full bg-accent text-white p-2 rounded-md hover:bg-secondary transition duration-300"
+              className="w-full bg-accent text-white p-2 rounded-md hover:bg-secondary transition duration-300 flex items-center justify-center"
+              disabled={isLoading}
             >
-              Subscribe
+              {isLoading ? (
+                <svg className="animate-spin h-5 w-5 mr-3" viewBox="0 0 24 24">
+                  <circle
+                    className="opacity-25"
+                    cx="12"
+                    cy="12"
+                    r="10"
+                    stroke="currentColor"
+                    strokeWidth="4"
+                  ></circle>
+                  <path
+                    className="opacity-75"
+                    fill="currentColor"
+                    d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                  ></path>
+                </svg>
+              ) : (
+                "Subscribe"
+              )}
             </button>
           </form>
+          {message && (
+            <p
+              className={`mt-2 text-sm ${
+                message.includes("Successfully")
+                  ? "text-green-400"
+                  : "text-red-400"
+              }`}
+            >
+              {message}
+            </p>
+          )}
         </div>
 
         {/* Legal Links */}
@@ -88,10 +178,10 @@ const Footer = () => {
             </li>
             <li>
               <Link
-                href="/CookiePolicy"
+                href="/RefundPolicy"
                 className="text-light hover:underline mt-2 block"
               >
-                Cookie Policy
+                Refund Policy
               </Link>
             </li>
           </ul>
