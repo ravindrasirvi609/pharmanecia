@@ -45,16 +45,14 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
     }
 
     // If we found a registration but not an abstract, try to find the corresponding abstract
-    // if (registration && !abstract) {
-    //   abstract = await AbstractModel.findOne({
-    //     registrationCode: registration.registrationCode,
-    //   }).lean();
-    //   console.log("abstract----3", abstract);
-    // }
+    if (registration && !abstract) {
+      abstract = await AbstractModel.findOne({
+        registrationCode: registration.registrationCode,
+      }).lean();
+      console.log("abstract----3", abstract);
+    }
 
     // If we found an abstract but not a registration, try to find the corresponding registration
-
-    console.log("abstract.registrationCode", abstract.registrationCode);
 
     if (abstract && !registration && abstract.registrationCode) {
       registration = await RegistrationModel.findOne({
