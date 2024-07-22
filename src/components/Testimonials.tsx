@@ -19,7 +19,9 @@ const Testimonials = () => {
                 were incredibly insightful, and I made valuable connections with
                 industry experts.&quot;
               </p>
-              <p className="mt-4 text-right font-semibold">- Dr. John Doe</p>
+              <p className="mt-4 text-right font-semibold">
+                - Shivina Bhatia, BITS Pilani
+              </p>
             </div>
             {/* Review 2 */}
             <div className="bg-white shadow-lg rounded-lg p-6">
@@ -28,7 +30,9 @@ const Testimonials = () => {
                 research. The workshops and discussions were highly relevant and
                 well-organized.&quot;
               </p>
-              <p className="mt-4 text-right font-semibold">- Dr. Jane Smith</p>
+              <p className="mt-4 text-right font-semibold">
+                - Shruti Morankar, MET College of Pharmacy, Nashik
+              </p>
             </div>
             {/* Review 3 */}
             <div className="bg-white shadow-lg rounded-lg p-6">
@@ -38,7 +42,8 @@ const Testimonials = () => {
                 enriching experience.&quot;
               </p>
               <p className="mt-4 text-right font-semibold">
-                - Dr. Emily Johnson
+                - Apurva Wankhede School of Pharmacy, Dr. Vishwanath Karad MIT
+                World Peace University, Pune
               </p>
             </div>
           </div>

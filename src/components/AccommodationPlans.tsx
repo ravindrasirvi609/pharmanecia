@@ -9,7 +9,7 @@ interface AccommodationPlan {
 const accommodationPlans: AccommodationPlan[] = [
   {
     type: "Single Occupancy",
-    price: 150,
+    price: 700,
     features: [
       "Private room",
       "En-suite bathroom",
@@ -19,7 +19,7 @@ const accommodationPlans: AccommodationPlan[] = [
   },
   {
     type: "Double Occupancy",
-    price: 200,
+    price: 1200,
     features: [
       "Shared room for two",
       "En-suite bathroom",
@@ -29,7 +29,7 @@ const accommodationPlans: AccommodationPlan[] = [
   },
   {
     type: "Dormitory",
-    price: 50,
+    price: 300,
     features: [
       "Shared room for 4-6 people",
       "Shared bathroom",
