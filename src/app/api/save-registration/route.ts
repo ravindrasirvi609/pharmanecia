@@ -89,7 +89,7 @@ export async function POST(req: NextRequest) {
     // Use findByIdAndUpdate with the `new` option to return the updated document
     const updatedRegistration = await RegistrationModel.findByIdAndUpdate(
       savedRegistration._id,
-      { qrCodeUrl },
+      registrationUpdate,
       { new: true }
     );
 
