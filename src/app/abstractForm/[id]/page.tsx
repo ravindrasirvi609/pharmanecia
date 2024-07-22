@@ -357,10 +357,7 @@ const AbstractForm: React.FC<StudentPageProps> = ({ params }) => {
                       label="Date of Birth"
                       value={registration.dob && formatDate(registration.dob)}
                     />
-                    <InfoItem
-                      label="Institute"
-                      value={registration.institute}
-                    />
+
                     <InfoItem
                       label="Payment Status"
                       value={registration.paymentStatus}
