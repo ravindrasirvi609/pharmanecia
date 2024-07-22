@@ -1,4 +1,5 @@
 import React from "react";
+import AccommodationPlans from "./AccommodationPlans";
 
 const VenueAccommodations = () => {
   return (
@@ -32,45 +33,7 @@ const VenueAccommodations = () => {
         </div>
 
         {/* Accommodation Information */}
-        <div>
-          <h2 className="text-3xl font-semibold mb-6 text-secondary text-center">
-            Accommodation Information
-          </h2>
-          <p className="text-lg leading-relaxed text-justify mb-4">
-            We recommend the following hotels for your stay during the
-            conference. These hotels offer comfortable accommodations and are
-            conveniently located near the conference venue.
-          </p>
-          <ul className="list-disc list-inside mb-4 text-lg text-justify">
-            <li>
-              <strong>Hotel A:</strong> Located 1 km from the venue, Hotel A
-              offers luxurious rooms and amenities.
-              <a href="#" className="text-accent ml-2">
-                Visit Website
-              </a>
-            </li>
-            <li className="mt-2">
-              <strong>Hotel B:</strong> Situated 2 km from the venue, Hotel B
-              provides affordable accommodations with excellent service.
-              <a href="#" className="text-accent ml-2">
-                Visit Website
-              </a>
-            </li>
-            <li className="mt-2">
-              <strong>Hotel C:</strong> 3 km from the venue, Hotel C offers a
-              range of facilities including a gym and a restaurant.
-              <a href="#" className="text-accent ml-2">
-                Visit Website
-              </a>
-            </li>
-          </ul>
-          <p className="text-lg leading-relaxed text-justify mb-4">
-            For travel information, Ooty is well connected by road and rail. The
-            nearest airport is Coimbatore International Airport, which is
-            approximately 90 km from the conference venue. Regular taxi and bus
-            services are available from the airport to Ooty.
-          </p>
-        </div>
+        <AccommodationPlans />
       </div>
     </div>
   );
