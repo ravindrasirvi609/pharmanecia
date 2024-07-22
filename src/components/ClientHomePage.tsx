@@ -71,8 +71,9 @@ const ClientHomePage = () => {
           </div>
         </div>
       </div>
-      <PharmaneciaScroll />
       <AboutConference />
+      <PharmaneciaScroll />
+
       <SpeakersHighlights />
       <ScheduleOverview />
       <SponsorsPartners />
