@@ -229,19 +229,29 @@ export const designationOptions = [
 
 export const plans: Plan[] = [
   {
-    name: "Basic Plan",
+    name: "Student Registration",
     description: "Includes entry to all sessions and conference kit.",
     price: 1,
   },
   {
-    name: "Standard Plan",
+    name: "Reasearch Scholar/Feculty Registration",
     description: "Includes entry to all sessions, conference kit, and lunch.",
-    price: 150,
+    price: 2000,
   },
   {
-    name: "Premium Plan",
+    name: "Industry Professional Registration",
     description:
       "Includes entry to all sessions, conference kit, lunch, and accommodation.",
-    price: 200,
+    price: 3000,
+  },
+  {
+    name: "OPF/OBRF Member Registration",
+    description: "Includes entry to all sessions and conference kit.",
+    price: 1200,
+  },
+  {
+    name: "International Delegate Registration",
+    description: "Includes entry to all sessions, conference kit, and lunch.",
+    price: 10000,
   },
 ];

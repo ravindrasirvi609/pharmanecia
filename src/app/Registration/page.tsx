@@ -9,13 +9,13 @@ const Registration = () => {
 
         <div className="mb-12">
           <p className="text-lg leading-relaxed text-justify mb-4">
-            Registrations For Pharmanecia 4.E will start from 1st August 2024.
+            Registrations For Pharmanecia 4.E starting from 1st August 2024.
           </p>
           <h2 className="text-3xl font-semibold mb-4 text-secondary">
             Registration Option
           </h2>
           <p className="text-lg leading-relaxed text-justify mb-4">
-            Online Registration starts from 1st August 2024. Registration is
+            Online Registration starting from 1st August 2024. Registration is
             compulsory to participate in Pharmanecia 4.E. Online: Candidates
             have to register online by filling the form at our website.
           </p>
@@ -49,8 +49,8 @@ const Registration = () => {
           <p className="text-lg leading-relaxed text-justify mb-4">
             Accommodation will be arranged on request in dormitories, hotels on
             additional charges. For more details, write to us at:
-            <a href="mailto:pharmanecia@gmail.com" className="text-accent ml-2">
-              pharmanecia@gmail.com
+            <a href="mailto:info@pharmanecia.org" className="text-accent ml-2">
+              info@pharmanecia.org
             </a>
           </p>
         </div>

@@ -122,7 +122,7 @@ const Sponsors = () => {
                 Includes premier booth space, keynote speaking opportunity, logo
                 on all materials, and more.
               </p>
-              <p className="text-lg font-semibold mb-6">10,000 ₹</p>
+              <p className="text-lg font-semibold mb-6">5,00,000 ₹</p>
               <Link href="/Sponsors/SponsorForm">
                 <button className="bg-accent text-light px-6 py-2 rounded-md hover:bg-secondary transition duration-300">
                   Become a Platinum Sponsor
@@ -138,7 +138,7 @@ const Sponsors = () => {
               <p className="text-lg mb-4">
                 Includes premium booth space, logo on materials, and more.
               </p>
-              <p className="text-lg font-semibold mb-6">7,500 ₹</p>
+              <p className="text-lg font-semibold mb-6">4,00,000 ₹</p>
               <Link href="/Sponsors/SponsorForm">
                 <button className="bg-accent text-light px-6 py-2 rounded-md hover:bg-secondary transition duration-300">
                   Become a Gold Sponsor
@@ -154,7 +154,7 @@ const Sponsors = () => {
               <p className="text-lg mb-4">
                 Includes standard booth space, logo on materials, and more.
               </p>
-              <p className="text-lg font-semibold mb-6">5,000 ₹</p>
+              <p className="text-lg font-semibold mb-6">3,00,000 ₹</p>
               <Link href="/Sponsors/SponsorForm">
                 <button className="bg-accent text-light px-6 py-2 rounded-md hover:bg-secondary transition duration-300">
                   Become a Silver Sponsor
@@ -170,7 +170,7 @@ const Sponsors = () => {
               <p className="text-lg mb-4">
                 Includes booth space, logo on materials, and more.
               </p>
-              <p className="text-lg font-semibold mb-6">2,500 ₹</p>
+              <p className="text-lg font-semibold mb-6">2,50,000 ₹</p>
               <Link href="/Sponsors/SponsorForm">
                 <button className="bg-accent text-light px-6 py-2 rounded-md hover:bg-secondary transition duration-300">
                   Become a Bronze Sponsor
@@ -186,7 +186,7 @@ const Sponsors = () => {
               <p className="text-lg mb-4">
                 Includes logo on materials and website.
               </p>
-              <p className="text-lg font-semibold mb-6">1,000 ₹</p>
+              <p className="text-lg font-semibold mb-6">1,00,000 ₹</p>
               <Link href="/Sponsors/SponsorForm">
                 <button className="bg-accent text-light px-6 py-2 rounded-md hover:bg-secondary transition duration-300">
                   Become a Supporter Sponsor
