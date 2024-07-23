@@ -21,6 +21,7 @@ export interface RegistrationFormData {
   dietaryRequirements: string;
   specialAssistance: string;
   abstractId: string | null;
+  includeGalaDinner: boolean;
 }
 
 export interface RegistrationInfo {

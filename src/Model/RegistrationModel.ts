@@ -48,6 +48,7 @@ const registrationSchema = new Schema({
   needAccommodation: { type: Boolean, default: false },
   dietaryRequirements: { type: String },
   specialAssistance: { type: String },
+  includeGalaDinner: { type: Boolean, default: false },
 
   // Registration Status
   registrationStatus: {

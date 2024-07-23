@@ -33,6 +33,7 @@ export async function POST(req: NextRequest) {
       needAccommodation,
       dietaryRequirements,
       specialAssistance,
+      includeGalaDinner,
     } = body;
 
     const newRegistration = new RegistrationModel({
@@ -58,6 +59,7 @@ export async function POST(req: NextRequest) {
       needAccommodation,
       dietaryRequirements,
       specialAssistance,
+      includeGalaDinner,
     });
 
     const savedRegistration = await newRegistration.save();

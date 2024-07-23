@@ -14,6 +14,7 @@ const RegistrationPlans: React.FC = () => {
   const [selectedPlan, setSelectedPlan] = useState<Plan | null>(null);
   const [showModal, setShowModal] = useState(false);
   const [formErrors, setFormErrors] = useState<{ [key: string]: string }>({});
+  const [includeGalaDinner, setIncludeGalaDinner] = useState(false);
 
   const [formData, setFormData] = useState<RegistrationFormData>({
     email: "",
@@ -38,6 +39,7 @@ const RegistrationPlans: React.FC = () => {
     gender: "Male",
     abstractSubmitted: false,
     abstractId: null,
+    includeGalaDinner: false,
   });
 
   const initializeRazorpay = () => {
@@ -59,6 +61,10 @@ const RegistrationPlans: React.FC = () => {
       [name]:
         type === "checkbox" ? (e.target as HTMLInputElement).checked : value,
     }));
+  };
+
+  const handleGalaDinnerChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setIncludeGalaDinner(e.target.checked);
   };
 
   const handleImageUpload = async (file: File) => {
@@ -172,6 +178,7 @@ const RegistrationPlans: React.FC = () => {
     }
   };
 
+  let totalAmount = 0;
   const makePayment = async (plan: Plan, registration: any) => {
     const res = await initializeRazorpay();
 
@@ -181,13 +188,16 @@ const RegistrationPlans: React.FC = () => {
     }
 
     try {
+      // Calculate the total amount based on the selected plan and gala dinner
+      totalAmount = includeGalaDinner ? plan.price + 1000 : plan.price;
+
       // Create Razorpay order
       const orderResponse = await fetch("/api/razorpay-order", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ amount: plan.price }),
+        body: JSON.stringify({ amount: totalAmount }),
       });
 
       if (!orderResponse.ok) {
@@ -288,6 +298,8 @@ const RegistrationPlans: React.FC = () => {
                 onInputChange={handleInputChange}
                 onImageUpload={handleImageUpload}
                 errors={formErrors}
+                includeGalaDinner={includeGalaDinner}
+                handleGalaDinnerChange={handleGalaDinnerChange}
               />
               {submitError && (
                 <div className="mb-4 p-3 bg-red-100 border border-red-400 text-red-700 rounded">
@@ -327,7 +339,13 @@ const RegistrationPlans: React.FC = () => {
                     Submitting...
                   </div>
                 ) : (
-                  "Register and Pay"
+                  "Register and Pay (₹" +
+                  `${
+                    includeGalaDinner && selectedPlan
+                      ? selectedPlan.price + 1000
+                      : selectedPlan?.price
+                  }` +
+                  ")"
                 )}
               </button>
               <button

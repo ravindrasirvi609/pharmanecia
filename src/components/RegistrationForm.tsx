@@ -12,6 +12,8 @@ interface RegistrationFormProps {
   ) => void;
   onImageUpload: (file: File) => Promise<void>;
   errors: { [key: string]: string };
+  includeGalaDinner: boolean;
+  handleGalaDinnerChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 const RegistrationForm: React.FC<RegistrationFormProps> = ({
@@ -19,9 +21,10 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({
   onInputChange,
   onImageUpload,
   errors,
+  includeGalaDinner,
+  handleGalaDinnerChange,
 }) => {
   const {
-    uploadFile,
     uploadProgress,
     isUploading,
     error: uploadError,
@@ -305,6 +308,20 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({
           Kindly enter correct Date of Birth to receive E-Certificate of
           conference on your Digilocker account linked with your Aadhar.
         </p>
+      </div>
+
+      <div className="mb-6">
+        <label className="flex items-center mb-2">
+          <input
+            type="checkbox"
+            name="includeGalaDinner"
+            checked={includeGalaDinner}
+            onChange={handleGalaDinnerChange}
+            value={includeGalaDinner ? "true" : "false"}
+            className="mr-2"
+          />
+          Include Networking Cum Gala Dinner (Additional ₹1000)
+        </label>
       </div>
 
       <div className="mb-4">
