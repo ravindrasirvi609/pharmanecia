@@ -366,7 +366,7 @@ const AbstractForm: React.FC<StudentPageProps> = ({ params }) => {
                       label="Payment Amount"
                       value={
                         registration.paymentAmount !== undefined
-                          ? `₹${registration.paymentAmount}`
+                          ? `${registration.paymentAmount}₹`
                           : undefined
                       }
                     />

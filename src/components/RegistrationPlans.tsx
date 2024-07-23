@@ -339,13 +339,13 @@ const RegistrationPlans: React.FC = () => {
                     Submitting...
                   </div>
                 ) : (
-                  "Register and Pay (₹" +
+                  "Register and Pay (" +
                   `${
                     includeGalaDinner && selectedPlan
                       ? selectedPlan.price + 1000
                       : selectedPlan?.price
                   }` +
-                  ")"
+                  "₹)"
                 )}
               </button>
               <button
