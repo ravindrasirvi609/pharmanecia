@@ -15,6 +15,7 @@ interface Abstract {
   registrationCode: string;
   Status: string;
   abstractFileUrl: string;
+  presentationType: string;
 }
 
 interface Filters {
@@ -98,6 +99,58 @@ const RejectPopup = ({
   );
 };
 
+const PresentationTypePopup = ({
+  isOpen,
+  onClose,
+  onSelect,
+  abstractId,
+}: {
+  isOpen: boolean;
+  onClose: () => void;
+  onSelect: (abstractId: string, presentationType: string) => void;
+  abstractId: string;
+}) => {
+  const [selectedType, setSelectedType] = useState<string>("");
+
+  return isOpen ? (
+    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+      <div className="bg-white p-6 rounded-lg shadow-lg w-96">
+        <h2 className="text-xl font-bold mb-4">Select Presentation Type</h2>
+        <select
+          className="w-full p-2 border rounded mb-4"
+          value={selectedType}
+          onChange={(e) => setSelectedType(e.target.value)}
+        >
+          <option value="">Select a type</option>
+          <option value="Oral">Oral</option>
+          <option value="E-Poster">E-Poster</option>
+        </select>
+        <div className="flex justify-end">
+          <button
+            className="bg-gray-300 hover:bg-gray-400 text-black font-bold py-2 px-4 rounded mr-2"
+            onClick={onClose}
+          >
+            Cancel
+          </button>
+          <button
+            className="bg-[#034C8C] hover:bg-[#022873] text-white font-bold py-2 px-4 rounded"
+            onClick={() => {
+              if (selectedType) {
+                onSelect(abstractId, selectedType);
+                onClose();
+              } else {
+                toast.error("Please select a presentation type");
+              }
+            }}
+          >
+            Confirm
+          </button>
+        </div>
+      </div>
+    </div>
+  ) : null;
+};
+
 export function AbstractList() {
   const [abstracts, setAbstracts] = useState<Abstract[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
@@ -113,6 +166,13 @@ export function AbstractList() {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [rejectPopup, setRejectPopup] = useState<{
+    isOpen: boolean;
+    abstractId: string | null;
+  }>({
+    isOpen: false,
+    abstractId: null,
+  });
+  const [presentationTypePopup, setPresentationTypePopup] = useState<{
     isOpen: boolean;
     abstractId: string | null;
   }>({
@@ -138,26 +198,25 @@ export function AbstractList() {
       );
     }
     filtered = filtered.sort((a, b) => {
-      if (a[filters.sortBy] < b[filters.sortBy])
-        return filters.sortOrder === "asc" ? -1 : 1;
-      if (a[filters.sortBy] > b[filters.sortBy])
-        return filters.sortOrder === "asc" ? 1 : -1;
+      if (a[filters.sortBy] && b[filters.sortBy]) {
+        if (a[filters.sortBy] < b[filters.sortBy])
+          return filters.sortOrder === "asc" ? -1 : 1;
+        if (a[filters.sortBy] > b[filters.sortBy])
+          return filters.sortOrder === "asc" ? 1 : -1;
+      }
       return 0;
     });
     return filtered;
   }, [abstracts, filters]);
 
-  const fetchAbstracts = async (page: number) => {
+  const fetchAbstracts = async () => {
     try {
       setLoading(true);
-      const response = await fetch(
-        `/api/abstractList?page=${page}&limit=${itemsPerPage}`
-      );
+      const response = await fetch(`/api/abstractList`);
       const data = await response.json();
 
       if (response.ok) {
         setAbstracts(data.abstracts);
-        setTotalPages(data.totalPages);
       } else {
         throw new Error(data.message);
       }
@@ -170,9 +229,8 @@ export function AbstractList() {
   };
 
   useEffect(() => {
-    fetchAbstracts(currentPage);
-  }, [currentPage]);
-
+    fetchAbstracts();
+  }, []);
   const handleDownload = (abstract: Abstract) => {
     window.open(abstract.abstractFileUrl, "_blank");
   };
@@ -180,15 +238,25 @@ export function AbstractList() {
   const handleStatusUpdate = async (abstract: Abstract, newStatus: string) => {
     if (newStatus === "Rejected") {
       setRejectPopup({ isOpen: true, abstractId: abstract._id });
+    } else if (newStatus === "Accepted") {
+      setPresentationTypePopup({ isOpen: true, abstractId: abstract._id });
     } else {
       await updateStatus(abstract._id, newStatus);
     }
   };
 
+  const handlePresentationTypeSelect = async (
+    abstractId: string,
+    presentationType: string
+  ) => {
+    await updateStatus(abstractId, "Accepted", undefined, presentationType);
+  };
+
   const updateStatus = async (
     abstractId: string,
     newStatus: string,
-    comment?: string
+    comment?: string,
+    presentationType?: string
   ) => {
     try {
       const response = await fetch(`/api/updateStatus?id=${abstractId}`, {
@@ -196,13 +264,24 @@ export function AbstractList() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ status: newStatus, _id: abstractId, comment }),
+        body: JSON.stringify({
+          status: newStatus,
+          _id: abstractId,
+          comment,
+          presentationType,
+        }),
       });
 
       if (response.ok) {
         setAbstracts((prevAbstracts) =>
           prevAbstracts.map((a) =>
-            a._id === abstractId ? { ...a, Status: newStatus } : a
+            a._id === abstractId
+              ? {
+                  ...a,
+                  Status: newStatus,
+                  presentationType: presentationType || a.presentationType,
+                }
+              : a
           )
         );
         toast.success(`Status updated to ${newStatus}`);
@@ -501,6 +580,16 @@ export function AbstractList() {
           rejectComment={rejectComment}
           setRejectComment={setRejectComment}
           updateStatus={updateStatus}
+        />
+      )}
+      {presentationTypePopup.isOpen && presentationTypePopup.abstractId && (
+        <PresentationTypePopup
+          isOpen={presentationTypePopup.isOpen}
+          onClose={() =>
+            setPresentationTypePopup({ isOpen: false, abstractId: null })
+          }
+          onSelect={handlePresentationTypeSelect}
+          abstractId={presentationTypePopup.abstractId}
         />
       )}
     </div>

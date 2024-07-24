@@ -7,7 +7,7 @@ connect();
 
 export async function PATCH(req: NextRequest) {
   try {
-    const { status, _id, comment } = await req.json();
+    const { status, _id, comment, presentationType } = await req.json();
 
     if (!_id || !status) {
       console.error("Missing _id or status in the request");
@@ -27,16 +27,29 @@ export async function PATCH(req: NextRequest) {
       );
     }
 
-    // Update the status and add comment if status is Rejected
+    // Update the status
     abstract.Status = status;
+
+    // Add comment if status is Rejected
     if (status === "Rejected") {
       abstract.rejectionComment = comment;
     }
 
-    // If the status is "Accepted", generate and set the AbstractCode
-    if (status === "Accepted" && !abstract.AbstractCode) {
-      const abstractCode = await generateAbstractCode(abstract.subject);
-      abstract.AbstractCode = abstractCode;
+    if (status === "Accepted") {
+      if (!abstract.AbstractCode) {
+        if (!presentationType) {
+          return NextResponse.json(
+            { message: "Presentation type is required for accepted abstracts" },
+            { status: 400 }
+          );
+        }
+        const abstractCode = await generateAbstractCode(
+          abstract.subject,
+          presentationType
+        );
+        abstract.AbstractCode = abstractCode;
+      }
+      abstract.presentationType = presentationType;
     }
 
     await abstract.save();
@@ -45,6 +58,7 @@ export async function PATCH(req: NextRequest) {
       _id: abstract._id,
       emailType: "UPDATE_STATUS",
     });
+
     return NextResponse.json({
       message: "Status updated successfully",
       abstract,
@@ -57,8 +71,10 @@ export async function PATCH(req: NextRequest) {
     );
   }
 }
-
-async function generateAbstractCode(subject: string): Promise<string> {
+async function generateAbstractCode(
+  subject: string,
+  presentationType: string
+): Promise<string> {
   const subjectCodes: { [key: string]: string } = {
     pharmaceuticalTechnology: "PT",
     medChem: "PC",
@@ -75,10 +91,12 @@ async function generateAbstractCode(subject: string): Promise<string> {
   };
 
   const subjectCode = subjectCodes[subject] || "XX";
+  const presentationPrefix = presentationType === "Oral" ? "O" : "E";
 
   const lastAbstract = await AbstractModel.findOne({
     subject: subject,
-    AbstractCode: { $regex: `^${subjectCode}` },
+    presentationType: presentationType,
+    AbstractCode: { $regex: `^${presentationPrefix}${subjectCode}` },
   }).sort({ AbstractCode: -1 });
 
   let sequenceNumber = 1;
@@ -90,5 +108,5 @@ async function generateAbstractCode(subject: string): Promise<string> {
 
   const paddedSequence = sequenceNumber.toString().padStart(3, "0");
 
-  return `${subjectCode}${paddedSequence}`;
+  return `${presentationPrefix}${subjectCode}${paddedSequence}`;
 }

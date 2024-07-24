@@ -22,6 +22,11 @@ const abstractSchema = new Schema({
   registrationCompleted: { type: Boolean, default: false },
   registrationCode: { type: String },
   articleType: { type: String },
+  presentationType: {
+    type: String,
+    enum: ["Oral", "E-Poster"],
+    default: null,
+  },
   createdAt: { type: Date, default: Date.now },
   updatedAt: { type: Date, default: Date.now },
 });
