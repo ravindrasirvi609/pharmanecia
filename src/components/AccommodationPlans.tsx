@@ -9,27 +9,17 @@ interface AccommodationPlan {
 const accommodationPlans: AccommodationPlan[] = [
   {
     type: "Single Occupancy",
-    price: 700,
-    features: [
-      "Private room",
-      "En-suite bathroom",
-      "Complimentary breakfast",
-      "Wi-Fi",
-    ],
+    price: 1770,
+    features: ["Private room", "En-suite bathroom", "Wi-Fi"],
   },
   {
     type: "Double Occupancy",
-    price: 1200,
-    features: [
-      "Shared room for two",
-      "En-suite bathroom",
-      "Complimentary breakfast",
-      "Wi-Fi",
-    ],
+    price: 900,
+    features: ["Shared room for two", "En-suite bathroom", "Wi-Fi"],
   },
   {
     type: "Dormitory",
-    price: 300,
+    price: 590,
     features: [
       "Shared room for 4-6 people",
       "Shared bathroom",
@@ -57,10 +47,13 @@ const AccommodationPlans: React.FC = () => {
                   {plan.type}
                 </h3>
                 <p className="mt-4 text-4xl font-extrabold text-[#D94814] text-center">
-                  {plan.price} ₹
+                  ₹ {plan.price}
                   <span className="text-base font-medium text-[#CACACA]">
                     /night
                   </span>
+                  <p className="text-base font-medium text-[#050505]">
+                    Including GST
+                  </p>
                 </p>
                 <ul className="mt-6 space-y-4">
                   {plan.features.map((feature, index) => (
