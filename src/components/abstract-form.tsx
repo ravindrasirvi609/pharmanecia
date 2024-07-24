@@ -144,6 +144,7 @@ export function AbstractForm() {
       formData.append("city", city);
       formData.append("state", state);
       formData.append("pincode", pincode);
+      formData.append("articleType", articleType);
 
       try {
         const response = await axios.post("/api/submitAbstract", formData, {
