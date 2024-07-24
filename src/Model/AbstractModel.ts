@@ -21,7 +21,7 @@ const abstractSchema = new Schema({
   Status: { type: String, default: "Pending" },
   registrationCompleted: { type: Boolean, default: false },
   registrationCode: { type: String },
-
+  articleType: { type: String },
   createdAt: { type: Date, default: Date.now },
   updatedAt: { type: Date, default: Date.now },
 });

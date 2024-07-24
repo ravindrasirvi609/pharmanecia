@@ -32,6 +32,7 @@ export async function POST(req: NextRequest) {
     const city = formData.get("city") as string;
     const state = formData.get("state") as string;
     const pincode = formData.get("pincode") as string;
+    const articleType = formData.get("articleType") as string;
 
     if (
       !email ||
@@ -44,7 +45,8 @@ export async function POST(req: NextRequest) {
       !address ||
       !city ||
       !state ||
-      !pincode
+      !pincode ||
+      !articleType
     ) {
       return NextResponse.json(
         { message: "All required fields must be provided" },
@@ -85,6 +87,7 @@ export async function POST(req: NextRequest) {
       pincode,
       qrCodeUrl,
       temporyAbstractCode,
+      articleType,
     };
 
     const newAbstract = new AbstractModel(abstractData);

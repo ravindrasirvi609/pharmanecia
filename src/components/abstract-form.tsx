@@ -19,6 +19,7 @@ interface Errors {
   city?: string;
   state?: string;
   pincode?: string;
+  articleType?: string;
 }
 
 export function AbstractForm() {
@@ -45,6 +46,7 @@ export function AbstractForm() {
   const [errors, setErrors] = useState<Errors>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState("");
+  const [articleType, setArticleType] = useState("");
   const onDrop = useCallback((acceptedFiles: File[]) => {
     if (acceptedFiles[0]) {
       setAbstractFile(acceptedFiles[0]);
@@ -86,6 +88,9 @@ export function AbstractForm() {
     }
     if (!subject) {
       newErrors.subject = "Subject is required";
+    }
+    if (!articleType) {
+      newErrors.articleType = "Article Type is required";
     }
     if (!abstractFile) {
       newErrors.abstractFile = "Abstract file is required";
@@ -362,6 +367,28 @@ export function AbstractForm() {
           </select>
           {errors.subject && (
             <p className="text-[#D94814] text-sm mt-1">{errors.subject}</p>
+          )}
+        </div>
+
+        <div>
+          <label
+            htmlFor="articleType"
+            className="block text-sm font-medium text-[#022873] mb-1"
+          >
+            Article Type
+          </label>
+          <select
+            id="articleType"
+            className="w-full px-3 py-2 border border-[#CACACA] text-black rounded-md focus:outline-none focus:ring-2 focus:ring-[#034C8C]"
+            value={articleType}
+            onChange={(e) => setArticleType(e.target.value)}
+          >
+            <option value="">Select a Article Types</option>
+            <option value="reviewArticle">Review Article</option>
+            <option value="researchArticle">Research Article</option>
+          </select>
+          {errors.articleType && (
+            <p className="text-[#D94814] text-sm mt-1">{errors.articleType}</p>
           )}
         </div>
 
