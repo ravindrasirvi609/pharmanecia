@@ -484,7 +484,7 @@ export function AbstractList() {
                       <span
                         className={`py-1 px-3 rounded-full text-xs ${
                           abstract.Status === "Accepted"
-                            ? "bg-green-200 text-green-800"
+                            ? "bg-green text-white"
                             : abstract.Status === "Rejected"
                             ? "bg-[#D94814] text-white"
                             : "bg-yellow-200 text-yellow-800"
