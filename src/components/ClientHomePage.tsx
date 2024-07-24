@@ -13,6 +13,7 @@ import Testimonials from "@/components/Testimonials";
 import VenueAccommodations from "@/components/VenueAccommodations";
 import OpfModel from "@/components/opfModel";
 import PharmaneciaScroll from "@/components/pharmanecia";
+import AnimatedIcons from "./AnimatedIcons";
 
 gsap.registerPlugin(useGSAP);
 
@@ -80,6 +81,8 @@ const ClientHomePage = () => {
       <VenueAccommodations />
       <Testimonials />
       <LatestNews />
+      {/* <AnimatedIcons /> */}
+
       <OpfModel />
     </>
   );
