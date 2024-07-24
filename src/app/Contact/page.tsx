@@ -48,7 +48,7 @@ const Contact = () => {
     {
       title: "Organizing Secretary",
       name: "Dr. R. Kalirajan",
-      phone: "+91 91505 36567",
+      phone: "+91 99940 98087",
     },
     {
       title: "Registration Committee",

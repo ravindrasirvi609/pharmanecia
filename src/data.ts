@@ -234,7 +234,7 @@ export const plans: Plan[] = [
     price: 1,
   },
   {
-    name: "Reasearch Scholar/Feculty Registration",
+    name: "Reasearch Scholar/Faculty Registration",
     description: "Includes entry to all sessions, conference kit, and lunch.",
     price: 2000,
   },
