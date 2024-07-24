@@ -11,7 +11,7 @@ const Navbar = () => {
     setMenuOpen(!menuOpen);
   };
   return (
-    <header className="bg-white text-black px-4 py-6 pt-1 fixed w-full z-10 top-0">
+    <header className="bg-white text-black px-4 py-6 pt-1 fixed w-full z-50 top-0">
       <div className="container mx-auto flex justify-between items-center">
         <Link href={"/"}>
           <h1 className="font-black text-3xl text-black my-auto mt-4">
