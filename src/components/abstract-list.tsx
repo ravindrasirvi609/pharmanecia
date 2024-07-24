@@ -8,9 +8,11 @@ import "react-toastify/dist/ReactToastify.css";
 interface Abstract {
   _id: string;
   title: string;
+  subject: string;
   name: string;
   email: string;
   temporyAbstractCode: string;
+  AbstractCode: string;
   registrationCompleted: boolean;
   registrationCode: string;
   Status: string;
@@ -163,8 +165,7 @@ export function AbstractList() {
   });
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [isSortOpen, setIsSortOpen] = useState(false);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(1);
+
   const [rejectPopup, setRejectPopup] = useState<{
     isOpen: boolean;
     abstractId: string | null;
@@ -180,7 +181,6 @@ export function AbstractList() {
     abstractId: null,
   });
   const [rejectComment, setRejectComment] = useState("");
-  const itemsPerPage = 10;
 
   const filteredAbstracts = useMemo(() => {
     let filtered = abstracts;
@@ -300,28 +300,6 @@ export function AbstractList() {
       {[...Array(5)].map((_, index) => (
         <div key={index} className="h-16 bg-gray-300 rounded mb-2"></div>
       ))}
-    </div>
-  );
-
-  const Pagination = () => (
-    <div className="flex justify-center mt-4">
-      <button
-        onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
-        disabled={currentPage === 1}
-        className="px-4 py-2 mr-2 bg-[#034C8C] text-white rounded-md disabled:bg-gray-300"
-      >
-        Previous
-      </button>
-      <span className="px-4 py-2">
-        Page {currentPage} of {totalPages}
-      </span>
-      <button
-        onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
-        disabled={currentPage === totalPages}
-        className="px-4 py-2 ml-2 bg-[#034C8C] text-white rounded-md disabled:bg-gray-300"
-      >
-        Next
-      </button>
     </div>
   );
 
@@ -455,10 +433,12 @@ export function AbstractList() {
             <table className="min-w-full bg-white shadow-md rounded-lg overflow-hidden">
               <thead>
                 <tr className="bg-[#022873] text-white uppercase text-sm leading-normal">
-                  <th className="py-3 px-6 text-left">Title</th>
+                  <th className="py-3 px-6 text-left">Subject</th>
                   <th className="py-3 px-6 text-left">Author</th>
                   <th className="py-3 px-6 text-left">Email</th>
-                  <th className="py-3 px-6 text-left">Abstact Code</th>
+                  <th className="py-3 px-6 text-left">Tempory Abstact Code</th>
+                  <th className="py-3 px-6 text-left">Final Abstact Code</th>
+
                   <th className="py-3 px-6 text-left">Registration Status</th>
                   <th className="py-3 px-6 text-left">Registration Code</th>
                   <th className="py-3 px-6 text-left">Status</th>
@@ -472,12 +452,15 @@ export function AbstractList() {
                     className="border-b border-[#CACACA] hover:bg-[#F2F2F2] transition duration-300 ease-in-out"
                   >
                     <td className="py-3 px-6 text-left whitespace-nowrap">
-                      {abstract.title}
+                      {abstract.subject}
                     </td>
                     <td className="py-3 px-6 text-left">{abstract.name}</td>
                     <td className="py-3 px-6 text-left">{abstract.email}</td>
                     <td className="py-3 px-6 text-left">
                       {abstract.temporyAbstractCode}
+                    </td>
+                    <td className="py-3 px-6 text-left">
+                      {abstract.AbstractCode}
                     </td>
 
                     <td className="py-3 px-6 text-left">
@@ -570,7 +553,6 @@ export function AbstractList() {
               </tbody>
             </table>
           )}
-          <Pagination />
         </div>
       </main>
       {rejectPopup.isOpen && (
