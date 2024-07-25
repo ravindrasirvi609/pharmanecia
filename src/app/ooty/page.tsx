@@ -1,14 +1,12 @@
 "use client";
-import React, { useRef } from "react";
+import React, { useRef, useEffect } from "react";
 import Image from "next/image";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 
-// Register the ScrollTrigger plugin
 gsap.registerPlugin(ScrollTrigger);
 
-// Define the media item type
 interface MediaItem {
   id: number;
   type: "image" | "video";
@@ -16,13 +14,12 @@ interface MediaItem {
   alt: string;
 }
 
-// Sample data (replace with your actual data)
 const ootyMedia: MediaItem[] = [
   { id: 1, type: "image", src: "/1.jpeg", alt: "Ooty Tea Gardens" },
   {
     id: 2,
     type: "video",
-    src: "https://www.youtube.com/watch?v=NudsuaFDeAY",
+    src: "https://www.youtube.com/embed/NudsuaFDeAY",
     alt: "Ooty Lake",
   },
   {
@@ -40,7 +37,7 @@ const ootyMedia: MediaItem[] = [
   {
     id: 5,
     type: "video",
-    src: "https://www.youtube.com/watch?v=OPIE5j0SN5Q",
+    src: "https://www.youtube.com/embed/OPIE5j0SN5Q",
     alt: "Nilgiri Mountain Railway",
   },
   {
@@ -53,84 +50,75 @@ const ootyMedia: MediaItem[] = [
 
 const Ooty: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
-  const titleRef = useRef<HTMLHeadingElement>(null);
+  const sectionsRef = useRef<HTMLDivElement[]>([]);
 
   useGSAP(() => {
-    if (containerRef.current && titleRef.current) {
-      // Animate the title
-      gsap.from(titleRef.current, {
-        y: 50,
-        opacity: 0,
-        duration: 1,
-        ease: "power3.out",
+    if (containerRef.current) {
+      const sections = sectionsRef.current;
+
+      gsap.to(sections, {
+        xPercent: -100 * (sections.length - 1),
+        ease: "none",
+        scrollTrigger: {
+          trigger: containerRef.current,
+          pin: true,
+          scrub: 1,
+          snap: 1 / (sections.length - 1),
+          end: () => "+=" + containerRef?.current?.offsetWidth,
+        },
       });
 
-      // Animate media items
-      gsap.utils.toArray(".media-item").forEach((item: any, index) => {
-        gsap.from(item, {
-          scrollTrigger: {
-            trigger: item,
-            start: "top bottom-=100",
-            toggleActions: "play none none reverse",
-          },
+      sections.forEach((section, i) => {
+        gsap.from(section.querySelector(".content"), {
           opacity: 0,
           y: 50,
-          duration: 0.8,
-          delay: index * 0.1,
+          duration: 1,
+          scrollTrigger: {
+            trigger: section,
+            containerAnimation: containerRef.current
+              ? gsap.to(containerRef.current, { x: 0 })
+              : undefined,
+            start: "left center",
+            toggleActions: "play none none reverse",
+          },
         });
       });
     }
   }, []);
 
   return (
-    <div
-      ref={containerRef}
-      className="bg-gradient-to-b from-blue-100 to-green-100 min-h-screen p-8"
-    >
-      <h1
-        ref={titleRef}
-        className="text-4xl md:text-6xl font-bold text-center text-blue-800 mb-12"
-      >
-        Discover the Beauty of Ooty
-      </h1>
-
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {ootyMedia.map((item) => (
+    <div ref={containerRef} className="overflow-hidden">
+      <div className="flex">
+        {ootyMedia.map((item, index) => (
           <div
             key={item.id}
-            className="media-item bg-white rounded-lg shadow-lg overflow-hidden"
+            ref={(el: HTMLDivElement | null) => {
+              sectionsRef.current[index] = el as HTMLDivElement;
+            }}
+            className="w-screen h-screen flex-shrink-0 relative"
           >
             {item.type === "image" ? (
-              <div className="relative h-64 md:h-80">
-                <Image
-                  src={item.src}
-                  alt={item.alt}
-                  layout="fill"
-                  objectFit="cover"
-                  className="transition-transform duration-300 hover:scale-105"
-                />
-              </div>
-            ) : (
-              <video
+              <Image
                 src={item.src}
-                controls
-                className="w-full h-64 md:h-80 object-cover"
-                poster="/images/video-poster.jpg"
+                alt={item.alt}
+                layout="fill"
+                objectFit="cover"
               />
+            ) : (
+              <iframe
+                src={item.src}
+                title={item.alt}
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+                className="w-full h-full"
+              ></iframe>
             )}
-            <div className="p-4">
-              <h2 className="text-xl font-semibold text-gray-800">
-                {item.alt}
-              </h2>
+            <div className="content absolute bottom-0 left-0 right-0 p-8 bg-gradient-to-t from-black to-transparent text-white">
+              <h2 className="text-4xl font-bold mb-4">{item.alt}</h2>
+              <p className="text-xl">Discover the beauty of Ooty</p>
             </div>
           </div>
         ))}
-      </div>
-
-      <div className="mt-12 text-center">
-        <button className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-full transition-transform duration-300 hover:scale-105">
-          Explore More
-        </button>
       </div>
     </div>
   );
