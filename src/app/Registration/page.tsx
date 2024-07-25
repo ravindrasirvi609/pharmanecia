@@ -53,6 +53,12 @@ const Registration = () => {
               info@pharmanecia.org
             </a>
           </p>
+          <p className="text-lg leading-relaxed text-justify mb-4">
+            Early Bird offer is valid until October 31, 2024.{" "}
+          </p>
+          <p className="text-lg leading-relaxed text-justify mb-4">
+            All prices mentioned are inclusive of GST.{" "}
+          </p>
         </div>
 
         {/* Registration Plans */}
