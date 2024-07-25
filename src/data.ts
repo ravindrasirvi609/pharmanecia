@@ -229,28 +229,38 @@ export const designationOptions = [
 
 export const plans: Plan[] = [
   {
-    name: "Student Registration",
+    name: "OPF/OBRF Members",
     description: "Includes entry to all sessions and conference kit.",
-    price: 1,
+    earlyBird: 1,
+    regular: 2000,
+    spot: 2500,
   },
   {
-    name: "Reasearch Scholar/Faculty Registration",
-    description: "Includes entry to all sessions, conference kit, and lunch.",
-    price: 2000,
-  },
-  {
-    name: "Industry Professional Registration",
-    description: "Includes entry to all sessions, conference kit, and  lunch.",
-    price: 3000,
-  },
-  {
-    name: "OPF/OBRF Member Registration",
+    name: "Students (UG /PG)",
     description: "Includes entry to all sessions and conference kit.",
-    price: 1200,
+    earlyBird: 1800,
+    regular: 2200,
+    spot: 2600,
   },
   {
-    name: "International Delegate Registration",
+    name: "Research Scholars & Faculties",
     description: "Includes entry to all sessions, conference kit, and lunch.",
-    price: 10000,
+    earlyBird: 2360,
+    regular: 2950,
+    spot: 3550,
+  },
+  {
+    name: "Industry Professionals",
+    description: "Includes entry to all sessions, conference kit, and lunch.",
+    earlyBird: 3550,
+    regular: 4130,
+    spot: 4720,
+  },
+  {
+    name: "International Delegates",
+    description: "Includes entry to all sessions, conference kit, and lunch.",
+    earlyBird: 130 * 83, // Assuming 1 USD = 83 INR
+    regular: 150 * 83,
+    spot: 180 * 83,
   },
 ];

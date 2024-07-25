@@ -86,5 +86,7 @@ export interface RegistrationInfo {
 export interface Plan {
   name: string;
   description: string;
-  price: number;
+  earlyBird: number;
+  regular: number;
+  spot: number;
 }
