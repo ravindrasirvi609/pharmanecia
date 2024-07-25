@@ -154,6 +154,7 @@ const ScheduleOverview = () => {
                 <li>
                   4:00 PM - 5:00 PM: Valedictory function and Award Ceremony
                 </li>
+                <li>5:00 PM : Certificate Distribution</li>
               </ul>
             </div>
           </div>

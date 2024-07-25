@@ -11,7 +11,7 @@ export const schedule = {
     {
       time: "10:00 AM - 12:00 PM",
       event: "Opening Ceremony and Keynote Speeches",
-      speakers: ["Dr. John Doe", "Dr. Jane Smith"],
+      speakers: ["Announcing Soon"],
     },
     {
       time: "12:00 PM - 1:00 PM",
@@ -21,19 +21,19 @@ export const schedule = {
     {
       time: "1:00 PM - 3:00 PM",
       event: "Workshop on Pharmaceutical Research",
-      speakers: ["Dr. Emily Johnson"],
+      speakers: ["Announcing Soon"],
     },
     {
       time: "3:00 PM - 5:00 PM",
       event: "Panel Discussion on Drug Discovery",
-      speakers: ["Dr. Robert Brown", "Dr. Alice White"],
+      speakers: ["Announcing Soon"],
     },
   ],
   day2: [
     {
       time: "9:00 AM - 10:30 AM",
       event: "Technical Session 1",
-      speakers: ["Dr. Michael Green"],
+      speakers: ["Announcing Soon"],
     },
     {
       time: "10:30 AM - 11:00 AM",
@@ -43,7 +43,7 @@ export const schedule = {
     {
       time: "11:00 AM - 12:30 PM",
       event: "Technical Session 2",
-      speakers: ["Dr. Laura Black"],
+      speakers: ["Announcing Soon"],
     },
     {
       time: "12:30 PM - 1:30 PM",
@@ -53,12 +53,12 @@ export const schedule = {
     {
       time: "1:30 PM - 3:00 PM",
       event: "Workshop on Clinical Pharmacy",
-      speakers: ["Dr. Kevin Grey"],
+      speakers: ["Announcing Soon"],
     },
     {
       time: "3:00 PM - 5:00 PM",
       event: "Technical Session 3",
-      speakers: ["Dr. Sarah Brown"],
+      speakers: ["Announcing Soon"],
     },
   ],
 };

@@ -20,12 +20,7 @@ const accommodationPlans: AccommodationPlan[] = [
   {
     type: "Dormitory",
     price: 590,
-    features: [
-      "Shared room for 4-6 people",
-      "Shared bathroom",
-      "Locker storage",
-      "Wi-Fi",
-    ],
+    features: ["Shared room for 4-6 people", "Shared bathroom", "Wi-Fi"],
   },
 ];
 

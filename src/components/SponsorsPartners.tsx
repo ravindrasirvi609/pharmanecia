@@ -78,8 +78,8 @@ const SponsorsPartners = () => {
           </p>
           <p className="text-lg leading-relaxed text-justify mb-4">
             If you are interested in becoming a sponsor, please contact us at{" "}
-            <a href="mailto:sponsor@conference.com" className="text-accent">
-              sponsor@conference.com
+            <a href="mailto:info@pharmanecia.org" className="text-accent">
+              info@pharmanecia.org
             </a>{" "}
             for more information and to receive a detailed sponsorship
             prospectus.

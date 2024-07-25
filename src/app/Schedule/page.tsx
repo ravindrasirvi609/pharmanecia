@@ -52,7 +52,7 @@ const Schedule = () => {
                         clipRule="evenodd"
                       />
                     </svg>
-                    <span>{speaker}</span>
+                    <span className="text-accent">{speaker}</span>
                   </li>
                 ))}
               </ul>

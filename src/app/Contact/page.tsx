@@ -15,6 +15,7 @@ const Contact = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
+  const [mobile, setMobile] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [registrationInfo, setRegistrationInfo] = useState<{
     url: string | undefined;
@@ -139,6 +140,25 @@ const Contact = () => {
               </div>
               <div className="mb-4">
                 <label
+                  htmlFor="mobile"
+                  className="block text-lg font-medium text-primary mb-2"
+                >
+                  Mobile Number
+                </label>
+                <div className="relative">
+                  <FaEnvelope className="absolute top-3 left-3 text-gray-400" />
+                  <input
+                    type="number"
+                    id="mobile"
+                    value={mobile}
+                    onChange={(e) => setMobile(e.target.value)}
+                    required
+                    className="w-full p-2 pl-10 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-accent"
+                  />
+                </div>
+              </div>
+              <div className="mb-4">
+                <label
                   htmlFor="email"
                   className="block text-lg font-medium text-primary mb-2"
                 >
@@ -156,6 +176,7 @@ const Contact = () => {
                   />
                 </div>
               </div>
+
               <div className="mb-4">
                 <label
                   htmlFor="message"

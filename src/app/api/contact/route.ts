@@ -8,7 +8,7 @@ connect();
 
 export async function POST(req: NextRequest) {
   if (req.method === "POST") {
-    const { name, email, message } = await req.json();
+    const { name, email, message, mobile } = await req.json();
 
     // Generate a unique registration ID
     const registrationId = new mongoose.Types.ObjectId().toString();
@@ -24,6 +24,7 @@ export async function POST(req: NextRequest) {
       message,
       registrationId,
       qrCodeUrl,
+      mobile,
     });
 
     await student.save();

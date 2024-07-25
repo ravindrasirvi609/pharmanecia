@@ -101,7 +101,7 @@ const SpeakersHighlights = () => {
                 the field.
               </p>
               <p className="text-sm text-gray-500 mt-2">
-                Speakers: Annaounching Soon
+                Speakers: Announcing Soon
               </p>
             </div>
 
@@ -115,7 +115,7 @@ const SpeakersHighlights = () => {
                 future of pharmaceuticals in this insightful session.
               </p>
               <p className="text-sm text-gray-500 mt-2">
-                Speakers: Annaounching Soon
+                Speakers: Announcing Soon
               </p>
             </div>
 
@@ -129,7 +129,7 @@ const SpeakersHighlights = () => {
                 addressing challenges and proposing innovative solutions.
               </p>
               <p className="text-sm text-gray-500 mt-2">
-                Speakers: Annaounching Soon
+                Speakers: Announcing Soon
               </p>
             </div>
           </div>

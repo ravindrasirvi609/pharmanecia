@@ -4,8 +4,6 @@ const Testimonials = () => {
   return (
     <div className="bg-light text-primary px-6 py-12">
       <div className="max-w-7xl mx-auto">
-        <h1 className="text-4xl font-bold mb-8 text-center">Testimonials</h1>
-
         {/* Attendee Reviews */}
         <div className="mb-12">
           <h2 className="text-3xl font-semibold mb-6 text-secondary text-center">
@@ -58,11 +56,11 @@ const Testimonials = () => {
             {/* Video 1 */}
             <div className="flex justify-center">
               <iframe
-                width="300"
-                height="200"
-                src="https://www.youtube.com/embed/5L7WbNHzcRw?si=YqKsHBxRR6z3Ee3V"
-                title="Video Testimonial 1"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                width="560"
+                height="315"
+                src="https://www.youtube.com/embed/kx5z0XNhVYk?si=6GdofroHdYcFlA7e"
+                title="YouTube video player"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                 allowFullScreen
                 className="w-full h-full"
               ></iframe>
@@ -82,11 +80,11 @@ const Testimonials = () => {
             {/* Video 3 */}
             <div className="flex justify-center">
               <iframe
-                width="300"
-                height="200"
-                src="https://www.youtube.com/embed/8rMsdkDeqfc?si=zOpoUlShDoHq7O4B"
-                title="Video Testimonial 3"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                width="560"
+                height="315"
+                src="https://www.youtube.com/embed/CX1P2K0XtMw?si=_VeGfIEiJDJXHBxf"
+                title="YouTube video player"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                 allowFullScreen
                 className="w-full h-full"
               ></iframe>

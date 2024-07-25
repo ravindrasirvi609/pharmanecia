@@ -57,6 +57,10 @@ const ClientHomePage = () => {
             Organized by Department of Pharmaceutical Chemistry, JSS College of
             Pharmacy, Ooty Hosted by, Operant Pharmacy Federation
           </p>
+          <p className="text-lg mb-8 text-danger font-bold">
+            Selected Research articles will be get published in Scopus Indexed
+            Journal
+          </p>
           <div className="space-x-4">
             <Link href="/Registration">
               <button className="bg-primary text-light px-6 py-3 rounded-md hover:bg-secondary transition duration-300">
