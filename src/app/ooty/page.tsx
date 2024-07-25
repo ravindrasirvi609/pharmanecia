@@ -1,5 +1,5 @@
 "use client";
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useState } from "react";
 import Image from "next/image";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -49,77 +49,79 @@ const ootyMedia: MediaItem[] = [
 ];
 
 const Ooty: React.FC = () => {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const sectionsRef = useRef<HTMLDivElement[]>([]);
+  const [imagesLoaded, setImagesLoaded] = useState<{ [key: number]: boolean }>(
+    {}
+  );
 
   useGSAP(() => {
-    if (containerRef.current) {
-      const sections = sectionsRef.current;
-
-      gsap.to(sections, {
-        xPercent: -100 * (sections.length - 1),
-        ease: "none",
-        scrollTrigger: {
-          trigger: containerRef.current,
-          pin: true,
-          scrub: 1,
-          snap: 1 / (sections.length - 1),
-          end: () => "+=" + containerRef?.current?.offsetWidth,
-        },
+    gsap.utils.toArray(".section").forEach((section: any, i) => {
+      ScrollTrigger.create({
+        trigger: section,
+        start: "top top",
+        pin: true,
+        pinSpacing: false,
       });
-
-      sections.forEach((section, i) => {
-        gsap.from(section.querySelector(".content"), {
-          opacity: 0,
-          y: 50,
-          duration: 1,
-          scrollTrigger: {
-            trigger: section,
-            containerAnimation: containerRef.current
-              ? gsap.to(containerRef.current, { x: 0 })
-              : undefined,
-            start: "left center",
-            toggleActions: "play none none reverse",
-          },
-        });
-      });
-    }
+    });
   }, []);
 
+  const handleImageLoad = (id: number) => {
+    setImagesLoaded((prev) => ({ ...prev, [id]: true }));
+  };
+
   return (
-    <div ref={containerRef} className="overflow-hidden">
-      <div className="flex">
-        {ootyMedia.map((item, index) => (
-          <div
-            key={item.id}
-            ref={(el: HTMLDivElement | null) => {
-              sectionsRef.current[index] = el as HTMLDivElement;
-            }}
-            className="w-screen h-screen flex-shrink-0 relative"
-          >
+    <div className="overflow-x-hidden">
+      {ootyMedia.map((item, index) => (
+        <div key={item.id} className="section h-screen w-full relative">
+          <div className="absolute inset-0 bg-gray-200 flex items-center justify-center">
+            {!imagesLoaded[item.id] && item.type === "image" && (
+              <p className="text-2xl text-gray-600">Loading {item.alt}...</p>
+            )}
+          </div>
+          <div className="absolute inset-0">
             {item.type === "image" ? (
               <Image
                 src={item.src}
                 alt={item.alt}
                 layout="fill"
                 objectFit="cover"
+                className={`transition-opacity duration-500 ${
+                  imagesLoaded[item.id] ? "opacity-100" : "opacity-0"
+                }`}
+                onLoad={() => handleImageLoad(item.id)}
+                onError={() =>
+                  console.error(`Failed to load image: ${item.src}`)
+                }
               />
             ) : (
               <iframe
-                src={item.src}
+                src={`${item.src}?autoplay=1&mute=1&loop=1&playlist=${item.src
+                  .split("/")
+                  .pop()}`}
                 title={item.alt}
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowFullScreen
                 className="w-full h-full"
-              ></iframe>
+              />
             )}
-            <div className="content absolute bottom-0 left-0 right-0 p-8 bg-gradient-to-t from-black to-transparent text-white">
-              <h2 className="text-4xl font-bold mb-4">{item.alt}</h2>
-              <p className="text-xl">Discover the beauty of Ooty</p>
+          </div>
+          <div className="absolute inset-0 flex items-center justify-center">
+            <div className="bg-black bg-opacity-50 p-8 rounded-lg max-w-2xl">
+              <h2 className="text-5xl font-bold mb-6 tracking-wide text-white">
+                {item.alt}
+              </h2>
+              <p className="text-xl leading-relaxed text-white">
+                Experience the breathtaking beauty of Ooty, where nature&apos;s
+                wonders await at every turn.
+              </p>
+              {item.type === "video" && (
+                <button className="mt-4 bg-white text-black px-4 py-2 rounded">
+                  Unmute Video
+                </button>
+              )}
             </div>
           </div>
-        ))}
-      </div>
+        </div>
+      ))}
     </div>
   );
 };
