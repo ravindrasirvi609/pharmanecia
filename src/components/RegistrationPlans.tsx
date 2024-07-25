@@ -5,6 +5,7 @@ import { Plan, RegistrationFormData } from "@/lib/interface";
 import { useFirebaseStorage } from "@/app/hooks/useFirebaseStorage";
 import { plans } from "@/data";
 import axios from "axios";
+import Link from "next/link";
 
 const RegistrationPlans: React.FC = () => {
   const { uploadFile } = useFirebaseStorage();
@@ -285,6 +286,21 @@ const RegistrationPlans: React.FC = () => {
               </button>
             </div>
           ))}
+
+          <div className="bg-white shadow-lg rounded-lg p-6 text-center">
+            <h3 className="text-2xl font-bold mb-4 text-primary">
+              Accompanying Person Registration
+            </h3>
+            <p className="text-lg mb-4">
+              Access Food Area and lunch, No Entry for scientific session
+            </p>
+            <p className="text-lg font-semibold mb-6">₹ 1200</p>
+            <Link href={"https://rzp.io/l/g60dnQz"}>
+              <button className="bg-accent text-light px-6 py-2 rounded-md hover:bg-secondary transition duration-300">
+                Select Plan
+              </button>
+            </Link>
+          </div>
         </div>
 
         {showModal && (
