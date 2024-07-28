@@ -172,10 +172,18 @@ const RegistrationPlans: React.FC = () => {
     setShowModal(false);
   };
 
-  const PriceDisplay = ({ label, price }: { label: string; price: number }) => (
+  const PriceDisplay = ({
+    label,
+    price,
+    className,
+  }: {
+    label: string;
+    price: number;
+    className?: string;
+  }) => (
     <div className="flex justify-between items-center mb-2">
       <span className="text-sm font-medium">{label}:</span>
-      <span className="text-lg font-bold">₹{price}</span>
+      <span className={`text-lg font-bold ${className}`}>₹{price}</span>
     </div>
   );
 
@@ -187,8 +195,12 @@ const RegistrationPlans: React.FC = () => {
       <div className="p-6">
         <p className="text-gray-600 mb-4">{plan.description}</p>
         <PriceDisplay label="Early Bird" price={plan.earlyBird} />
-        <PriceDisplay label="Regular" price={plan.regular} />
-        <PriceDisplay label="Spot" price={plan.spot} />
+        <PriceDisplay
+          label="Regular"
+          price={plan.regular}
+          className="line-through"
+        />
+        <PriceDisplay label="Spot" price={plan.spot} className="line-through" />
         <div className="mt-6">
           <button
             onClick={() => openModal(plan)}
