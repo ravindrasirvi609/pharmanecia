@@ -29,8 +29,6 @@ const ClientHomePage = () => {
 
   return (
     <>
-      <FloatingElements />
-
       <div
         className="min-h-screen flex items-center justify-center bg-cover bg-center"
         style={{

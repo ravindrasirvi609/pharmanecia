@@ -36,6 +36,8 @@ const RegistrationPlans: React.FC = () => {
     imageUrl: "",
     dob: "",
     AadharNumber: "",
+    memberId: "",
+
     institute: "",
     gender: "Male",
     abstractSubmitted: false,
@@ -126,6 +128,10 @@ const RegistrationPlans: React.FC = () => {
       errors.pincode = "Pincode is required";
     } else if (!/^\d{6}$/.test(formData.pincode)) {
       errors.pincode = "Pincode must be 6 digits";
+    }
+
+    if (selectedPlan?.name === "OPF/OBRF Members" && !formData.memberId) {
+      errors.memberId = "Member ID is required for OPF/OBRF Members";
     }
 
     // Add more validations as needed
@@ -348,6 +354,7 @@ const RegistrationPlans: React.FC = () => {
               errors={formErrors}
               includeGalaDinner={includeGalaDinner}
               handleGalaDinnerChange={handleGalaDinnerChange}
+              selectedPlanName={selectedPlan?.name}
             />
             {submitError && (
               <div className="mb-4 p-3 bg-red-100 border border-red-400 text-red-700 rounded">

@@ -15,6 +15,7 @@ export interface RegistrationFormData {
   pincode: string;
   country: string;
   institute: string;
+  memberId: string;
   registrationType: "Student" | "Professional" | "Academician";
   abstractSubmitted: boolean;
   needAccommodation: boolean;

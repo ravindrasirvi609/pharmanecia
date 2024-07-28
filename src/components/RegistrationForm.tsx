@@ -14,6 +14,7 @@ interface RegistrationFormProps {
   errors: { [key: string]: string };
   includeGalaDinner: boolean;
   handleGalaDinnerChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  selectedPlanName?: string;
 }
 
 const RegistrationForm: React.FC<RegistrationFormProps> = ({
@@ -23,6 +24,7 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({
   errors,
   includeGalaDinner,
   handleGalaDinnerChange,
+  selectedPlanName,
 }) => {
   const {
     uploadProgress,
@@ -206,6 +208,23 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({
           </div>
         )}
       </div>
+
+      {selectedPlanName === "OPF/OBRF Members" && (
+        <div className="mb-4">
+          <label className="block mb-2">Member ID</label>
+          <input
+            type="text"
+            name="memberId"
+            value={formData.memberId || ""}
+            onChange={onInputChange}
+            required
+            className="w-full p-2 border rounded"
+          />
+          {errors.memberId && (
+            <p className="text-danger text-sm mt-1">{errors.memberId}</p>
+          )}
+        </div>
+      )}
 
       {/* Personal Information */}
       <div className="mb-4">

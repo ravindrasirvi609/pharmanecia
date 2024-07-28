@@ -43,6 +43,7 @@ const registrationSchema = new Schema({
   paymentAmount: { type: Number },
   paymentDate: { type: Date },
   transactionId: { type: String },
+  memberId: { type: String },
 
   // Additional Conference Options
   needAccommodation: { type: Boolean, default: false },
