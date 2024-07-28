@@ -1,3 +1,4 @@
+import Image from "next/image";
 import React from "react";
 
 const AboutHost = () => {
@@ -6,7 +7,14 @@ const AboutHost = () => {
       <div className="max-w-7xl mx-auto">
         <h1 className="text-4xl font-bold mb-8 text-center">About Host</h1>
 
-        <div className="mb-12">
+        <div className="flex flex-col items-center mb-12">
+          <Image
+            src="https://opf.org.in/wp-content/uploads/2019/07/Final-OPF-1-1.png"
+            alt="Operant Pharmacy Federation Logo"
+            className="w-32 h-32 mb-6"
+            width={128}
+            height={128}
+          />
           <h2 className="text-3xl font-semibold mb-4 text-secondary">
             Operant Pharmacy Federation (OPF)
           </h2>

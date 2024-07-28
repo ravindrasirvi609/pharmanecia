@@ -1,3 +1,4 @@
+import Image from "next/image";
 import React from "react";
 
 const AboutOrganiser = () => {
@@ -8,7 +9,14 @@ const AboutOrganiser = () => {
           About Organisers
         </h1>
 
-        <div className="mb-12">
+        <div className="flex flex-col items-center mb-12">
+          <Image
+            src="/jsslogo.png"
+            alt="JSS College of Pharmacy Logo"
+            className="w-72 h-32 mb-6"
+            width={158}
+            height={128}
+          />
           <h2 className="text-3xl font-semibold mb-4 text-secondary">
             ABOUT JSS COLLEGE OF PHARMACY, OOTY
           </h2>
@@ -22,8 +30,8 @@ const AboutOrganiser = () => {
             The institution is accredited ‘A+’ grade by the National Assessment
             and Accreditation Council, New Dehli, for Pharm D Program and
             certified by ACPE, USA and approved by AICTE and Pharmacy Council of
-            India. The institution deepened it&apos;s roots by its
-            state-of-the-art laboratories.
+            India. The institution deepened its roots by its state-of-the-art
+            laboratories.
           </p>
         </div>
 

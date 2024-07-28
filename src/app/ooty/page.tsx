@@ -46,6 +46,72 @@ const ootyMedia: MediaItem[] = [
     src: "/harshal-more-8dS_mTPZ38w-unsplash.jpg",
     alt: "Rose Garden",
   },
+  {
+    id: 7,
+    type: "image",
+    src: "/6.jpg",
+    alt: "Ketti Valley",
+  },
+  {
+    id: 8,
+    type: "image",
+    src: "/7.jpg",
+    alt: "Lamb's Rock_Coonoor",
+  },
+  {
+    id: 9,
+    type: "image",
+    src: "/8.jpeg",
+    alt: "Ooty Lake",
+  },
+  {
+    id: 10,
+    type: "image",
+    src: "/9.jpg",
+    alt: "Ooty Rose Garden",
+  },
+  {
+    id: 11,
+    type: "image",
+    src: "/10.jpg",
+    alt: "Pykara Falls",
+  },
+  {
+    id: 12,
+    type: "image",
+    src: "/11.webp",
+    alt: "Sim's Park_Coonoor",
+  },
+  {
+    id: 13,
+    type: "image",
+    src: "/12.webp",
+    alt: "Tea Factory_Ooty",
+  },
+  {
+    id: 14,
+    type: "image",
+    src: "/13.jpg",
+    alt: "Tea Museum_Ooty",
+  },
+  {
+    id: 15,
+    type: "image",
+    src: "/14.jpg",
+    alt: "Thunder World_Ooty",
+  },
+  {
+    id: 16,
+    type: "image",
+    src: "/15.jpg",
+    alt: "Wax World_Ooty",
+  },
+  {
+    id: 17,
+    type: "image",
+    src: "/17.webp",
+    alt: "Nilgiri Mountain Railway",
+  },
 ];
 
 const Ooty: React.FC = () => {

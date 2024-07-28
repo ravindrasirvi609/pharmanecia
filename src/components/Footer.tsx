@@ -64,7 +64,7 @@ const Footer = () => {
           <h2 className="text-xl font-bold mb-4">Follow Us</h2>
           <div className="flex space-x-4">
             <Link
-              href="https://www.facebook.com/your-page"
+              href="https://www.facebook.com/operantpharmacyfederation/"
               className="text-light hover:text-accent"
             >
               <svg
@@ -77,7 +77,7 @@ const Footer = () => {
               </svg>
             </Link>
             <Link
-              href="https://www.linkedin.com/your-profile"
+              href="https://www.linkedin.com/company/operantpharmacyfederation/"
               className="text-light hover:text-accent"
             >
               <svg
@@ -90,7 +90,7 @@ const Footer = () => {
               </svg>
             </Link>
             <Link
-              href="https://wa.me/your-whatsapp-number"
+              href="https://whatsapp.com/channel/0029Va93LYsA89MpBKbv992x"
               className="text-light hover:text-accent"
             >
               <svg
