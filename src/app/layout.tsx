@@ -64,7 +64,7 @@ export default function RootLayout({
         className={cn("antialiased", fontHeading.variable, fontBody.variable)}
       >
         <Navbar />
-        <div className="mt-20 bg-light">
+        <div className="mt-[4rem] bg-light">
           {children}
           <Analytics />
         </div>
