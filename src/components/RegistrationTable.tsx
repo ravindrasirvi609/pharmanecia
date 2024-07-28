@@ -9,7 +9,7 @@ interface Registration {
   registrationStatus: string;
   createdAt: string;
   registrationCode: string;
-  institute: string;
+  affiliation: string;
   whatsappNumber: string;
 }
 
@@ -54,7 +54,7 @@ const RegistrationTable: React.FC<RegistrationTableProps> = ({
                   {registration.paymentStatus}
                 </span>
               </td>
-              <td className="px-4 py-2">{registration.institute}</td>
+              <td className="px-4 py-2">{registration.affiliation}</td>
               <td className="px-4 py-2">{registration.whatsappNumber}</td>
               <td className="px-4 py-2">
                 {new Date(registration.createdAt).toLocaleDateString()}

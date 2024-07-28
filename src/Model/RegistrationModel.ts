@@ -27,7 +27,6 @@ const registrationSchema = new Schema({
   // Conference-specific Information
   registrationType: {
     type: String,
-    enum: ["Student", "Professional", "Academician"],
     required: true,
   },
 

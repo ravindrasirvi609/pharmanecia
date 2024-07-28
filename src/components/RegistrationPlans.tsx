@@ -28,7 +28,7 @@ const RegistrationPlans: React.FC = () => {
     state: "",
     pincode: "",
     country: "",
-    registrationType: "Professional",
+    registrationType: "",
     needAccommodation: false,
     dietaryRequirements: "",
     specialAssistance: "",
@@ -157,6 +157,10 @@ const RegistrationPlans: React.FC = () => {
       return;
     }
 
+    const registrationType = selectedPlan.name;
+
+    const newFormData = { ...formData, registrationType };
+
     if (!validateForm()) {
       return;
     }
@@ -169,7 +173,7 @@ const RegistrationPlans: React.FC = () => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(newFormData),
       });
 
       if (registrationResponse.ok) {

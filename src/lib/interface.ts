@@ -16,7 +16,7 @@ export interface RegistrationFormData {
   country: string;
   institute: string;
   memberId: string;
-  registrationType: "Student" | "Professional" | "Academician";
+  registrationType: string;
   abstractSubmitted: boolean;
   needAccommodation: boolean;
   dietaryRequirements: string;
