@@ -211,7 +211,7 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({
 
       {selectedPlanName === "OPF/OBRF Members" && (
         <div className="mb-4">
-          <label className="block mb-2">Member ID</label>
+          <label className="block mb-2">OPF/OBRF Member Id</label>
           <input
             type="text"
             name="memberId"
