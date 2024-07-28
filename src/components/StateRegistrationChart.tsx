@@ -30,7 +30,7 @@ export default function StateRegistrationChart({
 }: StateRegistrationChartProps) {
   // Count registrations by state
   const stateCount = registrations.reduce((acc, registration) => {
-    const state = registration.state || "Unknown";
+    const state = registration.registrationType || "Unknown";
     acc[state] = (acc[state] || 0) + 1;
     return acc;
   }, {});
@@ -61,7 +61,7 @@ export default function StateRegistrationChart({
       },
       title: {
         display: true,
-        text: "Top 10 States by Registration",
+        text: "Registration Types",
       },
     },
   };
