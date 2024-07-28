@@ -134,6 +134,16 @@ const RegistrationPlans: React.FC = () => {
     return Object.keys(errors).length === 0;
   };
 
+  const initializeRazorpay = () => {
+    return new Promise((resolve) => {
+      const script = document.createElement("script");
+      script.src = "https://checkout.razorpay.com/v1/checkout.js";
+      script.onload = () => resolve(true);
+      script.onerror = () => resolve(false);
+      document.body.appendChild(script);
+    });
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!selectedPlan) {
@@ -148,18 +158,97 @@ const RegistrationPlans: React.FC = () => {
     setSubmitError("");
 
     try {
-      // Implement your form submission logic here
-      // This is a placeholder for the actual implementation
-      await new Promise((resolve) => setTimeout(resolve, 2000));
-      alert("Registration submitted successfully!");
-      closeModal();
+      const registrationResponse = await fetch("/api/save-registration", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (registrationResponse.ok) {
+        const registration = await registrationResponse.json();
+        await makePayment(selectedPlan, registration.registration);
+      } else {
+        throw new Error("Failed to save registration");
+      }
     } catch (error) {
       console.error("Registration failed:", error);
       setSubmitError(
-        "An error occurred while submitting the form. Please try again."
+        "Failed to submit registration. Please check the form and try again."
       );
-    } finally {
-      setIsSubmitting(false);
+    }
+  };
+
+  let totalAmount = 0;
+  const makePayment = async (plan: Plan, registration: any) => {
+    const res = await initializeRazorpay();
+
+    if (!res) {
+      alert("Razorpay SDK failed to load. Are you online?");
+      return;
+    }
+
+    try {
+      totalAmount = includeGalaDinner ? plan.earlyBird + 1000 : plan.earlyBird;
+
+      // Create Razorpay order
+      const orderResponse = await fetch("/api/razorpay-order", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ amount: totalAmount }),
+      });
+
+      if (!orderResponse.ok) {
+        throw new Error("Failed to create Razorpay order");
+      }
+
+      const orderData = await orderResponse.json();
+
+      const options = {
+        name: "Operant Pharmacy Federation",
+        currency: orderData.currency,
+        amount: orderData.amount,
+        order_id: orderData.id,
+        description: `Payment for ${plan.name}`,
+        handler: async function (response: any) {
+          try {
+            const transactionResponse = await axios.post(
+              "/api/save-transaction",
+              {
+                razorpay_order_id: response.razorpay_order_id,
+                razorpay_payment_id: response.razorpay_payment_id,
+                razorpay_signature: response.razorpay_signature,
+                amount: orderData.amount / 100,
+                currency: orderData.currency,
+                planName: plan.name,
+                customerName: registration.name,
+                customerEmail: registration.email,
+                customerPhone: registration.whatsappNumber,
+              }
+            );
+
+            window.location.href = `/abstractForm/${transactionResponse.data.registration._id}`;
+          } catch (error) {
+            console.error("Failed to save transaction:", error);
+          } finally {
+            closeModal();
+          }
+        },
+        prefill: {
+          name: registration.name,
+          email: registration.email,
+          contact: registration.whatsappNumber,
+        },
+      };
+
+      const paymentObject = new (window as any).Razorpay(options);
+      paymentObject.open();
+    } catch (error) {
+      console.error("Payment failed:", error);
+      alert("Failed to initiate payment. Please try again.");
     }
   };
 
