@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -152,6 +152,10 @@ const Ooty: React.FC = () => {
     {}
   );
   const [activeIndex, setActiveIndex] = useState(0);
+  const [mutedVideos, setMutedVideos] = useState<{ [key: number]: boolean }>(
+    {}
+  );
+  const videoRefs = useRef<(HTMLIFrameElement | null)[]>([]);
 
   useGSAP(() => {
     gsap.utils.toArray(".section").forEach((section: any, i) => {
@@ -168,6 +172,19 @@ const Ooty: React.FC = () => {
 
   const handleImageLoad = (id: number) => {
     setImagesLoaded((prev) => ({ ...prev, [id]: true }));
+  };
+
+  const handleMuteToggle = (index: number) => {
+    const video = videoRefs.current[index];
+    if (video) {
+      const src = video.src;
+      if (mutedVideos[index]) {
+        video.src = src.replace("&mute=0", "&mute=1");
+      } else {
+        video.src = src.replace("&mute=1", "&mute=0");
+      }
+      setMutedVideos((prev) => ({ ...prev, [index]: !prev[index] }));
+    }
   };
 
   return (
@@ -196,6 +213,9 @@ const Ooty: React.FC = () => {
               />
             ) : (
               <iframe
+                ref={(el: HTMLIFrameElement | null) => {
+                  videoRefs.current[index] = el;
+                }}
                 src={`${item.src}?autoplay=1&mute=1&loop=1&playlist=${item.src
                   .split("/")
                   .pop()}`}
@@ -207,7 +227,7 @@ const Ooty: React.FC = () => {
             )}
           </div>
           <div className="absolute inset-0 flex items-center justify-center">
-            <div className="bg-black bg-opacity-60 p-8 rounded-lg max-w-2xl text-center">
+            <div className="bg-black bg-opacity-40 p-8 rounded-lg max-w-2xl text-center">
               <h2 className="text-5xl font-bold mb-6 tracking-wide text-white">
                 {item.alt}
               </h2>
@@ -215,8 +235,11 @@ const Ooty: React.FC = () => {
                 {item.description}
               </p>
               {item.type === "video" && (
-                <button className="mt-4 bg-white text-black px-6 py-2 rounded-full hover:bg-gray-200 transition-colors duration-300">
-                  Unmute Video
+                <button
+                  onClick={() => handleMuteToggle(index)}
+                  className="mt-4 bg-white text-black px-6 py-2 rounded-full hover:bg-gray-200 transition-colors duration-300"
+                >
+                  {mutedVideos[index] ? "Mute Video" : "Unmute Video"}
                 </button>
               )}
             </div>
