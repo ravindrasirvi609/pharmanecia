@@ -41,15 +41,15 @@ const AccommodationPlans: React.FC = () => {
                 <h3 className="text-2xl font-semibold text-[#021373] text-center">
                   {plan.type}
                 </h3>
-                <p className="mt-4 text-4xl font-extrabold text-[#D94814] text-center">
+                <div className="mt-4 text-4xl font-extrabold text-[#D94814] text-center">
                   ₹ {plan.price}
                   <span className="text-base font-medium text-[#CACACA]">
                     /night
                   </span>
-                  <p className="text-base font-medium text-[#050505]">
+                  <div className="text-base font-medium text-[#050505]">
                     Including GST
-                  </p>
-                </p>
+                  </div>
+                </div>
                 <ul className="mt-6 space-y-4">
                   {plan.features.map((feature, index) => (
                     <li key={index} className="flex items-start">
