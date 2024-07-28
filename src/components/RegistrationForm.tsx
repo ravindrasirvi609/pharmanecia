@@ -220,6 +220,10 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({
             required
             className="w-full p-2 border rounded"
           />
+          <p className="text-sm text-gray-600 mt-1">
+            Enter Correct Membership No., Incorrect membership No is subjected
+            to Rejection of Registration & payment will be nonrefundable.
+          </p>
           {errors.memberId && (
             <p className="text-danger text-sm mt-1">{errors.memberId}</p>
           )}
