@@ -1,6 +1,5 @@
-// app/api/generate-share-image/route.ts
 import { NextRequest, NextResponse } from "next/server";
-import { getBrowser } from "@/lib/puppeteer-service";
+import puppeteer from "puppeteer";
 
 export async function POST(req: NextRequest) {
   try {
@@ -13,7 +12,7 @@ export async function POST(req: NextRequest) {
       registrationCode,
     } = await req.json();
 
-    const browser = await getBrowser();
+    const browser = await puppeteer.launch();
     const page = await browser.newPage();
 
     // Set the viewport to match Instagram post size (1080x1080)
@@ -95,6 +94,7 @@ export async function POST(req: NextRequest) {
                   ? `<div class="affiliation">${affiliation}</div>`
                   : ""
               }
+              
             </div>
             <div class="attending">Hey! I'm attending Pharmanecia 4.E</div>
           </div>
@@ -135,6 +135,7 @@ export async function POST(req: NextRequest) {
         })
     );
 
+    // Add a small delay to ensure all styles are applied
     // Add a small delay to ensure all styles are applied
     await new Promise((resolve) => setTimeout(resolve, 500));
 
