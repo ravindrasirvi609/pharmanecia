@@ -1,4 +1,5 @@
 import { useFirebaseStorage } from "@/app/hooks/useFirebaseStorage";
+import { indianStates } from "@/data";
 import { RegistrationFormData } from "@/lib/interface";
 import axios from "axios";
 import Image from "next/image";
@@ -430,14 +431,22 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({
 
       <div className="mb-4">
         <label className="block mb-2">State</label>
-        <input
-          type="text"
+        <select
           name="state"
           value={formData.state}
           onChange={onInputChange}
           required
           className="w-full p-2 border rounded"
-        />
+        >
+          <option value="" disabled>
+            Select your state
+          </option>
+          {indianStates.map((state) => (
+            <option key={state} value={state}>
+              {state}
+            </option>
+          ))}
+        </select>
         {errors.state && (
           <p className="text-danger text-sm mt-1">{errors.state}</p>
         )}

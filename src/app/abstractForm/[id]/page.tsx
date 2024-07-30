@@ -5,6 +5,7 @@ import { useFirebaseStorage } from "@/app/hooks/useFirebaseStorage";
 import { useDropzone } from "react-dropzone";
 import { formatDate } from "@/lib/utils";
 import { RegistrationInfo } from "@/lib/interface";
+import IdCard from "@/components/idCard";
 
 interface StudentPageProps {
   params: {
@@ -165,6 +166,17 @@ const AbstractForm: React.FC<StudentPageProps> = ({ params }) => {
                 <p className="mt-2 text-sm text-center text-gray-600">
                   Scan to check abstract updates
                 </p>
+              </div>
+
+              <div>
+                <IdCard
+                  name={registration.name ?? ""}
+                  registrationType={registration.registrationType}
+                  imageUrl={registration?.imageUrl ?? ""}
+                  affiliation={registration.affiliation}
+                  designation={registration.designation}
+                  registrationCode={registration?.registrationCode}
+                />
               </div>
             </div>
 

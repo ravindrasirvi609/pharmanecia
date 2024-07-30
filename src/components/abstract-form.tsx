@@ -1,7 +1,7 @@
 "use client";
 
 import { useFirebaseStorage } from "@/app/hooks/useFirebaseStorage";
-import { designationOptions, subjectOptions } from "@/data";
+import { designationOptions, indianStates, subjectOptions } from "@/data";
 import axios from "axios";
 import { useState, ChangeEvent, useCallback } from "react";
 import { useDropzone } from "react-dropzone";
@@ -551,20 +551,27 @@ export function AbstractForm() {
             >
               State
             </label>
-            <input
-              id="state"
-              type="text"
-              className="w-full px-3 py-2 border text-black border-[#CACACA] rounded-md focus:outline-none focus:ring-2 focus:ring-[#034C8C]"
-              placeholder="Enter your state"
+            <select
+              name="state"
               value={state}
-              onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                setState(e.target.value)
-              }
-            />
+              onChange={(e) => setState(e.target.value)}
+              required
+              className="w-full px-3 py-2 border text-black border-[#CACACA] rounded-md focus:outline-none focus:ring-2 focus:ring-[#034C8C]"
+            >
+              <option value="" disabled>
+                Select your state
+              </option>
+              {indianStates.map((state) => (
+                <option key={state} value={state}>
+                  {state}
+                </option>
+              ))}
+            </select>
             {errors.state && (
               <p className="text-[#D94814] text-sm mt-1">{errors.state}</p>
             )}
           </div>
+
           <div>
             <label
               htmlFor="pincode"
@@ -581,6 +588,7 @@ export function AbstractForm() {
               onChange={(e: ChangeEvent<HTMLInputElement>) =>
                 setPincode(e.target.value)
               }
+              max={6}
             />
             {errors.pincode && (
               <p className="text-[#D94814] text-sm mt-1">{errors.pincode}</p>
