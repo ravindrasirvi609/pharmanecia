@@ -9,7 +9,10 @@ export async function GET() {
     const registrations = await RegistrationModel.find({}).sort({
       createdAt: -1,
     });
-    return NextResponse.json(registrations);
+
+    const response = NextResponse.json(registrations);
+    response.headers.set("Cache-Control", "no-store, max-age=0");
+    return response;
   } catch (error) {
     return NextResponse.json(
       { error: "Failed to fetch registrations" },
@@ -17,3 +20,5 @@ export async function GET() {
     );
   }
 }
+
+export const dynamic = "force-dynamic";
