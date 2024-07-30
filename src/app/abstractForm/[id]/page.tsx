@@ -169,14 +169,16 @@ const AbstractForm: React.FC<StudentPageProps> = ({ params }) => {
               </div>
 
               <div>
-                <IdCard
-                  name={registration.name ?? ""}
-                  registrationType={registration.registrationType}
-                  imageUrl={registration?.imageUrl ?? ""}
-                  affiliation={registration.affiliation}
-                  designation={registration.designation}
-                  registrationCode={registration?.registrationCode}
-                />
+                {registration && (
+                  <IdCard
+                    name={registration.name ?? ""}
+                    registrationType={registration.registrationType}
+                    imageUrl={registration?.imageUrl ?? ""}
+                    affiliation={registration.affiliation}
+                    designation={registration.designation}
+                    registrationCode={registration?.registrationCode}
+                  />
+                )}
               </div>
             </div>
 
