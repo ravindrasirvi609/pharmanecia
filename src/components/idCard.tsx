@@ -81,7 +81,7 @@ const SocialShareCard: React.FC<SocialShareCardProps> = ({
               alt={name}
               width={192}
               height={192}
-              className="object-cover "
+              className="object-fill"
             />
           </div>
           <h2 className="text-3xl font-bold text-[#021373] mb-2">{name}</h2>
