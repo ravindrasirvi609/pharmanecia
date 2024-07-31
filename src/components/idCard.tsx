@@ -60,46 +60,47 @@ const SocialShareCard: React.FC<SocialShareCardProps> = ({
       {/* Card Content for Image Generation (positioned off-screen) */}
       <div
         ref={cardRef}
-        className="absolute -left-[9999px] w-[1080px] h-[1080px] flex flex-col items-center justify-between bg-gradient-to-br from-[#021373] to-[#D94814] text-white font-sans p-10 box-border"
+        className="absolute -left-[9999px] w-[1080px] h-[1080px] flex flex-col items-center justify-between bg-gradient-to-br from-[#1e0060] via-[#480048] to-[#c04848] text-white font-sans p-12 box-border"
       >
-        <div className="text-center">
-          <h1 className="text-5xl font-bold mb-4">Pharmanecia 4.E</h1>
+        <div className="text-center w-full">
+          <h1 className="text-6xl font-bold mb-4">Pharmanecia 4.E</h1>
           <h2 className="text-2xl font-semibold mb-2">
             International Research Conference on
           </h2>
-          <h3 className="text-3xl font-bold mb-4 px-10">
+          <h3 className="text-3xl font-bold mb-6 px-16">
             &quot;Recent Advances in Artificial Intelligence and Machine
             learning driven drug discovery&quot;
           </h3>
           <p className="text-2xl font-semibold">7th and 8th March, 2025</p>
         </div>
 
-        <div className="bg-white rounded-xl p-8 shadow-lg text-center">
-          <div className="w-48 h-48 rounded-full overflow-hidden border-4 border-[#D94814] mx-auto mb-4">
+        <div className="bg-white rounded-3xl p-10 shadow-lg text-center w-5/6">
+          <div className="w-40 h-40 rounded-full overflow-hidden border-4 border-[#D94814] mx-auto mb-6">
             <Image
               src={imageUrl}
               alt={name}
               width={192}
               height={192}
-              className="object-fill"
+              className="object-cover w-full h-full flex items-center justify-center"
             />
           </div>
-          <h2 className="text-3xl font-bold text-[#021373] mb-2">{name}</h2>
+
+          <h2 className="text-3xl font-bold text-[#1e0060] mb-2">{name}</h2>
           {designation && (
-            <p className="text-xl text-[#D94814] font-semibold mb-1">
+            <p className="text-2xl text-[#D94814] font-semibold mb-1">
               {designation}
             </p>
           )}
           {affiliation && (
-            <p className="text-lg text-gray-600 mb-2">{affiliation}</p>
+            <p className="text-xl text-gray-600 mb-4">{affiliation}</p>
           )}
+
+          <p className="text-5xl font-bold text-[#D94814] mt-6">
+            Hey! I&apos;m attending Pharmanecia 4.E
+          </p>
         </div>
 
-        <p className="text-2xl font-bold mb-6">
-          Hey! I&apos;m attending Pharmanecia 4.E
-        </p>
-
-        <div className="text-lg text-center">
+        <div className="text-lg text-center mt-6">
           <p>Organized by Department of Pharmaceutical Chemistry,</p>
           <p>JSS College of Pharmacy, Ooty</p>
           <p className="mb-4">Hosted by Operant Pharmacy Federation</p>
