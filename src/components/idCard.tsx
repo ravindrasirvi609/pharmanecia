@@ -75,15 +75,15 @@ const SocialShareCard: React.FC<SocialShareCardProps> = ({
         </div>
 
         <div className="bg-white rounded-3xl p-10 shadow-lg text-center w-5/6">
-          <div className="w-40 h-40 rounded-full overflow-hidden border-4 border-[#D94814] mx-auto mb-6">
+          {/* <div className="w-40 h-40 rounded-full flex justify-center overflow-hidden border-4 border-[#D94814] mx-auto mb-6">
             <Image
               src={imageUrl}
               alt={name}
               width={192}
               height={192}
-              className="object-cover w-full h-full flex items-center justify-center"
+              className="w-full h-full flex items-center justify-center"
             />
-          </div>
+          </div> */}
 
           <h2 className="text-3xl font-bold text-[#1e0060] mb-2">{name}</h2>
           {designation && (
@@ -95,8 +95,8 @@ const SocialShareCard: React.FC<SocialShareCardProps> = ({
             <p className="text-xl text-gray-600 mb-4">{affiliation}</p>
           )}
 
-          <p className="text-5xl font-bold text-[#D94814] mt-6">
-            Hey! I&apos;m attending Pharmanecia 4.E
+          <p className="text-3xl font-black text-[#D94814] mt-6">
+            Hey! I&apos;m Attending Pharmanecia 4.E
           </p>
         </div>
 
