@@ -16,7 +16,7 @@ const RegistrationPlans: React.FC = () => {
   const [showModal, setShowModal] = useState(false);
   const [formErrors, setFormErrors] = useState<{ [key: string]: string }>({});
   const [includeGalaDinner, setIncludeGalaDinner] = useState(false);
-
+  const [isProcessingTransaction, setIsProcessingTransaction] = useState(false);
   const [formData, setFormData] = useState<RegistrationFormData>({
     email: "",
     whatsappNumber: "",
@@ -225,6 +225,8 @@ const RegistrationPlans: React.FC = () => {
         description: `Payment for ${plan.name}`,
         handler: async function (response: any) {
           try {
+            setIsProcessingTransaction(true);
+
             const transactionResponse = await axios.post(
               "/api/save-transaction",
               {
@@ -244,6 +246,8 @@ const RegistrationPlans: React.FC = () => {
           } catch (error) {
             console.error("Failed to save transaction:", error);
           } finally {
+            setIsProcessingTransaction(false);
+
             closeModal();
           }
         },
@@ -348,65 +352,76 @@ const RegistrationPlans: React.FC = () => {
       {showModal && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
           <div className="bg-white rounded-lg p-8 max-w-2xl w-full max-h-[90vh] overflow-y-auto">
-            <h2 className="text-2xl font-bold mb-4">
-              Register for {selectedPlan?.name}
-            </h2>
-            <RegistrationForm
-              formData={formData}
-              onInputChange={handleInputChange}
-              onImageUpload={handleImageUpload}
-              errors={formErrors}
-              includeGalaDinner={includeGalaDinner}
-              handleGalaDinnerChange={handleGalaDinnerChange}
-              selectedPlanName={selectedPlan?.name}
-            />
-            {submitError && (
-              <div className="mb-4 p-3 bg-red-100 border border-red-400 text-red-700 rounded">
-                {submitError}
+            {isProcessingTransaction ? (
+              <div className="flex flex-col items-center justify-center h-64">
+                <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-primary"></div>
+                <p className="mt-4 text-lg font-semibold text-primary">
+                  Processing transaction... Thanks for your patience! 🙏
+                </p>
               </div>
+            ) : (
+              <>
+                <h2 className="text-2xl font-bold mb-4">
+                  Register for {selectedPlan?.name}
+                </h2>
+                <RegistrationForm
+                  formData={formData}
+                  onInputChange={handleInputChange}
+                  onImageUpload={handleImageUpload}
+                  errors={formErrors}
+                  includeGalaDinner={includeGalaDinner}
+                  handleGalaDinnerChange={handleGalaDinnerChange}
+                  selectedPlanName={selectedPlan?.name}
+                />
+                {submitError && (
+                  <div className="mb-4 p-3 bg-red-100 border border-red-400 text-red-700 rounded">
+                    {submitError}
+                  </div>
+                )}
+                <button
+                  onClick={handleSubmit}
+                  disabled={isSubmitting}
+                  className={`w-full font-bold py-3 px-6 rounded-md transition duration-300 ${
+                    isSubmitting
+                      ? "bg-gray-400 cursor-not-allowed"
+                      : "bg-accent text-white hover:bg-secondary"
+                  }`}
+                >
+                  {isSubmitting ? (
+                    <div className="flex items-center justify-center">
+                      <svg
+                        className="animate-spin h-5 w-5 mr-3 text-white"
+                        viewBox="0 0 24 24"
+                      >
+                        <circle
+                          className="opacity-25"
+                          cx="12"
+                          cy="12"
+                          r="10"
+                          stroke="currentColor"
+                          strokeWidth="4"
+                          fill="none"
+                        />
+                        <path
+                          className="opacity-75"
+                          fill="currentColor"
+                          d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                        />
+                      </svg>
+                      Submitting...
+                    </div>
+                  ) : (
+                    `Register and Pay (₹${selectedPlan?.earlyBird})`
+                  )}
+                </button>
+                <button
+                  onClick={closeModal}
+                  className="mt-4 w-full bg-gray-300 text-gray-800 font-bold py-3 px-6 rounded-md hover:bg-gray-400 transition duration-300"
+                >
+                  Close
+                </button>
+              </>
             )}
-            <button
-              onClick={handleSubmit}
-              disabled={isSubmitting}
-              className={`w-full font-bold py-3 px-6 rounded-md transition duration-300 ${
-                isSubmitting
-                  ? "bg-gray-400 cursor-not-allowed"
-                  : "bg-accent text-white hover:bg-secondary"
-              }`}
-            >
-              {isSubmitting ? (
-                <div className="flex items-center justify-center">
-                  <svg
-                    className="animate-spin h-5 w-5 mr-3 text-white"
-                    viewBox="0 0 24 24"
-                  >
-                    <circle
-                      className="opacity-25"
-                      cx="12"
-                      cy="12"
-                      r="10"
-                      stroke="currentColor"
-                      strokeWidth="4"
-                      fill="none"
-                    />
-                    <path
-                      className="opacity-75"
-                      fill="currentColor"
-                      d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                    />
-                  </svg>
-                  Submitting...
-                </div>
-              ) : (
-                `Register and Pay (₹${selectedPlan?.earlyBird})`
-              )}
-            </button>
-            <button
-              onClick={closeModal}
-              className="mt-4 w-full bg-gray-300 text-gray-800 font-bold py-3 px-6 rounded-md hover:bg-gray-400 transition duration-300"
-            >
-              Close
-            </button>
           </div>
         </div>
       )}
