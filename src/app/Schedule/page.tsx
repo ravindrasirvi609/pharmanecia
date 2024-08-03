@@ -32,8 +32,8 @@ const Schedule = () => {
   const renderSchedule = (day: "day1" | "day2") => {
     return schedule[day].map((item, index) => (
       <div key={index} className="mb-12 relative">
-        <div className="absolute left-0 top-0 w-4 h-4 bg-accent rounded-full -ml-2"></div>
-        <div className="border-l-4 border-accent pl-6 pb-6">
+        <div className="absolute left-0 top-0 w-4 h-4 bg-danger rounded-full -ml-2"></div>
+        <div className="border-l-4 border-danger pl-6 pb-6">
           <div className="bg-white shadow-lg rounded-lg p-6 transition-all duration-300 hover:shadow-xl">
             <h3 className="text-xl font-bold mb-2 text-primary">{item.time}</h3>
             <p className="text-lg mb-4 text-secondary">{item.event}</p>
@@ -86,6 +86,22 @@ const Schedule = () => {
 
   return (
     <div className="bg-light min-h-screen py-16 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-4xl mx-auto text-center">
+        <h1 className="text-5xl font-bold mb-8 text-primary">
+          Pharmanecia 4.E International Research Conference
+        </h1>
+        <p className="text-xl mb-4 text-secondary">
+          On &quot;Recent Advances in Artificial Intelligence and Machine
+          Learning Driven Drug Discovery&quot;
+        </p>
+        <p className="text-lg mb-4 text-secondary">
+          Organized by: Department of Pharmaceutical Chemistry, JSS College of
+          Pharmacy, Ooty
+        </p>
+        <p className="text-lg mb-12 text-secondary">
+          Hosted by: Operant Pharmacy Federation
+        </p>
+      </div>
       <div className="max-w-4xl mx-auto">
         <h1 className="text-5xl font-bold mb-12 text-center text-primary">
           Conference Schedule
@@ -95,7 +111,7 @@ const Schedule = () => {
           <button
             className={`px-6 py-2 rounded-full text-lg font-semibold transition-all duration-300 ${
               activeDay === "day1"
-                ? "bg-accent text-white"
+                ? "bg-danger text-white"
                 : "bg-white text-primary hover:bg-gray-100"
             }`}
             onClick={() => setActiveDay("day1")}
@@ -105,7 +121,7 @@ const Schedule = () => {
           <button
             className={`px-6 py-2 rounded-full text-lg font-semibold transition-all duration-300 ${
               activeDay === "day2"
-                ? "bg-accent text-white"
+                ? "bg-danger text-white"
                 : "bg-white text-primary hover:bg-gray-100"
             }`}
             onClick={() => setActiveDay("day2")}
@@ -115,7 +131,7 @@ const Schedule = () => {
         </div>
 
         <div ref={timelineRef} className="relative">
-          <div className="absolute left-0 top-0 h-full w-1 bg-accent"></div>
+          <div className="absolute left-0 top-0 h-full w-1 bg-danger"></div>
           {renderSchedule(activeDay)}
         </div>
       </div>
