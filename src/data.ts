@@ -11,13 +11,13 @@ export const schedule = {
     {
       time: "09:30",
       event:
-        "Keynote Address -- 1: Artificial Intelligence and Machine learning driven drug discovery",
+        "Keynote Address 1: Artificial Intelligence and Machine learning driven drug discovery",
       speakers: ["To be announced"],
     },
     {
       time: "10:00",
       event:
-        "Keynote Address -- 2: Breaking the barriers in Pharmaceutical Research",
+        "Keynote Address 2: Breaking the barriers in Pharmaceutical Research",
       speakers: ["To be announced"],
     },
     {
@@ -28,13 +28,13 @@ export const schedule = {
     {
       time: "10:45",
       event:
-        "Panel Discussion -- 1: AI-driven target identification and Validation / Machine learning models for predicting drug-target interactions",
+        "Panel Discussion 1: AI-driven target identification and Validation / Machine learning models for predicting drug-target interactions",
       speakers: ["To be announced"],
     },
     {
       time: "11:45",
       event:
-        "Plenary Session -- 1: Inclusive Pharmaceutical Education & Research: Bridging Educational & Research Gaps Worldwide",
+        "Plenary Session 1: Inclusive Pharmaceutical Education & Research: Bridging Educational & Research Gaps Worldwide",
       speakers: ["To be announced"],
     },
     {
@@ -52,9 +52,9 @@ export const schedule = {
           title:
             "Future of Pharmacy Education & Research: Breaking the International barriers in Education",
           sessions: [
-            { time: "13:30", event: "Plenary Session - 2" },
-            { time: "14:15", event: "Plenary Session - 4" },
-            { time: "15:00", event: "Plenary Session - 6" },
+            { time: "13:30", event: "Plenary Session 2" },
+            { time: "14:15", event: "Plenary Session 4" },
+            { time: "15:00", event: "Plenary Session 6" },
           ],
         },
         {
@@ -62,9 +62,9 @@ export const schedule = {
           title:
             "Regulatory intelligence: The impact of artificial intelligence in regulatory operations",
           sessions: [
-            { time: "13:30", event: "Plenary Session -- 3" },
-            { time: "14:15", event: "Plenary Session -- 5" },
-            { time: "15:00", event: "Plenary Session -- 7" },
+            { time: "13:30", event: "Plenary Session 3" },
+            { time: "14:15", event: "Plenary Session 5" },
+            { time: "15:00", event: "Plenary Session 7" },
           ],
         },
       ],
@@ -94,19 +94,19 @@ export const schedule = {
     {
       time: "09:00",
       event:
-        "Keynote Address -- 3: Standardisation of Phytopharmaceuticals in Modern Era: Need for sophisticated analytical Techniques",
+        "Keynote Address 3: Standardisation of Phytopharmaceuticals in Modern Era: Need for sophisticated analytical Techniques",
       speakers: ["To be announced"],
     },
     {
       time: "09:30",
       event:
-        "Keynote Address -- 4: Exploring Natural Products for Drug Discovery : Global Perspectives",
+        "Keynote Address 4: Exploring Natural Products for Drug Discovery : Global Perspectives",
       speakers: ["To be announced"],
     },
     {
       time: "10:00",
       event:
-        "Keynote Address -- 5: Targeted drug delivery system, QbD in formulation",
+        "Keynote Address 5: Targeted drug delivery system, QbD in formulation",
       speakers: ["To be announced"],
     },
     {
@@ -117,13 +117,13 @@ export const schedule = {
     {
       time: "10:45",
       event:
-        "Panel Discussion -- 2: AI applications in high-throughput Screening, Lead optimization and Deep learning approaches in de novo Drug Design",
+        "Panel Discussion 2: AI applications in high-throughput Screening, Lead optimization and Deep learning approaches in de novo Drug Design",
       speakers: ["To be announced"],
     },
     {
       time: "11:45",
       event:
-        "Panel Discussion -- 3: Ethical considerations and regulatory challenges in AI-driven Drug Discovery",
+        "Panel Discussion 3: Ethical considerations and regulatory challenges in AI-driven Drug Discovery",
       speakers: ["To be announced"],
     },
     {
@@ -151,9 +151,9 @@ export const schedule = {
           title:
             "Next-Generation Therapeutics: Gene and Cell Therapy based Approaches",
           sessions: [
-            { time: "13:30", event: "Plenary Session -- 9" },
-            { time: "14:15", event: "Plenary Session -- 11" },
-            { time: "15:00", event: "Plenary Session -- 13" },
+            { time: "13:30", event: "Plenary Session 9" },
+            { time: "14:15", event: "Plenary Session 11" },
+            { time: "15:00", event: "Plenary Session 13" },
           ],
         },
       ],

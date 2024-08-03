@@ -64,7 +64,7 @@ const Schedule = () => {
                     <h4 className="text-lg font-semibold text-primary">
                       {subEvent.track}: {subEvent.title}
                     </h4>
-                    <ul className="mt-2 space-y-2">
+                    <ul className="mt-2 space-y-2 text-danger">
                       {subEvent.sessions.map((session, sessionIdx) => (
                         <li key={sessionIdx} className="flex items-center">
                           <span className="font-medium mr-2">
