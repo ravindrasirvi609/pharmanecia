@@ -146,14 +146,15 @@ export const committee: CommitteeMember[] = [
     designation:
       "Chairman, Stage Committee (Inauguration & Valedictory Function)",
     contact: "Cell: 9790095279",
-    image: "/profile/Swaminathan.png",
+    image:
+      "https://jssaherstoragenew.blob.core.windows.net/jssuudstorage/EmployeeData/E1309/EMP_1309_P_7697DDDE02.jpg",
   },
   {
     name: "Dr. Srikanth Jupudi",
     designation: "Chairman, Accommodation / Transport Committee",
     contact: "Cell: 9393011114",
     image:
-      "https://lh3.googleusercontent.com/3IIz2tcH_2SiU09FxbuTvC4p76yqzoLr-baGHMxumR6V-F7tbHRyl0yYieWA0e0bNa1XuRqaDezsYR-Yk78ZlRU9PXA8DcWAzbp-RUH0HEKbKjbw7Zr779vxlA0QDpnv=w1280",
+      "https://jssaherstoragenew.blob.core.windows.net/jssuudstorage/EmployeeData/E1308/EMP_1308_P_768BF89FAA.jpg",
   },
   {
     name: "Dr. Gomathy Shanish",
