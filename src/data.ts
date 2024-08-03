@@ -4,61 +4,174 @@ import { Plan } from "./lib/interface";
 export const schedule = {
   day1: [
     {
-      time: "9:00 AM - 10:00 AM",
-      event: "Registration",
+      time: "09:00",
+      event: "Opening Remarks",
       speakers: [],
     },
     {
-      time: "10:00 AM - 12:00 PM",
-      event: "Opening Ceremony and Keynote Speeches",
-      speakers: ["Announcing Soon"],
+      time: "09:30",
+      event:
+        "Keynote Address -- 1: Artificial Intelligence and Machine learning driven drug discovery",
+      speakers: ["To be announced"],
     },
     {
-      time: "12:00 PM - 1:00 PM",
-      event: "Networking Lunch",
+      time: "10:00",
+      event:
+        "Keynote Address -- 2: Breaking the barriers in Pharmaceutical Research",
+      speakers: ["To be announced"],
+    },
+    {
+      time: "10:30",
+      event: "Coffee / Tea Break",
       speakers: [],
     },
     {
-      time: "1:00 PM - 3:00 PM",
-      event: "Workshop on Pharmaceutical Research",
-      speakers: ["Announcing Soon"],
+      time: "10:45",
+      event:
+        "Panel Discussion -- 1: AI-driven target identification and Validation / Machine learning models for predicting drug-target interactions",
+      speakers: ["To be announced"],
     },
     {
-      time: "3:00 PM - 5:00 PM",
-      event: "Panel Discussion on Drug Discovery",
-      speakers: ["Announcing Soon"],
+      time: "11:45",
+      event:
+        "Plenary Session -- 1: Inclusive Pharmaceutical Education & Research: Bridging Educational & Research Gaps Worldwide",
+      speakers: ["To be announced"],
+    },
+    {
+      time: "12:30",
+      event: "Lunch Cum Networking Break",
+      speakers: [],
+    },
+    {
+      time: "13:30 - 15:45",
+      event: "Concurrent Parallel Sessions",
+      speakers: [],
+      subEvents: [
+        {
+          track: "Track A",
+          title:
+            "Future of Pharmacy Education & Research: Breaking the International barriers in Education",
+          sessions: [
+            { time: "13:30", event: "Plenary Session - 2" },
+            { time: "14:15", event: "Plenary Session - 4" },
+            { time: "15:00", event: "Plenary Session - 6" },
+          ],
+        },
+        {
+          track: "Track B",
+          title:
+            "Regulatory intelligence: The impact of artificial intelligence in regulatory operations",
+          sessions: [
+            { time: "13:30", event: "Plenary Session -- 3" },
+            { time: "14:15", event: "Plenary Session -- 5" },
+            { time: "15:00", event: "Plenary Session -- 7" },
+          ],
+        },
+      ],
+    },
+    {
+      time: "15:45",
+      event: "High Tea",
+      speakers: [],
+    },
+    {
+      time: "16:00",
+      event: "Concurrent Parallel Oral Presentations",
+      speakers: [],
+    },
+    {
+      time: "16:00",
+      event: "Concurrent Parallel E-Poster Presentations",
+      speakers: [],
+    },
+    {
+      time: "19:00",
+      event: "Networking Cum Gala Dinner",
+      speakers: [],
     },
   ],
   day2: [
     {
-      time: "9:00 AM - 10:30 AM",
-      event: "Technical Session 1",
-      speakers: ["Announcing Soon"],
+      time: "09:00",
+      event:
+        "Keynote Address -- 3: Standardisation of Phytopharmaceuticals in Modern Era: Need for sophisticated analytical Techniques",
+      speakers: ["To be announced"],
     },
     {
-      time: "10:30 AM - 11:00 AM",
-      event: "Coffee Break",
+      time: "09:30",
+      event:
+        "Keynote Address -- 4: Exploring Natural Products for Drug Discovery : Global Perspectives",
+      speakers: ["To be announced"],
+    },
+    {
+      time: "10:00",
+      event:
+        "Keynote Address -- 5: Targeted drug delivery system, QbD in formulation",
+      speakers: ["To be announced"],
+    },
+    {
+      time: "10:30",
+      event: "Coffee / Tea Break",
       speakers: [],
     },
     {
-      time: "11:00 AM - 12:30 PM",
-      event: "Technical Session 2",
-      speakers: ["Announcing Soon"],
+      time: "10:45",
+      event:
+        "Panel Discussion -- 2: AI applications in high-throughput Screening, Lead optimization and Deep learning approaches in de novo Drug Design",
+      speakers: ["To be announced"],
     },
     {
-      time: "12:30 PM - 1:30 PM",
-      event: "Networking Lunch",
+      time: "11:45",
+      event:
+        "Panel Discussion -- 3: Ethical considerations and regulatory challenges in AI-driven Drug Discovery",
+      speakers: ["To be announced"],
+    },
+    {
+      time: "12:30",
+      event: "Lunch Cum Networking Break",
       speakers: [],
     },
     {
-      time: "1:30 PM - 3:00 PM",
-      event: "Workshop on Clinical Pharmacy",
-      speakers: ["Announcing Soon"],
+      time: "13:30 - 15:45",
+      event: "Concurrent Parallel Sessions",
+      speakers: [],
+      subEvents: [
+        {
+          track: "Track C",
+          title:
+            "Natural Products and Traditional Medicines in Modern Healthcare",
+          sessions: [
+            { time: "13:30", event: "Plenary Session - 8" },
+            { time: "14:15", event: "Plenary Session - 10" },
+            { time: "15:00", event: "Plenary Session - 12" },
+          ],
+        },
+        {
+          track: "Track D",
+          title:
+            "Next-Generation Therapeutics: Gene and Cell Therapy based Approaches",
+          sessions: [
+            { time: "13:30", event: "Plenary Session -- 9" },
+            { time: "14:15", event: "Plenary Session -- 11" },
+            { time: "15:00", event: "Plenary Session -- 13" },
+          ],
+        },
+      ],
     },
     {
-      time: "3:00 PM - 5:00 PM",
-      event: "Technical Session 3",
-      speakers: ["Announcing Soon"],
+      time: "15:45",
+      event: "High Tea",
+      speakers: [],
+    },
+    {
+      time: "16:00",
+      event: "Closing Ceremony & Awards Distribution",
+      speakers: [],
+    },
+    {
+      time: "17:00",
+      event: "Certificate Distribution",
+      speakers: [],
     },
   ],
 };

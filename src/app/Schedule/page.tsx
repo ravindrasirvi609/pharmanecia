@@ -37,7 +37,7 @@ const Schedule = () => {
           <div className="bg-white shadow-lg rounded-lg p-6 transition-all duration-300 hover:shadow-xl">
             <h3 className="text-xl font-bold mb-2 text-primary">{item.time}</h3>
             <p className="text-lg mb-4 text-secondary">{item.event}</p>
-            {item.speakers.length > 0 && (
+            {item.speakers && item.speakers.length > 0 && (
               <ul className="space-y-2">
                 {item.speakers.map((speaker, idx) => (
                   <li key={idx} className="flex items-center">
@@ -56,6 +56,27 @@ const Schedule = () => {
                   </li>
                 ))}
               </ul>
+            )}
+            {item.subEvents && (
+              <div className="mt-4">
+                {item.subEvents.map((subEvent, subIdx) => (
+                  <div key={subIdx} className="mb-4">
+                    <h4 className="text-lg font-semibold text-primary">
+                      {subEvent.track}: {subEvent.title}
+                    </h4>
+                    <ul className="mt-2 space-y-2">
+                      {subEvent.sessions.map((session, sessionIdx) => (
+                        <li key={sessionIdx} className="flex items-center">
+                          <span className="font-medium mr-2">
+                            {session.time}:
+                          </span>
+                          <span>{session.event}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                ))}
+              </div>
             )}
           </div>
         </div>
@@ -79,7 +100,7 @@ const Schedule = () => {
             }`}
             onClick={() => setActiveDay("day1")}
           >
-            Day 1
+            Day 1: March 7, 2025
           </button>
           <button
             className={`px-6 py-2 rounded-full text-lg font-semibold transition-all duration-300 ${
@@ -89,7 +110,7 @@ const Schedule = () => {
             }`}
             onClick={() => setActiveDay("day2")}
           >
-            Day 2
+            Day 2: March 8, 2025
           </button>
         </div>
 

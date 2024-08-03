@@ -115,7 +115,7 @@ const ScheduleOverview = () => {
 
         <div className="mb-12">
           <h2 className="text-4xl font-semibold mb-8 text-center text-yellow-100">
-            Conference Agenda
+            Conference Highlights
           </h2>
           <div className="space-y-8 md:space-y-0 md:grid md:grid-cols-2 md:gap-8">
             {/* Day 1 */}
@@ -124,17 +124,20 @@ const ScheduleOverview = () => {
               className="bg-white bg-opacity-10 backdrop-blur-md shadow-lg rounded-lg p-6 transition-transform duration-300 hover:scale-105"
             >
               <h3 className="text-2xl font-semibold text-yellow-300 mb-4">
-                Day 1: Inauguration Ceremony & Keynote Speeches
+                Day 1: March 7, 2025
               </h3>
               <ul className="space-y-2 text-lg">
-                <li>9:00 AM - 10:00 AM: Registration</li>
+                <li>09:00 AM: Opening Remarks</li>
+                <li>09:30 AM - 10:00 AM: Keynote Addresses</li>
                 <li>
-                  10:00 AM - 12:00 PM: Inauguration Ceremony and Keynote Address
+                  10:45 AM: Panel Discussion on AI-driven Target Identification
                 </li>
-                <li>12:00 PM - 1:00 PM: Panel Discussion</li>
-                <li>1:00 PM - 2:00 PM: Networking Lunch</li>
-                <li>2:00 PM - 3:00 PM: Panel Discussion</li>
-                <li>3:00 PM - 5:00 PM: Plenary Session</li>
+                <li>
+                  11:45 AM: Plenary Session on Inclusive Pharmaceutical
+                  Education & Research
+                </li>
+                <li>13:30 PM - 15:45 PM: Concurrent Parallel Sessions</li>
+                <li>19:00 PM: Networking Cum Gala Dinner</li>
               </ul>
             </div>
 
@@ -144,17 +147,21 @@ const ScheduleOverview = () => {
               className="bg-white bg-opacity-10 backdrop-blur-md shadow-lg rounded-lg p-6 transition-transform duration-300 hover:scale-105"
             >
               <h3 className="text-2xl font-semibold text-yellow-300 mb-4">
-                Day 2: Technical Sessions & Workshops
+                Day 2: March 8, 2025
               </h3>
               <ul className="space-y-2 text-lg">
-                <li>9:00 AM - 11:00 AM: Panel Discussion</li>
-                <li>11:00 AM - 1:00 PM: Plenary Session</li>
-                <li>1:00 PM - 2:00 PM: Networking Lunch</li>
-                <li>2:00 PM - 4:00 PM: Workshop on AI and ML</li>
+                <li>09:00 AM - 10:00 AM: Keynote Addresses</li>
                 <li>
-                  4:00 PM - 5:00 PM: Valedictory function and Award Ceremony
+                  10:45 AM: Panel Discussion on AI Applications in Drug
+                  Discovery
                 </li>
-                <li>5:00 PM : Certificate Distribution</li>
+                <li>
+                  11:45 AM: Panel Discussion on Ethical Considerations in
+                  AI-driven Drug Discovery
+                </li>
+                <li>13:30 PM - 15:45 PM: Concurrent Parallel Sessions</li>
+                <li>16:00 PM: Closing Ceremony & Awards Distribution</li>
+                <li>17:00 PM: Certificate Distribution</li>
               </ul>
             </div>
           </div>
