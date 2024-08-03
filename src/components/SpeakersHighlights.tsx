@@ -35,7 +35,7 @@ const SpeakersHighlights = () => {
             {/* Speaker 1 */}
             <div className="bg-white shadow-lg rounded-lg p-6 text-center">
               <Image
-                src="https://lh3.googleusercontent.com/Psk9RZBzv4T_rszcVrHU2oQHKIUvbU_hdBzHtbw2o9tBryc5PyhQxLHE5-pZl_ICeig0kz2KFKzRYb7vG_qqOeqaeh0wNpKbPhF5RkzCKBBIs246K4EBeiZRbFaTnyMNdg=w1280"
+                src="/profile/chancellor.jpg"
                 alt="Speaker 1"
                 className="w-32 h-32 mx-auto rounded-full mb-4"
                 height={150}
@@ -52,7 +52,7 @@ const SpeakersHighlights = () => {
             {/* Speaker 2 */}
             <div className="bg-white shadow-lg rounded-lg p-6 text-center">
               <Image
-                src="https://lh6.googleusercontent.com/xmvCM2RyHjPF7rY0giATC2DVhQZI8wJnANve_kTqKzhVC90HsApl5bREdae2GEW5wP-rGhLCj_tEXVtAM87ecQDhQwFlsr5y7ueG810_NfTTpMN7V8egME9TmSMlF24yVQ=w1280"
+                src="/profile/Surinder.png"
                 alt="Speaker 2"
                 className="w-32 h-32 mx-auto rounded-full mb-4"
                 height={150}

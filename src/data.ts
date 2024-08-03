@@ -101,8 +101,7 @@ export const committee: CommitteeMember[] = [
     name: "Dr. S. P. Dhanabal",
     designation: "Convener",
     affiliation: "Principal, JSS College of Pharmacy, Ooty",
-    image:
-      "https://lh3.googleusercontent.com/UHNpNj4I44jvIkcHBdf-M_gAwO0ERXekPbLwgAeGaJXnozY136jX4bPTL4KoDOfhXL2XuzqdS1fRRXF7ykfcVKqBwv5mP2AWjnqvRrRan5mgLcndO5wGMczituZ-vqdorg=w1280",
+    image: "/profile/Dhanabal.png",
   },
   {
     name: "Dr. R. Kalirajan",
@@ -110,8 +109,7 @@ export const committee: CommitteeMember[] = [
     affiliation:
       "HoD, Dept. of Pharmaceutical Chemistry, JSS College of Pharmacy, Ooty",
     contact: "Email: rkalirajan@jssuni.edu.in   Cell: 9994098087",
-    image:
-      "https://lh6.googleusercontent.com/89fC_3WK-jeTHxbSBmxAUNhwChcyBD2CAiPrvgjNwDpP_rlfA41ezS7jf0_0jA_HWrJyP0sJ4Y3P7vQqMD3vuCavayEvIAC4kh2TjCH8kuL3Ur7dDC2z1KMiKyR46GLvVA=w1280",
+    image: "/profile/Kalirajan.jpg",
   },
   {
     name: "Mr. Basavalingadevaru",
@@ -129,30 +127,26 @@ export const committee: CommitteeMember[] = [
     name: "Dr. S. Jubie",
     designation: "Chairman, Registration Committee",
     contact: "Cell: 9894618588",
-    image:
-      "https://lh6.googleusercontent.com/1ux1a4UkLJ4JFsruu6jDVErKgVHRF05IXoiYzc9cbq3mX-C-l0K2q_pT-7lOMN4MF29BCEoe8R3MH9u7-HfD8d4pntFQNNboiR-3IQGc6AtESrgAGzwc_AQWj3HF1Xqa_w=w1280",
+    image: "/profile/Jubie.png",
   },
   {
     name: "Dr. B. Gowramma",
     designation: "Chairman, Scientific Committee (Presentations)",
     contact: "Cell: 9442111172",
-    image:
-      "https://lh4.googleusercontent.com/quM4rVuAXxggkQDOWZ1w99djzME6ZeNDu0a-lrjfezN8UvSIvxym3VyODa4k_kD-8_1sD4aBzI8vfGXlIadnNkXaCkFidg57ddWxsee4oBreKvCfrB3XbjWmGjog8LyTPw=w1280",
+    image: "/profile/Gowramma.png",
   },
   {
     name: "Dr. Durai Anandha Kumar",
     designation: "Chairman, Scientific Committee (Plenary sessions)",
     contact: "Cell: 9866852707",
-    image:
-      "https://lh5.googleusercontent.com/x5UxfXSvVUJlZC2N9LAhuliwO6iV5tNEeARkEy8cEW1emV-ZOKvBFD1vaI71uJryCQk9cZtn_afRWP3SqD6bbtb4L4PzpGzWKN_5SQRh6n9iZL5aW8XBKLGZSLOOxL1SYQ=w1280",
+    image: "/profile/Durai.png",
   },
   {
     name: "Dr. Gomathi Swaminathan",
     designation:
       "Chairman, Stage Committee (Inauguration & Valedictory Function)",
     contact: "Cell: 9790095279",
-    image:
-      "https://lh6.googleusercontent.com/8XwaLZdfR36-gtYZqNgFBpAANU1XIgxaQQO1trIHraYBF6QNFw_SK_SnijIj0jCDPWuq1es479bcoqKpICHuQ6PU1UTU-_5VLeMnjpHixWEM-Sqd1k0sTlqWxD5NSX4sew=w1280",
+    image: "/profile/Swaminathan.png",
   },
   {
     name: "Dr. Srikanth Jupudi",
@@ -165,8 +159,7 @@ export const committee: CommitteeMember[] = [
     name: "Dr. Gomathy Shanish",
     designation: "Chairman, Hospitality / Catering Committee",
     contact: "Cell: 9486433876",
-    image:
-      "https://lh4.googleusercontent.com/hzT7g0w9BgRkjQV2JGsGxu7ard6ZIC7qQ9VYVKVdp-woS5-WK0CmJ51uYpjm4E_4fI9jXmHf6WsS3SmI-_2RA1vRPVWKJaKRn_o3CxmMLN7k3PbLTdREZJgo6DzQ9zHDbg=w1280",
+    image: "/profile/Gomathy.png",
   },
 ];
 export const subjectOptions = [
@@ -231,7 +224,7 @@ export const plans: Plan[] = [
   {
     name: "OPF/OBRF Members",
     description: "Includes entry to all sessions and conference kit.",
-    earlyBird: 1,
+    earlyBird: 1500,
     regular: 2000,
     spot: 2500,
   },
