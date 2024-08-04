@@ -16,6 +16,14 @@ const AbstractFormPage: React.FC = () => {
             &quot;Recent Advances in Artificial Intelligence and Machine
             Learning Driven Drug Discovery&quot;
           </h2>
+          <section className="mt-8 bg-[#D94814] p-6 my-2 rounded-lg shadow-md text-white">
+            <p className="mb-4">
+              The Pharmanecia Scientific Committee (PSC) invites delegates to
+              submit their original scientific work as abstracts for
+              presentation during the Congress as Poster and/or Oral
+              presentations.
+            </p>
+          </section>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div className="space-y-8">
@@ -87,16 +95,10 @@ const AbstractFormPage: React.FC = () => {
                 </ul>
                 <div className="mt-4 space-x-4">
                   <a
-                    href="#"
-                    className="text-[#034C8C] hover:text-[#021373] transition duration-300"
+                    href="https://docs.google.com/document/d/1XNRgI2o0S6oaC0quxcxj0Aw0CVV93Ft3/edit?usp=sharing&ouid=108384988200604232400&rtpof=true&sd=true"
+                    className="text-[#034C8C] hover:text-[#000000] font-bold underline transition duration-300"
                   >
-                    Pharmanecia MODEL ABSTRACT
-                  </a>
-                  <a
-                    href="#"
-                    className="text-[#034C8C] hover:text-[#021373] transition duration-300"
-                  >
-                    MODEL ABSTRACT POSTER
+                    PHARMANECIA MODEL ABSTRACT
                   </a>
                 </div>
               </section>
@@ -142,12 +144,6 @@ const AbstractFormPage: React.FC = () => {
 
           <section className="mt-8 bg-[#D94814] p-6 rounded-lg shadow-md text-white">
             <h3 className="text-xl font-semibold mb-4">Submit Abstract</h3>
-            <p className="mb-4">
-              The Pharmanecia Scientific Committee (PSC) invites delegates to
-              submit their original scientific work as abstracts for
-              presentation during the Congress as Poster and/or Oral
-              presentations.
-            </p>
             <button
               onClick={() => setShowForm(!showForm)}
               className="bg-white text-[#D94814] hover:bg-[#F2F2F2] font-bold py-2 px-4 rounded transition duration-300"
