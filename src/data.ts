@@ -205,10 +205,10 @@ export const speakers = [
 
 export const committee: CommitteeMember[] = [
   {
-    name: "Mr. Vikram Choudhary",
-    designation: "Chairman",
-    affiliation: "Founder Operant Pharmacy Federation",
-    image: "https://via.placeholder.com/150",
+    name: "Dr. Gopal Natesan",
+    designation: "LOC Chairman",
+    affiliation: "Pharmanecia 4.E",
+    image: "/profile/gopal.jpeg",
   },
   {
     name: "Dr. S. P. Dhanabal",
