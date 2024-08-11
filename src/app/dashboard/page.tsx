@@ -1,9 +1,11 @@
 import StateRegistrationChart from "@/components/StateRegistrationChart";
+import { connect } from "@/dbConfig/dbConfig";
 import AbstractModel from "@/Model/AbstractModel";
 import RegistrationModel from "@/Model/RegistrationModel";
 import React from "react";
 
 async function getRegistrationsAndAbstracts() {
+  connect();
   const registrations = await RegistrationModel.find()
     .sort({ createdAt: -1 })
     .limit(100);
