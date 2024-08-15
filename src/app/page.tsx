@@ -1,14 +1,17 @@
 import ClientHomePage from "@/components/ClientHomePage";
 import { Metadata } from "next";
+import Script from "next/script";
 
 export const metadata: Metadata = {
-  title: "Home | Pharmanecia 4.E Conference",
+  title: "Pharmanecia 4.E | International Pharmacy Conference on AI and ML",
   description:
-    "Welcome to Pharmanecia 4.E, exploring AI and ML in drug discovery. Join us on March 7-8, 2025 at JSS College of Pharmacy, Ooty.",
+    "Join the leading international pharmacy conference, Pharmanecia 4.E, exploring AI and ML in drug discovery. March 7-8, 2025, JSS College of Pharmacy, Ooty.",
+  keywords:
+    "pharmacy conference, international conference, AI in pharmacy, ML in drug discovery, Pharmanecia",
   openGraph: {
-    title: "Pharmanecia 4.E",
+    title: "Pharmanecia 4.E - International Pharmacy Conference",
     description:
-      "International Research Conference on AI and ML in Drug Discovery",
+      "Leading international conference on AI and ML in Drug Discovery. Join pharmacy experts worldwide on March 7-8, 2025.",
     url: "https://www.pharmanecia.org/",
     siteName: "Pharmanecia 4.E",
     images: [
@@ -32,5 +35,36 @@ export const metadata: Metadata = {
 };
 
 export default function HomePage() {
-  return <ClientHomePage />;
+  return (
+    <>
+      {" "}
+      <ClientHomePage />
+      <Script id="event-schema" type="application/ld+json">
+        {`
+          {
+            "@context": "https://schema.org",
+            "@type": "Event",
+            "name": "Pharmanecia 4.E International Pharmacy Conference",
+            "description": "International Research Conference on AI and ML in Drug Discovery",
+            "startDate": "2025-03-07",
+            "endDate": "2025-03-08",
+            "location": {
+              "@type": "Place",
+              "name": "JSS College of Pharmacy",
+              "address": {
+                "@type": "PostalAddress",
+                "addressLocality": "Ooty",
+                "addressCountry": "IN"
+              }
+            },
+            "organizer": {
+              "@type": "Organization",
+              "name": "Pharmanecia",
+              "url": "https://www.pharmanecia.org/"
+            }
+          }
+        `}
+      </Script>
+    </>
+  );
 }
