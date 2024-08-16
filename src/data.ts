@@ -249,7 +249,7 @@ export const committee: CommitteeMember[] = [
     image: "/profile/Gowramma.png",
   },
   {
-    name: "Dr. Durai Anandha Kumar",
+    name: "Dr. Durai Ananda Kumar",
     designation: "Chairman, Scientific Committee (Plenary sessions)",
     contact: "Cell: 9866852707",
     image: "/profile/Durai.png",
@@ -276,6 +276,7 @@ export const committee: CommitteeMember[] = [
     image: "/profile/Gomathy.png",
   },
 ];
+
 export const subjectOptions = [
   { value: "pharmaceuticalTechnology", label: "Pharmaceutical Technology" },
   { value: "medChem", label: "Pharmaceutical / Medicinal Chemistry" },
