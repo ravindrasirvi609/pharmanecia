@@ -249,7 +249,7 @@ export const committee: CommitteeMember[] = [
     image: "/profile/Gowramma.png",
   },
   {
-    name: "Dr. Durai Ananda Kumar",
+    name: "Dr. T. Durai Ananda Kumar",
     designation: "Chairman, Scientific Committee (Plenary sessions)",
     contact: "Cell: 9866852707",
     image: "/profile/Durai.png",
