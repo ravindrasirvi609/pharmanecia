@@ -32,10 +32,6 @@ const Registration = () => {
             Registration fee includes entry to all scientific sessions,
             conference kit, lunch, and refreshment.
           </p>
-          <p className="text-lg leading-relaxed text-justify mb-4">
-            Special Offer for Group Registration: 15+1. For more information,
-            contact us.
-          </p>
           <h3 className="text-2xl font-semibold mb-4 text-secondary">
             Mode of Payment
           </h3>

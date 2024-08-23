@@ -58,7 +58,7 @@ export async function POST(req: NextRequest) {
     const savedGroupRegistration = await newGroupRegistration.save();
 
     // Generate QR Code
-    const url = `${process.env.NEXT_PUBLIC_BASE_URL}/groupRegistration/${savedGroupRegistration._id}`;
+    const url = `${process.env.NEXT_PUBLIC_BASE_URL}/abstractForm/${savedGroupRegistration._id}`;
     const qrCodeBuffer = await QRCode.toBuffer(url);
     const qrCodeUrl = await uploadQRCodeToFirebase(
       qrCodeBuffer,

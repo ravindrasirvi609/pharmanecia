@@ -5,6 +5,7 @@ import Image from "next/image";
 import { useDropzone } from "react-dropzone";
 import axios from "axios";
 import { useFirebaseStorage } from "../hooks/useFirebaseStorage";
+import { useRouter } from "next/navigation";
 
 interface GroupRegistrationFormData {
   groupCode: string;
@@ -27,6 +28,7 @@ interface GroupRegistrationFormData {
 }
 
 const GroupRegistrationForm: React.FC = () => {
+  const router = useRouter();
   const { uploadFile } = useFirebaseStorage();
 
   const [formData, setFormData] = useState<GroupRegistrationFormData>({
@@ -140,9 +142,11 @@ const GroupRegistrationForm: React.FC = () => {
           "Content-Type": "application/json",
         },
       });
+      console.log("Registration response:", response);
 
-      if (response.status === 200) {
+      if (response.status === 201) {
         setSubmitMessage("Registration successful!");
+        window.location.href = `/abstractForm/${response.data.registration._id}`;
         // Reset form
         setFormData({
           groupCode: "",
