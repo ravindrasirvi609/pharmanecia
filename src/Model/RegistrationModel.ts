@@ -2,6 +2,7 @@ import { Schema, model, models } from "mongoose";
 
 const registrationSchema = new Schema({
   // Personal Information
+  groupCode: { type: String },
   email: { type: String, required: true },
   whatsappNumber: {
     type: String,

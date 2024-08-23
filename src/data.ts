@@ -275,6 +275,11 @@ export const committee: CommitteeMember[] = [
     contact: "Cell: 9486433876",
     image: "/profile/Gomathy.png",
   },
+  {
+    name: "Dr. Vijay A. Jagtap",
+    designation: "Principal, Yashwantrao Bhonsale College of Pharmacy",
+    image: "/profile/Vijay.jpeg",
+  },
 ];
 
 export const subjectOptions = [
