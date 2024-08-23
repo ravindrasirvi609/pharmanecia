@@ -28,7 +28,6 @@ const registrationSchema = new Schema({
   // Conference-specific Information
   registrationType: {
     type: String,
-    required: true,
   },
 
   abstractSubmitted: { type: Boolean, default: false },

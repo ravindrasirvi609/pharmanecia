@@ -364,6 +364,29 @@ const GroupRegistrationForm: React.FC = () => {
                 </p>
               )}
             </div>
+            <div className="col-span-2 sm:col-span-1">
+              <label
+                htmlFor="whatsappNumber"
+                className="block text-sm font-medium text-gray-700"
+              >
+                WhatsApp Number
+              </label>
+              <input
+                type="tel"
+                id="whatsappNumber"
+                name="whatsappNumber"
+                value={formData.whatsappNumber}
+                onChange={onInputChange}
+                placeholder="Enter your WhatsApp number"
+                required
+                className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-accent focus:border-accent sm:text-sm"
+              />
+              {errors.whatsappNumber && (
+                <p className="mt-2 text-sm text-red-600">
+                  {errors.whatsappNumber}
+                </p>
+              )}
+            </div>
             {/* Affiliation */}
             <div className="col-span-2 sm:col-span-1">
               <label
