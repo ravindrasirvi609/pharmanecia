@@ -52,6 +52,7 @@ export async function POST(req: NextRequest) {
       needAccommodation,
       registrationCode,
       registrationStatus: "Confirmed",
+      registrationType: "Group",
     });
 
     const savedGroupRegistration = await newGroupRegistration.save();
