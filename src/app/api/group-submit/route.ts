@@ -53,6 +53,7 @@ export async function POST(req: NextRequest) {
       registrationCode,
       registrationStatus: "Confirmed",
       registrationType: "Group",
+      paymentStatus: "Completed",
     });
 
     const savedGroupRegistration = await newGroupRegistration.save();
@@ -104,6 +105,9 @@ async function getNextRegistrationCode(): Promise<string> {
   }
 
   const lastNumber = parseInt(lastRegistration.registrationCode.slice(1), 10);
+  console.log("lastNumber", lastNumber);
+
   const nextNumber = lastNumber + 1;
+  console.log("nextNumber", nextNumber);
   return `G${nextNumber.toString().padStart(4, "0")}`;
 }

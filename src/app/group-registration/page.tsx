@@ -276,7 +276,7 @@ const GroupRegistrationForm: React.FC = () => {
                 onChange={onInputChange}
                 placeholder="Enter your full name"
                 required
-                className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-accent focus:border-accent sm:text-sm"
+                className="mt-1 block w-full border text-black border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-accent focus:border-accent sm:text-sm"
               />
               {errors.name && (
                 <p className="mt-2 text-sm text-red-600">{errors.name}</p>
@@ -295,7 +295,7 @@ const GroupRegistrationForm: React.FC = () => {
                 name="salutation"
                 value={formData.salutation}
                 onChange={onInputChange}
-                className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-accent focus:border-accent sm:text-sm"
+                className="mt-1 block w-full border text-black border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-accent focus:border-accent sm:text-sm"
               >
                 <option value="Mr.">Mr.</option>
                 <option value="Ms.">Ms.</option>
@@ -316,7 +316,7 @@ const GroupRegistrationForm: React.FC = () => {
                 name="gender"
                 value={formData.gender}
                 onChange={onInputChange}
-                className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-accent focus:border-accent sm:text-sm"
+                className="mt-1 block w-full border text-black border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-accent focus:border-accent sm:text-sm"
               >
                 <option value="Male">Male</option>
                 <option value="Female">Female</option>
@@ -338,7 +338,7 @@ const GroupRegistrationForm: React.FC = () => {
                 value={formData.dob}
                 onChange={onInputChange}
                 required
-                className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-accent focus:border-accent sm:text-sm"
+                className="mt-1 block w-full border text-black border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-accent focus:border-accent sm:text-sm"
               />
               {errors.dob && (
                 <p className="mt-2 text-sm text-red-600">{errors.dob}</p>
@@ -360,7 +360,7 @@ const GroupRegistrationForm: React.FC = () => {
                 onChange={onInputChange}
                 placeholder="Enter your Aadhar number"
                 required
-                className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-accent focus:border-accent sm:text-sm"
+                className="mt-1 block w-full text-black border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-accent focus:border-accent sm:text-sm"
               />
               {errors.aadharNumber && (
                 <p className="mt-2 text-sm text-red-600">
@@ -383,7 +383,7 @@ const GroupRegistrationForm: React.FC = () => {
                 onChange={onInputChange}
                 placeholder="Enter your WhatsApp number"
                 required
-                className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-accent focus:border-accent sm:text-sm"
+                className="mt-1 block w-full text-black border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-accent focus:border-accent sm:text-sm"
               />
               {errors.whatsappNumber && (
                 <p className="mt-2 text-sm text-red-600">
@@ -407,7 +407,7 @@ const GroupRegistrationForm: React.FC = () => {
                 onChange={onInputChange}
                 placeholder="Enter your affiliation"
                 required
-                className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-accent focus:border-accent sm:text-sm"
+                className="mt-1 block w-full text-black border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-accent focus:border-accent sm:text-sm"
               />
               {errors.affiliation && (
                 <p className="mt-2 text-sm text-red-600">
@@ -431,7 +431,7 @@ const GroupRegistrationForm: React.FC = () => {
                 onChange={onInputChange}
                 placeholder="Enter your designation"
                 required
-                className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-accent focus:border-accent sm:text-sm"
+                className="mt-1 block w-full text-black border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-accent focus:border-accent sm:text-sm"
               />
               {errors.designation && (
                 <p className="mt-2 text-sm text-red-600">
@@ -454,7 +454,7 @@ const GroupRegistrationForm: React.FC = () => {
                 onChange={onInputChange}
                 placeholder="Enter your email address"
                 required
-                className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-accent focus:border-accent sm:text-sm"
+                className="mt-1 block w-full text-black border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-accent focus:border-accent sm:text-sm"
               />
               {errors.email && (
                 <p className="mt-2 text-sm text-red-600">{errors.email}</p>
@@ -476,7 +476,7 @@ const GroupRegistrationForm: React.FC = () => {
                 onChange={onInputChange}
                 placeholder="Enter your address"
                 required
-                className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-accent focus:border-accent sm:text-sm"
+                className="mt-1 block w-full text-black border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-accent focus:border-accent sm:text-sm"
               />
               {errors.address && (
                 <p className="mt-2 text-sm text-red-600">{errors.address}</p>
@@ -498,7 +498,7 @@ const GroupRegistrationForm: React.FC = () => {
                 onChange={onInputChange}
                 placeholder="Enter your city"
                 required
-                className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-accent focus:border-accent sm:text-sm"
+                className="mt-1 block w-full text-black border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-accent focus:border-accent sm:text-sm"
               />
               {errors.city && (
                 <p className="mt-2 text-sm text-red-600">{errors.city}</p>
@@ -517,7 +517,7 @@ const GroupRegistrationForm: React.FC = () => {
                 name="state"
                 value={formData.state}
                 onChange={onInputChange}
-                className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-accent focus:border-accent sm:text-sm"
+                className="mt-1 block w-full text-black border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-accent focus:border-accent sm:text-sm"
                 required
               >
                 {indianStates.map((state) => (
@@ -546,7 +546,7 @@ const GroupRegistrationForm: React.FC = () => {
                 onChange={onInputChange}
                 placeholder="Enter your pincode"
                 required
-                className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-accent focus:border-accent sm:text-sm"
+                className="mt-1 block w-full text-black border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-accent focus:border-accent sm:text-sm"
               />
               {errors.pincode && (
                 <p className="mt-2 text-sm text-red-600">{errors.pincode}</p>
@@ -567,7 +567,7 @@ const GroupRegistrationForm: React.FC = () => {
                 value={formData.country}
                 onChange={onInputChange}
                 readOnly
-                className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-accent focus:border-accent sm:text-sm"
+                className="mt-1 block w-full text-black border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-accent focus:border-accent sm:text-sm"
               />
             </div>
             {/* Need Accommodation */}
