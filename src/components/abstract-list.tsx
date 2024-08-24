@@ -11,6 +11,7 @@ interface Abstract {
   subject: string;
   name: string;
   email: string;
+  designation: string;
   temporyAbstractCode: string;
   AbstractCode: string;
   registrationCompleted: boolean;
@@ -438,6 +439,7 @@ export function AbstractList() {
                   <th className="py-3 px-6 text-left">Email</th>
                   <th className="py-3 px-6 text-left">Tempory Abstact Code</th>
                   <th className="py-3 px-6 text-left">Final Abstact Code</th>
+                  <th className="py-3 px-6 text-left">Designation</th>
 
                   <th className="py-3 px-6 text-left">Registration Status</th>
                   <th className="py-3 px-6 text-left">Registration Code</th>
@@ -454,13 +456,19 @@ export function AbstractList() {
                     <td className="py-3 px-6 text-left whitespace-nowrap">
                       {abstract.subject}
                     </td>
-                    <td className="py-3 px-6 text-left">{abstract.name}</td>
+                    <Link href={`/abstractForm/${abstract._id}`}>
+                      {" "}
+                      <td className="py-3 px-6 text-left">{abstract.name}</td>
+                    </Link>
                     <td className="py-3 px-6 text-left">{abstract.email}</td>
                     <td className="py-3 px-6 text-left">
                       {abstract.temporyAbstractCode}
                     </td>
                     <td className="py-3 px-6 text-left">
                       {abstract.AbstractCode}
+                    </td>
+                    <td className="py-3 px-6 text-left">
+                      {abstract.designation}
                     </td>
 
                     <td className="py-3 px-6 text-left">
