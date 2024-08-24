@@ -4,6 +4,7 @@ import { sendEmail } from "@/lib/mailer";
 import { uploadQRCodeToFirebase } from "@/lib/firebase";
 import QRCode from "qrcode";
 import RegistrationModel from "@/Model/RegistrationModel";
+import AbstractModel from "@/Model/AbstractModel";
 
 connect();
 
@@ -65,13 +66,44 @@ export async function POST(req: NextRequest) {
       qrCodeBuffer,
       `group_${savedGroupRegistration._id}.png`
     );
+    // Search for the email in the abstract model
+    const abstract = await AbstractModel.findOne({ email: email });
 
-    // Update the registration with the QR code URL
+    let foundAbstractId = null;
+    if (abstract) {
+      foundAbstractId = abstract._id;
+    }
+
+    // Update the registration with the abstract ID if found
+    const registrationUpdate = {
+      qrCodeUrl,
+      ...(foundAbstractId && { abstractId: foundAbstractId }),
+    };
+
+    // Use findByIdAndUpdate with the `new` option to return the updated document
     const updatedGroupRegistration = await RegistrationModel.findByIdAndUpdate(
       savedGroupRegistration._id,
-      { qrCodeUrl },
+      registrationUpdate,
       { new: true }
     );
+
+    if (abstract) {
+      try {
+        await AbstractModel.findByIdAndUpdate(
+          updatedGroupRegistration.abstractId,
+          {
+            registrationCompleted: true,
+            registrationCode: updatedGroupRegistration.registrationCode,
+          }
+        );
+      } catch (error) {
+        console.error("Failed to update Abstract Model:", error);
+        return NextResponse.json(
+          { error: "Failed to update Abstract" },
+          { status: 500 }
+        );
+      }
+    }
 
     // Send confirmation email
     await sendEmail({

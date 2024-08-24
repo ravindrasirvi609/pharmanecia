@@ -88,8 +88,12 @@ export const sendEmail = async ({
           <>
             <Text>Congratulations! Your abstract has been accepted.</Text>
             <Text>
-              Your official abstract code is:{" "}
+              Your official abstract Presentation code is:{" "}
               <strong>{abstract.AbstractCode}</strong>
+            </Text>
+            <Text>
+              Presentation Type :{" "}
+              <strong>{abstract.presentationType} presentation</strong>
             </Text>
           </>
         );
