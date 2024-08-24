@@ -1,5 +1,6 @@
 "use client";
 
+import { designationOptions } from "@/data";
 import Link from "next/link";
 import React, { useState, useMemo, useEffect, useRef } from "react";
 import { ToastContainer, toast } from "react-toastify";
@@ -304,6 +305,13 @@ export function AbstractList() {
     </div>
   );
 
+  const getDesignationLabel = (value: any) => {
+    const designation = designationOptions.find(
+      (option) => option.value === value
+    );
+    return designation ? designation.label : "Unknown Designation";
+  };
+
   return (
     <div className="flex flex-col h-screen bg-[#F2F2F2]">
       <ToastContainer position="top-right" autoClose={3000} />
@@ -468,7 +476,7 @@ export function AbstractList() {
                       {abstract.AbstractCode}
                     </td>
                     <td className="py-3 px-6 text-left">
-                      {abstract.designation}
+                      {getDesignationLabel(abstract.designation)}
                     </td>
 
                     <td className="py-3 px-6 text-left">
