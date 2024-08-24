@@ -45,7 +45,7 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
     }
 
     // If we found a registration but not an abstract, try to find the corresponding abstract
-    if (registration && !abstract) {
+    if (registration.registrationCode && !abstract) {
       abstract = await AbstractModel.findOne({
         registrationCode: registration.registrationCode,
       }).lean();

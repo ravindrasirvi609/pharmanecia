@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React from "react";
 
 interface Registration {
@@ -49,7 +50,9 @@ const RegistrationTable: React.FC<RegistrationTableProps> = ({
                 className="border-b hover:bg-light text-black"
               >
                 <td className="px-4 py-2">{registration.registrationCode}</td>
-                <td className="px-4 py-2">{registration.name}</td>
+                <Link href={`/abstractForm/${registration._id}`}>
+                  <td className="px-4 py-2">{registration.name}</td>
+                </Link>
                 <td className="px-4 py-2">{registration.email}</td>
                 <td className="px-4 py-2">{registration.registrationType}</td>
                 <td className="px-4 py-2">
