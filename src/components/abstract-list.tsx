@@ -167,7 +167,7 @@ export function AbstractList() {
   });
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [isSortOpen, setIsSortOpen] = useState(false);
-
+  const [openDropdownId, setOpenDropdownId] = useState<string | null>(null);
   const [rejectPopup, setRejectPopup] = useState<{
     isOpen: boolean;
     abstractId: string | null;
@@ -236,6 +236,19 @@ export function AbstractList() {
   const handleDownload = (abstract: Abstract) => {
     window.open(abstract.abstractFileUrl, "_blank");
   };
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (openDropdownId !== null) {
+        setOpenDropdownId(null);
+      }
+    };
+
+    document.addEventListener("click", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("click", handleClickOutside);
+    };
+  }, [openDropdownId]);
 
   const handleStatusUpdate = async (abstract: Abstract, newStatus: string) => {
     if (newStatus === "Rejected") {
@@ -439,7 +452,7 @@ export function AbstractList() {
               </Link>
             </div>
           ) : (
-            <table className="min-w-full bg-white shadow-md rounded-lg overflow-hidden">
+            <table className="min-w-full bg-white shadow-md rounded-lg overflow-hidden relative">
               <thead>
                 <tr className="bg-[#022873] text-white uppercase text-sm leading-normal">
                   <th className="py-3 px-6 text-left">Subject</th>
@@ -519,48 +532,53 @@ export function AbstractList() {
                         </button>
                         <div className="relative">
                           <button
-                            onClick={() => {
-                              const elem = document.getElementById(
-                                `status-dropdown-${abstract._id}`
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              setOpenDropdownId(
+                                openDropdownId === abstract._id
+                                  ? null
+                                  : abstract._id
                               );
-                              if (elem) elem.classList.toggle("hidden");
                             }}
                             className="bg-danger hover:bg-[#022873] text-white font-bold py-1 px-3 rounded transition duration-300 ease-in-out"
                           >
                             Update Status
                           </button>
-                          <div
-                            id={`status-dropdown-${abstract._id}`}
-                            className="fixed right-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 hidden z-50"
-                          >
+                          {openDropdownId === abstract._id && (
                             <div
-                              className="py-1 z-50"
-                              role="menu"
-                              aria-orientation="vertical"
+                              className="absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 z-50"
+                              style={{
+                                position: "fixed",
+                                transform: "translate(0, -100%)",
+                              }}
                             >
-                              {[
-                                "Pending",
-                                "InReview",
-                                "Rejected",
-                                "Accepted",
-                              ].map((status) => (
-                                <button
-                                  key={status}
-                                  onClick={() => {
-                                    handleStatusUpdate(abstract, status);
-                                    const elem = document.getElementById(
-                                      `status-dropdown-${abstract._id}`
-                                    );
-                                    if (elem) elem.classList.add("hidden");
-                                  }}
-                                  className="block w-full text-left px-4 py-2 text-sm text-[#021373] hover:bg-[#F2F2F2] hover:text-[#034C8C] transition duration-300 ease-in-out"
-                                  role="menuitem"
-                                >
-                                  {status}
-                                </button>
-                              ))}
+                              <div
+                                className="py-1 z-50"
+                                role="menu"
+                                aria-orientation="vertical"
+                              >
+                                {[
+                                  "Pending",
+                                  "InReview",
+                                  "Rejected",
+                                  "Accepted",
+                                ].map((status) => (
+                                  <button
+                                    key={status}
+                                    onClick={(e) => {
+                                      e.stopPropagation();
+                                      handleStatusUpdate(abstract, status);
+                                      setOpenDropdownId(null);
+                                    }}
+                                    className="block w-full text-left px-4 py-2 text-sm text-[#021373] hover:bg-[#F2F2F2] hover:text-[#034C8C] transition duration-300 ease-in-out"
+                                    role="menuitem"
+                                  >
+                                    {status}
+                                  </button>
+                                ))}
+                              </div>
                             </div>
-                          </div>
+                          )}
                         </div>
                       </div>
                     </td>

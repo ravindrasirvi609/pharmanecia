@@ -423,10 +423,10 @@ const AbstractForm: React.FC<StudentPageProps> = ({ params }) => {
           <p>
             For any queries, please contact our support team at{" "}
             <a
-              href="mailto:ssc@pharmanecia.org"
+              href="mailto:psc@pharmanecia.org"
               className="text-danger hover:underline"
             >
-              ssc@pharmanecia.org
+              psc@pharmanecia.org
             </a>
           </p>
         </div>
