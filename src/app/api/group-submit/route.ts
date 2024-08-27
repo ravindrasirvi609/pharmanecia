@@ -7,6 +7,9 @@ import RegistrationModel from "@/Model/RegistrationModel";
 import AbstractModel from "@/Model/AbstractModel";
 
 connect();
+interface IRegistration {
+  registrationCode: string;
+}
 
 export async function POST(req: NextRequest) {
   try {
@@ -32,6 +35,7 @@ export async function POST(req: NextRequest) {
     } = body;
 
     const registrationCode = await getNextRegistrationCode();
+    console.log("registrationCode---", registrationCode);
 
     const newGroupRegistration = new RegistrationModel({
       groupCode,
@@ -51,7 +55,7 @@ export async function POST(req: NextRequest) {
       pincode,
       country,
       needAccommodation,
-      registrationCode,
+      registrationCode: registrationCode,
       registrationStatus: "Confirmed",
       registrationType: "Group",
       paymentStatus: "Completed",
@@ -128,18 +132,29 @@ export async function POST(req: NextRequest) {
 }
 
 async function getNextRegistrationCode(): Promise<string> {
-  const lastRegistration = await RegistrationModel.findOne().sort({
-    registrationCode: -1,
-  });
+  const registrations = (await RegistrationModel.find(
+    {},
+    {
+      registrationCode: 1,
+    }
+  )
+    .lean()
+    .exec()) as unknown as (Document & IRegistration)[];
 
-  if (!lastRegistration || !lastRegistration.registrationCode) {
-    return "G1001";
+  let maxNumber = 1000;
+
+  for (const registration of registrations) {
+    if (
+      registration.registrationCode &&
+      registration.registrationCode.startsWith("G")
+    ) {
+      const number = parseInt(registration.registrationCode.slice(1), 10);
+      if (!isNaN(number) && number > maxNumber) {
+        maxNumber = number;
+      }
+    }
   }
 
-  const lastNumber = parseInt(lastRegistration.registrationCode.slice(1), 10);
-  console.log("lastNumber", lastNumber);
-
-  const nextNumber = lastNumber + 1;
-  console.log("nextNumber", nextNumber);
+  const nextNumber = maxNumber + 1;
   return `G${nextNumber.toString().padStart(4, "0")}`;
 }
