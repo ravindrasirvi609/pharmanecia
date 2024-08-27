@@ -91,6 +91,8 @@ export async function POST(req: NextRequest) {
       { new: true }
     );
 
+    console.log("updatedGroupRegistration---", updatedGroupRegistration);
+
     if (abstract) {
       try {
         await AbstractModel.findByIdAndUpdate(
@@ -110,7 +112,7 @@ export async function POST(req: NextRequest) {
     }
 
     // Send confirmation email
-    await sendEmail({
+    sendEmail({
       emailType: "REGISTRATION_SUCCESS",
       _id: updatedGroupRegistration._id,
     });
