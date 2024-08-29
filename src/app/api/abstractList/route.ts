@@ -9,7 +9,7 @@ export async function GET(req: NextRequest) {
     // Get page and limit from query parameters
     const url = new URL(req.url);
     const page = parseInt(url.searchParams.get("page") || "1");
-    const limit = parseInt(url.searchParams.get("limit") || "10");
+    const limit = parseInt(url.searchParams.get("limit") || "50");
 
     // Calculate skip value for pagination
     const skip = (page - 1) * limit;
@@ -18,10 +18,7 @@ export async function GET(req: NextRequest) {
     const total = await AbstractModel.countDocuments();
 
     // Fetch paginated abstracts from the database
-    const abstracts = await AbstractModel.find({})
-      .skip(skip)
-      .limit(limit)
-      .lean();
+    const abstracts = await AbstractModel.find({}).lean();
 
     // Check if abstracts exist
     if (!abstracts || abstracts.length === 0) {
