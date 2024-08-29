@@ -15,7 +15,7 @@ interface GroupRegistrationFormData {
   whatsappNumber: string;
   gender: string;
   dob: string;
-  aadharNumber: string;
+  AadharNumber: string;
   affiliation: string;
   designation: string;
   address: string;
@@ -39,7 +39,7 @@ const GroupRegistrationForm: React.FC = () => {
     whatsappNumber: "",
     gender: "Male",
     dob: "",
-    aadharNumber: "",
+    AadharNumber: "",
     affiliation: "",
     designation: "",
     address: "",
@@ -98,10 +98,10 @@ const GroupRegistrationForm: React.FC = () => {
     if (!/^\d{10}$/.test(formData.whatsappNumber))
       newErrors.whatsappNumber = "Invalid WhatsApp number";
     if (!formData.dob) newErrors.dob = "Date of Birth is required";
-    if (!formData.aadharNumber)
-      newErrors.aadharNumber = "Aadhar Number is required";
-    if (!/^\d{12}$/.test(formData.aadharNumber))
-      newErrors.aadharNumber = "Invalid Aadhar Number";
+    if (!formData.AadharNumber)
+      newErrors.AadharNumber = "Aadhar Number is required";
+    if (!/^\d{12}$/.test(formData.AadharNumber))
+      newErrors.AadharNumber = "Invalid Aadhar Number";
     if (!formData.affiliation)
       newErrors.affiliation = "Affiliation is required";
     if (!formData.designation)
@@ -156,7 +156,7 @@ const GroupRegistrationForm: React.FC = () => {
           whatsappNumber: "",
           gender: "Male",
           dob: "",
-          aadharNumber: "",
+          AadharNumber: "",
           affiliation: "",
           designation: "",
           address: "",
@@ -347,24 +347,24 @@ const GroupRegistrationForm: React.FC = () => {
             {/* Aadhar Number */}
             <div className="col-span-2 sm:col-span-1">
               <label
-                htmlFor="aadharNumber"
+                htmlFor="AadharNumber"
                 className="block text-sm font-medium text-gray-700"
               >
                 Aadhar Number
               </label>
               <input
                 type="text"
-                id="aadharNumber"
-                name="aadharNumber"
-                value={formData.aadharNumber}
+                id="AadharNumber"
+                name="AadharNumber"
+                value={formData.AadharNumber}
                 onChange={onInputChange}
                 placeholder="Enter your Aadhar number"
                 required
                 className="mt-1 block w-full text-black border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-accent focus:border-accent sm:text-sm"
               />
-              {errors.aadharNumber && (
+              {errors.AadharNumber && (
                 <p className="mt-2 text-sm text-red-600">
-                  {errors.aadharNumber}
+                  {errors.AadharNumber}
                 </p>
               )}
             </div>
