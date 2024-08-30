@@ -146,7 +146,7 @@ export function AbstractList() {
                   aria-orientation="vertical"
                   aria-labelledby="options-menu"
                 >
-                  {["all", "Pending", "InReview", "Rejected", "Accepted"].map(
+                  {["all", "Pending", "InReview", "Revision", "Accepted"].map(
                     (status) => (
                       <button
                         key={status}

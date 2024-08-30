@@ -43,7 +43,7 @@ async function Dashboard() {
     abstractStatus: {
       Pending: abstracts.filter((a) => a.Status === "Pending").length,
       InReview: abstracts.filter((a) => a.Status === "InReview").length,
-      Rejected: abstracts.filter((a) => a.Status === "Rejected").length,
+      Revision: abstracts.filter((a) => a.Status === "Revision").length,
       Accepted: abstracts.filter((a) => a.Status === "Accepted").length,
     },
     registrationTypes: registrations.reduce((acc, reg) => {

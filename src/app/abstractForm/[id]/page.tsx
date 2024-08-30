@@ -244,7 +244,7 @@ const AbstractForm: React.FC<StudentPageProps> = ({ params }) => {
                     </div>
                   </div>
 
-                  {abstract.Status === "Rejected" && (
+                  {abstract.Status === "Revision" && (
                     <div className="mt-8 bg-red-50 border border-red-200 rounded-lg p-4">
                       <h3 className="text-xl font-bold mb-2 text-danger">
                         Rejection Comment

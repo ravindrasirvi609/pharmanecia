@@ -30,8 +30,8 @@ export async function PATCH(req: NextRequest) {
     // Update the status
     abstract.Status = status;
 
-    // Add comment if status is Rejected
-    if (status === "Rejected") {
+    // Add comment if status is Revision
+    if (status === "Revision") {
       abstract.rejectionComment = comment;
     }
 

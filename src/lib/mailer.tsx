@@ -80,8 +80,8 @@ export const sendEmail = async ({
     } else if (emailType === "UPDATE_STATUS") {
       let statusSpecificContent: React.ReactNode = null;
       let codeToShow = abstract.temporyAbstractCode;
-      let statusForSubject = abstract.Status;
-
+      let statusForSubject =
+        abstract.Status === "Revision" ? "Revision required" : abstract.Status;
       if (abstract.Status === "Accepted") {
         codeToShow = abstract.AbstractCode;
         statusSpecificContent = (
@@ -97,13 +97,21 @@ export const sendEmail = async ({
             </Text>
           </>
         );
-      } else if (abstract.Status === "Rejected" && abstract.rejectionComment) {
+      } else if (abstract.Status === "Revision" && abstract.rejectionComment) {
         statusSpecificContent = (
           <>
             <Text>
-              We regret to inform you that your abstract has not been accepted.
+              We regret to inform you that your abstract does not fully comply
+              with the Pharmanecia 4.E International Research Conference
+              guidelines. Kindly revise your abstract according to the provided
+              guidelines and reviewer comments. Please resubmit the abstract by
+              clicking View Submission Details.
             </Text>
-            <Text>Reason for rejection: {abstract.rejectionComment}</Text>
+            <Text>
+              <strong>
+                Reviewer Committee Comments: {abstract.rejectionComment}
+              </strong>
+            </Text>
           </>
         );
       }
@@ -115,7 +123,12 @@ export const sendEmail = async ({
             <strong>{codeToShow}</strong>).
           </Text>
           <Text>
-            Current Status: <strong>{abstract.Status}</strong>
+            Current Status:{" "}
+            <strong>
+              {abstract.Status === "Revision"
+                ? "Revision required"
+                : abstract.Status}
+            </strong>
           </Text>
           {statusSpecificContent}
           <Text>

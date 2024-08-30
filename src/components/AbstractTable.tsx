@@ -1,5 +1,9 @@
 import React, { useState } from "react";
 import Link from "next/link";
+import { Eye, Download, MoreVertical } from "lucide-react";
+import FileViewerModal from "./FileViewerModal";
+
+// Assuming you have a designationOptions array defined somewhere
 import { designationOptions } from "@/data";
 
 interface Abstract {
@@ -61,26 +65,36 @@ const AbstractTable: React.FC<AbstractTableProps> = ({
     abstractId: null,
   });
   const [rejectComment, setRejectComment] = useState("");
+  const [fileViewerModal, setFileViewerModal] = useState<{
+    isOpen: boolean;
+    fileUrl: string;
+    fileName: string;
+  }>({
+    isOpen: false,
+    fileUrl: "",
+    fileName: "",
+  });
 
   const handleDownload = (abstract: Abstract) => {
     window.open(abstract.abstractFileUrl, "_blank");
   };
 
-  const getDesignationLabel = (value: any) => {
+  const handleViewFile = (abstract: Abstract) => {
+    const fileName = `${abstract.name}'s Abstract`;
+
+    setFileViewerModal({
+      isOpen: true,
+      fileUrl: abstract.abstractFileUrl,
+      fileName: fileName,
+    });
+  };
+
+  const getDesignationLabel = (value: string) => {
     const designation = designationOptions.find(
       (option) => option.value === value
     );
     return designation ? designation.label : "Unknown Designation";
   };
-
-  const SkeletonLoader = () => (
-    <div className="animate-pulse">
-      <div className="h-8 bg-gray-300 rounded mb-4"></div>
-      {[...Array(5)].map((_, index) => (
-        <div key={index} className="h-16 bg-gray-300 rounded mb-2"></div>
-      ))}
-    </div>
-  );
 
   const handleStatusUpdateClick = (abstract: Abstract, newStatus: string) => {
     if (newStatus === "Rejected") {
@@ -91,6 +105,15 @@ const AbstractTable: React.FC<AbstractTableProps> = ({
       handleStatusUpdate(abstract._id, newStatus);
     }
   };
+
+  const SkeletonLoader = () => (
+    <div className="animate-pulse">
+      <div className="h-8 bg-gray-300 rounded mb-4"></div>
+      {[...Array(5)].map((_, index) => (
+        <div key={index} className="h-16 bg-gray-300 rounded mb-2"></div>
+      ))}
+    </div>
+  );
 
   const RejectPopup = () => (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
@@ -113,7 +136,7 @@ const AbstractTable: React.FC<AbstractTableProps> = ({
             Cancel
           </button>
           <button
-            className="bg-danger hover:bg-danger text-white font-bold py-2 px-4 rounded"
+            className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded"
             onClick={async () => {
               if (rejectPopup.abstractId) {
                 await handleStatusUpdate(
@@ -173,10 +196,10 @@ const AbstractTable: React.FC<AbstractTableProps> = ({
   if (error)
     return (
       <div className="text-center py-10">
-        <p className="text-danger text-xl mb-4">Oops! Something went wrong.</p>
+        <p className="text-red-500 text-xl mb-4">Oops! Something went wrong.</p>
         <button
           onClick={() => window.location.reload()}
-          className="bg-[#034C8C] text-white px-4 py-2 rounded hover:bg-[#022873] transition duration-300"
+          className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition duration-300"
         >
           Retry
         </button>
@@ -185,14 +208,14 @@ const AbstractTable: React.FC<AbstractTableProps> = ({
 
   return (
     <>
-      <table className="min-w-full bg-white shadow-md rounded-lg overflow-hidden relative">
+      <table className="min-w-full bg-white shadow-md rounded-lg overflow-hidden">
         <thead>
-          <tr className="bg-[#022873] text-white uppercase text-sm leading-normal">
+          <tr className="bg-blue-900 text-white uppercase text-sm leading-normal">
             <th className="py-3 px-6 text-left">Subject</th>
             <th className="py-3 px-6 text-left">Author</th>
             <th className="py-3 px-6 text-left">Email</th>
-            <th className="py-3 px-6 text-left">Tempory Abstact Code</th>
-            <th className="py-3 px-6 text-left">Final Abstact Code</th>
+            <th className="py-3 px-6 text-left">Temporary Abstract Code</th>
+            <th className="py-3 px-6 text-left">Final Abstract Code</th>
             <th className="py-3 px-6 text-left">Designation</th>
             <th className="py-3 px-6 text-left">Registration Status</th>
             <th className="py-3 px-6 text-left">Registration Code</th>
@@ -200,17 +223,20 @@ const AbstractTable: React.FC<AbstractTableProps> = ({
             <th className="py-3 px-6 text-center">Actions</th>
           </tr>
         </thead>
-        <tbody className="text-[#021373] text-sm">
+        <tbody className="text-gray-600 text-sm font-light">
           {abstracts.map((abstract) => (
             <tr
               key={abstract._id}
-              className="border-b border-[#CACACA] hover:bg-[#F2F2F2] transition duration-300 ease-in-out"
+              className="border-b border-gray-200 hover:bg-gray-100"
             >
               <td className="py-3 px-6 text-left whitespace-nowrap">
                 {abstract.subject}
               </td>
               <td className="py-3 px-6 text-left">
-                <Link href={`/abstractForm/${abstract._id}`}>
+                <Link
+                  href={`/abstractForm/${abstract._id}`}
+                  className="text-blue-600 hover:text-blue-800"
+                >
                   {abstract.name}
                 </Link>
               </td>
@@ -227,12 +253,10 @@ const AbstractTable: React.FC<AbstractTableProps> = ({
                   className={`py-1 px-3 rounded-full text-xs ${
                     abstract.registrationCompleted
                       ? "bg-green-200 text-green-800"
-                      : "bg-[#D94814] text-white"
+                      : "bg-red-200 text-red-800"
                   }`}
                 >
-                  {abstract.registrationCompleted
-                    ? "Registration Complete"
-                    : "Not Complete"}
+                  {abstract.registrationCompleted ? "Complete" : "Incomplete"}
                 </span>
               </td>
               <td className="py-3 px-6 text-left">
@@ -242,9 +266,9 @@ const AbstractTable: React.FC<AbstractTableProps> = ({
                 <span
                   className={`py-1 px-3 rounded-full text-xs ${
                     abstract.Status === "Accepted"
-                      ? "bg-green text-white"
+                      ? "bg-green text-black"
                       : abstract.Status === "Rejected"
-                      ? "bg-[#D94814] text-white"
+                      ? "bg-red text-black"
                       : "bg-yellow-200 text-yellow-800"
                   }`}
                 >
@@ -254,53 +278,47 @@ const AbstractTable: React.FC<AbstractTableProps> = ({
               <td className="py-3 px-6 text-center">
                 <div className="flex item-center justify-center">
                   <button
-                    onClick={() => handleDownload(abstract)}
-                    className="bg-[#034C8C] hover:bg-[#022873] text-white font-bold py-1 px-3 rounded mr-2 transition duration-300 ease-in-out"
+                    onClick={() => handleViewFile(abstract)}
+                    className="bg-blue-500 hover:bg-blue-600 text-white rounded-full p-2 mx-1"
+                    title="View"
                   >
-                    Download
+                    <Eye size={16} />
+                  </button>
+                  <button
+                    onClick={() => handleDownload(abstract)}
+                    className="bg-green-500 hover:bg-green-600 text-white rounded-full p-2 mx-1"
+                    title="Download"
+                  >
+                    <Download size={16} color="black" />
                   </button>
                   <div className="relative">
                     <button
-                      onClick={(e) => {
-                        e.stopPropagation();
+                      onClick={() =>
                         setOpenDropdownId(
                           openDropdownId === abstract._id ? null : abstract._id
-                        );
-                      }}
-                      className="bg-danger hover:bg-[#022873] text-white font-bold py-1 px-3 rounded transition duration-300 ease-in-out"
+                        )
+                      }
+                      className="bg-gray-200 hover:bg-gray-300 text-gray-800 rounded-full p-2 mx-1"
+                      title="More Actions"
                     >
-                      Update Status
+                      <MoreVertical size={16} />
                     </button>
                     {openDropdownId === abstract._id && (
-                      <div
-                        className="absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 z-50"
-                        style={{
-                          position: "fixed",
-                          transform: "translate(0, -100%)",
-                        }}
-                      >
-                        <div
-                          className="py-1 z-50"
-                          role="menu"
-                          aria-orientation="vertical"
-                        >
-                          {["Pending", "InReview", "Rejected", "Accepted"].map(
-                            (status) => (
-                              <button
-                                key={status}
-                                onClick={(e) => {
-                                  e.stopPropagation();
-                                  handleStatusUpdateClick(abstract, status);
-                                  setOpenDropdownId(null);
-                                }}
-                                className="block w-full text-left px-4 py-2 text-sm text-[#021373] hover:bg-[#F2F2F2] hover:text-[#034C8C] transition duration-300 ease-in-out"
-                                role="menuitem"
-                              >
-                                {status}
-                              </button>
-                            )
-                          )}
-                        </div>
+                      <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg z-[9999]">
+                        {["Pending", "InReview", "Rejected", "Accepted"].map(
+                          (status) => (
+                            <button
+                              key={status}
+                              onClick={() => {
+                                handleStatusUpdateClick(abstract, status);
+                                setOpenDropdownId(null);
+                              }}
+                              className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                            >
+                              {status}
+                            </button>
+                          )
+                        )}
                       </div>
                     )}
                   </div>
@@ -312,6 +330,14 @@ const AbstractTable: React.FC<AbstractTableProps> = ({
       </table>
       {rejectPopup.isOpen && <RejectPopup />}
       {presentationTypePopup.isOpen && <PresentationTypePopup />}
+      <FileViewerModal
+        isOpen={fileViewerModal.isOpen}
+        onClose={() =>
+          setFileViewerModal({ ...fileViewerModal, isOpen: false })
+        }
+        fileUrl={fileViewerModal.fileUrl}
+        fileName={fileViewerModal.fileName}
+      />
     </>
   );
 };
