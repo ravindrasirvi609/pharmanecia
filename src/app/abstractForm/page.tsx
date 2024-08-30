@@ -185,6 +185,10 @@ const AbstractFormPage: React.FC = () => {
                     </li>
                     <li>Submit only one abstract per presenting author.</li>
                     <li>Double-check all information before submission.</li>
+                    <li className="font-bold">
+                      Please note that if you have submitted multiple abstracts,
+                      you will not be eligible for conference registration.{" "}
+                    </li>
                   </ul>
                   <p className="mb-2">
                     If you encounter any technical issues, please contact our
