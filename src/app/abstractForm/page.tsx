@@ -1,9 +1,20 @@
 "use client";
 import React, { useState } from "react";
 import AbstractForm from "@/components/abstract-form";
+import { FaWhatsapp } from "react-icons/fa";
 
 const AbstractFormPage: React.FC = () => {
   const [showForm, setShowForm] = useState(false);
+  const [showDialog, setShowDialog] = useState(false);
+
+  const handleSubmitClick = () => {
+    setShowDialog(true);
+  };
+
+  const handleDialogClose = () => {
+    setShowDialog(false);
+    setShowForm(true);
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#034C8C] to-[#022873] py-12 px-4 sm:px-6 lg:px-8">
@@ -145,12 +156,61 @@ const AbstractFormPage: React.FC = () => {
           <section className="mt-8 bg-[#D94814] p-6 rounded-lg shadow-md text-white">
             <h3 className="text-xl font-semibold mb-4">Submit Abstract</h3>
             <button
-              onClick={() => setShowForm(!showForm)}
+              onClick={handleSubmitClick}
               className="bg-white text-[#D94814] hover:bg-[#F2F2F2] font-bold py-2 px-4 rounded transition duration-300"
             >
-              {showForm ? "Hide Form" : "Submit Abstract"}
+              Submit Abstract
             </button>
           </section>
+
+          {showDialog && (
+            <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4">
+              <div className="bg-white rounded-lg p-6 max-w-md w-full text-black">
+                <h2 className="text-xl font-semibold mb-4">
+                  Important Instructions
+                </h2>
+                <div className="mb-4">
+                  <p className="mb-2">
+                    Please read the following instructions carefully before
+                    submitting your abstract:
+                  </p>
+                  <ul className="list-disc pl-5 mb-4">
+                    <li>
+                      Ensure your abstract is original and not previously
+                      published.
+                    </li>
+                    <li>
+                      Follow the guidelines provided on the website for abstract
+                      preparation.
+                    </li>
+                    <li>Submit only one abstract per presenting author.</li>
+                    <li>Double-check all information before submission.</li>
+                  </ul>
+                  <p className="mb-2">
+                    If you encounter any technical issues, please contact our
+                    support team:
+                  </p>
+                  <div className="flex items-center">
+                    <FaWhatsapp className="mr-2" size={24} />
+                    <a
+                      href="https://wa.me/918107199052"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-blue-500 hover:underline"
+                    >
+                      +91 8107199052
+                    </a>
+                  </div>
+                </div>
+                <button
+                  onClick={handleDialogClose}
+                  className="bg-[#D94814] text-white hover:bg-[#C13700] font-bold py-2 px-4 rounded transition duration-300"
+                >
+                  Proceed to Submit
+                </button>
+              </div>
+            </div>
+          )}
 
           {showForm && (
             <div className="mt-8 bg-white p-6 rounded-lg shadow-md">
