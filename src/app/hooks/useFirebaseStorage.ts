@@ -19,7 +19,7 @@ export const useFirebaseStorage = (): UseFirebaseStorageReturn => {
     setError(null);
 
     try {
-      const storageRef = ref(storage, `abstracts/${file.name}`);
+      const storageRef = ref(storage, `abstracts/${file.size}_${file.name}`);
       const snapshot = await uploadBytes(storageRef, file);
       setUploadProgress(100);
 

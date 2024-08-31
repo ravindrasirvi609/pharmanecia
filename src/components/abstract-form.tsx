@@ -55,7 +55,6 @@ export function AbstractForm() {
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop,
     accept: {
-      "application/pdf": [".pdf"],
       "application/msword": [".doc"],
       "application/vnd.openxmlformats-officedocument.wordprocessingml.document":
         [".docx"],
@@ -98,7 +97,6 @@ export function AbstractForm() {
       newErrors.abstractFile = "Abstract file must be less than 5 MB";
     } else if (
       ![
-        "application/pdf",
         "application/msword",
         "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
       ].includes(abstractFile.type)
