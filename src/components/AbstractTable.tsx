@@ -279,6 +279,8 @@ const AbstractTable: React.FC<AbstractTableProps> = ({
                       ? "bg-green text-white"
                       : abstract.Status === "Revision"
                       ? "bg-red text-white"
+                      : abstract.Status === "InReview"
+                      ? "bg-blue-500 text-white"
                       : "bg-yellow-200 text-yellow-800"
                   }`}
                 >
