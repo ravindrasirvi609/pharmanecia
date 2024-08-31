@@ -4,6 +4,8 @@ import { NextRequest, NextResponse } from "next/server";
 
 connect();
 
+export const revalidate = 0; // Disable caching for this route
+
 export async function GET(req: NextRequest) {
   try {
     // Fetch abstracts from the database, excluding those with status "Delete"
@@ -19,11 +21,16 @@ export async function GET(req: NextRequest) {
       );
     }
 
-    // Return the list of abstracts with pagination info
-    return NextResponse.json({
+    // Return the list of abstracts with cache control headers
+    const response = NextResponse.json({
       message: "Abstracts fetched successfully",
       abstracts,
     });
+
+    // Set cache control headers
+    response.headers.set("Cache-Control", "no-store, max-age=0");
+
+    return response;
   } catch (error: any) {
     console.error("Error:", error);
     return NextResponse.json(
