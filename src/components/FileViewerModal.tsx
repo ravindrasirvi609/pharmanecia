@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import dynamic from "next/dynamic";
 import { X } from "lucide-react";
 
@@ -19,9 +19,23 @@ const FileViewerModal: React.FC<FileViewerModalProps> = ({
   fileUrl,
   fileName,
 }) => {
+  const [corsError, setCorsError] = useState(false);
+
+  useEffect(() => {
+    if (isOpen) {
+      // Reset CORS error state when modal opens
+      setCorsError(false);
+    }
+  }, [isOpen]);
+
   if (!isOpen) return null;
 
   const documents = [{ uri: fileUrl, fileName: fileName }];
+
+  const handleError = (error: any) => {
+    console.error("DocViewer error:", error);
+    setCorsError(true);
+  };
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
@@ -36,17 +50,33 @@ const FileViewerModal: React.FC<FileViewerModalProps> = ({
           </button>
         </div>
         <div className="flex-grow overflow-hidden">
-          <DocViewer
-            documents={documents}
-            config={{
-              header: {
-                disableHeader: true,
-                disableFileName: true,
-                retainURLParams: false,
-              },
-            }}
-            style={{ height: "100%" }}
-          />
+          {corsError ? (
+            <div className="h-full flex flex-col items-center justify-center">
+              <p className="text-red-500 mb-4">
+                Unable to load the document due to CORS restrictions.
+              </p>
+              <a
+                href={fileUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+              >
+                Download Document
+              </a>
+            </div>
+          ) : (
+            <DocViewer
+              documents={documents}
+              config={{
+                header: {
+                  disableHeader: true,
+                  disableFileName: true,
+                  retainURLParams: false,
+                },
+              }}
+              style={{ height: "100%" }}
+            />
+          )}
         </div>
       </div>
     </div>

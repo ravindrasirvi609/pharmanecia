@@ -244,107 +244,110 @@ const AbstractForm: React.FC<StudentPageProps> = ({ params }) => {
                     </div>
                   </div>
 
-                  {abstract.Status === "Revision" && (
-                    <div className="mt-8 bg-red-50 border border-red-200 rounded-lg p-4">
-                      <h3 className="text-xl font-bold mb-2 text-danger">
-                        Rejection Comment
-                      </h3>
-                      <p className="text-gray-800">
-                        {abstract.rejectionComment || "No comment provided"}
-                      </p>
-
-                      <div className="mt-6">
-                        <h3 className="text-xl font-bold mb-4 text-danger">
-                          Update Abstract File
+                  {abstract.Status === "Revision" ||
+                    (abstract.Status === "Rejected" && (
+                      <div className="mt-8 bg-red-50 border border-red-200 rounded-lg p-4">
+                        <h3 className="text-xl font-bold mb-2 text-danger">
+                          Rejection Comment
                         </h3>
-                        <div
-                          {...getRootProps()}
-                          className={`w-full p-6 border-2 border-dashed rounded-lg text-center cursor-pointer transition-colors duration-200 ease-in-out ${
-                            isDragActive
-                              ? "border-danger bg-red-50"
-                              : "border-gray-300 hover:border-danger hover:bg-gray-50"
-                          }`}
-                        >
-                          <input {...getInputProps()} />
-                          <p className="text-gray-700">
-                            {isDragActive
-                              ? "Drop the file here..."
-                              : "Drag & drop your abstract file here, or click to select"}
-                          </p>
-                          <p className="text-sm text-gray-500 mt-2">
-                            Supported formats: .doc, .docx (Max size: 5MB)
-                          </p>
+                        <p className="text-gray-800">
+                          {abstract.rejectionComment || "No comment provided"}
+                        </p>
+
+                        <div className="mt-6">
+                          <h3 className="text-xl font-bold mb-4 text-danger">
+                            Update Abstract File
+                          </h3>
+                          <div
+                            {...getRootProps()}
+                            className={`w-full p-6 border-2 border-dashed rounded-lg text-center cursor-pointer transition-colors duration-200 ease-in-out ${
+                              isDragActive
+                                ? "border-danger bg-red-50"
+                                : "border-gray-300 hover:border-danger hover:bg-gray-50"
+                            }`}
+                          >
+                            <input {...getInputProps()} />
+                            <p className="text-gray-700">
+                              {isDragActive
+                                ? "Drop the file here..."
+                                : "Drag & drop your abstract file here, or click to select"}
+                            </p>
+                            <p className="text-sm text-gray-500 mt-2">
+                              Supported formats: .doc, .docx (Max size: 5MB)
+                            </p>
+                          </div>
+
+                          {abstractFile && (
+                            <div className="flex items-center space-x-2 text-sm text-gray-700 mt-2">
+                              <svg
+                                className="w-5 h-5 text-green-500"
+                                fill="none"
+                                stroke="currentColor"
+                                viewBox="0 0 24 24"
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <path
+                                  strokeLinecap="round"
+                                  strokeLinejoin="round"
+                                  strokeWidth={2}
+                                  d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                                />
+                              </svg>
+                              <span>{abstractFile.name}</span>
+                            </div>
+                          )}
+
+                          {isUploading && (
+                            <div className="mt-4">
+                              <div className="flex justify-between mb-1">
+                                <span className="text-sm font-medium text-gray-700">
+                                  Uploading
+                                </span>
+                                <span className="text-sm font-medium text-gray-700">
+                                  {uploadProgress}%
+                                </span>
+                              </div>
+                              <div className="w-full bg-gray-200 rounded-full h-2.5">
+                                <div
+                                  className="bg-danger h-2.5 rounded-full transition-all duration-300 ease-in-out"
+                                  style={{ width: `${uploadProgress}%` }}
+                                ></div>
+                              </div>
+                            </div>
+                          )}
+
+                          {uploadError && (
+                            <div className="flex items-center space-x-2 text-red-600 mt-2">
+                              <svg
+                                className="w-5 h-5"
+                                fill="none"
+                                stroke="currentColor"
+                                viewBox="0 0 24 24"
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <path
+                                  strokeLinecap="round"
+                                  strokeLinejoin="round"
+                                  strokeWidth={2}
+                                  d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                                />
+                              </svg>
+                              <span>{uploadError}</span>
+                            </div>
+                          )}
+
+                          <button
+                            onClick={handleFileUpload}
+                            disabled={!abstractFile || isUploading}
+                            className="mt-4 w-full bg-danger text-white py-2 px-4 rounded-md hover:bg-red-700 transition-colors duration-200 ease-in-out disabled:opacity-50 disabled:cursor-not-allowed"
+                          >
+                            {isUploading
+                              ? "Uploading..."
+                              : "Upload New Abstract"}
+                          </button>
                         </div>
-
-                        {abstractFile && (
-                          <div className="flex items-center space-x-2 text-sm text-gray-700 mt-2">
-                            <svg
-                              className="w-5 h-5 text-green-500"
-                              fill="none"
-                              stroke="currentColor"
-                              viewBox="0 0 24 24"
-                              xmlns="http://www.w3.org/2000/svg"
-                            >
-                              <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                strokeWidth={2}
-                                d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-                              />
-                            </svg>
-                            <span>{abstractFile.name}</span>
-                          </div>
-                        )}
-
-                        {isUploading && (
-                          <div className="mt-4">
-                            <div className="flex justify-between mb-1">
-                              <span className="text-sm font-medium text-gray-700">
-                                Uploading
-                              </span>
-                              <span className="text-sm font-medium text-gray-700">
-                                {uploadProgress}%
-                              </span>
-                            </div>
-                            <div className="w-full bg-gray-200 rounded-full h-2.5">
-                              <div
-                                className="bg-danger h-2.5 rounded-full transition-all duration-300 ease-in-out"
-                                style={{ width: `${uploadProgress}%` }}
-                              ></div>
-                            </div>
-                          </div>
-                        )}
-
-                        {uploadError && (
-                          <div className="flex items-center space-x-2 text-red-600 mt-2">
-                            <svg
-                              className="w-5 h-5"
-                              fill="none"
-                              stroke="currentColor"
-                              viewBox="0 0 24 24"
-                              xmlns="http://www.w3.org/2000/svg"
-                            >
-                              <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                strokeWidth={2}
-                                d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                              />
-                            </svg>
-                            <span>{uploadError}</span>
-                          </div>
-                        )}
-
-                        <button
-                          onClick={handleFileUpload}
-                          disabled={!abstractFile || isUploading}
-                          className="mt-4 w-full bg-danger text-white py-2 px-4 rounded-md hover:bg-red-700 transition-colors duration-200 ease-in-out disabled:opacity-50 disabled:cursor-not-allowed"
-                        >
-                          {isUploading ? "Uploading..." : "Upload New Abstract"}
-                        </button>
                       </div>
-                    </div>
-                  )}
+                    ))}
                 </div>
               )}
 

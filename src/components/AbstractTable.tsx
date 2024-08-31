@@ -49,7 +49,6 @@ const AbstractTable: React.FC<AbstractTableProps> = ({
   filters,
   handleStatusUpdate,
 }) => {
-  const [openDropdownId, setOpenDropdownId] = useState<string | null>(null);
   const [rejectPopup, setRejectPopup] = useState<{
     isOpen: boolean;
     abstractId: string | null;
@@ -73,6 +72,13 @@ const AbstractTable: React.FC<AbstractTableProps> = ({
     isOpen: false,
     fileUrl: "",
     fileName: "",
+  });
+  const [statusModal, setStatusModal] = useState<{
+    isOpen: boolean;
+    abstractId: string | null;
+  }>({
+    isOpen: false,
+    abstractId: null,
   });
 
   const handleDownload = (abstract: Abstract) => {
@@ -104,6 +110,7 @@ const AbstractTable: React.FC<AbstractTableProps> = ({
     } else {
       handleStatusUpdate(abstract._id, newStatus);
     }
+    setStatusModal({ isOpen: false, abstractId: null });
   };
 
   const SkeletonLoader = () => (
@@ -115,81 +122,124 @@ const AbstractTable: React.FC<AbstractTableProps> = ({
     </div>
   );
 
-  const RejectPopup = () => (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-      <div className="bg-white p-6 rounded-lg shadow-lg w-96">
-        <h2 className="text-xl font-bold mb-4">Reject Abstract</h2>
-        <textarea
-          className="w-full h-32 p-2 border rounded mb-4"
-          placeholder="Enter rejection reason..."
-          value={rejectComment}
-          onChange={(e) => setRejectComment(e.target.value)}
-        ></textarea>
-        <div className="flex justify-end">
+  const CustomModal = ({
+    isOpen,
+    onClose,
+    title,
+    children,
+  }: {
+    isOpen: boolean;
+    onClose: () => void;
+    title: string;
+    children: React.ReactNode;
+  }) => {
+    if (!isOpen) return null;
+
+    return (
+      <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+        <div className="bg-white p-6 rounded-lg shadow-lg w-96">
+          <h2 className="text-xl font-bold mb-4">{title}</h2>
+          {children}
           <button
-            className="bg-gray-300 hover:bg-gray-400 text-black font-bold py-2 px-4 rounded mr-2"
-            onClick={() => {
-              setRejectPopup({ isOpen: false, abstractId: null });
-              setRejectComment("");
-            }}
+            onClick={onClose}
+            className="mt-4 bg-gray-300 hover:bg-gray-400 text-black font-bold py-2 px-4 rounded"
           >
-            Cancel
-          </button>
-          <button
-            className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded"
-            onClick={async () => {
-              if (rejectPopup.abstractId) {
-                await handleStatusUpdate(
-                  rejectPopup.abstractId,
-                  "Rejected",
-                  rejectComment
-                );
-                setRejectPopup({ isOpen: false, abstractId: null });
-                setRejectComment("");
-              }
-            }}
-          >
-            Confirm Reject
+            Close
           </button>
         </div>
       </div>
-    </div>
-  );
+    );
+  };
 
-  const PresentationTypePopup = () => (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-      <div className="bg-white p-6 rounded-lg shadow-lg w-96">
-        <h2 className="text-xl font-bold mb-4">Select Presentation Type</h2>
-        <select
-          className="w-full p-2 border rounded mb-4"
-          onChange={(e) => {
-            if (presentationTypePopup.abstractId) {
-              handleStatusUpdate(
-                presentationTypePopup.abstractId,
-                "Accepted",
-                undefined,
-                e.target.value
+  const RejectPopup = () => (
+    <CustomModal
+      isOpen={rejectPopup.isOpen}
+      onClose={() => setRejectPopup({ isOpen: false, abstractId: null })}
+      title="Reject Abstract"
+    >
+      <textarea
+        className="w-full h-32 p-2 border rounded mb-4"
+        placeholder="Enter rejection reason..."
+        value={rejectComment}
+        onChange={(e) => setRejectComment(e.target.value)}
+      ></textarea>
+      <div className="flex justify-end">
+        <button
+          className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded"
+          onClick={async () => {
+            if (rejectPopup.abstractId) {
+              await handleStatusUpdate(
+                rejectPopup.abstractId,
+                "Rejected",
+                rejectComment
               );
-              setPresentationTypePopup({ isOpen: false, abstractId: null });
+              setRejectPopup({ isOpen: false, abstractId: null });
+              setRejectComment("");
             }
           }}
         >
-          <option value="">Select a type</option>
-          <option value="Oral">Oral</option>
-          <option value="E-Poster">E-Poster</option>
-        </select>
-        <div className="flex justify-end">
-          <button
-            className="bg-gray-300 hover:bg-gray-400 text-black font-bold py-2 px-4 rounded"
-            onClick={() =>
-              setPresentationTypePopup({ isOpen: false, abstractId: null })
-            }
-          >
-            Cancel
-          </button>
-        </div>
+          Confirm Reject
+        </button>
       </div>
-    </div>
+    </CustomModal>
+  );
+
+  const PresentationTypePopup = () => (
+    <CustomModal
+      isOpen={presentationTypePopup.isOpen}
+      onClose={() =>
+        setPresentationTypePopup({ isOpen: false, abstractId: null })
+      }
+      title="Select Presentation Type"
+    >
+      <select
+        className="w-full p-2 border rounded mb-4"
+        onChange={(e) => {
+          if (presentationTypePopup.abstractId) {
+            handleStatusUpdate(
+              presentationTypePopup.abstractId,
+              "Accepted",
+              undefined,
+              e.target.value
+            );
+            setPresentationTypePopup({ isOpen: false, abstractId: null });
+          }
+        }}
+      >
+        <option value="">Select a type</option>
+        <option value="Oral">Oral</option>
+        <option value="E-Poster">E-Poster</option>
+      </select>
+    </CustomModal>
+  );
+
+  const StatusChangeModal = () => (
+    <CustomModal
+      isOpen={statusModal.isOpen}
+      onClose={() => setStatusModal({ isOpen: false, abstractId: null })}
+      title="Change Status"
+    >
+      <div className="grid gap-4">
+        {["Pending", "InReview", "Rejected", "Accepted"].map((status) => (
+          <button
+            key={status}
+            onClick={() => {
+              if (statusModal.abstractId) {
+                const abstract = abstracts.find(
+                  (a) => a._id === statusModal.abstractId
+                );
+                if (abstract) {
+                  handleStatusUpdateClick(abstract, status);
+                }
+              }
+            }}
+            className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded"
+          >
+            {status}
+          </button>
+        ))}
+      </div>
+    </CustomModal>
   );
 
   if (loading) return <SkeletonLoader />;
@@ -266,9 +316,9 @@ const AbstractTable: React.FC<AbstractTableProps> = ({
                 <span
                   className={`py-1 px-3 rounded-full text-xs ${
                     abstract.Status === "Accepted"
-                      ? "bg-green text-black"
+                      ? "bg-green-200 text-green-800"
                       : abstract.Status === "Rejected"
-                      ? "bg-red text-black"
+                      ? "bg-red-200 text-red-800"
                       : "bg-yellow-200 text-yellow-800"
                   }`}
                 >
@@ -289,47 +339,26 @@ const AbstractTable: React.FC<AbstractTableProps> = ({
                     className="bg-green-500 hover:bg-green-600 text-white rounded-full p-2 mx-1"
                     title="Download"
                   >
-                    <Download size={16} color="black" />
+                    <Download size={16} />
                   </button>
-                  <div className="relative">
-                    <button
-                      onClick={() =>
-                        setOpenDropdownId(
-                          openDropdownId === abstract._id ? null : abstract._id
-                        )
-                      }
-                      className="bg-gray-200 hover:bg-gray-300 text-gray-800 rounded-full p-2 mx-1"
-                      title="More Actions"
-                    >
-                      <MoreVertical size={16} />
-                    </button>
-                    {openDropdownId === abstract._id && (
-                      <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg z-[9999]">
-                        {["Pending", "InReview", "Rejected", "Accepted"].map(
-                          (status) => (
-                            <button
-                              key={status}
-                              onClick={() => {
-                                handleStatusUpdateClick(abstract, status);
-                                setOpenDropdownId(null);
-                              }}
-                              className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                            >
-                              {status}
-                            </button>
-                          )
-                        )}
-                      </div>
-                    )}
-                  </div>
+                  <button
+                    onClick={() =>
+                      setStatusModal({ isOpen: true, abstractId: abstract._id })
+                    }
+                    className="bg-gray-200 hover:bg-gray-300 text-gray-800 rounded-full p-2 mx-1"
+                    title="More Actions"
+                  >
+                    <MoreVertical size={16} />
+                  </button>
                 </div>
               </td>
             </tr>
           ))}
         </tbody>
       </table>
-      {rejectPopup.isOpen && <RejectPopup />}
-      {presentationTypePopup.isOpen && <PresentationTypePopup />}
+      <RejectPopup />
+      <PresentationTypePopup />
+      <StatusChangeModal />
       <FileViewerModal
         isOpen={fileViewerModal.isOpen}
         onClose={() =>
