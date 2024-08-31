@@ -80,6 +80,12 @@ const AbstractFormPage: React.FC = () => {
                     Abstracts must be original and not previously published or
                     presented at another conference.
                   </li>
+                  <li>Font: Times New Roman</li>
+                  <li>Title: Font Size 14 + Bold</li>
+                  <li>
+                    Author Name, Affiliation & Abstract Body: Font Size 12
+                  </li>
+                  <li>Word Limit: Between 250 - 350</li>
                 </ul>
               </section>
             </div>
@@ -142,7 +148,7 @@ const AbstractFormPage: React.FC = () => {
                     be provided upon acceptance of the abstract.
                   </li>
                   <li>
-                    Presenters must be registered delegates of Pharmanecia 2024.
+                    Presenters must be registered delegates of Pharmanecia 4.E.
                   </li>
                   <li>
                     The best Poster and/or Oral presentations in each category
