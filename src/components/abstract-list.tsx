@@ -1,26 +1,11 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import Link from "next/link";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import AbstractTable from "./AbstractTable";
-
-interface Abstract {
-  _id: string;
-  title: string;
-  subject: string;
-  name: string;
-  email: string;
-  designation: string;
-  temporyAbstractCode: string;
-  AbstractCode: string;
-  registrationCompleted: boolean;
-  registrationCode: string;
-  Status: string;
-  abstractFileUrl: string;
-  presentationType: string;
-}
+import { Abstract, exportAbstractsToExcel } from "@/lib/excelExport";
 
 interface Filters {
   Status: string;
@@ -109,16 +94,64 @@ export function AbstractList() {
     }
   };
 
+  const handleExportToExcel = () => {
+    if (abstracts.length === 0) {
+      toast.error("No abstracts to export.");
+      return;
+    }
+    const fileName = `Abstracts_Export_${
+      new Date().toISOString().split("T")[0]
+    }`;
+    exportAbstractsToExcel(abstracts, fileName);
+    toast.success("Abstracts exported successfully!");
+  };
+
+  const filteredAndSortedAbstracts = useMemo(() => {
+    let result = [...abstracts];
+
+    // Apply Status filter
+    if (filters.Status !== "all") {
+      result = result.filter((abstract) => abstract.Status === filters.Status);
+    }
+
+    // Apply search filter
+    if (filters.search) {
+      const searchLower = filters.search.toLowerCase();
+      result = result.filter(
+        (abstract) =>
+          abstract.title.toLowerCase().includes(searchLower) ||
+          abstract.name.toLowerCase().includes(searchLower) ||
+          abstract.email.toLowerCase().includes(searchLower)
+      );
+    }
+
+    // Apply sorting
+    result.sort((a, b) => {
+      if (a[filters.sortBy] < b[filters.sortBy])
+        return filters.sortOrder === "asc" ? -1 : 1;
+      if (a[filters.sortBy] > b[filters.sortBy])
+        return filters.sortOrder === "asc" ? 1 : -1;
+      return 0;
+    });
+
+    return result;
+  }, [abstracts, filters]);
+
   // Get current abstracts
   const indexOfLastAbstract = currentPage * abstractsPerPage;
   const indexOfFirstAbstract = indexOfLastAbstract - abstractsPerPage;
-  const currentAbstracts = abstracts.slice(
+  const currentAbstracts = filteredAndSortedAbstracts.slice(
     indexOfFirstAbstract,
     indexOfLastAbstract
   );
 
   // Change page
   const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
+
+  // Update pagination when filters change
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [filters]);
 
   return (
     <div className="flex flex-col h-screen bg-[#F2F2F2]">
@@ -131,6 +164,12 @@ export function AbstractList() {
               Registration List
             </button>
           </Link>
+          <button
+            onClick={handleExportToExcel}
+            className="bg-pink-500 text-white px-4 py-2 text-sm font-medium rounded hover:bg-green-700 transition duration-300 ease-in-out"
+          >
+            Export to Excel
+          </button>
           <div className="relative">
             <button
               onClick={() => setIsFilterOpen(!isFilterOpen)}
@@ -236,7 +275,11 @@ export function AbstractList() {
           />
           <div className="mt-4 flex justify-center">
             {Array.from(
-              { length: Math.ceil(abstracts.length / abstractsPerPage) },
+              {
+                length: Math.ceil(
+                  filteredAndSortedAbstracts.length / abstractsPerPage
+                ),
+              },
               (_, i) => (
                 <button
                   key={i}

@@ -4,22 +4,7 @@ import { Eye, Download, MoreVertical } from "lucide-react";
 import FileViewerModal from "./FileViewerModal";
 import RejectPopup from "./RejectPopup";
 import { designationOptions } from "@/data";
-
-interface Abstract {
-  _id: string;
-  title: string;
-  subject: string;
-  name: string;
-  email: string;
-  designation: string;
-  temporyAbstractCode: string;
-  AbstractCode: string;
-  registrationCompleted: boolean;
-  registrationCode: string;
-  Status: string;
-  abstractFileUrl: string;
-  presentationType: string;
-}
+import { Abstract } from "@/lib/excelExport";
 
 interface Filters {
   Status: string;

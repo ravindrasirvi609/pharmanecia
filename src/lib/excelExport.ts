@@ -91,3 +91,78 @@ export const exportToExcel = (
   // Save the file
   saveAs(data, `${fileName}.xlsx`);
 };
+
+export interface Abstract {
+  _id: string;
+  title: string;
+  subject: string;
+  name: string;
+  email: string;
+  designation: string;
+  temporyAbstractCode: string;
+  AbstractCode: string;
+  registrationCompleted: boolean;
+  registrationCode: string;
+  Status: string;
+  abstractFileUrl: string;
+  presentationType: string;
+  whatsappNumber: string;
+  affiliation: string;
+  coAuthor: string;
+  address: string;
+  city: string;
+  state: string;
+  pincode: string;
+  qrCodeUrl: string;
+  rejectionComment: string;
+  articleType: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export const exportAbstractsToExcel = (
+  abstractData: Abstract[],
+  fileName: string
+) => {
+  // Prepare the data for export
+  const exportData = abstractData.map((item) => ({
+    "Abstract ID": item.AbstractCode,
+    "Temporary Abstract Code": item.temporyAbstractCode,
+    Title: item.title,
+    Subject: item.subject,
+    Name: item.name,
+    Email: item.email,
+    "WhatsApp Number": item.whatsappNumber,
+    Designation: item.designation,
+    Affiliation: item.affiliation,
+    "Co-Author": item.coAuthor,
+    "Registration Completed": item.registrationCompleted ? "Yes" : "No",
+    "Registration Code": item.registrationCode,
+    Status: item.Status,
+    "Abstract File URL": item.abstractFileUrl,
+    "Presentation Type": item.presentationType,
+    Address: item.address,
+    City: item.city,
+    State: item.state,
+    Pincode: item.pincode,
+    "QR Code URL": item.qrCodeUrl,
+    "Rejection Comment": item.rejectionComment,
+    "Article Type": item.articleType,
+    "Created At": new Date(item.createdAt).toLocaleString(),
+    "Updated At": new Date(item.updatedAt).toLocaleString(),
+  }));
+
+  // Create a new workbook and add the data
+  const ws = XLSX.utils.json_to_sheet(exportData);
+  const wb = XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(wb, ws, "Abstracts");
+
+  // Generate the Excel file
+  const excelBuffer = XLSX.write(wb, { bookType: "xlsx", type: "array" });
+  const data = new Blob([excelBuffer], {
+    type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+  });
+
+  // Save the file
+  saveAs(data, `${fileName}.xlsx`);
+};
