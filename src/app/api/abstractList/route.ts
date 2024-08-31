@@ -6,19 +6,10 @@ connect();
 
 export async function GET(req: NextRequest) {
   try {
-    // Get page and limit from query parameters
-    const url = new URL(req.url);
-    const page = parseInt(url.searchParams.get("page") || "1");
-    const limit = parseInt(url.searchParams.get("limit") || "50");
-
-    // Calculate skip value for pagination
-    const skip = (page - 1) * limit;
-
-    // Fetch total count of abstracts
-    const total = await AbstractModel.countDocuments();
-
-    // Fetch paginated abstracts from the database
-    const abstracts = await AbstractModel.find({}).lean();
+    // Fetch abstracts from the database, excluding those with status "Delete"
+    const abstracts = await AbstractModel.find({
+      status: { $ne: "Delete" },
+    }).lean();
 
     // Check if abstracts exist
     if (!abstracts || abstracts.length === 0) {
@@ -32,10 +23,6 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({
       message: "Abstracts fetched successfully",
       abstracts,
-      total,
-      page,
-      limit,
-      totalPages: Math.ceil(total / limit),
     });
   } catch (error: any) {
     console.error("Error:", error);

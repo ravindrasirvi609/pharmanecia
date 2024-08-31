@@ -48,6 +48,11 @@ const AbstractTable: React.FC<AbstractTableProps> = ({
   filters,
   handleStatusUpdate,
 }) => {
+  // Filter out abstracts with status "Delete"
+  const filteredAbstracts = abstracts.filter(
+    (abstract) => abstract.Status !== "Delete"
+  );
+
   const [rejectPopup, setRejectPopup] = useState<{
     isOpen: boolean;
     abstractId: string | null;
@@ -81,15 +86,6 @@ const AbstractTable: React.FC<AbstractTableProps> = ({
 
   const handleDownload = useCallback((abstract: Abstract) => {
     window.open(abstract.abstractFileUrl, "_blank");
-  }, []);
-
-  const handleViewFile = useCallback((abstract: Abstract) => {
-    const fileName = `${abstract.name}'s Abstract`;
-    setFileViewerModal({
-      isOpen: true,
-      fileUrl: abstract.abstractFileUrl,
-      fileName: fileName,
-    });
   }, []);
 
   const getDesignationLabel = useCallback((value: string) => {
@@ -197,24 +193,26 @@ const AbstractTable: React.FC<AbstractTableProps> = ({
       title="Change Status"
     >
       <div className="grid gap-4">
-        {["Pending", "InReview", "Revision", "Accepted"].map((status) => (
-          <button
-            key={status}
-            onClick={() => {
-              if (statusModal.abstractId) {
-                const abstract = abstracts.find(
-                  (a) => a._id === statusModal.abstractId
-                );
-                if (abstract) {
-                  handleStatusUpdateClick(abstract, status);
+        {["Pending", "InReview", "Revision", "Accepted", "Delete"].map(
+          (status) => (
+            <button
+              key={status}
+              onClick={() => {
+                if (statusModal.abstractId) {
+                  const abstract = filteredAbstracts.find(
+                    (a) => a._id === statusModal.abstractId
+                  );
+                  if (abstract) {
+                    handleStatusUpdateClick(abstract, status);
+                  }
                 }
-              }
-            }}
-            className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded"
-          >
-            {status}
-          </button>
-        ))}
+              }}
+              className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded"
+            >
+              {status}
+            </button>
+          )
+        )}
       </div>
     </CustomModal>
   );
@@ -251,7 +249,7 @@ const AbstractTable: React.FC<AbstractTableProps> = ({
           </tr>
         </thead>
         <tbody className="text-gray-600 text-sm font-light">
-          {abstracts.map((abstract) => (
+          {filteredAbstracts.map((abstract) => (
             <tr
               key={abstract._id}
               className="border-b border-gray-200 hover:bg-gray-100"
@@ -311,13 +309,7 @@ const AbstractTable: React.FC<AbstractTableProps> = ({
                   >
                     <Download size={16} />
                   </button>
-                  <button
-                    onClick={() => handleViewFile(abstract)}
-                    className="bg-blue-500 hover:bg-blue-600 text-white rounded-full p-2 mx-1"
-                    title="View"
-                  >
-                    <Eye size={16} />
-                  </button>
+
                   <button
                     onClick={() =>
                       setStatusModal({ isOpen: true, abstractId: abstract._id })
