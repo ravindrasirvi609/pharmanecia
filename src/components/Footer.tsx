@@ -43,8 +43,8 @@ const Footer = () => {
           <h2 className="text-xl font-bold mb-4">Contact Information</h2>
           <p>
             Email:{" "}
-            <a href="mailto:info@pharmanecia.com" className="text-light">
-              info@pharmanecia.com
+            <a href="mailto:info@pharmanecia.org" className="text-light">
+              info@pharmanecia.org
             </a>
           </p>
           <p>

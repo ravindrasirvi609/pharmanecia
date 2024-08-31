@@ -1,9 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import Link from "next/link";
 import { Eye, Download, MoreVertical } from "lucide-react";
 import FileViewerModal from "./FileViewerModal";
-
-// Assuming you have a designationOptions array defined somewhere
+import RejectPopup from "./RejectPopup";
 import { designationOptions } from "@/data";
 
 interface Abstract {
@@ -63,7 +62,6 @@ const AbstractTable: React.FC<AbstractTableProps> = ({
     isOpen: false,
     abstractId: null,
   });
-  const [rejectComment, setRejectComment] = useState("");
   const [fileViewerModal, setFileViewerModal] = useState<{
     isOpen: boolean;
     fileUrl: string;
@@ -81,37 +79,49 @@ const AbstractTable: React.FC<AbstractTableProps> = ({
     abstractId: null,
   });
 
-  const handleDownload = (abstract: Abstract) => {
+  const handleDownload = useCallback((abstract: Abstract) => {
     window.open(abstract.abstractFileUrl, "_blank");
-  };
+  }, []);
 
-  const handleViewFile = (abstract: Abstract) => {
+  const handleViewFile = useCallback((abstract: Abstract) => {
     const fileName = `${abstract.name}'s Abstract`;
-
     setFileViewerModal({
       isOpen: true,
       fileUrl: abstract.abstractFileUrl,
       fileName: fileName,
     });
-  };
+  }, []);
 
-  const getDesignationLabel = (value: string) => {
+  const getDesignationLabel = useCallback((value: string) => {
     const designation = designationOptions.find(
       (option) => option.value === value
     );
     return designation ? designation.label : "Unknown Designation";
-  };
+  }, []);
 
-  const handleStatusUpdateClick = (abstract: Abstract, newStatus: string) => {
-    if (newStatus === "Rejected") {
-      setRejectPopup({ isOpen: true, abstractId: abstract._id });
-    } else if (newStatus === "Accepted") {
-      setPresentationTypePopup({ isOpen: true, abstractId: abstract._id });
-    } else {
-      handleStatusUpdate(abstract._id, newStatus);
-    }
-    setStatusModal({ isOpen: false, abstractId: null });
-  };
+  const handleStatusUpdateClick = useCallback(
+    (abstract: Abstract, newStatus: string) => {
+      if (newStatus === "Revision") {
+        setRejectPopup({ isOpen: true, abstractId: abstract._id });
+      } else if (newStatus === "Accepted") {
+        setPresentationTypePopup({ isOpen: true, abstractId: abstract._id });
+      } else {
+        handleStatusUpdate(abstract._id, newStatus);
+      }
+      setStatusModal({ isOpen: false, abstractId: null });
+    },
+    [handleStatusUpdate]
+  );
+
+  const handleReject = useCallback(
+    async (comment: string) => {
+      if (rejectPopup.abstractId) {
+        await handleStatusUpdate(rejectPopup.abstractId, "Revision", comment);
+        setRejectPopup({ isOpen: false, abstractId: null });
+      }
+    },
+    [rejectPopup.abstractId, handleStatusUpdate]
+  );
 
   const SkeletonLoader = () => (
     <div className="animate-pulse">
@@ -151,39 +161,6 @@ const AbstractTable: React.FC<AbstractTableProps> = ({
     );
   };
 
-  const RejectPopup = () => (
-    <CustomModal
-      isOpen={rejectPopup.isOpen}
-      onClose={() => setRejectPopup({ isOpen: false, abstractId: null })}
-      title="Reject Abstract"
-    >
-      <textarea
-        className="w-full h-32 p-2 border rounded mb-4"
-        placeholder="Enter rejection reason..."
-        value={rejectComment}
-        onChange={(e) => setRejectComment(e.target.value)}
-      ></textarea>
-      <div className="flex justify-end">
-        <button
-          className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded"
-          onClick={async () => {
-            if (rejectPopup.abstractId) {
-              await handleStatusUpdate(
-                rejectPopup.abstractId,
-                "Rejected",
-                rejectComment
-              );
-              setRejectPopup({ isOpen: false, abstractId: null });
-              setRejectComment("");
-            }
-          }}
-        >
-          Confirm Reject
-        </button>
-      </div>
-    </CustomModal>
-  );
-
   const PresentationTypePopup = () => (
     <CustomModal
       isOpen={presentationTypePopup.isOpen}
@@ -220,7 +197,7 @@ const AbstractTable: React.FC<AbstractTableProps> = ({
       title="Change Status"
     >
       <div className="grid gap-4">
-        {["Pending", "InReview", "Rejected", "Accepted"].map((status) => (
+        {["Pending", "InReview", "Revision", "Accepted"].map((status) => (
           <button
             key={status}
             onClick={() => {
@@ -302,8 +279,8 @@ const AbstractTable: React.FC<AbstractTableProps> = ({
                 <span
                   className={`py-1 px-3 rounded-full text-xs ${
                     abstract.registrationCompleted
-                      ? "bg-green-200 text-green-800"
-                      : "bg-red-200 text-red-800"
+                      ? "bg-green text-white"
+                      : "bg-red text-white"
                   }`}
                 >
                   {abstract.registrationCompleted ? "Complete" : "Incomplete"}
@@ -316,9 +293,9 @@ const AbstractTable: React.FC<AbstractTableProps> = ({
                 <span
                   className={`py-1 px-3 rounded-full text-xs ${
                     abstract.Status === "Accepted"
-                      ? "bg-green-200 text-green-800"
-                      : abstract.Status === "Rejected"
-                      ? "bg-red-200 text-red-800"
+                      ? "bg-green text-white"
+                      : abstract.Status === "Revision"
+                      ? "bg-red text-white"
                       : "bg-yellow-200 text-yellow-800"
                   }`}
                 >
@@ -328,18 +305,18 @@ const AbstractTable: React.FC<AbstractTableProps> = ({
               <td className="py-3 px-6 text-center">
                 <div className="flex item-center justify-center">
                   <button
+                    onClick={() => handleDownload(abstract)}
+                    className="bg-green hover:bg-green text-white rounded-full p-2 mx-1"
+                    title="Download"
+                  >
+                    <Download size={16} />
+                  </button>
+                  <button
                     onClick={() => handleViewFile(abstract)}
                     className="bg-blue-500 hover:bg-blue-600 text-white rounded-full p-2 mx-1"
                     title="View"
                   >
                     <Eye size={16} />
-                  </button>
-                  <button
-                    onClick={() => handleDownload(abstract)}
-                    className="bg-green-500 hover:bg-green-600 text-white rounded-full p-2 mx-1"
-                    title="Download"
-                  >
-                    <Download size={16} />
                   </button>
                   <button
                     onClick={() =>
@@ -356,7 +333,11 @@ const AbstractTable: React.FC<AbstractTableProps> = ({
           ))}
         </tbody>
       </table>
-      <RejectPopup />
+      <RejectPopup
+        isOpen={rejectPopup.isOpen}
+        onClose={() => setRejectPopup({ isOpen: false, abstractId: null })}
+        onReject={handleReject}
+      />
       <PresentationTypePopup />
       <StatusChangeModal />
       <FileViewerModal
