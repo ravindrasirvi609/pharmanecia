@@ -18,7 +18,7 @@ const abstractSchema = new Schema({
   temporyAbstractCode: { type: String },
   AbstractCode: { type: String },
   rejectionComment: { type: String },
-  Status: { type: String, default: "Pending" },
+  Status: { type: String, default: "InReview" },
   registrationCompleted: { type: Boolean, default: false },
   registrationCode: { type: String },
   articleType: { type: String },

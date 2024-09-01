@@ -12,12 +12,15 @@ const LatestNews = () => {
           {/* News Item 1 */}
           <div className="bg-white shadow-lg rounded-lg p-6">
             <h2 className="text-2xl font-semibold mb-4 text-secondary">
-              Announcement: Keynote Speakers Confirmed
+              Pioneering the Future of Drug Discovery: AI and Machine Learning
+              Take Center Stage at International Conference
             </h2>
             <p className="text-lg leading-relaxed text-justify mb-4">
-              We are thrilled to announce the confirmed keynote speakers for
-              Pharmanecia 4.E. Join us to hear from leading experts in
-              pharmaceutical research.
+              The Department of Pharmaceutical Chemistry at JSS College of
+              Pharmacy, Ooty, in collaboration with the Operant Pharmacy
+              Federation, is proud to announce the International Research
+              Conference on &quot;Recent Advances in Artificial Intelligence and
+              Machine Learning Driven Drug Discovery.&quot;
             </p>
             <a href="#" className="text-accent hover:text-secondary">
               Read more
@@ -27,12 +30,15 @@ const LatestNews = () => {
           {/* News Item 2 */}
           <div className="bg-white shadow-lg rounded-lg p-6">
             <h2 className="text-2xl font-semibold mb-4 text-secondary">
-              Article: Emerging Trends in Pharmaceutical Research
+              International Conference to Explore the Role of AI and Machine
+              Learning in Drug Discovery
             </h2>
             <p className="text-lg leading-relaxed text-justify mb-4">
-              Discover the latest trends in pharmaceutical research and how they
-              are shaping the future of medicine. Our experts share their
-              insights.
+              The International Research Conference on &quot;Recent Advances in
+              Artificial Intelligence and Machine Learning Driven Drug
+              Discovery,&quot; hosted by the Department of Pharmaceutical
+              Chemistry at JSS College of Pharmacy, Ooty, and Operant Pharmacy
+              Federation, is set to be a groundbreaking event.
             </p>
             <a href="#" className="text-accent hover:text-secondary">
               Read more
@@ -42,12 +48,15 @@ const LatestNews = () => {
           {/* News Item 3 */}
           <div className="bg-white shadow-lg rounded-lg p-6">
             <h2 className="text-2xl font-semibold mb-4 text-secondary">
-              Update: Abstract Submission Deadline Extended
+              JSS College of Pharmacy to Host International Conference on
+              AI-Driven Drug Discovery{" "}
             </h2>
             <p className="text-lg leading-relaxed text-justify mb-4">
-              Good news for researchers! The abstract submission deadline for
-              Pharmanecia 4.E has been extended to August 31. Submit your
-              abstracts now.
+              The Department of Pharmaceutical Chemistry at JSS College of
+              Pharmacy, Ooty, in partnership with the Operant Pharmacy
+              Federation, is excited to host the International Research
+              Conference on &quot;Recent Advances in Artificial Intelligence and
+              Machine Learning Driven Drug Discovery.&quot;
             </p>
             <a href="#" className="text-accent hover:text-secondary">
               Read more

@@ -33,7 +33,7 @@ export async function PATCH(req: NextRequest) {
     }
 
     // Update the abstract
-    abstract.Status = "Pending";
+    abstract.Status = "InReview";
     abstract.abstractFileUrl = abstractFileUrl;
     abstract.updatedAt = new Date(); // Update the timestamp
 
