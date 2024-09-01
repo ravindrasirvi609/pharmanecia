@@ -33,7 +33,7 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
     // If not found by _id, try with temporaryAbstractCode or registrationCode
     if (!abstract && !registration) {
       abstract = await AbstractModel.findOne({
-        temporaryAbstractCode: id,
+        temporyAbstractCode: id,
       }).lean();
       console.log("abstract----2", abstract);
       if (!abstract) {
