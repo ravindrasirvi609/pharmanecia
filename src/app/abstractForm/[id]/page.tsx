@@ -174,7 +174,6 @@ const AbstractForm: React.FC<StudentPageProps> = ({ params }) => {
                     name={registration.name ?? ""}
                     imageUrl={registration?.imageUrl ?? ""}
                     affiliation={registration.affiliation}
-                    designation={registration.designation}
                   />
                 )}
               </div>

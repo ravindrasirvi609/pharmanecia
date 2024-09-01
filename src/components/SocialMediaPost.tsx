@@ -13,119 +13,103 @@ const SocialMediaPost = ({ name, affiliation, imageUrl }: any) => {
         textAlign: "center",
         padding: "40px",
         boxSizing: "border-box",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "space-between",
       }}
     >
-      <h1
-        style={{
-          color: "#FFD700",
-          fontSize: "60px",
-          margin: "0 0 20px",
-        }}
-      >
-        Pharmanecia 4.E
-      </h1>
-
-      <p
-        style={{
-          fontSize: "24px",
-          margin: "0 0 20px",
-        }}
-      >
-        International Research Conference on
-      </p>
-
-      <h2
-        style={{
-          fontSize: "28px",
-          margin: "0 0 20px",
-          padding: "0 100px",
-          lineHeight: "1.4",
-        }}
-      >
-        &quot;Recent Advances in Artificial Intelligence and Machine Learning
-        Driven Drug Discovery&quot;
-      </h2>
-
-      <p
-        style={{
-          fontSize: "24px",
-          margin: "0 0 40px",
-        }}
-      >
-        7th and 8th March, 2025
-      </p>
-
-      <div
-        style={{
-          background: "white",
-          borderRadius: "20px",
-          padding: "30px",
-          width: "80%",
-          margin: "0 auto",
-        }}
-      >
-        <div
+      <div>
+        <h1
           style={{
-            width: "200px",
-            height: "200px",
-            borderRadius: "50%",
-            border: "4px solid #FFA500",
-            overflow: "hidden",
-            margin: "0 auto 20px",
+            color: "#FFD700",
+            fontSize: "60px",
+            margin: "0 0 20px",
+            fontWeight: "bold",
           }}
         >
-          <Image
-            src={imageUrl}
-            alt={name}
-            style={{
-              width: "100%",
-              height: "100%",
-              objectFit: "cover",
-            }}
-          />
-        </div>
-
-        <h3
-          style={{
-            color: "#000080",
-            fontSize: "28px",
-            margin: "0 0 10px",
-          }}
-        >
-          {name}
-        </h3>
+          Pharmanecia 4.E
+        </h1>
 
         <p
           style={{
-            color: "#FFA500",
             fontSize: "24px",
-            margin: "0 0 10px",
-          }}
-        >
-          Student
-        </p>
-
-        <p
-          style={{
-            color: "#000000",
-            fontSize: "20px",
             margin: "0 0 20px",
           }}
         >
-          {affiliation}
+          International Research Conference on
         </p>
+
+        <h2
+          style={{
+            fontSize: "28px",
+            margin: "0 0 20px",
+            padding: "0 100px",
+            lineHeight: "1.4",
+          }}
+        >
+          &quot;Recent Advances in Artificial Intelligence and Machine Learning
+          Driven Drug Discovery&quot;
+        </h2>
 
         <p
           style={{
-            color: "#FFA500",
             fontSize: "24px",
-            fontWeight: "bold",
-            margin: "0",
+            margin: "0 0 40px",
           }}
         >
-          Hey! I&apos;m Attending Pharmanecia 4.E
+          7<sup>th</sup> and 8<sup>th</sup> March, 2025
         </p>
       </div>
+
+      {/* <div
+        style={{
+          width: "200px",
+          height: "200px",
+          overflow: "hidden",
+          margin: "0 auto",
+          position: "relative",
+        }}
+      >
+        <Image
+          src={imageUrl}
+          alt={name}
+          layout="fill"
+          objectFit="cover"
+          objectPosition="center"
+        />
+      </div> */}
+
+      <h3
+        style={{
+          color: "#FFA500",
+          fontSize: "48px",
+          margin: "20px 0 10px",
+          fontWeight: "bold",
+        }}
+      >
+        {name}
+      </h3>
+
+      <p
+        style={{
+          color: "#FFA500",
+          fontSize: "20px",
+          margin: "0 0 20px",
+        }}
+      >
+        {affiliation}
+      </p>
+
+      <p
+        style={{
+          color: "#FFA500",
+          fontSize: "40px",
+          fontWeight: "black",
+          margin: "0",
+        }}
+      >
+        Hey! I&apos;m Attending Pharmanecia 4.E
+      </p>
 
       <div
         style={{

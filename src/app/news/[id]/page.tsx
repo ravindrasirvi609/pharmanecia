@@ -92,7 +92,7 @@ export default function ArticlePage({ params }: { params: { id: string } }) {
 
       <div className="prose prose-lg max-w-none">
         {article.content.split("\n\n").map((paragraph, index) => (
-          <p key={index} className="mb-4">
+          <p key={index} className="mb-4 text-blue-950">
             {paragraph}
           </p>
         ))}
