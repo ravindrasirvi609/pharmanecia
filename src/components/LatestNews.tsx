@@ -22,7 +22,7 @@ const LatestNews = () => {
               Conference on &quot;Recent Advances in Artificial Intelligence and
               Machine Learning Driven Drug Discovery.&quot;
             </p>
-            <a href="#" className="text-accent hover:text-secondary">
+            <a href="/news/1" className="text-accent hover:text-secondary">
               Read more
             </a>
           </div>
@@ -40,7 +40,7 @@ const LatestNews = () => {
               Chemistry at JSS College of Pharmacy, Ooty, and Operant Pharmacy
               Federation, is set to be a groundbreaking event.
             </p>
-            <a href="#" className="text-accent hover:text-secondary">
+            <a href="/news/2" className="text-accent hover:text-secondary">
               Read more
             </a>
           </div>
@@ -58,7 +58,7 @@ const LatestNews = () => {
               Conference on &quot;Recent Advances in Artificial Intelligence and
               Machine Learning Driven Drug Discovery.&quot;
             </p>
-            <a href="#" className="text-accent hover:text-secondary">
+            <a href="/news/3" className="text-accent hover:text-secondary">
               Read more
             </a>
           </div>
