@@ -151,14 +151,12 @@ export function AbstractForm() {
           },
         });
 
-        console.log("Response:", response);
-
         if (response.status === 200) {
           const result = response.data;
-          console.log(result);
-          console.log("result.abstract", result.abstract, result.abstract._id);
-
           if (result.abstract) {
+            alert(
+              "Your Abstract Submitted Successfully ! you will be redirected to the abstract page"
+            );
             window.location.href = `/abstractForm/${result.abstract._id}`;
           } else {
             throw new Error("Failed to submit abstract");
