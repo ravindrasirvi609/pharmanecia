@@ -1,17 +1,10 @@
-// SocialShareCard.tsx
-"use client";
-
-import React, { useState, useRef } from "react";
-import Image from "next/image";
-import Html2Canvas from "html2canvas";
+import React, { useState } from "react";
 
 interface SocialShareCardProps {
   name: string;
   affiliation?: string;
   designation?: string;
   imageUrl: string;
-  registrationType?: string;
-  registrationCode?: string;
 }
 
 const SocialShareCard: React.FC<SocialShareCardProps> = ({
@@ -19,36 +12,35 @@ const SocialShareCard: React.FC<SocialShareCardProps> = ({
   affiliation,
   designation,
   imageUrl,
-  registrationType,
-  registrationCode,
 }) => {
   const [isLoading, setIsLoading] = useState(false);
-  const cardRef = useRef<HTMLDivElement>(null);
 
   const handleDownload = async () => {
     setIsLoading(true);
 
     try {
-      if (cardRef.current && typeof window !== "undefined") {
-        const canvas = await new Promise<HTMLCanvasElement>((resolve) => {
-          if (cardRef.current) {
-            Html2Canvas(cardRef.current, {
-              scale: 2,
-              useCORS: true,
-              logging: false,
-              allowTaint: true,
-            }).then((canvas: HTMLCanvasElement) => resolve(canvas));
-          }
-        });
+      const response = await fetch("/api/generate-share-image", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ name, affiliation, designation, imageUrl }),
+      });
 
-        const dataUrl = canvas.toDataURL("image/png");
-        const link = document.createElement("a");
-        link.download = `${name.replace(/\s+/g, "_")}_Pharmanecia_Share.png`;
-        link.href = dataUrl;
-        link.click();
+      if (!response.ok) {
+        throw new Error("Failed to generate image");
       }
+
+      const blob = await response.blob();
+      const url = window.URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = `${name.replace(/\s+/g, "_")}_Pharmanecia_Share.png`;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
     } catch (error) {
-      console.error("Error generating image:", error);
+      console.error("Error downloading image:", error);
       alert("Failed to generate image. Please try again.");
     } finally {
       setIsLoading(false);
@@ -57,65 +49,10 @@ const SocialShareCard: React.FC<SocialShareCardProps> = ({
 
   return (
     <div className="flex flex-col items-center">
-      {/* Card Content for Image Generation (positioned off-screen) */}
-      <div
-        ref={cardRef}
-        className="absolute -left-[9999px] w-[1080px] h-[1080px] flex flex-col items-center justify-between bg-gradient-to-br from-[#1e0060] via-[#480048] to-[#c04848] text-white font-sans p-12 box-border"
-      >
-        <div className="text-center w-full">
-          <h1 className="text-6xl font-bold mb-4">Pharmanecia 4.E</h1>
-          <h2 className="text-2xl font-semibold mb-2">
-            International Research Conference on
-          </h2>
-          <h3 className="text-3xl font-bold mb-6 px-16">
-            &quot;Recent Advances in Artificial Intelligence and Machine
-            learning driven drug discovery&quot;
-          </h3>
-          <p className="text-2xl font-semibold">7th and 8th March, 2025</p>
-        </div>
-
-        <div className="bg-white rounded-3xl p-10 shadow-lg text-center w-5/6">
-          {/* <div className="w-40 h-40 rounded-full flex justify-center overflow-hidden border-4 border-[#D94814] mx-auto mb-6">
-            <Image
-              src={imageUrl}
-              alt={name}
-              width={192}
-              height={192}
-              className="w-full h-full flex items-center justify-center"
-            />
-          </div> */}
-
-          <h2 className="text-3xl font-bold text-[#1e0060] mb-2">{name}</h2>
-          {designation && (
-            <p className="text-2xl text-[#D94814] font-semibold mb-1">
-              {designation}
-            </p>
-          )}
-          {affiliation && (
-            <p className="text-xl text-gray-600 mb-4">{affiliation}</p>
-          )}
-
-          <p className="text-3xl font-black text-[#D94814] mt-6">
-            Hey! I&apos;m Attending Pharmanecia 4.E
-          </p>
-        </div>
-
-        <div className="text-lg text-center mt-6">
-          <p>Organized by Department of Pharmaceutical Chemistry,</p>
-          <p>JSS College of Pharmacy, Ooty</p>
-          <p className="mb-4">Hosted by Operant Pharmacy Federation</p>
-          <p className="text-sm">
-            #Pharmanecia4E #AIinDrugDiscovery #MachineLearning
-            #PharmaceuticalSciences
-          </p>
-        </div>
-      </div>
-
-      {/* Download Button */}
       <button
         onClick={handleDownload}
         disabled={isLoading}
-        className={`mt-6 px-6 py-3 bg-gradient-to-r from-[#021373] to-[#D94814] text-white font-semibold rounded-full hover:from-[#D94814] hover:to-[#021373] transition-all duration-300 flex items-center space-x-2 shadow-lg ${
+        className={`px-6 py-3 bg-gradient-to-r from-[#021373] to-[#D94814] text-white font-semibold rounded-full hover:from-[#D94814] hover:to-[#021373] transition-all duration-300 flex items-center space-x-2 shadow-lg ${
           isLoading ? "opacity-50 cursor-not-allowed" : ""
         }`}
       >
@@ -151,7 +88,7 @@ const SocialShareCard: React.FC<SocialShareCardProps> = ({
             />
           </svg>
         )}
-        <span>{isLoading ? "Generating..." : "Download Image"}</span>
+        <span>{isLoading ? "Generating..." : "Download Share Image"}</span>
       </button>
     </div>
   );
