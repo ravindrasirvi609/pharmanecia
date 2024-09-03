@@ -283,7 +283,7 @@ export const committee: CommitteeMember[] = [
   {
     name: "Dr. Wu Yuan Seng",
     designation:
-      "Department of Biological Sciences, School of Medical and Life Sciences, Sunway University, Selangor 47500, Malaysia",
+      "Sunway Microbiome Centre, School of Medical and Life Sciences, Sunway University, Selangor 47500, Malaysia Department of Biological Sciences, School of Medical and Life Sciences, Sunway University, Selangor 47500, Malaysia",
     image: "/profile/Wu.jpg",
   },
 ];
