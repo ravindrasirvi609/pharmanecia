@@ -1,4 +1,3 @@
-// models/Student.js
 import mongoose from "mongoose";
 
 const contactSchema = new mongoose.Schema({
@@ -13,6 +12,7 @@ const contactSchema = new mongoose.Schema({
   breakfastTaken: { type: Boolean, default: false },
   lunchTaken: { type: Boolean, default: false },
   certificateTaken: { type: Boolean, default: false },
+  timeStamp: { type: Date, default: Date.now },
 });
 
 const Contact =

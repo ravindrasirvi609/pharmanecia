@@ -280,6 +280,12 @@ export const committee: CommitteeMember[] = [
     designation: "Principal, Yashwantrao Bhonsale College of Pharmacy",
     image: "/profile/Vijay.jpeg",
   },
+  {
+    name: "Dr. Wu Yuan Seng",
+    designation:
+      "Department of Biological Sciences, School of Medical and Life Sciences, Sunway University, Selangor 47500, Malaysia",
+    image: "/profile/Wu.jpg",
+  },
 ];
 
 export const subjectOptions = [
