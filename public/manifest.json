@@ -1,0 +1,21 @@
+{
+  "name": "pharmanecia4.E",
+  "short_name": "pharmanecia",
+  "description": "Join the leading international pharmacy conference, Pharmanecia 4.E, exploring AI and ML in drug discovery. March 7-8, 2025, JSS College of Pharmacy, Ooty.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#000000",
+  "icons": [
+    {
+      "src": "/opflogo.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/opflogo.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

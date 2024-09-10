@@ -5,6 +5,7 @@ import Navbar from "@/components/nav";
 import Footer from "@/components/Footer";
 import { cn } from "@/lib/utils";
 import { Analytics } from "@vercel/analytics/react";
+import Script from "next/script";
 
 const fontHeading = Inter({
   subsets: ["latin"],
@@ -36,7 +37,7 @@ export const metadata: Metadata = {
     siteName: "Pharmanecia 4.E",
     images: [
       {
-        url: "https://www.pharmanecia.org/og-image.png", // Create this image
+        url: "https://www.pharmanecia.org/og-image.png",
         width: 1200,
         height: 630,
       },
@@ -49,8 +50,11 @@ export const metadata: Metadata = {
     title: "Pharmanecia 4.E Conference",
     description:
       "International Research Conference on AI and ML in Drug Discovery",
-    images: ["https://www.pharmanecia.org/og-image.png"], // Create this image
+    images: ["https://www.pharmanecia.org/og-image.png"],
   },
+  manifest: "/manifest.json",
+  themeColor: "#ffffff", // Adjust this to match your app's theme color
+  viewport: "width=device-width, initial-scale=1, maximum-scale=1",
 };
 
 export default function RootLayout({
@@ -60,6 +64,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <link rel="apple-touch-icon" href="/icon-192x192.png" />
+      </head>
       <body
         className={cn("antialiased", fontHeading.variable, fontBody.variable)}
       >
@@ -69,6 +76,19 @@ export default function RootLayout({
           <Analytics />
         </div>
         <Footer />
+        <Script
+          id="register-sw"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `
+              if ('serviceWorker' in navigator) {
+                window.addEventListener('load', function() {
+                  navigator.serviceWorker.register('/sw.js');
+                });
+              }
+            `,
+          }}
+        />
       </body>
     </html>
   );
