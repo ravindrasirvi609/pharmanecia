@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import React, { useState } from "react";
 import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
+import InstallPWA from "./InstallPWA";
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState<boolean>(false);
@@ -200,6 +201,7 @@ const Navbar = () => {
               </Link>
             </li>
           </ul>
+          <InstallPWA />
         </nav>
       )}
     </header>
