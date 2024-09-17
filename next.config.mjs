@@ -18,7 +18,8 @@ const nextConfig = {
       'lh6.googleusercontent.com',
       'lh4.googleusercontent.com',
       'lh5.googleusercontent.com',
-      'firebasestorage.googleapis.com'
+      'firebasestorage.googleapis.com',
+      'www.youtube.com'
     ],
   },
 };

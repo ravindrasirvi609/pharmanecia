@@ -4,6 +4,15 @@ import Image from "next/image";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
+import {
+  ArrowDown,
+  Calendar,
+  Users,
+  MapPin,
+  Coffee,
+  Hotel,
+  Wifi,
+} from "lucide-react";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -14,7 +23,6 @@ interface MediaItem {
   alt: string;
   description?: string;
 }
-
 const ootyMedia: MediaItem[] = [
   { id: 1, type: "image", src: "/1.jpeg", alt: "Ooty Tea Gardens" },
   {
@@ -147,112 +155,128 @@ const ootyMedia: MediaItem[] = [
   },
 ];
 
-const Ooty: React.FC = () => {
-  const [imagesLoaded, setImagesLoaded] = useState<{ [key: number]: boolean }>(
-    {}
-  );
-  const [activeIndex, setActiveIndex] = useState(0);
-  const [mutedVideos, setMutedVideos] = useState<{ [key: number]: boolean }>(
-    {}
-  );
-  const videoRefs = useRef<(HTMLIFrameElement | null)[]>([]);
+const OotyConference: React.FC = () => {
+  const [activeSection, setActiveSection] = useState(0);
+  const sectionRefs = useRef<(HTMLDivElement | null)[]>([]);
 
   useGSAP(() => {
-    gsap.utils.toArray(".section").forEach((section: any, i) => {
+    sectionRefs.current.forEach((section, index) => {
       ScrollTrigger.create({
         trigger: section,
-        start: "top top",
-        pin: true,
-        pinSpacing: false,
-        onEnter: () => setActiveIndex(i),
-        onEnterBack: () => setActiveIndex(i),
+        start: "top center",
+        end: "bottom center",
+        onEnter: () => setActiveSection(index),
+        onEnterBack: () => setActiveSection(index),
       });
     });
   }, []);
 
-  const handleImageLoad = (id: number) => {
-    setImagesLoaded((prev) => ({ ...prev, [id]: true }));
-  };
-
-  const handleMuteToggle = (index: number) => {
-    const video = videoRefs.current[index];
-    if (video) {
-      const src = video.src;
-      if (mutedVideos[index]) {
-        video.src = src.replace("&mute=0", "&mute=1");
-      } else {
-        video.src = src.replace("&mute=1", "&mute=0");
-      }
-      setMutedVideos((prev) => ({ ...prev, [index]: !prev[index] }));
-    }
+  const scrollToSection = (index: number) => {
+    sectionRefs.current[index]?.scrollIntoView({ behavior: "smooth" });
   };
 
   return (
-    <div className="overflow-x-hidden">
-      {ootyMedia.map((item, index) => (
-        <div key={item.id} className="section h-screen w-full relative">
-          <div className="absolute inset-0 bg-gray-200 flex items-center justify-center">
-            {!imagesLoaded[item.id] && item.type === "image" && (
-              <p className="text-2xl text-gray-600">Loading {item.alt}...</p>
-            )}
-          </div>
-          <div className="absolute inset-0">
-            {item.type === "image" ? (
-              <Image
-                src={item.src}
-                alt={item.alt}
-                layout="fill"
-                objectFit="cover"
-                className={`transition-opacity duration-500 ${
-                  imagesLoaded[item.id] ? "opacity-100" : "opacity-0"
-                }`}
-                onLoad={() => handleImageLoad(item.id)}
-                onError={() =>
-                  console.error(`Failed to load image: ${item.src}`)
-                }
-              />
-            ) : (
-              <iframe
-                ref={(el: HTMLIFrameElement | null) => {
-                  videoRefs.current[index] = el;
-                }}
-                src={`${item.src}?autoplay=1&mute=1&loop=1&playlist=${item.src
-                  .split("/")
-                  .pop()}`}
-                title={item.alt}
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-                className="w-full h-full"
-              />
-            )}
-          </div>
-          <div className="absolute inset-0 flex items-center justify-center">
-            <div className="bg-black bg-opacity-40 p-8 rounded-lg max-w-2xl text-center">
-              <h2 className="text-5xl font-bold mb-6 tracking-wide text-white">
-                {item.alt}
-              </h2>
-              <p className="text-xl leading-relaxed text-white mb-6">
-                {item.description}
-              </p>
-              {item.type === "video" && (
-                <button
-                  onClick={() => handleMuteToggle(index)}
-                  className="mt-4 bg-white text-black px-6 py-2 rounded-full hover:bg-gray-200 transition-colors duration-300"
-                >
-                  {mutedVideos[index] ? "Mute Video" : "Unmute Video"}
-                </button>
-              )}
-            </div>
-          </div>
+    <div className="bg-gray-100 text-black min-h-screen">
+      {/* Hero Section */}
+      <section className="relative h-screen flex items-center justify-center">
+        <Image
+          src="/1.jpeg"
+          alt="Ooty Conference Destination"
+          layout="fill"
+          objectFit="cover"
+          className="z-0"
+        />
+        <div className="absolute inset-0 bg-black opacity-50 z-10"></div>
+        <div className="relative z-20 text-center text-white">
+          <h1 className="text-6xl font-bold mb-4">
+            Ooty: Your Next Conference Destination
+          </h1>
+          <p className="text-xl mb-8">
+            Experience the perfect blend of nature and networking
+          </p>
+          <button
+            onClick={() => scrollToSection(1)}
+            className="bg-white text-black px-8 py-3 rounded-full font-semibold hover:bg-opacity-90 transition-colors duration-300"
+          >
+            Explore Ooty
+          </button>
         </div>
-      ))}
-      <div className="fixed bottom-8 left-1/2 transform -translate-x-1/2 z-50">
-        <div className="flex space-x-2">
-          {ootyMedia.map((_, index) => (
+        <ArrowDown
+          className="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-white animate-bounce"
+          size={32}
+        />
+      </section>
+
+      {/* Why Ooty for Conferences */}
+      <section
+        ref={(el) => {
+          sectionRefs.current[1] = el as HTMLDivElement;
+        }}
+        className="py-20 px-4 md:px-8 lg:px-16"
+      >
+        <h2 className="text-4xl font-bold text-center mb-12">
+          Why Choose Ooty for Your Conference?
+        </h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <FeatureCard
+            icon={<Calendar size={32} />}
+            title="Year-round Pleasant Climate"
+            description="Enjoy comfortable temperatures and scenic beauty in any season."
+          />
+          <FeatureCard
+            icon={<Users size={32} />}
+            title="Diverse Venue Options"
+            description="From intimate meeting rooms to large conference halls, we have it all."
+          />
+          <FeatureCard
+            icon={<MapPin size={32} />}
+            title="Easy Accessibility"
+            description="Well-connected by road, rail, and air from major cities."
+          />
+          <FeatureCard
+            icon={<Coffee size={32} />}
+            title="Rich Cultural Experience"
+            description="Immerse in local culture and cuisine during your stay."
+          />
+          <FeatureCard
+            icon={<Hotel size={32} />}
+            title="Quality Accommodation"
+            description="Wide range of hotels and resorts to suit every budget."
+          />
+          <FeatureCard
+            icon={<Wifi size={32} />}
+            title="Modern Amenities"
+            description="High-speed internet and state-of-the-art conference facilities."
+          />
+        </div>
+      </section>
+
+      {/* Featured Attractions */}
+      <section
+        ref={(el) => {
+          sectionRefs.current[2] = el as HTMLDivElement;
+        }}
+        className="py-20 px-4 md:px-8 lg:px-16 bg-white"
+      >
+        <h2 className="text-4xl font-bold text-center mb-12">
+          Featured Attractions
+        </h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {ootyMedia.slice(0, 6).map((item) => (
+            <AttractionCard key={item.id} item={item} />
+          ))}
+        </div>
+      </section>
+
+      {/* Navigation Dots */}
+      <div className="fixed right-4 top-1/2 transform -translate-y-1/2 z-50">
+        <div className="flex flex-col space-y-2">
+          {[0, 1, 2, 3].map((index) => (
             <div
               key={index}
-              className={`w-3 h-3 rounded-full ${
-                index === activeIndex ? "bg-white" : "bg-gray-400"
+              onClick={() => scrollToSection(index)}
+              className={`w-3 h-3 rounded-full cursor-pointer transition-colors duration-300 ${
+                index === activeSection ? "bg-blue-600" : "bg-gray-400"
               }`}
             ></div>
           ))}
@@ -262,4 +286,28 @@ const Ooty: React.FC = () => {
   );
 };
 
-export default Ooty;
+const FeatureCard: React.FC<{
+  icon: React.ReactNode;
+  title: string;
+  description: string;
+}> = ({ icon, title, description }) => (
+  <div className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
+    <div className="text-blue-600 mb-4">{icon}</div>
+    <h3 className="text-xl font-semibold mb-2">{title}</h3>
+    <p className="text-gray-600">{description}</p>
+  </div>
+);
+
+const AttractionCard: React.FC<{ item: MediaItem }> = ({ item }) => (
+  <div className="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300">
+    <div className="relative h-48">
+      <Image src={item.src} alt={item.alt} layout="fill" objectFit="cover" />
+    </div>
+    <div className="p-4">
+      <h3 className="text-xl font-semibold mb-2">{item.alt}</h3>
+      <p className="text-gray-600 line-clamp-3">{item.description}</p>
+    </div>
+  </div>
+);
+
+export default OotyConference;
