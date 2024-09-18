@@ -234,7 +234,7 @@ export const committee: CommitteeMember[] = [
     name: "Mrs. Anjali Chouhan",
     designation: "Administrative Officer",
     affiliation: "Operant Pharmacy Federation",
-    image: "https://via.placeholder.com/150",
+    image: "/Anjali.jpeg",
   },
   {
     name: "Dr. S. Jubie",
