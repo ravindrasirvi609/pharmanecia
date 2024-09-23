@@ -357,7 +357,7 @@ export const plans: Plan[] = [
   {
     name: "Students (UG /PG)",
     description: "Includes entry to all sessions and conference kit.",
-    earlyBird: 1800,
+    earlyBird: 2124,
     regular: 2200,
     spot: 2600,
   },
