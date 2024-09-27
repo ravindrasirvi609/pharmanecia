@@ -37,7 +37,6 @@ const RegistrationPlans: React.FC = () => {
     dob: "",
     AadharNumber: "",
     memberId: "",
-
     institute: "",
     gender: "Male",
     abstractSubmitted: false,

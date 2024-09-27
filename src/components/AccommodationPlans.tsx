@@ -9,18 +9,18 @@ interface AccommodationPlan {
 const accommodationPlans: AccommodationPlan[] = [
   {
     type: "Single Occupancy",
-    price: 1770,
-    features: ["Private room", "En-suite bathroom", "Wi-Fi"],
+    price: 2000,
+    features: ["Private room"],
   },
   {
     type: "Double Occupancy",
-    price: 900,
-    features: ["Shared room for two", "En-suite bathroom", "Wi-Fi"],
+    price: 1000,
+    features: ["Shared room for two"],
   },
   {
     type: "Dormitory",
-    price: 590,
-    features: ["Shared room for 4-6 people", "Shared bathroom", "Wi-Fi"],
+    price: 600,
+    features: ["Shared room for 3-6 people"],
   },
 ];
 
