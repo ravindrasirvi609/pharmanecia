@@ -1,9 +1,11 @@
+import Link from "next/link";
 import React from "react";
 
 interface AccommodationPlan {
   type: string;
   price: number;
   features: string[];
+  razorpayLink: string;
 }
 
 const accommodationPlans: AccommodationPlan[] = [
@@ -11,16 +13,19 @@ const accommodationPlans: AccommodationPlan[] = [
     type: "Single Occupancy",
     price: 2000,
     features: ["Private room"],
+    razorpayLink: "https://rzp.io/l/singleoccupancy",
   },
   {
     type: "Double Occupancy",
     price: 1000,
     features: ["Shared room for two"],
+    razorpayLink: "https://rzp.io/l/doubleoccupancy",
   },
   {
     type: "Dormitory",
     price: 600,
     features: ["Shared room for 3-6 people"],
+    razorpayLink: "https://rzp.io/l/dormitory",
   },
 ];
 
@@ -77,7 +82,23 @@ const AccommodationPlans: React.FC = () => {
               </div>
               <div className="px-6 py-4 bg-[#F2F2F2]">
                 <button className="w-full bg-[#021373] text-white py-2 px-4 rounded-md hover:bg-[#D94814] transition duration-300">
-                  Book Now
+                  <Link
+                    href={plan.razorpayLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={`block w-full py-2 px-4 rounded-md transition duration-300 text-center ${
+                      plan.razorpayLink
+                        ? "bg-[#021373] text-white hover:bg-[#D94814]"
+                        : "bg-gray-400 text-gray-700 cursor-not-allowed"
+                    }`}
+                    onClick={(e) => {
+                      if (!plan.razorpayLink) {
+                        e.preventDefault();
+                      }
+                    }}
+                  >
+                    Book Now
+                  </Link>
                 </button>
               </div>
             </div>
