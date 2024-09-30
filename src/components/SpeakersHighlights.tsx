@@ -69,7 +69,7 @@ const SpeakersHighlights = () => {
             {/* Speaker 3 */}
             <div className="bg-white shadow-lg rounded-lg p-6 text-center">
               <Image
-                src="https://lh5.googleusercontent.com/NswNLKmcMHFEZoeCa5HIq39glOmqpCJ0IAicxRU1-5csW3wP4wl7OcwUxoUq-qCkkYNG6Fuo90hpLB7L5-V4x2Q8zcaLDdn6GwsxDeQryh3K26xJZACubDXPq0X6MZ04jA=w1280"
+                src="/097A3252.jpg"
                 alt="Speaker 3"
                 className="w-32 h-32 mx-auto rounded-full mb-4"
                 height={150}
