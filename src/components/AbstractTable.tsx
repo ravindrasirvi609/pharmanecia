@@ -227,6 +227,7 @@ const AbstractTable: React.FC<AbstractTableProps> = ({
             <th className="py-3 px-6 text-left">Temporary Abstract Code</th>
             <th className="py-3 px-6 text-left">Final Abstract Code</th>
             <th className="py-3 px-6 text-left">Designation</th>
+            <th className="py-3 px-6 text-left">Article Type</th>
             <th className="py-3 px-6 text-left">Registration Status</th>
             <th className="py-3 px-6 text-left">Registration Code</th>
             <th className="py-3 px-6 text-left">Status</th>
@@ -258,6 +259,7 @@ const AbstractTable: React.FC<AbstractTableProps> = ({
               <td className="py-3 px-6 text-left">
                 {getDesignationLabel(abstract.designation)}
               </td>
+              <td className="py-3 px-6 text-left">{abstract.articleType}</td>
               <td className="py-3 px-6 text-left">
                 <span
                   className={`py-1 px-3 rounded-full text-xs ${
