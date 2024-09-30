@@ -32,8 +32,7 @@ const ClientHomePage = () => {
       <div
         className="min-h-screen flex items-center justify-center bg-cover bg-center"
         style={{
-          backgroundImage:
-            "url('https://images.unsplash.com/photo-1579723798913-390e4be1d6ae?q=80&w=3270&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')",
+          backgroundImage: 'url("/ooty/walpaper-1.jpg")',
         }}
       >
         <div
