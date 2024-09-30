@@ -101,21 +101,21 @@ const OotyTourismPage: React.FC = () => {
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div>
-              <p className="text-lg mb-4">
+              <p className="text-lg mb-4 text-black">
                 Ooty, short for Ootacamund, is a picturesque hill station
                 nestled in the Nilgiri Hills of Tamil Nadu, India. Known for its
                 lush green tea gardens, misty landscapes, and colonial charm,
                 Ooty offers a perfect retreat for nature lovers and adventure
                 seekers alike.
               </p>
-              <p className="text-lg mb-4">
+              <p className="text-lg mb-4 text-black">
                 Founded in the early 19th century by the British as a summer
                 retreat, Ooty still retains much of its colonial architecture
                 and ambiance. The town is surrounded by rolling hills covered in
                 eucalyptus and pine forests, interspersed with vast tea estates
                 that produce the famous Nilgiri tea.
               </p>
-              <p className="text-lg mb-4">
+              <p className="text-lg mb-4 text-black">
                 With its year-round pleasant climate, Ooty is a haven for those
                 looking to escape the heat of the plains. Visitors can enjoy a
                 variety of activities, from boating on Ooty Lake and hiking in

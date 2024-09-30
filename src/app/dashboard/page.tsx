@@ -3,6 +3,7 @@ import RegistrationModel from "@/Model/RegistrationModel";
 import AbstractModel from "@/Model/AbstractModel";
 import DashboardCharts from "@/components/DashboardCharts";
 import Link from "next/link";
+import { connect } from "@/dbConfig/dbConfig";
 
 // Utility components
 const StatCard = ({ title, value }: { title: string; value: number }) => (
@@ -17,6 +18,7 @@ const StatCard = ({ title, value }: { title: string; value: number }) => (
 // Server Component
 async function Dashboard() {
   // Fetch data from your database
+  connect();
   const registrations = await RegistrationModel.find()
     .sort({ createdAt: -1 })
     .limit(100);
