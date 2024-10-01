@@ -3,11 +3,11 @@ import { Metadata } from "next";
 import Script from "next/script";
 
 export const metadata: Metadata = {
-  title: "Pharmanecia 4.E | International Pharmacy Conference on AI and ML",
+  title: "Pharmanecia 4.E | International Research Conference on AI and ML",
   description:
-    "Join the leading international pharmacy conference, Pharmanecia 4.E, exploring AI and ML in drug discovery. March 7-8, 2025, JSS College of Pharmacy, Ooty.",
+    "Join the leading international Research conference, Pharmanecia 4.E, exploring AI and ML in drug discovery. March 7-8, 2025, JSS College of Pharmacy, Ooty.",
   keywords:
-    "pharmacy conference, international conference, AI in pharmacy, ML in drug discovery, Pharmanecia",
+    "Research conference, international conference, AI in pharmacy, ML in drug discovery, Pharmanecia",
   openGraph: {
     title: "Pharmanecia 4.E - International Pharmacy Conference",
     description:
