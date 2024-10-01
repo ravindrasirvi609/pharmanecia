@@ -21,13 +21,11 @@ export function AbstractList() {
   const [filters, setFilters] = useState<Filters>({
     Status: "all",
     search: "",
-    sortBy: "title",
-    sortOrder: "asc",
+    sortBy: "createdAt", // Changed to sort by creation date by default
+    sortOrder: "desc", // Changed to descending order to show newest first
   });
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [isSortOpen, setIsSortOpen] = useState(false);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [abstractsPerPage] = useState(7);
 
   const fetchAbstracts = async () => {
     try {
@@ -137,22 +135,6 @@ export function AbstractList() {
     return result;
   }, [abstracts, filters]);
 
-  // Get current abstracts
-  const indexOfLastAbstract = currentPage * abstractsPerPage;
-  const indexOfFirstAbstract = indexOfLastAbstract - abstractsPerPage;
-  const currentAbstracts = filteredAndSortedAbstracts.slice(
-    indexOfFirstAbstract,
-    indexOfLastAbstract
-  );
-
-  // Change page
-  const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
-
-  // Update pagination when filters change
-  useEffect(() => {
-    setCurrentPage(1);
-  }, [filters]);
-
   return (
     <div className="flex flex-col h-screen bg-[#F2F2F2]">
       <ToastContainer position="top-right" autoClose={3000} />
@@ -228,22 +210,27 @@ export function AbstractList() {
                   aria-orientation="vertical"
                   aria-labelledby="options-menu"
                 >
-                  {["title", "name", "email", "Status"].map((sortOption) => (
-                    <button
-                      key={sortOption}
-                      onClick={() => {
-                        setFilters((prev) => ({
-                          ...prev,
-                          sortBy: sortOption as keyof Abstract,
-                        }));
-                        setIsSortOpen(false);
-                      }}
-                      className="block px-4 py-2 text-sm text-[#021373] hover:bg-[#F2F2F2] hover:text-[#034C8C] w-full text-left transition duration-300 ease-in-out"
-                      role="menuitem"
-                    >
-                      {sortOption.charAt(0).toUpperCase() + sortOption.slice(1)}
-                    </button>
-                  ))}
+                  {["createdAt", "title", "name", "email", "Status"].map(
+                    (sortOption) => (
+                      <button
+                        key={sortOption}
+                        onClick={() => {
+                          setFilters((prev) => ({
+                            ...prev,
+                            sortBy: sortOption as keyof Abstract,
+                          }));
+                          setIsSortOpen(false);
+                        }}
+                        className="block px-4 py-2 text-sm text-[#021373] hover:bg-[#F2F2F2] hover:text-[#034C8C] w-full text-left transition duration-300 ease-in-out"
+                        role="menuitem"
+                      >
+                        {sortOption === "createdAt"
+                          ? "Creation Date"
+                          : sortOption.charAt(0).toUpperCase() +
+                            sortOption.slice(1)}
+                      </button>
+                    )
+                  )}
                   <hr className="my-1 border-[#CACACA]" />
                   <button
                     onClick={() => {
@@ -267,34 +254,12 @@ export function AbstractList() {
       <main className="flex-1 overflow-auto">
         <div className="container mx-auto py-6">
           <AbstractTable
-            abstracts={currentAbstracts}
+            abstracts={filteredAndSortedAbstracts}
             loading={loading}
             error={error}
             filters={filters}
             handleStatusUpdate={handleStatusUpdate}
           />
-          <div className="mt-4 flex justify-center">
-            {Array.from(
-              {
-                length: Math.ceil(
-                  filteredAndSortedAbstracts.length / abstractsPerPage
-                ),
-              },
-              (_, i) => (
-                <button
-                  key={i}
-                  onClick={() => paginate(i + 1)}
-                  className={`mx-1 px-3 py-1 rounded ${
-                    currentPage === i + 1
-                      ? "bg-[#034C8C] text-white"
-                      : "bg-white text-[#034C8C]"
-                  }`}
-                >
-                  {i + 1}
-                </button>
-              )
-            )}
-          </div>
         </div>
       </main>
     </div>
