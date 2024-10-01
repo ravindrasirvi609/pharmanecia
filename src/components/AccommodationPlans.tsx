@@ -13,19 +13,19 @@ const accommodationPlans: AccommodationPlan[] = [
     type: "Single Occupancy",
     price: 2000,
     features: ["Private room"],
-    razorpayLink: "",
+    razorpayLink: "https://rzp.io/rzp/EalAJRt",
   },
   {
     type: "Double Occupancy",
     price: 1000,
     features: ["Shared room for two"],
-    razorpayLink: "",
+    razorpayLink: "https://rzp.io/rzp/HnJK1HW",
   },
   {
     type: "Dormitory",
     price: 600,
     features: ["Shared room for 3-6 people"],
-    razorpayLink: "",
+    razorpayLink: "https://rzp.io/rzp/DJ4cMLE",
   },
 ];
 
