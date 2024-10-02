@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import React, { useEffect, useRef } from "react";
+import React, { useRef } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
@@ -9,7 +9,7 @@ gsap.registerPlugin(useGSAP);
 gsap.registerPlugin(ScrollTrigger);
 
 const SpeakersHighlights = () => {
-  const boxRef = useRef<HTMLHeadingElement>(null);
+  const boxRef = useRef<HTMLDivElement>(null);
   useGSAP(() => {
     gsap.from(boxRef.current, {
       y: 50,
@@ -22,69 +22,89 @@ const SpeakersHighlights = () => {
       },
     });
   });
+
   return (
     <div className="bg-danger text-primary px-6 py-12" ref={boxRef}>
       <div className="max-w-7xl mx-auto">
-        {/* <h1 className="text-4xl font-bold mb-8 text-center">Chief Patron</h1> */}
-
         <div className="mb-12">
           <h2 className="text-3xl font-semibold mb-6 text-secondary text-center">
-            Chief Patron{" "}
+            Chief Patron
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {/* Speaker 1 */}
-            <div className="bg-white shadow-lg rounded-lg p-6 text-center">
-              <Image
-                src="/profile/chancellor.jpg"
-                alt="Speaker 1"
-                className="w-32 h-32 mx-auto rounded-full mb-4"
-                height={150}
-                width={150}
-              />
-              <h3 className="text-xl font-semibold text-primary">
-                Dr. B. Suresh
-              </h3>
-              <p className="text-sm text-gray-700 mt-2">
-                Pro Chancellor, JSSAHER, Mysuru
-              </p>
+          <div className="grid grid-cols-1 gap-8">
+            {/* First row with single centered patron */}
+            <div className="flex justify-center">
+              <div className="bg-white shadow-lg rounded-lg p-6 text-center w-full max-w-md">
+                <Image
+                  src="/vijaykarnataka.webp"
+                  alt="Chief Patron"
+                  className="w-32 h-32 mx-auto rounded-full mb-4"
+                  height={150}
+                  width={150}
+                />
+                <h3 className="text-xl font-semibold text-primary">
+                  Jagadguru Sri Shivarathri Deshikendra Mahaswamiji
+                </h3>
+                <p className="text-sm text-gray-700 mt-2">
+                  Chancellor of JSS Academy of Higher Education and Research,
+                  Mysuru
+                </p>
+              </div>
             </div>
 
-            {/* Speaker 2 */}
-            <div className="bg-white shadow-lg rounded-lg p-6 text-center">
-              <Image
-                src="/profile/Surinder.png"
-                alt="Speaker 2"
-                className="w-32 h-32 mx-auto rounded-full mb-4"
-                height={150}
-                width={150}
-              />
-              <h3 className="text-xl font-semibold text-primary">
-                Dr. Surinder Singh
-              </h3>
-              <p className="text-sm text-gray-700 mt-2">
-                Vice Chancellor, JSSAHER, Mysuru
-              </p>
-            </div>
+            {/* Second row with three patrons */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              <div className="bg-white shadow-lg rounded-lg p-6 text-center">
+                <Image
+                  src="/profile/chancellor.jpg"
+                  alt="Pro Chancellor"
+                  className="w-32 h-32 mx-auto rounded-full mb-4"
+                  height={150}
+                  width={150}
+                />
+                <h3 className="text-xl font-semibold text-primary">
+                  Dr. B. Suresh
+                </h3>
+                <p className="text-sm text-gray-700 mt-2">
+                  Pro Chancellor, JSSAHER, Mysuru
+                </p>
+              </div>
 
-            {/* Speaker 3 */}
-            <div className="bg-white shadow-lg rounded-lg p-6 text-center">
-              <Image
-                src="/097A3252.jpg"
-                alt="Speaker 3"
-                className="w-32 h-32 mx-auto rounded-full mb-4"
-                height={150}
-                width={150}
-              />
-              <h3 className="text-xl font-semibold text-primary">
-                Vikram Choudhary
-              </h3>
-              <p className="text-sm text-gray-700 mt-2">
-                Founder, Operant Pharmacy Federation
-              </p>
+              <div className="bg-white shadow-lg rounded-lg p-6 text-center">
+                <Image
+                  src="/profile/Surinder.png"
+                  alt="Vice Chancellor"
+                  className="w-32 h-32 mx-auto rounded-full mb-4"
+                  height={150}
+                  width={150}
+                />
+                <h3 className="text-xl font-semibold text-primary">
+                  Dr. Surinder Singh
+                </h3>
+                <p className="text-sm text-gray-700 mt-2">
+                  Vice Chancellor, JSSAHER, Mysuru
+                </p>
+              </div>
+
+              <div className="bg-white shadow-lg rounded-lg p-6 text-center">
+                <Image
+                  src="/097A3252.jpg"
+                  alt="Founder"
+                  className="w-32 h-32 mx-auto rounded-full mb-4"
+                  height={150}
+                  width={150}
+                />
+                <h3 className="text-xl font-semibold text-primary">
+                  Vikram Choudhary
+                </h3>
+                <p className="text-sm text-gray-700 mt-2">
+                  Founder, Operant Pharmacy Federation
+                </p>
+              </div>
             </div>
           </div>
         </div>
 
+        {/* Notable Sessions section remains unchanged */}
         <div>
           <h2 className="text-3xl font-semibold mb-6 text-secondary text-center">
             Notable Sessions
