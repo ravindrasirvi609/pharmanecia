@@ -583,4 +583,108 @@ The future of AI in drug discovery is bright, but it must be guided by a strong 
       "AI drug development ethics",
     ],
   },
+  {
+    id: "4",
+    title:
+      "AI and Machine Learning Revolutionize Drug Discovery: Join Us at the International Conference in Tamil Nadu",
+    slug: "ai-machine-learning-drug-discovery-conference-tamil-nadu",
+    date: "2024-10-01",
+    author: "Dr. Priya Natarajan",
+    authorRole: "Professor of Pharmaceutical Sciences",
+    excerpt:
+      "Discover the future of AI-driven drug discovery at the prestigious Pharmanecia 4.E conference in Tamil Nadu, India. March 7th-8th, 2025.",
+    content: `The Pharmanecia 4.E International Research Conference, hosted by JSS College of Pharmacy, Ooty, Tamil Nadu, is set to redefine pharmaceutical research with its focus on AI and Machine Learning-driven drug discovery. Held on March 7th-8th, 2025, this event will bring together experts in artificial intelligence, machine learning, and pharmaceutical sciences from across India and around the world.
+
+Tamil Nadu, a hub of pharmaceutical education and research, is the perfect backdrop for this groundbreaking event. Attendees will explore cutting-edge developments in AI and machine learning as applied to drug discovery and development. Topics will range from predictive algorithms to ethical issues surrounding AI-assisted drug design.
+
+With India's booming pharmaceutical sector, this conference is poised to foster collaborations that could shape the future of healthcare. Whether you're a researcher, data scientist, or student, this conference is a must-attend for anyone interested in the intersection of AI and medicine.`,
+    imageUrl: "/ai-conference-tamil-nadu.jpg",
+    tags: [
+      "AI",
+      "Machine Learning",
+      "Drug Discovery",
+      "Pharmacy Conference",
+      "Tamil Nadu",
+      "India",
+    ],
+    metaDescription:
+      "Explore AI and machine learning in drug discovery at Pharmanecia 4.E International Research Conference, Tamil Nadu, India. March 2025.",
+    keywords: [
+      "AI in drug discovery",
+      "pharmaceutical research in Tamil Nadu",
+      "India AI drug conference",
+      "pharmacy conference Tamil Nadu",
+      "JSS College of Pharmacy",
+    ],
+  },
+  {
+    id: "5",
+    title:
+      "Pharmanecia 4.E: India’s Leading AI and Machine Learning Drug Discovery Conference",
+    slug: "pharmanecia-ai-ml-drug-conference-india",
+    date: "2024-09-25",
+    author: "Dr. Arun Kumar",
+    authorRole: "Head of AI Research, PharmaTech Innovations",
+    excerpt:
+      "Join global experts at Pharmanecia 4.E in Ooty, Tamil Nadu for insights into AI and ML in drug discovery. Hosted by JSS College of Pharmacy, March 2025.",
+    content: `Pharmanecia 4.E, India's premier conference on AI and Machine Learning-driven drug discovery, will take place at JSS College of Pharmacy, Ooty, Tamil Nadu on March 7th-8th, 2025. This international event will host leaders from both the pharmaceutical and tech industries, as well as top academic researchers.
+
+India has become a hotbed of pharmaceutical research, and this conference underscores the nation’s commitment to integrating cutting-edge AI and ML technologies in drug discovery. Participants will dive into key themes like machine learning models for predicting drug interactions, AI-powered screening, and the ethical frameworks for AI in healthcare.
+
+Tamil Nadu's rich academic and research culture further enhances the conference’s appeal. With a focus on fostering partnerships between Indian and global institutions, Pharmanecia 4.E aims to accelerate innovations that can transform drug discovery and medical treatments on a global scale.`,
+    imageUrl: "/india-pharma-research.jpg",
+    tags: [
+      "AI",
+      "Machine Learning",
+      "Drug Discovery",
+      "Pharmaceutical Research",
+      "India",
+      "Tamil Nadu",
+      "Research Conference",
+    ],
+    metaDescription:
+      "Discover the latest AI and ML innovations in drug discovery at India's Pharmanecia 4.E conference, hosted by JSS College of Pharmacy, Tamil Nadu.",
+    keywords: [
+      "India AI conference",
+      "drug discovery AI India",
+      "Tamil Nadu AI drug discovery",
+      "India pharmaceutical conference",
+      "AI-driven drug research",
+    ],
+  },
+  {
+    id: "3",
+    title:
+      "Advancing Drug Discovery with AI: Highlights from Pharmanecia 4.E, Ooty, Tamil Nadu",
+    slug: "advancing-drug-discovery-ai-conference-tamil-nadu",
+    date: "2024-09-30",
+    author: "Dr. Kavitha Menon",
+    authorRole: "Associate Professor, Department of Pharmaceutical Chemistry",
+    excerpt:
+      "Pharmanecia 4.E, held at JSS College of Pharmacy in Ooty, Tamil Nadu, highlights how AI is transforming the pharmaceutical landscape.",
+    content: `Artificial Intelligence and Machine Learning have the potential to revolutionize how drugs are discovered and developed, and nowhere is this more evident than at the Pharmanecia 4.E International Conference in Ooty, Tamil Nadu. Taking place on March 7th and 8th, 2025, this event will showcase groundbreaking research at the nexus of AI, ML, and pharmaceutical sciences.
+
+This two-day conference will offer insights into AI's role in drug discovery, from predicting drug-target interactions to applying machine learning in lead optimization. Hosted by JSS College of Pharmacy, Ooty, and supported by the Operant Pharmacy Federation, the event is a vital forum for exploring the future of pharmaceutical research.
+
+In addition to thought-provoking talks, the conference will feature a range of networking opportunities aimed at fostering collaboration between AI experts, data scientists, and pharmaceutical professionals. With selected research articles published in Scopus-indexed journals, this is a not-to-miss event for anyone in the pharmaceutical research community.`,
+    imageUrl: "/pharma-research-conference-ooty.jpg",
+    tags: [
+      "AI",
+      "Drug Discovery",
+      "Machine Learning",
+      "Pharmaceutical Research",
+      "India",
+      "Tamil Nadu",
+      "Conference",
+    ],
+    metaDescription:
+      "Attend the Pharmanecia 4.E International Research Conference on AI and ML in drug discovery, hosted in Ooty, Tamil Nadu, India.",
+    keywords: [
+      "AI drug discovery India",
+      "conference Tamil Nadu",
+      "pharma AI innovations",
+      "AI and machine learning in drug research",
+      "pharma research India",
+    ],
+  },
 ];
