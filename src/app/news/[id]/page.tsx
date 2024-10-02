@@ -1,7 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Article, articles } from "@/data";
+import { articles } from "@/data";
 import { Metadata } from "next";
 
 export async function generateMetadata({
@@ -136,7 +136,7 @@ export default function ArticlePage({ params }: { params: { id: string } }) {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {articles
             .filter((a) => a.id !== article.id)
-            .slice(0, 2)
+            .slice(0, 6)
             .map((relatedArticle) => (
               <div
                 key={relatedArticle.id}

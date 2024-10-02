@@ -598,7 +598,7 @@ The future of AI in drug discovery is bright, but it must be guided by a strong 
 Tamil Nadu, a hub of pharmaceutical education and research, is the perfect backdrop for this groundbreaking event. Attendees will explore cutting-edge developments in AI and machine learning as applied to drug discovery and development. Topics will range from predictive algorithms to ethical issues surrounding AI-assisted drug design.
 
 With India's booming pharmaceutical sector, this conference is poised to foster collaborations that could shape the future of healthcare. Whether you're a researcher, data scientist, or student, this conference is a must-attend for anyone interested in the intersection of AI and medicine.`,
-    imageUrl: "/ai-conference-tamil-nadu.jpg",
+    imageUrl: "/ai-drug-development_0.jpg",
     tags: [
       "AI",
       "Machine Learning",
@@ -632,7 +632,7 @@ With India's booming pharmaceutical sector, this conference is poised to foster 
 India has become a hotbed of pharmaceutical research, and this conference underscores the nationâ€™s commitment to integrating cutting-edge AI and ML technologies in drug discovery. Participants will dive into key themes like machine learning models for predicting drug interactions, AI-powered screening, and the ethical frameworks for AI in healthcare.
 
 Tamil Nadu's rich academic and research culture further enhances the conferenceâ€™s appeal. With a focus on fostering partnerships between Indian and global institutions, Pharmanecia 4.E aims to accelerate innovations that can transform drug discovery and medical treatments on a global scale.`,
-    imageUrl: "/india-pharma-research.jpg",
+    imageUrl: "/blog5.avif",
     tags: [
       "AI",
       "Machine Learning",
@@ -653,7 +653,7 @@ Tamil Nadu's rich academic and research culture further enhances the conferenceâ
     ],
   },
   {
-    id: "3",
+    id: "6",
     title:
       "Advancing Drug Discovery with AI: Highlights from Pharmanecia 4.E, Ooty, Tamil Nadu",
     slug: "advancing-drug-discovery-ai-conference-tamil-nadu",
@@ -667,7 +667,7 @@ Tamil Nadu's rich academic and research culture further enhances the conferenceâ
 This two-day conference will offer insights into AI's role in drug discovery, from predicting drug-target interactions to applying machine learning in lead optimization. Hosted by JSS College of Pharmacy, Ooty, and supported by the Operant Pharmacy Federation, the event is a vital forum for exploring the future of pharmaceutical research.
 
 In addition to thought-provoking talks, the conference will feature a range of networking opportunities aimed at fostering collaboration between AI experts, data scientists, and pharmaceutical professionals. With selected research articles published in Scopus-indexed journals, this is a not-to-miss event for anyone in the pharmaceutical research community.`,
-    imageUrl: "/pharma-research-conference-ooty.jpg",
+    imageUrl: "/What-is-Model-Informed-Drug-Development.webp",
     tags: [
       "AI",
       "Drug Discovery",
