@@ -1,6 +1,7 @@
 import { connect } from "@/dbConfig/dbConfig";
 import NominationModel from "@/Model/NominationModel";
 import { NextRequest, NextResponse } from "next/server";
+
 export async function POST(req: NextRequest) {
   try {
     // Connect to the database
@@ -19,6 +20,7 @@ export async function POST(req: NextRequest) {
       "email",
       "whatsappNumber",
       "category",
+      "subCategory",
       "professionalAchievements",
       "innovations",
       "nominationStatement",
@@ -59,7 +61,8 @@ export async function POST(req: NextRequest) {
         return NextResponse.json(
           {
             message: "Duplicate entry error",
-            details: "A nomination with this Aadhar number already exists",
+            details:
+              "A nomination with this Aadhar number or email already exists",
           },
           { status: 409 }
         );

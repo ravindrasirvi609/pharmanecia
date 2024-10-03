@@ -14,6 +14,7 @@ type NominationFormData = {
   email: string;
   whatsappNumber: string;
   category: string;
+  subCategory: string;
   nominatorName: string;
   nominatorContact: string;
   professionalAchievements: string;
@@ -32,6 +33,105 @@ type NominationFormData = {
   nominationStatement: string;
   uniqueQualities: string;
   additionalInfo: string;
+  membershipNumber: string;
+};
+
+const categories = [
+  { value: "1", label: "Industry-Specific Awards" },
+  { value: "2", label: "Academic Education and Learning Excellence Awards" },
+  { value: "3", label: "Research & Development Awards" },
+  { value: "4", label: "Special Recognition Awards" },
+];
+
+const subCategories = {
+  "1": [
+    { value: "innovation-leader", label: "Innovation Leader of the Year" },
+    { value: "healthcare-innovation", label: "Healthcare Innovation Award" },
+    {
+      value: "pharma-manufacturing",
+      label: "Excellence in Pharmaceutical Manufacturing Award",
+    },
+    {
+      value: "supply-chain-innovation",
+      label: "Best Supply Chain Innovation in Pharmaceuticals Award",
+    },
+    { value: "quality-assurance", label: "Quality Assurance Leadership Award" },
+    { value: "technology-pioneer", label: "Technology Pioneer Award" },
+    {
+      value: "supply-chain-leadership",
+      label: "Supply Chain Leadership Award",
+    },
+    { value: "rd-innovator", label: "R&D Innovator Award" },
+    {
+      value: "industry-academia",
+      label: "Best Industry-Academia Partnership Award",
+    },
+    { value: "regulatory-strategy", label: "Best Regulatory Strategy Award" },
+    { value: "young-entrepreneur", label: "Young Entrepreneur Award" },
+  ],
+  "2": [
+    {
+      value: "distance-learning",
+      label: "Excellence in Distance Learning Award",
+    },
+    {
+      value: "student-development",
+      label: "Student Development Leadership Award",
+    },
+    { value: "digital-education", label: "Digital Education Innovator Award" },
+    { value: "innovative-teaching", label: "Innovative Teaching Award" },
+    { value: "collaborative-research", label: "Collaborative Research Award" },
+    { value: "best-thesis", label: "Best Thesis/Dissertation Award" },
+    { value: "emerging-scholar", label: "Emerging Scholar Award" },
+  ],
+  "3": [
+    {
+      value: "multidisciplinary-research",
+      label: "Excellence in Multidisciplinary Research",
+    },
+    { value: "startup-research", label: "Innovative Start-Up Research Award" },
+  ],
+  "4": [
+    { value: "women-in-stem", label: "Women in STEM Award" },
+    { value: "global-impact", label: "Global Impact Award" },
+    { value: "csr", label: "Corporate Social Responsibility (CSR) Award" },
+    {
+      value: "global-healthcare",
+      label: "Excellence in Global Healthcare Initiatives Award",
+    },
+    {
+      value: "environmental-leadership",
+      label: "Environmental Leadership Award",
+    },
+    { value: "social-impact", label: "Social Impact Award" },
+    { value: "ai-healthcare", label: "AI in Healthcare Excellence Award" },
+    {
+      value: "diversity-inclusion",
+      label: "Innovator for Diversity & Inclusion Award",
+    },
+    { value: "ceo-of-the-year", label: "CEO of the Year Award" },
+    {
+      value: "transformational-leadership",
+      label: "Transformational Leadership Award",
+    },
+    { value: "hr-leadership", label: "Human Resources Leadership Award" },
+    {
+      value: "healthcare-provider",
+      label: "Healthcare Provider of the Year Award",
+    },
+    {
+      value: "smart-manufacturing",
+      label: "Excellence in Smart Manufacturing Award",
+    },
+    {
+      value: "biopharmaceutical-innovation",
+      label: "Excellence in Biopharmaceutical Innovation Award",
+    },
+    {
+      value: "emerging-pharma-tech",
+      label: "Emerging Pharmaceutical Technology Award",
+    },
+  ],
 };
 
 const NominationForm: React.FC = () => {
@@ -40,8 +140,9 @@ const NominationForm: React.FC = () => {
     handleSubmit,
     formState: { errors },
     reset,
+    watch,
   } = useForm<NominationFormData>({
-    mode: "onChange", // This enables real-time validation
+    mode: "onChange",
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<
@@ -54,6 +155,8 @@ const NominationForm: React.FC = () => {
     isUploading,
     error: uploadError,
   } = useFirebaseStorage();
+
+  const selectedCategory = watch("category");
 
   const onDrop = useCallback(
     async (acceptedFiles: File[]) => {
@@ -163,15 +266,85 @@ const NominationForm: React.FC = () => {
               name="whatsappNumber"
               required
             />
-            <InputField
-              label="Category of Nomination"
-              name="category"
-              required
-            />
+            <div className="mb-6">
+              <label
+                htmlFor="category"
+                className="block mb-2 text-sm font-medium text-gray-900"
+              >
+                Category of Nomination
+              </label>
+              <Controller
+                name="category"
+                control={control}
+                rules={{ required: "Category is required" }}
+                render={({ field }) => (
+                  <select
+                    {...field}
+                    id="category"
+                    className="bg-light border border-darkgray text-primary text-sm rounded-lg focus:ring-accent focus:border-accent block w-full p-2.5"
+                  >
+                    <option value="">Select a category</option>
+                    {categories.map((category) => (
+                      <option key={category.value} value={category.value}>
+                        {category.label}
+                      </option>
+                    ))}
+                  </select>
+                )}
+              />
+              {errors.category && (
+                <p className="mt-2 text-sm text-danger">
+                  {errors.category.message}
+                </p>
+              )}
+            </div>
+            {selectedCategory && (
+              <div className="mb-6">
+                <label
+                  htmlFor="subCategory"
+                  className="block mb-2 text-sm font-medium text-gray-900"
+                >
+                  Sub-Category
+                </label>
+                <Controller
+                  name="subCategory"
+                  control={control}
+                  rules={{ required: "Sub-category is required" }}
+                  render={({ field }) => (
+                    <select
+                      {...field}
+                      id="subCategory"
+                      className="bg-light border border-darkgray text-primary text-sm rounded-lg focus:ring-accent focus:border-accent block w-full p-2.5"
+                    >
+                      <option value="">Select a sub-category</option>
+                      {subCategories[
+                        selectedCategory as keyof typeof subCategories
+                      ].map((subCategory) => (
+                        <option
+                          key={subCategory.value}
+                          value={subCategory.value}
+                        >
+                          {subCategory.label}
+                        </option>
+                      ))}
+                    </select>
+                  )}
+                />
+                {errors.subCategory && (
+                  <p className="mt-2 text-sm text-danger">
+                    {errors.subCategory.message}
+                  </p>
+                )}
+              </div>
+            )}
             <InputField label="Nominator's Name" name="nominatorName" />
             <InputField
               label="Nominator's Contact Information"
               name="nominatorContact"
+            />
+            <InputField
+              label="OPF/OBRF Membership Number"
+              name="membershipNumber"
             />
           </div>
 
@@ -287,6 +460,7 @@ const NominationForm: React.FC = () => {
               <ul className="mt-4 space-y-2">
                 {uploadedFiles.map((file, index) => (
                   <li key={index} className="text-sm text-accent">
+                    File {index + 1}
                     File {index + 1} uploaded successfully
                   </li>
                 ))}
