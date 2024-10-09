@@ -346,6 +346,13 @@ const RegistrationPlans: React.FC = () => {
             </div>
           </div>
         </div>
+        <div className="flex justify-center items-center py-8">
+          <Link href="/Contact">
+            <button className="bg-orange-500 text-white text-2xl font-bold py-4 px-8 rounded-md hover:bg-primary transition duration-300">
+              For Group Registration, Please Contact Us
+            </button>
+          </Link>
+        </div>
       </div>
 
       {showModal && (
