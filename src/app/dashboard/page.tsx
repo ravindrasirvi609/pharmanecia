@@ -80,6 +80,12 @@ async function Dashboard() {
             >
               Registrations List
             </Link>
+            <Link
+              href="/admin/nominationList"
+              className="text-gray-700 bg-gray-200 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium"
+            >
+              Nomination List
+            </Link>
           </div>
         </div>
       </header>
