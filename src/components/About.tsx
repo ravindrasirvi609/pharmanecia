@@ -64,7 +64,7 @@ const AboutConference: React.FC = () => {
   }, []);
 
   return (
-    <div className="bg-gradient-to-b from-light to-white text-primary px-6 py-16">
+    <div className="bg-gradient-to-r from-blue-100 to-purple-100 text-primary px-6 py-16">
       <div className="max-w-4xl mx-auto">
         <h1 ref={titleRef} className="text-5xl font-bold mb-12 text-center">
           About the Conference
