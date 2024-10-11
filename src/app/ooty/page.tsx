@@ -1,7 +1,18 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
-import { Camera, Map, Coffee, Trees, Sun, Info, X } from "lucide-react";
+import {
+  Camera,
+  Map,
+  Coffee,
+  Trees,
+  Sun,
+  Info,
+  X,
+  ChevronLeft,
+  ChevronRight,
+} from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 
 const attractions = [
   {
@@ -29,7 +40,7 @@ const attractions = [
     name: "Tea Factory Visit",
     icon: <Coffee className="w-6 h-6" />,
     description:
-      "Visit a tea factory to learn about the process of tea production, from plucking to packaging. Dont forget to taste and purchase some of the famous Nilgiri tea.",
+      "Visit a tea factory to learn about the process of tea production, from plucking to packaging. Don't forget to taste and purchase some of the famous Nilgiri tea.",
     image: "/ooty/e7.jpg",
   },
   {
@@ -43,7 +54,7 @@ const attractions = [
     name: "Rose Garden",
     icon: <Trees className="w-6 h-6" />,
     description:
-      "Home to over 20,000 varieties of roses, this garden is a colorful spectacle. Its the largest rose garden in India and the first in South Asia to be awarded the Garden of Excellence Award.",
+      "Home to over 20,000 varieties of roses, this garden is a colorful spectacle. It's the largest rose garden in India and the first in South Asia to be awarded the Garden of Excellence Award.",
     image: "/ooty/rose.webp",
   },
 ];
@@ -55,24 +66,47 @@ const ImageSlider = ({ images, currentIndex, onClose }: any) => {
   const prevImage = () => setIndex((index - 1 + images.length) % images.length);
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50">
-      <button onClick={onClose} className="absolute top-4 right-4 text-white">
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50"
+    >
+      <button
+        onClick={onClose}
+        className="absolute top-4 right-4 text-white hover:text-gray-300 transition-colors"
+      >
         <X className="w-8 h-8" />
       </button>
-      <button onClick={prevImage} className="absolute left-4 text-white">
-        &lt;
+      <button
+        onClick={prevImage}
+        className="absolute left-4 text-white hover:text-gray-300 transition-colors"
+      >
+        <ChevronLeft className="w-12 h-12" />
       </button>
-      <Image
-        src={images[index]}
-        alt={`Attraction ${index + 1}`}
-        width={800}
-        height={600}
-        objectFit="contain"
-      />
-      <button onClick={nextImage} className="absolute right-4 text-white">
-        &gt;
+      <motion.div
+        key={index}
+        initial={{ opacity: 0, x: 100 }}
+        animate={{ opacity: 1, x: 0 }}
+        exit={{ opacity: 0, x: -100 }}
+        transition={{ duration: 0.3 }}
+      >
+        <Image
+          src={images[index]}
+          alt={`Attraction ${index + 1}`}
+          width={800}
+          height={600}
+          objectFit="contain"
+          className="rounded-lg shadow-2xl"
+        />
+      </motion.div>
+      <button
+        onClick={nextImage}
+        className="absolute right-4 text-white hover:text-gray-300 transition-colors"
+      >
+        <ChevronRight className="w-12 h-12" />
       </button>
-    </div>
+    </motion.div>
   );
 };
 
@@ -85,37 +119,68 @@ const OotyTourismPage: React.FC = () => {
     setSliderOpen(true);
   };
 
+  useEffect(() => {
+    if (sliderOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+    }
+  }, [sliderOpen]);
+
   return (
-    <div className="min-h-screen bg-gradient-to-b from-light to-darkgray">
-      <header className="bg-primary text-light py-8">
-        <div className="container mx-auto px-4">
-          <h1 className="text-4xl font-bold mb-2">Welcome to Ooty</h1>
-          <p className="text-xl">The Queen of Hill Stations</p>
+    <div className="min-h-screen bg-gradient-to-b from-blue-100 to-purple-100 text-gray-800">
+      <header className="bg-blue-600 text-white py-16">
+        <div className="container mx-auto px-4 text-center">
+          <motion.h1
+            initial={{ opacity: 0, y: -50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="text-5xl font-bold mb-4"
+          >
+            Welcome to Ooty
+          </motion.h1>
+          <motion.p
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="text-2xl"
+          >
+            The Queen of Hill Stations
+          </motion.p>
         </div>
       </header>
 
-      <main className="container mx-auto px-4 py-8">
-        <section className="mb-12">
-          <h2 className="text-3xl font-semibold mb-4 text-secondary">
+      <main className="container mx-auto px-4 py-16">
+        <section className="mb-20">
+          <motion.h2
+            initial={{ opacity: 0, x: -50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5 }}
+            className="text-4xl font-semibold mb-8 text-blue-800"
+          >
             Discover Ooty
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div>
-              <p className="text-lg mb-4 text-black">
+          </motion.h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+            <motion.div
+              initial={{ opacity: 0, y: 50 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+            >
+              <p className="text-lg mb-6 leading-relaxed">
                 Ooty, short for Ootacamund, is a picturesque hill station
                 nestled in the Nilgiri Hills of Tamil Nadu, India. Known for its
                 lush green tea gardens, misty landscapes, and colonial charm,
                 Ooty offers a perfect retreat for nature lovers and adventure
                 seekers alike.
               </p>
-              <p className="text-lg mb-4 text-black">
+              <p className="text-lg mb-6 leading-relaxed">
                 Founded in the early 19th century by the British as a summer
                 retreat, Ooty still retains much of its colonial architecture
                 and ambiance. The town is surrounded by rolling hills covered in
                 eucalyptus and pine forests, interspersed with vast tea estates
                 that produce the famous Nilgiri tea.
               </p>
-              <p className="text-lg mb-4 text-black">
+              <p className="text-lg mb-6 leading-relaxed">
                 With its year-round pleasant climate, Ooty is a haven for those
                 looking to escape the heat of the plains. Visitors can enjoy a
                 variety of activities, from boating on Ooty Lake and hiking in
@@ -124,130 +189,182 @@ const OotyTourismPage: React.FC = () => {
                 also famous for its chocolate and homemade cheeses, adding a
                 delightful culinary dimension to your visit.
               </p>
-            </div>
+            </motion.div>
 
-            <div className="relative h-80 md:h-auto">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.5, delay: 0.4 }}
+              className="relative h-96 md:h-auto rounded-lg overflow-hidden shadow-2xl"
+            >
               <Image
                 src="/ooty/ooty-wallpaper.jpg"
                 alt="Ooty Landscape"
                 layout="fill"
                 objectFit="cover"
-                className="rounded-lg cursor-pointer"
+                className="cursor-pointer transition-transform duration-300 hover:scale-110"
                 onClick={() => openSlider(0)}
               />
-            </div>
+            </motion.div>
           </div>
         </section>
 
-        <section className="mb-12">
-          <h2 className="text-3xl font-semibold mb-4 text-secondary">
+        <section className="mb-20">
+          <motion.h2
+            initial={{ opacity: 0, x: -50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5 }}
+            className="text-4xl font-semibold mb-8 text-blue-800"
+          >
             Top Attractions
-          </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          </motion.h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
             {attractions.map((attraction, index) => (
-              <div
+              <motion.div
                 key={index}
-                className="bg-light p-6 rounded-lg shadow-md hover:shadow-lg transition duration-300"
+                initial={{ opacity: 0, y: 50 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                className="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition duration-300 transform hover:-translate-y-2"
               >
-                <div className="relative h-48 mb-4">
+                <div className="relative h-48 mb-4 rounded-lg overflow-hidden">
                   <Image
                     src={attraction.image}
                     alt={attraction.name}
                     layout="fill"
                     objectFit="cover"
-                    className="rounded-lg cursor-pointer"
+                    className="cursor-pointer transition-transform duration-300 hover:scale-110"
                     onClick={() => openSlider(index + 1)}
                   />
                 </div>
                 <div className="flex items-center mb-4">
-                  {attraction.icon}
-                  <h3 className="text-xl font-semibold ml-2 text-primary">
+                  <div className="bg-blue-100 p-2 rounded-full mr-3">
+                    {attraction.icon}
+                  </div>
+                  <h3 className="text-xl font-semibold text-blue-800">
                     {attraction.name}
                   </h3>
                 </div>
-                <p className="text-gray-600">{attraction.description}</p>
-              </div>
+                <p className="text-gray-600 leading-relaxed">
+                  {attraction.description}
+                </p>
+              </motion.div>
             ))}
           </div>
         </section>
 
-        <section className="mb-12">
-          <h2 className="text-3xl font-semibold mb-4 text-secondary">
+        <section className="mb-20">
+          <motion.h2
+            initial={{ opacity: 0, x: -50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5 }}
+            className="text-4xl font-semibold mb-8 text-blue-800"
+          >
             Travel Tips
-          </h2>
-          <div className="bg-light p-6 rounded-lg shadow-md">
-            <ul className="list-disc list-inside space-y-2 text-gray-600">
-              <li>Best time to visit: March to June</li>
-              <li>Don&apos;t forget to try the famous Nilgiri tea</li>
-              <li>Carry warm clothes as evenings can be chilly</li>
-              <li>Book accommodations in advance during peak season</li>
+          </motion.h2>
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="bg-white p-8 rounded-lg shadow-lg"
+          >
+            <ul className="space-y-4 text-gray-700">
+              <li className="flex items-center">
+                <Sun className="w-6 h-6 mr-3 text-yellow-500" />
+                <span>Best time to visit: March to June</span>
+              </li>
+              <li className="flex items-center">
+                <Coffee className="w-6 h-6 mr-3 text-brown-500" />
+                <span>Don&apos;t forget to try the famous Nilgiri tea</span>
+              </li>
+              <li className="flex items-center">
+                <Info className="w-6 h-6 mr-3 text-blue-500" />
+                <span>Carry warm clothes as evenings can be chilly</span>
+              </li>
+              <li className="flex items-center">
+                <Map className="w-6 h-6 mr-3 text-green-500" />
+                <span>Book accommodations in advance during peak season</span>
+              </li>
             </ul>
-          </div>
+          </motion.div>
         </section>
 
         <section>
-          <h2 className="text-3xl font-semibold mb-4 text-secondary">
+          <motion.h2
+            initial={{ opacity: 0, x: -50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5 }}
+            className="text-4xl font-semibold mb-8 text-blue-800"
+          >
             Getting Here
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div>
-              <div>
-                <p className="text-lg mb-4 text-gray-600">
-                  Ooty is well-connected by road and rail, making it accessible
-                  from various parts of South India. The nearest airport is
-                  Coimbatore International Airport, about 88 km away. From
-                  there, you can take a scenic drive through the winding ghat
-                  roads or experience the famous Nilgiri Mountain Railway to
-                  reach Ooty.
-                </p>
-                <p className="text-lg mb-4 text-gray-600">
-                  By Road: Regular bus services are available from major cities
-                  like Bangalore, Mysore, and Coimbatore. The journey offers
-                  breathtaking views of the Nilgiri mountains and forests.
-                  Private taxis and self-drive options are also available for
-                  those who prefer more flexibility.
-                </p>
-                <p className="text-lg mb-4 text-gray-600">
-                  By Rail: The Nilgiri Mountain Railway, a UNESCO World Heritage
-                  Site, offers a unique and picturesque journey from
-                  Mettupalayam to Ooty. This toy train winds its way through 108
-                  curves and 16 tunnels, providing stunning views of the Nilgiri
-                  landscape. It&apos;s not just a mode of transport, but an
-                  attraction in itself.
-                </p>
-                <p className="text-lg mb-4 text-gray-600">
-                  Once in Ooty, local transportation options include taxis,
-                  auto-rickshaws, and rental bikes or cars for exploring the
-                  town and its surrounding areas. Many hotels also offer shuttle
-                  services to popular attractions.
-                </p>
-              </div>
-            </div>
-            <div className="relative h-64 md:h-auto">
+          </motion.h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+            <motion.div
+              initial={{ opacity: 0, y: 50 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+            >
+              <p className="text-lg mb-6 leading-relaxed">
+                Ooty is well-connected by road and rail, making it accessible
+                from various parts of South India. The nearest airport is
+                Coimbatore International Airport, about 88 km away. From there,
+                you can take a scenic drive through the winding ghat roads or
+                experience the famous Nilgiri Mountain Railway to reach Ooty.
+              </p>
+              <p className="text-lg mb-6 leading-relaxed">
+                <strong>By Road:</strong> Regular bus services are available
+                from major cities like Bangalore, Mysore, and Coimbatore. The
+                journey offers breathtaking views of the Nilgiri mountains and
+                forests. Private taxis and self-drive options are also available
+                for those who prefer more flexibility.
+              </p>
+              <p className="text-lg mb-6 leading-relaxed">
+                <strong>By Rail:</strong> The Nilgiri Mountain Railway, a UNESCO
+                World Heritage Site, offers a unique and picturesque journey
+                from Mettupalayam to Ooty. This toy train winds its way through
+                108 curves and 16 tunnels, providing stunning views of the
+                Nilgiri landscape. It&apos;s not just a mode of transport, but
+                an attraction in itself.
+              </p>
+              <p className="text-lg mb-6 leading-relaxed">
+                Once in Ooty, local transportation options include taxis,
+                auto-rickshaws, and rental bikes or cars for exploring the town
+                and its surrounding areas. Many hotels also offer shuttle
+                services to popular attractions.
+              </p>
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.5, delay: 0.4 }}
+              className="relative h-96 md:h-auto rounded-lg overflow-hidden shadow-2xl"
+            >
               <Image
                 src="/ooty/walpaper-1.jpg"
                 alt="Map to Ooty"
                 layout="fill"
                 objectFit="cover"
-                className="rounded-lg cursor-pointer"
+                className="cursor-pointer transition-transform duration-300 hover:scale-110"
                 onClick={() => openSlider(attractions.length + 1)}
               />
-            </div>
+            </motion.div>
           </div>
         </section>
       </main>
 
-      {sliderOpen && (
-        <ImageSlider
-          images={[
-            "/ooty/ooty-wallpaper.jpg",
-            ...attractions.map((a) => a.image),
-            "/ooty/walpaper-1.jpg",
-          ]}
-          currentIndex={currentImageIndex}
-          onClose={() => setSliderOpen(false)}
-        />
-      )}
+      <AnimatePresence>
+        {sliderOpen && (
+          <ImageSlider
+            images={[
+              "/ooty/ooty-wallpaper.jpg",
+              ...attractions.map((a) => a.image),
+              "/ooty/walpaper-1.jpg",
+            ]}
+            currentIndex={currentImageIndex}
+            onClose={() => setSliderOpen(false)}
+          />
+        )}
+      </AnimatePresence>
     </div>
   );
 };
