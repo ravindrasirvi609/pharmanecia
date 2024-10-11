@@ -85,7 +85,7 @@ const Schedule = () => {
   };
 
   return (
-    <div className="bg-light min-h-screen py-16 px-4 sm:px-6 lg:px-8">
+    <div className="bg-gradient-to-r from-blue-50 to-purple-50 min-h-screen py-16 px-4 sm:px-6 lg:px-8">
       <div className="max-w-4xl mx-auto text-center">
         <h1 className="text-5xl font-bold mb-8 text-primary">
           Pharmanecia 4.E International Research Conference
