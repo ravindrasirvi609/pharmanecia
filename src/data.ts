@@ -228,7 +228,7 @@ export const committee: CommitteeMember[] = [
     name: "Mr. Basavalingadevaru",
     designation: "Administrative officer",
     affiliation: "JSS College of Pharmacy, Ooty",
-    image: "https://via.placeholder.com/150",
+    image: "/profile/Basavanna.jpeg",
   },
   {
     name: "Miss. Anjali Chouhan",
