@@ -24,6 +24,7 @@ export interface Registration {
   abstractId: string;
   paymentStatus: string;
   needAccommodation: boolean;
+  includeGalaDinner: boolean;
   dietaryRequirements: string;
   specialAssistance: string;
   registrationStatus: string;
@@ -66,6 +67,7 @@ export const exportToExcel = (
     "Abstract ID": item.abstractId,
     "Payment Status": item.paymentStatus,
     "Need Accommodation": item.needAccommodation ? "Yes" : "No",
+    "Include Gala Dinner": item.includeGalaDinner ? "Yes" : "No",
     "Dietary Requirements": item.dietaryRequirements,
     "Special Assistance": item.specialAssistance,
     "Registration Status": item.registrationStatus,

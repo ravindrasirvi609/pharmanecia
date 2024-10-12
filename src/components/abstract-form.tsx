@@ -47,11 +47,14 @@ export function AbstractForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState("");
   const [articleType, setArticleType] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+
   const onDrop = useCallback((acceptedFiles: File[]) => {
     if (acceptedFiles[0]) {
       setAbstractFile(acceptedFiles[0]);
     }
   }, []);
+
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop,
     accept: {
@@ -61,9 +64,11 @@ export function AbstractForm() {
     },
     multiple: false,
   });
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
+    setIsLoading(true);
     setSubmitError("");
     const newErrors: Errors = {};
     if (!email) {
@@ -155,7 +160,7 @@ export function AbstractForm() {
           const result = response.data;
           if (result.abstract) {
             alert(
-              "Your Abstract Submitted Successfully ! you will be redirected to the abstract page"
+              "Your Abstract Submitted Successfully! You will be redirected to the abstract page"
             );
             window.location.href = `/abstractForm/${result.abstract._id}`;
           } else {
@@ -168,8 +173,6 @@ export function AbstractForm() {
         console.log("Error:", error);
 
         if (error.response) {
-          // The request was made and the server responded with a status code
-          // that falls out of the range of 2xx
           if (error.response.status === 409) {
             setSubmitError("An abstract with this email already exists");
           } else {
@@ -178,17 +181,17 @@ export function AbstractForm() {
             );
           }
         } else if (error.request) {
-          // The request was made but no response was received
           setSubmitError("No response received from server");
         } else {
-          // Something happened in setting up the request that triggered an Error
           setSubmitError(error.message);
         }
       } finally {
         setIsSubmitting(false);
+        setIsLoading(false);
       }
     } else {
       setIsSubmitting(false);
+      setIsLoading(false);
     }
   };
 
@@ -601,13 +604,13 @@ export function AbstractForm() {
         <button
           type="submit"
           className={`w-full font-bold py-3 px-4 rounded-md transition duration-300 ${
-            isSubmitting
+            isSubmitting || isLoading
               ? "bg-gray-400 cursor-not-allowed"
               : "bg-[#021373] text-white hover:bg-[#022873]"
           }`}
-          disabled={isSubmitting}
+          disabled={isSubmitting || isLoading}
         >
-          {isSubmitting ? (
+          {isSubmitting || isLoading ? (
             <div className="flex items-center justify-center">
               <svg
                 className="animate-spin h-5 w-5 mr-3 text-white"
@@ -628,7 +631,9 @@ export function AbstractForm() {
                   d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
                 />
               </svg>
-              Submitting...
+              <span className="transition-opacity duration-300 ease-in-out">
+                {isSubmitting ? "Submitting..." : "Loading..."}
+              </span>
             </div>
           ) : (
             "Submit Abstract"
