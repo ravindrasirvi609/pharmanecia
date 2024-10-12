@@ -43,7 +43,6 @@ const ChartCard = ({
     </div>
   </div>
 );
-
 interface DashboardChartsProps {
   data: {
     paymentStatus: { completed: number; pending: number; failed: number };
