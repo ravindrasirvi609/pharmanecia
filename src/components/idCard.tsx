@@ -62,7 +62,7 @@ const SocialShareCard: React.FC<SocialShareCardProps> = ({
   };
 
   return (
-    <div className="flex flex-col items-center">
+    <div className="flex flex-col items-center space-y-4">
       <button
         onClick={handleDownload}
         disabled={isLoading}
@@ -102,8 +102,26 @@ const SocialShareCard: React.FC<SocialShareCardProps> = ({
             />
           </svg>
         )}
-        <span>{isLoading ? "Generating..." : "Download Image"}</span>
+        <span>
+          {isLoading ? "Generating..." : "Generate Social Media Post"}
+        </span>
       </button>
+      <div className="text-center text-lg text-gray-600 max-w-md">
+        <p>
+          Download and share this image on LinkedIn to showcase your
+          participation in Pharmanecia 4.E!
+        </p>
+        <p className="mt-2">
+          Don&apos;t forget to tag{" "}
+          <span className="font-bold">Operant Pharmacy Federation</span> and use
+          the hashtag{" "}
+          <span className="font-semibold text-blue-600">#Pharmanecia4E</span>.
+        </p>
+        <p className="mt-2 text-indigo-600 font-bold">
+          Lucky participants who share will be eligible for exciting prizes on
+          the day of the conference!
+        </p>
+      </div>
     </div>
   );
 };

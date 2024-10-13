@@ -168,7 +168,7 @@ const AbstractForm: React.FC<StudentPageProps> = ({ params }) => {
                 </p>
               </div>
 
-              <div>
+              <div className="mt-8">
                 {registration && (
                   <IdCard
                     name={registration.name ?? ""}
