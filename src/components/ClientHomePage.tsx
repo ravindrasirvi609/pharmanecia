@@ -58,7 +58,7 @@ const ClientHomePage = () => {
           className="relative z-10 text-light text-center max-w-4xl px-4 py-8 bg-black bg-opacity-50 backdrop-filter backdrop-blur-sm rounded-lg"
           ref={contentRef}
         >
-          <h1 className="text-5xl md:text-7xl text-danger font-extrabold mb-4 bg-clip-text bg-gradient-to-r from-accent to-secondary">
+          <h1 className="text-5xl md:text-7xl text-yellow-400 font-extrabold mb-4 bg-clip-text bg-gradient-to-r from-accent to-secondary">
             Pharmanecia 4.E
           </h1>
           <h2 className="text-2xl md:text-3xl font-semibold mb-4">
@@ -78,14 +78,14 @@ const ClientHomePage = () => {
             Selected Research articles will be published in Scopus Indexed
             Journal
           </p>
-          <div className="space-x-4">
+          <div className="space-x-4 ">
             <Link href="/Registration">
-              <button className="bg-secondary text-light px-8 py-3 rounded-full text-lg font-semibold hover:bg-accent transition duration-300 transform hover:scale-105">
+              <button className="bg-secondary text-light px-8 py-3 rounded-full text-lg font-semibold hover:bg-accent transition duration-300 transform hover:scale-105 ">
                 Register Now
               </button>
             </Link>
             <Link href="/abstractForm">
-              <button className="bg-primary text-light px-8 py-3 rounded-full text-lg font-semibold hover:bg-secondary transition duration-300 transform hover:scale-105">
+              <button className="bg-primary text-light px-8 py-3 rounded-full text-lg font-semibold hover:bg-secondary transition duration-300 transform hover:scale-105 ">
                 Submit Abstract
               </button>
             </Link>
