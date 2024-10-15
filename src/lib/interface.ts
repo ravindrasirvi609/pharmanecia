@@ -37,6 +37,7 @@ export interface RegistrationInfo {
     email?: string;
     affiliation?: string;
     coAuthor?: string;
+    presentationType?: string;
     address?: string;
     city?: string;
     state?: string;
@@ -46,6 +47,7 @@ export interface RegistrationInfo {
     rejectionComment?: string;
     createdAt?: string;
     updatedAt?: string;
+    articleType?: string;
   };
 
   registration: {
@@ -81,6 +83,8 @@ export interface RegistrationInfo {
     registrationCode?: string;
     transactionId?: string;
     qrCodeUrl?: string;
+    presentationType?: string;
+    articleType?: string;
   };
 }
 

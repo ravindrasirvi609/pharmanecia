@@ -208,6 +208,24 @@ const AbstractForm: React.FC<StudentPageProps> = ({ params }) => {
                         abstract.createdAt && formatDate(abstract.createdAt)
                       }
                     />
+                    <InfoItem
+                      label="Persentation Type"
+                      value={abstract?.presentationType}
+                    />
+                    <InfoItem
+                      label="Affiliation"
+                      value={abstract.affiliation}
+                    />
+                    <InfoItem
+                      label="Article Type"
+                      value={abstract.articleType}
+                    />
+                    <InfoItem
+                      label="Submitted At"
+                      value={
+                        abstract.createdAt && formatDate(abstract.createdAt)
+                      }
+                    />
                     <div className="col-span-2">
                       <InfoItem
                         label="Abstract File"
@@ -378,7 +396,7 @@ const AbstractForm: React.FC<StudentPageProps> = ({ params }) => {
                       label="Payment Amount"
                       value={
                         registration.paymentAmount !== undefined
-                          ? `${registration.paymentAmount}₹`
+                          ? `₹${registration.paymentAmount}`
                           : undefined
                       }
                     />
@@ -393,14 +411,7 @@ const AbstractForm: React.FC<StudentPageProps> = ({ params }) => {
                       label="Need Accommodation"
                       value={registration.needAccommodation ? "Yes" : "No"}
                     />
-                    <InfoItem
-                      label="Dietary Requirements"
-                      value={registration.dietaryRequirements}
-                    />
-                    <InfoItem
-                      label="Special Assistance"
-                      value={registration.specialAssistance}
-                    />
+
                     <InfoItem label="Address" value={registration.address} />
                     <InfoItem label="City" value={registration.city} />
                     <InfoItem label="State" value={registration.state} />
