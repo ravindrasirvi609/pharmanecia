@@ -82,6 +82,7 @@ const AbstractFormPage: React.FC = () => {
                   </li>
                   <li>Font: Times New Roman</li>
                   <li>Title: Font Size 14 + Bold</li>
+                  <li>Abstract Body Content: Justified</li>
                   <li>
                     Author Name, Affiliation & Abstract Body: Font Size 12
                   </li>
@@ -105,7 +106,7 @@ const AbstractFormPage: React.FC = () => {
                     into the designated space on the submission portal.
                   </li>
                   <li>Abstracts must be submitted online only.</li>
-                  <li>The deadline for submission is 15 October, 2024.</li>
+                  <li>The deadline for submission is 31 October, 2024.</li>
                   <li>
                     A model abstract is available for reference on the website.
                   </li>
