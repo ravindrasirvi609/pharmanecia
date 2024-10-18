@@ -151,7 +151,7 @@ const AbstractTable: React.FC<AbstractTableProps> = ({
       title="Select Presentation Type"
     >
       <select
-        className="w-full p-2 border rounded mb-4"
+        className="w-full p-2 border rounded mb-4 text-black"
         onChange={(e) => {
           if (presentationTypePopup.abstractId) {
             handleStatusUpdate(
@@ -164,7 +164,9 @@ const AbstractTable: React.FC<AbstractTableProps> = ({
           }
         }}
       >
-        <option value="">Select a type</option>
+        <option value="" className="text-black">
+          Select a type
+        </option>
         <option value="Oral">Oral</option>
         <option value="E-Poster">E-Poster</option>
       </select>
