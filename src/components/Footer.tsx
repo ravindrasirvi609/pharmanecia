@@ -177,7 +177,7 @@ const Footer: React.FC = () => {
         <div className="space-y-4">
           <h2 className="text-xl font-bold">Legal</h2>
           <ul className="space-y-2">
-            {["Terms of Service", "Privacy Policy", "Refund Policy"].map(
+            {["Terms Of Service", "Privacy Policy", "Refund Policy"].map(
               (item) => (
                 <li key={item}>
                   <Link
