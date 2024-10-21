@@ -16,7 +16,7 @@ export const metadata: Metadata = {
     siteName: "Pharmanecia 4.E",
     images: [
       {
-        url: "https://www.pharmanecia.org/og-image.png", // Replace with your actual image URL
+        url: "https://www.pharmanecia.org/og-image.png",
         width: 1200,
         height: 630,
         alt: "Pharmanecia 4.E Conference",
@@ -30,7 +30,7 @@ export const metadata: Metadata = {
     title: "Pharmanecia 4.E",
     description:
       "International Research Conference on AI and ML in Drug Discovery",
-    images: ["https://www.pharmanecia.org/og-image.png"], // Replace with your actual image URL
+    images: ["https://www.pharmanecia.org/og-image.png"],
   },
 };
 

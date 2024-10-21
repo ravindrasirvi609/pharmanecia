@@ -53,7 +53,7 @@ export const metadata: Metadata = {
     images: ["https://www.pharmanecia.org/og-image.png"],
   },
   manifest: "/manifest.json",
-  themeColor: "#ffffff", // Adjust this to match your app's theme color
+  themeColor: "#ffffff",
   viewport: "width=device-width, initial-scale=1, maximum-scale=1",
 };
 
