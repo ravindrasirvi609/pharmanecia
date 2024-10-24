@@ -12,6 +12,7 @@ interface Registration {
   registrationCode: string;
   affiliation: string;
   whatsappNumber: string;
+  includeGalaDinner: boolean;
 }
 
 interface RegistrationTableProps {
@@ -47,7 +48,9 @@ const RegistrationTable: React.FC<RegistrationTableProps> = ({
             registrations.map((registration) => (
               <tr
                 key={registration._id}
-                className="border-b hover:bg-light text-black"
+                className={`border-b hover:bg-light text-black ${
+                  registration.includeGalaDinner ? "bg-pink-200" : ""
+                }`}
               >
                 <td className="px-4 py-2">{registration.registrationCode}</td>
                 <Link href={`/abstractForm/${registration._id}`}>
