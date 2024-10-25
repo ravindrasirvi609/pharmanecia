@@ -70,7 +70,7 @@ const ImageSlider = ({ images, currentIndex, onClose }: any) => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50"
+      className="fixed inset-0 bg-black bg-opacity-90 flex items-center justify-center z-50"
     >
       <button
         onClick={onClose}
@@ -97,7 +97,7 @@ const ImageSlider = ({ images, currentIndex, onClose }: any) => {
           width={800}
           height={600}
           objectFit="contain"
-          className="rounded-lg shadow-2xl"
+          className="rounded-lg shadow-2xl border-4 border-white"
         />
       </motion.div>
       <button
@@ -128,14 +128,14 @@ const OotyTourismPage: React.FC = () => {
   }, [sliderOpen]);
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-blue-100 to-purple-100 text-gray-800">
-      <header className="bg-blue-600 text-white py-16">
+    <div className="min-h-screen bg-gradient-to-b from-blue-200 to-purple-300 text-gray-800">
+      <header className="bg-blue-700 text-white py-20 shadow-lg">
         <div className="container mx-auto px-4 text-center">
           <motion.h1
             initial={{ opacity: 0, y: -50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="text-5xl font-bold mb-4"
+            className="text-6xl font-bold mb-4"
           >
             Welcome to Ooty
           </motion.h1>
@@ -143,7 +143,7 @@ const OotyTourismPage: React.FC = () => {
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="text-2xl"
+            className="text-3xl italic"
           >
             The Queen of Hill Stations
           </motion.p>
@@ -156,7 +156,72 @@ const OotyTourismPage: React.FC = () => {
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5 }}
-            className="text-4xl font-semibold mb-8 text-blue-800"
+            className="text-5xl font-semibold mb-8 text-blue-800"
+          >
+            Getting Here
+          </motion.h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+            <motion.div
+              initial={{ opacity: 0, y: 50 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+            >
+              <p className="text-lg mb-6 leading-relaxed">
+                Ooty is well-connected by road and rail, making it accessible
+                from various parts of South India. The nearest airport is
+                Coimbatore International Airport, about 88 km away. From there,
+                you can take a scenic drive through the winding ghat roads or
+                experience the famous Nilgiri Mountain Railway to reach Ooty.
+              </p>
+              <p className="text-lg mb-6 leading-relaxed">
+                <strong>By Air:</strong> The nearest airport is Coimbatore
+                International Airport, which is approximately 88 km from Ooty.
+                From the airport, you can hire a taxi or take a bus to reach
+                Ooty.
+              </p>
+              <p className="text-lg mb-6 leading-relaxed">
+                <strong>By Train:</strong> The Nilgiri Mountain Railway, a
+                UNESCO World Heritage Site, offers a unique and picturesque
+                journey from Mettupalayam to Ooty. This toy train winds its way
+                through 108 curves and 16 tunnels, providing stunning views of
+                the Nilgiri landscape. It&apos;s not just a mode of transport,
+                but an attraction in itself.
+              </p>
+              <p className="text-lg mb-6 leading-relaxed">
+                <strong>By Bus:</strong> Regular bus services are available from
+                major cities like Bangalore, Mysore, and Coimbatore. The journey
+                offers breathtaking views of the Nilgiri mountains and forests.
+              </p>
+              <p className="text-lg mb-6 leading-relaxed">
+                <strong>By Private Vehicle:</strong> If you prefer more
+                flexibility, you can drive to Ooty. The roads are
+                well-maintained, and the scenic views make the drive enjoyable.
+              </p>
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.5, delay: 0.4 }}
+              className="relative h-96 md:h-auto rounded-lg overflow-hidden shadow-2xl"
+            >
+              <Image
+                src="/ooty/walpaper-1.jpg"
+                alt="Map to Ooty"
+                layout="fill"
+                objectFit="cover"
+                className="cursor-pointer transition-transform duration-300 hover:scale-110"
+                onClick={() => openSlider(attractions.length + 1)}
+              />
+            </motion.div>
+          </div>
+        </section>
+
+        <section className="mb-20">
+          <motion.h2
+            initial={{ opacity: 0, x: -50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5 }}
+            className="text-5xl font-semibold mb-8 text-blue-800"
           >
             Discover Ooty
           </motion.h2>
@@ -214,7 +279,7 @@ const OotyTourismPage: React.FC = () => {
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5 }}
-            className="text-4xl font-semibold mb-8 text-blue-800"
+            className="text-5xl font-semibold mb-8 text-blue-800"
           >
             Top Attractions
           </motion.h2>
@@ -258,7 +323,7 @@ const OotyTourismPage: React.FC = () => {
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5 }}
-            className="text-4xl font-semibold mb-8 text-blue-800"
+            className="text-5xl font-semibold mb-8 text-blue-800"
           >
             Travel Tips
           </motion.h2>
@@ -294,7 +359,7 @@ const OotyTourismPage: React.FC = () => {
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5 }}
-            className="text-4xl font-semibold mb-8 text-blue-800"
+            className="text-5xl font-semibold mb-8 text-blue-800"
           >
             Getting Here
           </motion.h2>
