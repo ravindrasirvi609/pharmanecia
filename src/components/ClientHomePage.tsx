@@ -55,7 +55,7 @@ const ClientHomePage = () => {
         <FloatingElements />
         <div className="absolute inset-0 bg-primary bg-opacity-50"></div>
         <div
-          className="relative z-10 text-light text-center max-w-4xl px-4 py-8 bg-black bg-opacity-50 backdrop-filter backdrop-blur-sm rounded-lg"
+          className="relative z-10 text-light text-center max-w-4xl px-4 py-8 bg-black bg-opacity-70 backdrop-filter backdrop-blur-sm rounded-lg shadow-lg"
           ref={contentRef}
         >
           <h1 className="text-5xl md:text-7xl text-yellow-400 font-extrabold mb-4 bg-clip-text bg-gradient-to-r from-accent to-secondary">
@@ -78,14 +78,17 @@ const ClientHomePage = () => {
             Selected Research articles will be published in Scopus Indexed
             Journal
           </p>
+          <p className="text-lg mb-8 font-bold text-yellow-500">
+            Malaysian Journal of Medicine and Health Sciences (MJMHS)
+          </p>
           <div className="space-x-4 ">
             <Link href="/Registration">
-              <button className="bg-secondary text-light px-8 py-3 rounded-full text-lg font-semibold hover:bg-accent transition duration-300 transform hover:scale-105 ">
+              <button className="bg-secondary text-light px-8 py-3 rounded-full text-lg font-semibold hover:bg-accent transition duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-accent focus:ring-opacity-50">
                 Register Now
               </button>
             </Link>
             <Link href="/abstractForm">
-              <button className="bg-primary text-light px-8 py-3 rounded-full text-lg font-semibold hover:bg-secondary transition duration-300 transform hover:scale-105 ">
+              <button className="bg-primary text-light px-8 py-3 rounded-full text-lg font-semibold hover:bg-secondary transition duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-accent focus:ring-opacity-50">
                 Submit Abstract
               </button>
             </Link>
