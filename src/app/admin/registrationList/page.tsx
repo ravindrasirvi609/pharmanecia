@@ -58,7 +58,7 @@ export default function RegistrationList() {
             placeholder="Search registrations..."
             value={searchTerm}
             onChange={handleSearch}
-            className="px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
+            className="px-4 py-2 border text-black rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
           />
           <button
             onClick={handleExport}
