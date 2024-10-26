@@ -13,6 +13,7 @@ import {
   ChevronRight,
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { FaBus, FaCar, FaPlane, FaRoad, FaTrain } from "react-icons/fa";
 
 const attractions = [
   {
@@ -167,19 +168,22 @@ const OotyTourismPage: React.FC = () => {
               transition={{ duration: 0.5, delay: 0.2 }}
             >
               <p className="text-lg mb-6 leading-relaxed">
-                Ooty is well-connected by road and rail, making it accessible
-                from various parts of South India. The nearest airport is
-                Coimbatore International Airport, about 88 km away. From there,
-                you can take a scenic drive through the winding ghat roads or
-                experience the famous Nilgiri Mountain Railway to reach Ooty.
+                <FaRoad className="inline-block mr-2 text-blue-600" /> Ooty is
+                well-connected by road and rail, making it accessible from
+                various parts of South India. The nearest airport is Coimbatore
+                International Airport, about 88 km away. From there, you can
+                take a scenic drive through the winding ghat roads or experience
+                the famous Nilgiri Mountain Railway to reach Ooty.
               </p>
               <p className="text-lg mb-6 leading-relaxed">
+                <FaPlane className="inline-block mr-2 text-blue-600" />
                 <strong>By Air:</strong> The nearest airport is Coimbatore
                 International Airport, which is approximately 88 km from Ooty.
                 From the airport, you can hire a taxi or take a bus to reach
                 Ooty.
               </p>
               <p className="text-lg mb-6 leading-relaxed">
+                <FaTrain className="inline-block mr-2 text-blue-600" />
                 <strong>By Train:</strong> The Nilgiri Mountain Railway, a
                 UNESCO World Heritage Site, offers a unique and picturesque
                 journey from Mettupalayam to Ooty. This toy train winds its way
@@ -188,11 +192,13 @@ const OotyTourismPage: React.FC = () => {
                 but an attraction in itself.
               </p>
               <p className="text-lg mb-6 leading-relaxed">
+                <FaBus className="inline-block mr-2 text-blue-600" />
                 <strong>By Bus:</strong> Regular bus services are available from
                 major cities like Bangalore, Mysore, and Coimbatore. The journey
                 offers breathtaking views of the Nilgiri mountains and forests.
               </p>
               <p className="text-lg mb-6 leading-relaxed">
+                <FaCar className="inline-block mr-2 text-blue-600" />
                 <strong>By Private Vehicle:</strong> If you prefer more
                 flexibility, you can drive to Ooty. The roads are
                 well-maintained, and the scenic views make the drive enjoyable.
@@ -352,68 +358,6 @@ const OotyTourismPage: React.FC = () => {
               </li>
             </ul>
           </motion.div>
-        </section>
-
-        <section>
-          <motion.h2
-            initial={{ opacity: 0, x: -50 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5 }}
-            className="text-5xl font-semibold mb-8 text-blue-800"
-          >
-            Getting Here
-          </motion.h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-            <motion.div
-              initial={{ opacity: 0, y: 50 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-            >
-              <p className="text-lg mb-6 leading-relaxed">
-                Ooty is well-connected by road and rail, making it accessible
-                from various parts of South India. The nearest airport is
-                Coimbatore International Airport, about 88 km away. From there,
-                you can take a scenic drive through the winding ghat roads or
-                experience the famous Nilgiri Mountain Railway to reach Ooty.
-              </p>
-              <p className="text-lg mb-6 leading-relaxed">
-                <strong>By Road:</strong> Regular bus services are available
-                from major cities like Bangalore, Mysore, and Coimbatore. The
-                journey offers breathtaking views of the Nilgiri mountains and
-                forests. Private taxis and self-drive options are also available
-                for those who prefer more flexibility.
-              </p>
-              <p className="text-lg mb-6 leading-relaxed">
-                <strong>By Rail:</strong> The Nilgiri Mountain Railway, a UNESCO
-                World Heritage Site, offers a unique and picturesque journey
-                from Mettupalayam to Ooty. This toy train winds its way through
-                108 curves and 16 tunnels, providing stunning views of the
-                Nilgiri landscape. It&apos;s not just a mode of transport, but
-                an attraction in itself.
-              </p>
-              <p className="text-lg mb-6 leading-relaxed">
-                Once in Ooty, local transportation options include taxis,
-                auto-rickshaws, and rental bikes or cars for exploring the town
-                and its surrounding areas. Many hotels also offer shuttle
-                services to popular attractions.
-              </p>
-            </motion.div>
-            <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.5, delay: 0.4 }}
-              className="relative h-96 md:h-auto rounded-lg overflow-hidden shadow-2xl"
-            >
-              <Image
-                src="/ooty/walpaper-1.jpg"
-                alt="Map to Ooty"
-                layout="fill"
-                objectFit="cover"
-                className="cursor-pointer transition-transform duration-300 hover:scale-110"
-                onClick={() => openSlider(attractions.length + 1)}
-              />
-            </motion.div>
-          </div>
         </section>
       </main>
 
