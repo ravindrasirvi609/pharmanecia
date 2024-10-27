@@ -4,33 +4,6 @@ import Link from "next/link";
 import { articles } from "@/data";
 import { Metadata } from "next";
 
-export async function generateMetadata({
-  params,
-}: {
-  params: { id: string };
-}): Promise<Metadata> {
-  const article = articles.find((a) => a.id === params.id);
-
-  if (!article) {
-    return {
-      title: "Article Not Found",
-    };
-  }
-
-  return {
-    title: `${article.title} | AI in Drug Discovery`,
-    description: article.metaDescription,
-    openGraph: {
-      title: article.title,
-      description: article.metaDescription,
-      images: [article.imageUrl],
-    },
-    twitter: {
-      card: "summary_large_image",
-    },
-  };
-}
-
 export async function generateStaticParams() {
   return articles.map((article) => ({
     id: article.id,

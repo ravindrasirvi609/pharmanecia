@@ -9,6 +9,7 @@ import {
   getSessionId,
   getVisitorInfo,
 } from "@/lib/tracking";
+import { Suspense } from "react";
 
 // Define interfaces for better type safety
 interface TrackingData {
@@ -143,5 +144,9 @@ export default function TrackingProvider({
     };
   }, [trackPageView, trackExit]);
 
-  return <>{children}</>;
+  return (
+    <>
+      <Suspense fallback={<div>Loading...</div>}>{children}</Suspense>
+    </>
+  );
 }
