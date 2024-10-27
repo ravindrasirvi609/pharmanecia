@@ -25,12 +25,12 @@ import {
   Monitor,
   Chrome,
   Server,
+  LucideIcon,
 } from "lucide-react";
-import PropTypes from "prop-types";
 
 const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042", "#8884d8"];
 
-// Define the interface for the overview data
+// Define interfaces for the data types
 interface Overview {
   totalPageViews: number;
   uniqueVisitors: number;
@@ -38,36 +38,74 @@ interface Overview {
   bounceRate: number;
 }
 
-// Define the interface for user behavior data
 interface UserBehavior {
-  topPages: { _id: string; visits: number }[]; // Adjust the structure as needed
+  topPages: Array<{
+    _id: string;
+    visits: number;
+  }>;
 }
 
-// Define the interface for device stats
 interface DeviceStats {
-  deviceTypes: { _id: string; count: number }[]; // Adjust structure as needed
-  browsers: { _id: string; count: number }[];
-  operatingSystems: { _id: string; count: number }[];
+  deviceTypes: Array<{
+    _id: string;
+    count: number;
+  }>;
+  browsers: Array<{
+    _id: string;
+    count: number;
+  }>;
+  operatingSystems: Array<{
+    _id: string;
+    count: number;
+  }>;
 }
 
-// Define the interface for performance data
 interface PerformanceData {
-  loadTimes: {
+  loadTimes: Array<{
     _id: string;
     avgLoadTime: number;
     avgFirstPaint: number;
     avgFirstContentfulPaint: number;
-  }[];
+  }>;
 }
 
-const Analytics = () => {
-  const [period, setPeriod] = useState("7d");
+// Define interface for StatCard props
+interface StatCardProps {
+  icon: LucideIcon;
+  title: string;
+  value: string;
+  subtitle?: string;
+}
+
+// StatCard component with proper TypeScript types
+const StatCard: React.FC<StatCardProps> = ({
+  icon: Icon,
+  title,
+  value,
+  subtitle,
+}) => (
+  <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+    <div className="flex items-center space-x-4">
+      <div className="p-3 bg-blue-50 rounded-full">
+        <Icon className="w-6 h-6 text-blue-500" />
+      </div>
+      <div>
+        <h3 className="text-lg font-semibold text-gray-700">{value}</h3>
+        <p className="text-sm text-gray-500">{title}</p>
+        {subtitle && <p className="text-xs text-gray-400">{subtitle}</p>}
+      </div>
+    </div>
+  </div>
+);
+
+const Analytics: React.FC = () => {
+  const [period, setPeriod] = useState<string>("7d");
   const [overview, setOverview] = useState<Overview | null>(null);
-  const [pageViews, setPageViews] = useState([]);
+  const [pageViews, setPageViews] = useState<any[]>([]);
   const [userBehavior, setUserBehavior] = useState<UserBehavior | null>(null);
   const [deviceStats, setDeviceStats] = useState<DeviceStats | null>(null);
   const [performance, setPerformance] = useState<PerformanceData | null>(null);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState<boolean>(true);
 
   const fetchData = async () => {
     try {
@@ -79,11 +117,15 @@ const Analytics = () => {
         deviceStatsRes,
         performanceRes,
       ] = await Promise.all([
-        axios.get("/api/analytics/overview"),
+        axios.get<Overview>("/api/analytics/overview"),
         axios.get(`/api/analytics/page-views?period=${period}`),
-        axios.get(`/api/analytics/user-behavior?period=${period}`),
-        axios.get(`/api/analytics/device-stats?period=${period}`),
-        axios.get(`/api/analytics/performance?period=${period}`),
+        axios.get<UserBehavior>(
+          `/api/analytics/user-behavior?period=${period}`
+        ),
+        axios.get<DeviceStats>(`/api/analytics/device-stats?period=${period}`),
+        axios.get<PerformanceData>(
+          `/api/analytics/performance?period=${period}`
+        ),
       ]);
 
       setOverview(overviewRes.data);
@@ -101,35 +143,6 @@ const Analytics = () => {
   useEffect(() => {
     fetchData();
   }, [period]);
-
-  const StatCard: React.FC<{
-    icon: React.ElementType;
-    title: string;
-    value: string;
-    subtitle?: string;
-  }> = ({ icon: Icon, title, value, subtitle }) => (
-    <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
-      <div className="flex items-center space-x-4">
-        <div className="p-3 bg-blue-50 rounded-full">
-          <Icon className="w-6 h-6 text-blue-500" />
-        </div>
-        <div>
-          <h3 className="text-lg font-semibold text-gray-700">{value}</h3>
-          <p className="text-sm text-gray-500">{title}</p>
-          {subtitle && <p className="text-xs text-gray-400">{subtitle}</p>}
-        </div>
-      </div>
-    </div>
-  );
-
-  // Update the prop types to allow string as a valid type for icon
-  StatCard.propTypes = {
-    icon: PropTypes.oneOfType([PropTypes.elementType, PropTypes.string])
-      .isRequired, // Allow both React component types and strings
-    title: PropTypes.string.isRequired,
-    value: PropTypes.string.isRequired,
-    subtitle: PropTypes.string, // Make subtitle optional
-  };
 
   if (loading) {
     return (
@@ -176,7 +189,6 @@ const Analytics = () => {
           icon={Activity}
           title="Bounce Rate"
           value={`${Math.round(overview?.bounceRate || 0)}%`}
-          subtitle="" // Provide an empty string or a default value
         />
       </div>
 
