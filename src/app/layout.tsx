@@ -6,6 +6,7 @@ import Footer from "@/components/Footer";
 import { cn } from "@/lib/utils";
 import { Analytics } from "@vercel/analytics/react";
 import Script from "next/script";
+import TrackingProvider from "@/components/TrackingProvider";
 
 const fontHeading = Inter({
   subsets: ["latin"],
@@ -70,12 +71,14 @@ export default function RootLayout({
       <body
         className={cn("antialiased", fontHeading.variable, fontBody.variable)}
       >
-        <Navbar />
-        <div className="mt-[4rem] bg-light">
-          {children}
-          <Analytics />
-        </div>
-        <Footer />
+        <TrackingProvider>
+          <Navbar />
+          <div className="mt-[4rem] bg-light">
+            {children}
+            <Analytics />
+          </div>
+          <Footer />
+        </TrackingProvider>
         <Script
           id="register-sw"
           strategy="afterInteractive"
