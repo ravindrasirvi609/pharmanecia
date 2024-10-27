@@ -8,6 +8,7 @@ export async function POST(req: NextRequest) {
     await connect();
     const data = await req.json();
     const headersList = headers();
+    console.log("data", data);
 
     const pageView = await PageView.create({
       ...data,

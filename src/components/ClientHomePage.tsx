@@ -15,12 +15,14 @@ import VenueAccommodations from "@/components/VenueAccommodations";
 import OpfModel from "@/components/opfModel";
 import PharmaneciaScroll from "@/components/pharmanecia";
 import FloatingElements from "./FloatingElements";
+import { useTrackingContext } from "./TrackingProvider";
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
 const ClientHomePage = () => {
   const heroRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
+  const { trackEvent } = useTrackingContext();
 
   useGSAP(() => {
     gsap.from(heroRef.current, {
@@ -42,6 +44,23 @@ const ClientHomePage = () => {
       },
     });
   });
+  const handleRegisterClick = () => {
+    trackEvent({
+      eventType: "button_click",
+      eventCategory: "engagement",
+      eventAction: "click",
+      eventLabel: "signup_button",
+    });
+  };
+
+  const handleSubmitAbstractClick = () => {
+    trackEvent({
+      eventType: "button_click",
+      eventCategory: "engagement",
+      eventAction: "click",
+      eventLabel: "submit_abstract_button",
+    });
+  };
 
   return (
     <>
@@ -83,12 +102,18 @@ const ClientHomePage = () => {
           </p>
           <div className="space-x-4 ">
             <Link href="/Registration">
-              <button className="bg-secondary text-light px-8 py-3 rounded-full text-lg font-semibold hover:bg-accent transition duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-accent focus:ring-opacity-50">
+              <button
+                className="bg-secondary text-light px-8 py-3 rounded-full text-lg font-semibold hover:bg-accent transition duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-accent focus:ring-opacity-50"
+                onClick={handleRegisterClick}
+              >
                 Register Now
               </button>
             </Link>
             <Link href="/abstractForm">
-              <button className="bg-primary text-light px-8 py-3 rounded-full text-lg font-semibold hover:bg-secondary transition duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-accent focus:ring-opacity-50">
+              <button
+                className="bg-primary text-light px-8 py-3 rounded-full text-lg font-semibold hover:bg-secondary transition duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-accent focus:ring-opacity-50"
+                onClick={handleSubmitAbstractClick}
+              >
                 Submit Abstract
               </button>
             </Link>
