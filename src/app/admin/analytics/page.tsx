@@ -84,14 +84,14 @@ const StatCard: React.FC<StatCardProps> = ({
   value,
   subtitle,
 }) => (
-  <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+  <div className="bg-white p-6 rounded-lg shadow-lg border border-gray-200 transition-transform transform hover:scale-105">
     <div className="flex items-center space-x-4">
       <div className="p-3 bg-blue-50 rounded-full">
         <Icon className="w-6 h-6 text-blue-500" />
       </div>
       <div>
-        <h3 className="text-lg font-semibold text-gray-700">{value}</h3>
-        <p className="text-sm text-gray-500">{title}</p>
+        <h3 className="text-lg font-semibold text-gray-800">{value}</h3>
+        <p className="text-sm text-gray-600">{title}</p>
         {subtitle && <p className="text-xs text-gray-400">{subtitle}</p>}
       </div>
     </div>
@@ -193,7 +193,7 @@ const Analytics: React.FC = () => {
       </div>
 
       {/* Page Views Chart */}
-      <div className="bg-white p-6 rounded-lg shadow-sm mb-8">
+      <div className="bg-white p-6 rounded-lg shadow-lg mb-8">
         <h2 className="text-xl font-semibold mb-4">Page Views Trend</h2>
         <div className="h-72">
           <ResponsiveContainer width="100%" height="100%">
@@ -217,7 +217,7 @@ const Analytics: React.FC = () => {
       {/* Top Pages and Device Stats */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
         {/* Top Pages */}
-        <div className="bg-white p-6 rounded-lg shadow-sm">
+        <div className="bg-white p-6 rounded-lg shadow-lg">
           <h2 className="text-xl font-semibold mb-4">Top Pages</h2>
           <div className="h-72">
             <ResponsiveContainer width="100%" height="100%">
@@ -233,7 +233,7 @@ const Analytics: React.FC = () => {
         </div>
 
         {/* Device Types */}
-        <div className="bg-white p-6 rounded-lg shadow-sm">
+        <div className="bg-white p-6 rounded-lg shadow-lg">
           <h2 className="text-xl font-semibold mb-4">Device Distribution</h2>
           <div className="h-72">
             <ResponsiveContainer width="100%" height="100%">
@@ -263,7 +263,7 @@ const Analytics: React.FC = () => {
       </div>
 
       {/* Performance Metrics */}
-      <div className="bg-white p-6 rounded-lg shadow-sm mb-8">
+      <div className="bg-white p-6 rounded-lg shadow-lg mb-8">
         <h2 className="text-xl font-semibold mb-4">Performance Metrics</h2>
         <div className="h-72">
           <ResponsiveContainer width="100%" height="100%">
@@ -299,7 +299,7 @@ const Analytics: React.FC = () => {
       {/* Browser and OS Stats */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         {/* Browser Distribution */}
-        <div className="bg-white p-6 rounded-lg shadow-sm">
+        <div className="bg-white p-6 rounded-lg shadow-lg">
           <h2 className="text-xl font-semibold mb-4">Browser Distribution</h2>
           <div className="h-72">
             <ResponsiveContainer width="100%" height="100%">
@@ -328,7 +328,7 @@ const Analytics: React.FC = () => {
         </div>
 
         {/* OS Distribution */}
-        <div className="bg-white p-6 rounded-lg shadow-sm">
+        <div className="bg-white p-6 rounded-lg shadow-lg">
           <h2 className="text-xl font-semibold mb-4">OS Distribution</h2>
           <div className="h-72">
             <ResponsiveContainer width="100%" height="100%">
@@ -355,6 +355,22 @@ const Analytics: React.FC = () => {
             </ResponsiveContainer>
           </div>
         </div>
+      </div>
+
+      {/* User Activity Section */}
+      <div className="bg-white p-6 rounded-lg shadow-lg mb-8">
+        <h2 className="text-xl font-semibold mb-4">User Activity</h2>
+        <ul className="space-y-2">
+          {userBehavior?.topPages?.map((page) => (
+            <li
+              key={page._id}
+              className="flex justify-between p-4 border-b border-gray-200"
+            >
+              <span className="text-gray-700">{page._id}</span>
+              <span className="text-gray-500">{page.visits} visits</span>
+            </li>
+          ))}
+        </ul>
       </div>
     </div>
   );
