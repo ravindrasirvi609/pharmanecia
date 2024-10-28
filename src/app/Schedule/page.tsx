@@ -109,20 +109,20 @@ const Schedule = () => {
 
         <div className="flex justify-center mb-12 space-x-4">
           <button
-            className={`px-6 py-2 rounded-full text-lg font-semibold transition-all duration-300 ${
+            className={`px-8 py-3 rounded-full text-lg font-semibold transition-all duration-300 border-2 ${
               activeDay === "day1"
-                ? "bg-danger text-white"
-                : "bg-white text-primary hover:bg-gray-100"
+                ? "bg-danger text-white border-danger"
+                : "bg-white text-primary border-gray-300 hover:bg-gray-100"
             }`}
             onClick={() => setActiveDay("day1")}
           >
             Day 1: March 7, 2025
           </button>
           <button
-            className={`px-6 py-2 rounded-full text-lg font-semibold transition-all duration-300 ${
+            className={`px-8 py-3 rounded-full text-lg font-semibold transition-all duration-300 border-2 ${
               activeDay === "day2"
-                ? "bg-danger text-white"
-                : "bg-white text-primary hover:bg-gray-100"
+                ? "bg-danger text-white border-danger"
+                : "bg-white text-primary border-gray-300 hover:bg-gray-100"
             }`}
             onClick={() => setActiveDay("day2")}
           >
