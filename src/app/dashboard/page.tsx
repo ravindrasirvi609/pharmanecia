@@ -105,6 +105,7 @@ function Dashboard() {
               "registration List",
               "nomination List",
               "analytics",
+              "contact List",
             ].map((item) => (
               <Link
                 key={item}
