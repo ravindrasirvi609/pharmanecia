@@ -10,6 +10,7 @@ import {
   FaMapMarkerAlt,
   FaPhone,
 } from "react-icons/fa";
+import Link from "next/link";
 
 const Contact = () => {
   const [name, setName] = useState("");
@@ -215,29 +216,24 @@ const Contact = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="mt-12 bg-purple-400 p-6 rounded-lg shadow-lg text-white"
+            className="mt-12 bg-green-500 p-6 rounded-lg shadow-lg text-white"
           >
-            <h2 className="text-2xl font-bold mb-4">Registration Details</h2>
+            <h1 className="text-xl font-semibold mb-2">
+              Thank you for your submission!
+            </h1>
             <p className="mb-4">
-              Registration ID:{" "}
-              <span className="font-semibold">
-                {registrationInfo.registrationId}
-              </span>
+              We appreciate your message and will get back to you shortly. If
+              your inquiry is urgent, please contact us directly:
             </p>
-            <p className="bg-red-500 p-2 rounded-md text-white mb-4">
-              <a href={registrationInfo.url} className="underline text-white">
-                Click Here
-              </a>
-            </p>
-            <div className="flex justify-center">
-              <Image
-                src={registrationInfo.qrCodeUrl}
-                alt="QR Code"
-                width={300}
-                height={300}
-                className="rounded-md"
-              />
-            </div>
+            <Link
+              href="https://wa.me/918107199052"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center text-accent hover:underline font-bold"
+            >
+              <FaPhone className="mr-2" />
+              8107199052
+            </Link>
           </motion.div>
         )}
 
