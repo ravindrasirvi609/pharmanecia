@@ -37,8 +37,10 @@ const ContactList = () => {
   );
 
   return (
-    <div className="p-6 max-w-4xl mx-auto">
-      <h1 className="text-3xl font-bold text-center mb-6">Contact List</h1>
+    <div className="p-6 max-w-4xl mx-auto text-black">
+      <h1 className="text-3xl font-bold text-center mb-6 text-black">
+        Contact List
+      </h1>
 
       <div className="flex justify-between items-center mb-4">
         <input
