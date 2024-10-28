@@ -20,6 +20,7 @@ import {
 // Constants
 const TRACK_DEBOUNCE_MS = 1000;
 const EXIT_DEBOUNCE_MS = 2000;
+const PROTECTED_ROUTES = ["/admin", "/dashboard"];
 
 // Types
 interface TrackingContextType {
@@ -39,7 +40,6 @@ interface TrackingData {
   userAgent: string;
   sessionId: string | null;
   screenResolution: string;
-
   [key: string]: unknown;
 }
 
@@ -59,6 +59,23 @@ interface TrackingProviderProps {
   children: React.ReactNode;
 }
 
+// Utility functions
+const isProtectedRoute = (pathname: string): boolean => {
+  return PROTECTED_ROUTES.some((route) => pathname.startsWith(route));
+};
+
+const isLocalhost = (): boolean => {
+  if (typeof window !== "undefined") {
+    const hostname = window.location.hostname;
+    return hostname === "localhost" || hostname === "127.0.0.1";
+  }
+  return false;
+};
+
+const shouldTrack = (pathname: string): boolean => {
+  return !isProtectedRoute(pathname) && !isLocalhost();
+};
+
 // Context
 export const TrackingContext = createContext<TrackingContextType | null>(null);
 
@@ -74,10 +91,13 @@ export const useTrackingContext = () => {
 
 // Custom hook for tracking
 export const useTracking = (pageViewId: string | null) => {
+  const pathname = usePathname();
+
   const trackClick = useCallback(
     _.debounce(
       async (event: MouseEvent, element: HTMLElement): Promise<void> => {
-        if (!pageViewId) return Promise.resolve(); // Return a resolved promise if pageViewId is not set
+        if (!pageViewId || !shouldTrack(pathname ?? ""))
+          return Promise.resolve();
 
         try {
           await fetch("/api/track/click", {
@@ -98,7 +118,7 @@ export const useTracking = (pageViewId: string | null) => {
       },
       500
     ),
-    [pageViewId]
+    [pageViewId, pathname]
   );
 
   const trackEvent = useCallback(
@@ -110,7 +130,7 @@ export const useTracking = (pageViewId: string | null) => {
         eventLabel?: string;
         eventValue?: number;
       }) => {
-        if (!pageViewId) return;
+        if (!pageViewId || !shouldTrack(pathname ?? "")) return;
 
         try {
           await fetch("/api/track/event", {
@@ -127,7 +147,7 @@ export const useTracking = (pageViewId: string | null) => {
       },
       500
     ),
-    [pageViewId]
+    [pageViewId, pathname]
   );
 
   return { trackClick, trackEvent };
@@ -148,6 +168,11 @@ export default function TrackingProvider({
 
   const trackPageView = useCallback(
     _.debounce(async (): Promise<void> => {
+      // Check if tracking should be prevented
+      if (!shouldTrack(pathname ?? "")) {
+        return;
+      }
+
       // Prevent tracking if less than TRACK_DEBOUNCE_MS has passed
       const now = Date.now();
       if (now - lastTrackTime.current < TRACK_DEBOUNCE_MS) {
@@ -209,7 +234,7 @@ export default function TrackingProvider({
 
   const trackExit = useCallback(
     _.debounce(async (): Promise<void> => {
-      if (!pageViewId) return;
+      if (!pageViewId || !shouldTrack(pathname ?? "")) return;
 
       const timeOnPage = Math.floor((Date.now() - startTime.current) / 1000);
       const scrollDepth = Math.floor(
@@ -254,9 +279,11 @@ export default function TrackingProvider({
       }
     };
 
-    window.addEventListener("click", handleClick);
-    return () => window.removeEventListener("click", handleClick);
-  }, [trackClick]);
+    if (!isProtectedRoute(pathname ?? "") && !isLocalhost()) {
+      window.addEventListener("click", handleClick);
+      return () => window.removeEventListener("click", handleClick);
+    }
+  }, [trackClick, pathname]);
 
   // Handle page view tracking
   useEffect(() => {
@@ -269,13 +296,15 @@ export default function TrackingProvider({
       void trackExit();
     };
 
-    window.addEventListener("beforeunload", handleBeforeUnload);
+    if (!isProtectedRoute(pathname ?? "") && !isLocalhost()) {
+      window.addEventListener("beforeunload", handleBeforeUnload);
+      return () => {
+        void trackExit();
+        window.removeEventListener("beforeunload", handleBeforeUnload);
+      };
+    }
+  }, [trackPageView, trackExit, pathname]);
 
-    return () => {
-      void trackExit();
-      window.removeEventListener("beforeunload", handleBeforeUnload);
-    };
-  }, [trackPageView, trackExit]);
   return (
     <TrackingContext.Provider
       value={{

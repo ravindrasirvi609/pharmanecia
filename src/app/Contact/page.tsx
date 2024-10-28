@@ -33,7 +33,7 @@ const Contact = () => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ name, email, message }),
+        body: JSON.stringify({ name, email, mobile, message }),
       });
 
       const data = await res.json();
