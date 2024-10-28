@@ -27,6 +27,7 @@ import {
   Server,
   LucideIcon,
 } from "lucide-react";
+import { UserClicksTable, UserEventsTable } from "@/components/AnalyticsTable";
 
 const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042", "#8884d8"];
 
@@ -371,6 +372,23 @@ const Analytics: React.FC = () => {
             </li>
           ))}
         </ul>
+      </div>
+
+      <div>
+        <h2 className="text-xl font-semibold mb-4">User Events</h2>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          {/* User Clicks */}
+          <div className="bg-white p-6 rounded-lg shadow-lg">
+            <h2 className="text-xl font-semibold mb-4">User Clicks</h2>
+            <UserClicksTable period={period} onPeriodChange={setPeriod} />
+          </div>
+
+          {/* User Events */}
+          <div className="bg-white p-6 rounded-lg shadow-lg">
+            <h2 className="text-xl font-semibold mb-4">User Events</h2>
+            <UserEventsTable period={period} onPeriodChange={setPeriod} />
+          </div>
+        </div>
       </div>
     </div>
   );
