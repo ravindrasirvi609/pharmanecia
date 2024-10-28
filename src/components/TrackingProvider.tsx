@@ -39,6 +39,7 @@ interface TrackingData {
   userAgent: string;
   sessionId: string | null;
   screenResolution: string;
+
   [key: string]: unknown;
 }
 
@@ -157,6 +158,7 @@ export default function TrackingProvider({
       const data: TrackingData = {
         page: pathname ?? "",
         userAgent: navigator.userAgent,
+        referrer: document.referrer || null,
         ...getDeviceInfo(navigator.userAgent),
         ...getVisitorInfo(),
         sessionId: getSessionId(),
