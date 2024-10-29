@@ -49,7 +49,7 @@ const ClientHomePage = () => {
       eventType: "button_click",
       eventCategory: "engagement",
       eventAction: "click",
-      eventLabel: "signup_button",
+      eventLabel: "register_button",
     });
   };
 
@@ -58,7 +58,7 @@ const ClientHomePage = () => {
       eventType: "button_click",
       eventCategory: "engagement",
       eventAction: "click",
-      eventLabel: "submit_abstract_button",
+      eventLabel: "abstract_button",
     });
   };
 
