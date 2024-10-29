@@ -106,6 +106,7 @@ const Analytics: React.FC = () => {
   const [userBehavior, setUserBehavior] = useState<UserBehavior | null>(null);
   const [deviceStats, setDeviceStats] = useState<DeviceStats | null>(null);
   const [performance, setPerformance] = useState<PerformanceData | null>(null);
+  const [referrers, setReferrers] = useState<any[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
 
   const fetchData = async () => {
@@ -117,6 +118,7 @@ const Analytics: React.FC = () => {
         userBehaviorRes,
         deviceStatsRes,
         performanceRes,
+        referrersRes,
       ] = await Promise.all([
         axios.get<Overview>("/api/analytics/overview"),
         axios.get(`/api/analytics/page-views?period=${period}`),
@@ -127,6 +129,7 @@ const Analytics: React.FC = () => {
         axios.get<PerformanceData>(
           `/api/analytics/performance?period=${period}`
         ),
+        axios.get(`/api/analytics/referrers?period=${period}`),
       ]);
 
       setOverview(overviewRes.data);
@@ -134,6 +137,7 @@ const Analytics: React.FC = () => {
       setUserBehavior(userBehaviorRes.data);
       setDeviceStats(deviceStatsRes.data);
       setPerformance(performanceRes.data);
+      setReferrers(referrersRes.data);
     } catch (error) {
       console.error("Error fetching analytics data:", error);
     } finally {
@@ -356,6 +360,22 @@ const Analytics: React.FC = () => {
             </ResponsiveContainer>
           </div>
         </div>
+      </div>
+
+      {/* Referrers */}
+      <div className="bg-white p-6 rounded-lg shadow-lg mb-8">
+        <h2 className="text-xl font-semibold mb-4">Referrers</h2>
+        <ul className="space-y-2">
+          {referrers.map((referrer) => (
+            <li
+              key={referrer._id}
+              className="flex justify-between p-4 border-b border-gray-200"
+            >
+              <span className="text-gray-700">{referrer._id}</span>
+              <span className="text-gray-500">{referrer.count} visits</span>
+            </li>
+          ))}
+        </ul>
       </div>
 
       {/* User Activity Section */}
