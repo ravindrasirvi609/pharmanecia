@@ -378,13 +378,13 @@ const Analytics: React.FC = () => {
         <h2 className="text-xl font-semibold mb-4">User Events</h2>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           {/* User Clicks */}
-          <div className="bg-white p-6 rounded-lg shadow-lg">
+          <div className="bg-white text-black p-6 rounded-lg shadow-lg">
             <h2 className="text-xl font-semibold mb-4">User Clicks</h2>
             <UserClicksTable period={period} onPeriodChange={setPeriod} />
           </div>
 
           {/* User Events */}
-          <div className="bg-white p-6 rounded-lg shadow-lg">
+          <div className="bg-white text-black p-6 rounded-lg shadow-lg">
             <h2 className="text-xl font-semibold mb-4">User Events</h2>
             <UserEventsTable period={period} onPeriodChange={setPeriod} />
           </div>

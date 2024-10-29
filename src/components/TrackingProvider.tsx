@@ -40,6 +40,7 @@ interface TrackingData {
   userAgent: string;
   sessionId: string | null;
   screenResolution: string;
+  referrer: string | null;
   [key: string]: unknown;
 }
 
