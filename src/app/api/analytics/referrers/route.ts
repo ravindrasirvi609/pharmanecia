@@ -1,4 +1,3 @@
-// app/api/referrers/route.ts
 import { NextResponse } from "next/server";
 import { connect } from "@/dbConfig/dbConfig";
 import { PageView } from "@/Model/analyticsModel";

@@ -9,10 +9,8 @@ export async function GET() {
     const now = new Date();
     const thirtyDaysAgo = new Date(now.setDate(now.getDate() - 30));
 
-    // Get total page views
     const totalPageViews = await PageView.countDocuments();
 
-    // Get unique visitors (based on sessionId)
     const uniqueVisitors = await PageView.distinct(
       "sessionId"
     ).countDocuments();
