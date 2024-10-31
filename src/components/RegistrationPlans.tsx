@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import RegistrationForm from "./RegistrationForm";
 import { Plan, RegistrationFormData } from "@/lib/interface";
 import { useFirebaseStorage } from "@/app/hooks/useFirebaseStorage";
@@ -43,6 +43,16 @@ const RegistrationPlans: React.FC = () => {
     abstractId: null,
     includeGalaDinner: false,
   });
+  const [countdown, setCountdown] = useState(7);
+
+  useEffect(() => {
+    if (isProcessingTransaction && countdown > 0) {
+      const timer = setInterval(() => {
+        setCountdown((prev) => prev - 1);
+      }, 1000);
+      return () => clearInterval(timer);
+    }
+  }, [isProcessingTransaction, countdown]);
 
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
@@ -359,11 +369,23 @@ const RegistrationPlans: React.FC = () => {
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
           <div className="bg-white rounded-lg p-8 max-w-2xl w-full max-h-[90vh] overflow-y-auto">
             {isProcessingTransaction ? (
-              <div className="flex flex-col items-center justify-center h-64">
-                <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-primary"></div>
-                <p className="mt-4 text-lg font-semibold text-primary">
-                  Processing transaction... Thanks for your patience! 🙏
+              <div className="flex flex-col items-center justify-center h-64 p-6 bg-white shadow-lg rounded-lg">
+                <div className="animate-spin rounded-full h-24 w-24 border-t-4 border-b-4 border-primary mb-4"></div>
+                <p className="mt-2 text-xl font-semibold text-primary">
+                  Processing your transaction... Thank you for your patience! 🙏
                 </p>
+                <p className="mt-1 text-md font-medium text-gray-600">
+                  Please wait for{" "}
+                  <span id="countdown" className="font-bold">
+                    {countdown}
+                  </span>{" "}
+                  seconds...
+                </p>
+                <div className="mt-4">
+                  <span className="text-lg font-semibold text-primary">
+                    {countdown}
+                  </span>
+                </div>
               </div>
             ) : (
               <>
