@@ -1,3 +1,4 @@
+import InfiniteRibbon from "@/components/InfiniteRibbon";
 import RegistrationPlans from "@/components/RegistrationPlans";
 import React from "react";
 
@@ -6,7 +7,6 @@ const Registration = () => {
     <div className="bg-gradient-to-r from-blue-50 to-purple-50 text-primary px-6 py-12">
       <div className="max-w-7xl mx-auto">
         <h1 className="text-4xl font-bold mb-8 text-center">Registration</h1>
-
         <div className="mb-12">
           <p className="text-lg leading-relaxed text-justify mb-4">
             Registrations For Pharmanecia 4.E started from 1st August 2024.
@@ -49,14 +49,14 @@ const Registration = () => {
               info@pharmanecia.org
             </a>
           </p>
-          <p className="text-lg leading-relaxed text-justify mb-4">
-            Early Bird offer is valid until October 31, 2024.{" "}
+          <p className="text-lg leading-relaxed text-justify mb-4 font-bold">
+            Early Bird offer is valid until November 15, 2024.{" "}
           </p>
           <p className="text-lg leading-relaxed text-justify mb-4">
             All prices mentioned are inclusive of GST.{" "}
           </p>
         </div>
-
+        <InfiniteRibbon text="Early Bird offer is valid until November 15, 2024." />
         {/* Registration Plans */}
         <RegistrationPlans />
       </div>
