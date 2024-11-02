@@ -180,7 +180,6 @@ export default function Dashboard({
 }
 
 export const getServerSideProps: GetServerSideProps = async () => {
-  // Fetch data from your database
   const registrations = await RegistrationModel.find()
     .sort({ createdAt: -1 })
     .limit(100);
