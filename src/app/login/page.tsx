@@ -8,11 +8,14 @@ export default function LoginPage() {
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
+  const [rememberMe, setRememberMe] = useState(false);
   const router = useRouter();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
+    setErrorMessage("");
     try {
       const response = await fetch("/api/login", {
         method: "POST",
@@ -23,10 +26,11 @@ export default function LoginPage() {
       if (response.ok) {
         router.push("/dashboard");
       } else {
-        throw new Error("Login failed");
+        const data = await response.json();
+        setErrorMessage(data.message || "Login failed");
       }
     } catch (error) {
-      alert("Login failed. Please try again.");
+      setErrorMessage("Login failed. Please try again.");
     } finally {
       setIsLoading(false);
     }
@@ -104,6 +108,27 @@ export default function LoginPage() {
               </div>
             </div>
           </div>
+
+          <div className="flex items-center">
+            <input
+              id="rememberMe"
+              name="rememberMe"
+              type="checkbox"
+              className="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
+              checked={rememberMe}
+              onChange={(e) => setRememberMe(e.target.checked)}
+            />
+            <label
+              htmlFor="rememberMe"
+              className="ml-2 block text-sm text-gray-900"
+            >
+              Remember me
+            </label>
+          </div>
+
+          {errorMessage && (
+            <div className="text-red-600 text-sm">{errorMessage}</div>
+          )}
 
           <div>
             <button

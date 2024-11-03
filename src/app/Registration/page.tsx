@@ -1,5 +1,6 @@
 import InfiniteRibbon from "@/components/InfiniteRibbon";
 import RegistrationPlans from "@/components/RegistrationPlans";
+import Link from "next/link";
 import React from "react";
 
 const Registration = () => {
@@ -45,9 +46,12 @@ const Registration = () => {
           <p className="text-lg leading-relaxed text-justify mb-4">
             Accommodation will be arranged on request in dormitories, hotels on
             additional charges. For more details, write to us at:
-            <a href="mailto:info@pharmanecia.org" className="text-accent ml-2">
+            <Link
+              href="mailto:info@pharmanecia.org"
+              className="text-accent ml-2"
+            >
               info@pharmanecia.org
-            </a>
+            </Link>
           </p>
           <p className="text-lg leading-relaxed text-justify mb-4 font-bold">
             Early Bird offer is valid until November 15, 2024.{" "}
