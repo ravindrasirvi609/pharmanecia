@@ -112,7 +112,7 @@ const AbstractForm: React.FC<StudentPageProps> = ({ params }) => {
             </h1>
           </div>
 
-          <div className="md:flex">
+          <div className="flex flex-col md:flex-row">
             <div className="md:w-1/3 p-8 bg-gray-50">
               {registration?.imageUrl && (
                 <div className="mb-8 flex justify-center">
@@ -209,7 +209,7 @@ const AbstractForm: React.FC<StudentPageProps> = ({ params }) => {
                       }
                     />
                     <InfoItem
-                      label="Persentation Type"
+                      label="Presentation Type"
                       value={abstract?.presentationType}
                     />
                     <InfoItem
