@@ -148,9 +148,6 @@ const SpeakersHighlights = () => {
                 Join us for a deep dive into the regulatory landscape,
                 addressing challenges and proposing innovative solutions.
               </p>
-              <p className="text-sm text-gray-500 mt-2">
-                Speakers: Announcing Soon
-              </p>
             </div>
           </div>
         </div>
