@@ -1,4 +1,5 @@
 "use client";
+import LoadingExample from "@/components/Loader";
 import RegistrationTable from "@/components/RegistrationTable";
 import { exportToExcel } from "@/lib/excelExport";
 import Link from "next/link";
@@ -46,7 +47,13 @@ export default function RegistrationList() {
     setSearchTerm(e.target.value);
   };
 
-  if (loading) return <div>Loading...</div>;
+  if (loading)
+    return (
+      <div>
+        {" "}
+        <LoadingExample />
+      </div>
+    );
 
   return (
     <div className="container mx-auto px-4 py-8">

@@ -10,6 +10,7 @@ import {
   FaMoneyCheckAlt,
   FaHourglassHalf,
 } from "react-icons/fa";
+import LoadingExample from "@/components/Loader";
 
 // Define types for the dashboard data
 interface DashboardStats {
@@ -88,7 +89,13 @@ function Dashboard() {
     fetchDashboardData();
   }, []);
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading)
+    return (
+      <div>
+        {" "}
+        <LoadingExample />
+      </div>
+    );
   if (error) return <div>Error: {error}</div>;
   if (!dashboardData) return null;
 

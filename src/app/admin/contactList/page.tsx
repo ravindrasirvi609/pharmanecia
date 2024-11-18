@@ -1,6 +1,7 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import LoadingExample from "@/components/Loader";
 
 interface Contact {
   name: string;
@@ -53,7 +54,10 @@ const ContactList = () => {
       </div>
 
       {loading ? (
-        <div className="text-center">Loading...</div>
+        <div className="text-center">
+          {" "}
+          <LoadingExample />
+        </div>
       ) : filteredContacts.length > 0 ? (
         <table className="w-full text-left table-auto border-collapse">
           <thead>

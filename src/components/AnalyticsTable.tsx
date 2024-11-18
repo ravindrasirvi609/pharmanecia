@@ -17,6 +17,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import LoadingExample from "./Loader";
 
 interface PaginationProps {
   total: number;
@@ -91,7 +92,12 @@ export const UserClicksTable: React.FC<UserClicksTableProps> = ({
   }, [period, page]);
 
   if (loading) {
-    return <div>Loading...</div>;
+    return (
+      <div>
+        {" "}
+        <LoadingExample />
+      </div>
+    );
   }
 
   return (
@@ -186,7 +192,12 @@ export const UserEventsTable: React.FC<UserEventsTableProps> = ({
   }, [period, page]);
 
   if (loading) {
-    return <div>Loading...</div>;
+    return (
+      <div>
+        {" "}
+        <LoadingExample />
+      </div>
+    );
   }
 
   return (

@@ -8,6 +8,7 @@ import { Analytics } from "@vercel/analytics/react";
 import Script from "next/script";
 import TrackingProvider from "@/components/TrackingProvider";
 import { Suspense } from "react";
+import LoadingExample from "@/components/Loader";
 
 const fontHeading = Inter({
   subsets: ["latin"],
@@ -72,7 +73,13 @@ export default function RootLayout({
       <body
         className={cn("antialiased", fontHeading.variable, fontBody.variable)}
       >
-        <Suspense fallback={<div>Loading...</div>}>
+        <Suspense
+          fallback={
+            <div>
+              <LoadingExample />
+            </div>
+          }
+        >
           <TrackingProvider>
             <Navbar />
             <div className="mt-[4rem] bg-light">
