@@ -9,6 +9,7 @@ import {
   FaComment,
   FaMapMarkerAlt,
   FaPhone,
+  FaWhatsapp,
 } from "react-icons/fa";
 import Link from "next/link";
 
@@ -197,6 +198,31 @@ const Contact = () => {
                   ></textarea>
                 </div>
               </div>
+              {registrationInfo && (
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5 }}
+                  className=" bg-green-500 p-6 rounded-lg shadow-lg"
+                >
+                  <h1 className="text-xl font-semibold mb-2 text-green-500">
+                    Thank you for your submission!
+                  </h1>
+                  <p className="mb-4 text-green">
+                    We appreciate your message and will get back to you shortly.
+                    If your inquiry is urgent, please contact us directly:
+                  </p>
+                  <Link
+                    href="https://wa.me/918107199052"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center text-green hover:underline font-bold"
+                  >
+                    <FaWhatsapp className="mr-2" />
+                    8107199052
+                  </Link>
+                </motion.div>
+              )}
               <button
                 type="submit"
                 disabled={isSubmitting}
@@ -211,31 +237,6 @@ const Contact = () => {
         </div>
 
         {/* Registration Info */}
-        {registrationInfo && (
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="mt-12 bg-green-500 p-6 rounded-lg shadow-lg text-white"
-          >
-            <h1 className="text-xl font-semibold mb-2">
-              Thank you for your submission!
-            </h1>
-            <p className="mb-4">
-              We appreciate your message and will get back to you shortly. If
-              your inquiry is urgent, please contact us directly:
-            </p>
-            <Link
-              href="https://wa.me/918107199052"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center text-accent hover:underline font-bold"
-            >
-              <FaPhone className="mr-2" />
-              8107199052
-            </Link>
-          </motion.div>
-        )}
 
         {/* Map */}
         <motion.div
