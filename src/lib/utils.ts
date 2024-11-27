@@ -21,3 +21,13 @@ export function formatDateTime(date: string) {
     second: "numeric",
   });
 }
+
+export function formatShortTime(date: string) {
+  return new Date(date).toLocaleTimeString("en-IN", {
+    day: "numeric",
+    month: "short",
+    year: "numeric",
+    hour: "numeric",
+    minute: "numeric",
+  });
+}
