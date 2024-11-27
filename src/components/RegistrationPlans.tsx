@@ -209,7 +209,7 @@ const RegistrationPlans: React.FC = () => {
     }
 
     try {
-      totalAmount = includeGalaDinner ? plan.earlyBird + 1000 : plan.earlyBird;
+      totalAmount = includeGalaDinner ? plan.earlyBird + 1180 : plan.earlyBird;
 
       // Create Razorpay order
       const orderResponse = await fetch("/api/razorpay-order", {
@@ -343,9 +343,9 @@ const RegistrationPlans: React.FC = () => {
               <p className="text-gray-600 mb-4">
                 Access Food Area and lunch, No Entry for scientific session
               </p>
-              <PriceDisplay label="Early Bird" price={1200} />
-              <PriceDisplay label="Regular" price={1200} />
-              <PriceDisplay label="Spot" price={1500} />
+              <PriceDisplay label="Early Bird" price={1416} />
+              <PriceDisplay label="Regular" price={1416} />
+              <PriceDisplay label="Spot" price={1770} />
               <div className="mt-6">
                 <Link href={"https://rzp.io/l/g60dnQz"}>
                   <button className="w-full bg-accent text-white font-semibold py-3 px-4 rounded-md hover:bg-secondary transition duration-300">
