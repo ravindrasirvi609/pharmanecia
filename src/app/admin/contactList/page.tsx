@@ -39,7 +39,7 @@ const ContactList = () => {
   );
 
   return (
-    <div className="p-8 max-w-8xl mx-auto bg-white shadow-lg rounded-lg">
+    <div className="p-8 max-w-8xl mx-auto bg-white text-black shadow-lg rounded-lg">
       <h1 className="text-4xl font-bold text-center mb-8 text-gray-800">
         Contact List
       </h1>
