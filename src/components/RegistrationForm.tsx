@@ -344,7 +344,7 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({
             value={includeGalaDinner ? "true" : "false"}
             className="mr-2"
           />
-          Include Networking Cum Gala Dinner (Additional ₹1000)
+          Include Networking Cum Gala Dinner (Additional ₹1500)
         </label>
       </div>
 

@@ -209,7 +209,7 @@ const RegistrationPlans: React.FC = () => {
     }
 
     try {
-      totalAmount = includeGalaDinner ? plan.earlyBird + 1180 : plan.earlyBird;
+      totalAmount = includeGalaDinner ? plan.earlyBird + 1500 : plan.earlyBird;
 
       // Create Razorpay order
       const orderResponse = await fetch("/api/razorpay-order", {
