@@ -113,7 +113,7 @@ const AbstractForm: React.FC<StudentPageProps> = ({ params }) => {
           </div>
 
           <div className="flex flex-col md:flex-row">
-            <div className="md:w-1/3 p-8 bg-gray-50">
+            <div className="md:w-1/3 p-4 md:p-8 bg-gray-50">
               {registration?.imageUrl && (
                 <div className="mb-8 flex justify-center">
                   <Image
@@ -179,13 +179,13 @@ const AbstractForm: React.FC<StudentPageProps> = ({ params }) => {
               </div>
             </div>
 
-            <div className="md:w-2/3 p-8">
+            <div className="md:w-2/3 p-4 md:p-8">
               {abstract && (
                 <div className="mb-12">
-                  <h2 className="text-3xl font-bold mb-6 text-danger">
+                  <h2 className="text-2xl md:text-3xl font-bold mb-4 text-danger">
                     Scientific Abstract
                   </h2>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <InfoItem
                       label="Status"
                       value={
