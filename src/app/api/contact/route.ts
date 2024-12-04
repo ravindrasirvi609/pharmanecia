@@ -29,6 +29,22 @@ export async function POST(req: NextRequest) {
 
     await student.save();
 
+    const apiKey = process.env.RESEND_API_KEY;
+
+    const response = await fetch("https://api.resend.com/emails", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${apiKey}`,
+      },
+      body: JSON.stringify({
+        from: "psc@pharmanecia.org",
+        to: "info@pharmanecia.org",
+        subject: "New Contact Received",
+        html: `A new contact has been received from ${name} with email ${email} and mobile ${mobile}. The message is: ${message}`,
+      }),
+    });
+
     return NextResponse.json({ registrationId, url, qrCodeUrl });
   } else {
     return NextResponse.json({ message: "Method not allowed" });
