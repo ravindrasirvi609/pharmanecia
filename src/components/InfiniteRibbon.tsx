@@ -48,11 +48,11 @@ const InfiniteRibbon: React.FC<InfiniteRibbonProps> = ({ text }) => {
   }, []);
 
   return (
-    <div className="sticky top-0 w-full overflow-hidden bg-gradient-to-r from-blue-600 to-purple-600 py-3 z-50">
-      <div ref={containerRef} className="relative whitespace-nowrap h-6">
+    <div className="sticky w-full overflow-hidden bg-red z-10">
+      <div ref={containerRef} className="relative whitespace-nowrap h-8">
         <div
           ref={textRef}
-          className="inline-block text-white font-semibold px-4 text-base"
+          className="inline-block text-white font-black text-2xl"
         >
           <span className="flex items-center gap-2">
             <span className="text-yellow-300">🔔</span>
