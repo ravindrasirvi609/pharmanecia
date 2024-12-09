@@ -2,6 +2,7 @@
 import Link from "next/link";
 import React, { useState, useEffect } from "react";
 import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
+import InstallPWA from "./InstallPWA";
 
 const Navbar: React.FC = () => {
   const [menuOpen, setMenuOpen] = useState<boolean>(false);
@@ -14,7 +15,7 @@ const Navbar: React.FC = () => {
       e.preventDefault();
       setSupportsPWA(true);
       setPromptInstall(e);
-      // setShowInstallPrompt(true);
+      setShowInstallPrompt(true);
     };
     window.addEventListener("beforeinstallprompt", handler);
 
@@ -227,6 +228,8 @@ const Navbar: React.FC = () => {
                 </Link>
               </li>
             </ul>
+
+            <InstallPWA />
           </nav>
         )}
       </header>
