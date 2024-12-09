@@ -15,7 +15,7 @@ const Navbar: React.FC = () => {
       e.preventDefault();
       setSupportsPWA(true);
       setPromptInstall(e);
-      setShowInstallPrompt(true);
+      // setShowInstallPrompt(true);
     };
     window.addEventListener("beforeinstallprompt", handler);
 
