@@ -31,7 +31,7 @@ const accommodationPlans: AccommodationPlan[] = [
 
 const AccommodationPlans: React.FC = () => {
   return (
-    <div className="py-12 bg-[#F2F2F2]">
+    <div className="py-12 bg-[#F2F2F2]" id="accommodation">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <h2 className="text-3xl font-semibold mb-6 text-[#021373] text-center">
           Accommodation Plans

@@ -55,14 +55,14 @@ const SpeakersHighlights = () => {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               <div className="bg-white shadow-lg rounded-lg p-6 text-center">
                 <Image
-                  src="/profile/chancellor.jpg"
+                  src="/drbasavanagowdappa.jpg"
                   alt="Pro Chancellor"
                   className="w-32 h-32 mx-auto rounded-full mb-4"
                   height={150}
                   width={150}
                 />
                 <h3 className="text-xl font-semibold text-primary">
-                  Dr. B. Suresh
+                  Dr H. Basavanagowdappa{" "}
                 </h3>
                 <p className="text-sm text-gray-700 mt-2">
                   Pro Chancellor, JSSAHER, Mysuru
