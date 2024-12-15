@@ -51,9 +51,6 @@ const AccommodationPlans: React.FC = () => {
                   <span className="text-base font-medium text-[#CACACA]">
                     /night
                   </span>
-                  <div className="text-base font-medium text-[#050505]">
-                    Including GST
-                  </div>
                 </div>
                 <ul className="mt-6 space-y-4">
                   {plan.features.map((feature, index) => (
