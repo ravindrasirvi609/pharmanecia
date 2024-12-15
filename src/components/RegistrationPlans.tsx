@@ -43,7 +43,7 @@ const RegistrationPlans: React.FC = () => {
     abstractId: null,
     includeGalaDinner: false,
   });
-  const [countdown, setCountdown] = useState(7);
+  const [countdown, setCountdown] = useState(10);
 
   useEffect(() => {
     if (isProcessingTransaction && countdown > 0) {
@@ -372,7 +372,9 @@ const RegistrationPlans: React.FC = () => {
               <div className="flex flex-col items-center justify-center h-64 p-6 bg-white shadow-lg rounded-lg">
                 <div className="animate-spin rounded-full h-24 w-24 border-t-4 border-b-4 border-primary mb-4"></div>
                 <p className="mt-2 text-xl font-semibold text-primary">
-                  Processing your transaction... Thank you for your patience! 🙏
+                  Please keep this window open. You will be automatically
+                  redirected. Your transaction is being processed... Do not
+                  refresh the page.
                 </p>
                 <p className="mt-1 text-md font-medium text-gray-600">
                   Please wait for{" "}
