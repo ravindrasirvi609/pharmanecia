@@ -109,14 +109,14 @@ const ClientHomePage = () => {
                 Register Now
               </button>
             </Link>
-            <Link href="/abstractForm">
+            {/* <Link href="/abstractForm">
               <button
                 className="bg-primary text-light px-8 py-3 rounded-full text-lg font-semibold hover:bg-danger transition duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-accent focus:ring-opacity-50 border-danger border-2"
                 onClick={handleSubmitAbstractClick}
               >
                 Submit Abstract
               </button>
-            </Link>
+            </Link> */}
             <Link href="#accommodation">
               <button className="bg-primary text-light px-8 py-3 rounded-full text-lg font-semibold hover:bg-danger transition duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-accent focus:ring-opacity-50 border-danger border-2">
                 Book Accommodation
