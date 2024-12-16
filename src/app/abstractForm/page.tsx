@@ -109,7 +109,7 @@ const AbstractFormPage: React.FC = () => {
                   <li>
                     {" "}
                     <strong>
-                      The deadline for submission is 15 December, 2024.
+                      The deadline for submission is 31 December, 2024.
                     </strong>
                   </li>
                   <li>
