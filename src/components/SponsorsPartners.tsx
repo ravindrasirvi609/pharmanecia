@@ -18,6 +18,15 @@ const SponsorsPartners = () => {
             {/* Sponsor 1 */}
             <div className="flex justify-center">
               <Image
+                src="/ANRFlogo.png"
+                alt="Operant"
+                className="h-24 w-auto"
+                height={150}
+                width={150}
+              />
+            </div>
+            <div className="flex justify-center">
+              <Image
                 src="/operant.png"
                 alt="Operant"
                 className="h-24 w-auto"
