@@ -36,6 +36,7 @@ const OrganisingCommittee: React.FC = () => {
                   layout="fill"
                   objectFit="cover"
                   className="transition-transform duration-300 hover:scale-110"
+                  unoptimized
                 />
               </div>
               <h3 className="text-xl font-bold mb-2 text-blue-700">
@@ -78,6 +79,7 @@ const OrganisingCommittee: React.FC = () => {
                   width={200}
                   height={200}
                   className="rounded-lg object-cover"
+                  unoptimized
                 />
               </div>
               <div className="w-full md:w-2/3 md:pl-6">
