@@ -155,6 +155,7 @@ const AbstractForm: React.FC<StudentPageProps> = ({ params }) => {
                       width={150}
                       height={150}
                       className="rounded-lg shadow-md"
+                      unoptimized
                     />
                   </div>
                 )}
