@@ -309,13 +309,13 @@ export function AbstractForm() {
             htmlFor="affiliation"
             className="block text-sm font-medium text-[#022873] mb-1"
           >
-            Affiliation of Author
+            Institute Name
           </label>
           <input
             id="affiliation"
             type="text"
             className="w-full px-3 py-2 border text-black border-[#CACACA] rounded-md focus:outline-none focus:ring-2 focus:ring-[#034C8C]"
-            placeholder="Enter your affiliation"
+            placeholder="Enter your Institute name"
             value={affiliation}
             onChange={(e: ChangeEvent<HTMLInputElement>) =>
               setAffiliation(e.target.value)
