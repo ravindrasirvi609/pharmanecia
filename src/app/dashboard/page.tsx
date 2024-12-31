@@ -76,7 +76,7 @@ function Dashboard() {
       try {
         const response = await axios.post<DashboardData>("/api/dashboard", {
           startDate: "2023-01-01", // Adjust these dates as needed
-          endDate: "2024-12-31",
+          endDate: "2025-12-31",
         });
         setDashboardData(response.data);
         setIsLoading(false);
