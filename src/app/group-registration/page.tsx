@@ -397,7 +397,7 @@ const GroupRegistrationForm: React.FC = () => {
                 htmlFor="affiliation"
                 className="block text-sm font-medium text-gray-700"
               >
-                Affiliation
+                Institute Name
               </label>
               <input
                 type="text"
