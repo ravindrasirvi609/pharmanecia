@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import AbstractForm from "@/components/abstract-form";
 import { FaWhatsapp } from "react-icons/fa";
+import InfiniteRibbon from "@/components/InfiniteRibbon";
 
 const AbstractFormPage: React.FC = () => {
   const [showForm, setShowForm] = useState(false);
@@ -35,6 +36,7 @@ const AbstractFormPage: React.FC = () => {
               presentations.
             </p>
           </section>
+          <InfiniteRibbon text="Thank you for your overwhelming response! Abstract submissions for Pharmanecia 4.E are now officially closed." />
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div className="space-y-8">
