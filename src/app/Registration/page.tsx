@@ -54,13 +54,13 @@ const Registration = () => {
             </Link>
           </p>
           <p className="text-lg leading-relaxed text-justify mb-4 font-bold">
-            Early Bird offer is valid until December 31, 2024.{" "}
+            Early Bird offer is valid until January 15, 2025.{" "}
           </p>
           <p className="text-lg leading-relaxed text-justify mb-4">
             All prices mentioned are inclusive of GST.{" "}
           </p>
         </div>
-        <InfiniteRibbon text="Early Bird offer is valid until December 31, 2024." />
+        <InfiniteRibbon text="Early Bird offer is valid until January 15, 2025." />
         {/* Registration Plans */}
         <RegistrationPlans />
       </div>
