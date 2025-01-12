@@ -48,6 +48,8 @@ export interface RegistrationInfo {
     createdAt?: string;
     updatedAt?: string;
     articleType?: string;
+    presentationFileStatus?: string;
+    presentationFileUrl?: string;
   };
 
   registration: {
@@ -94,4 +96,10 @@ export interface Plan {
   earlyBird: number;
   regular: number;
   spot: number;
+}
+
+export interface Abstract {
+  presentationFileUrl?: string;
+  presentationFileStatus?: string;
+  presentationRejectionComment?: string;
 }
