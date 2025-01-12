@@ -36,7 +36,7 @@ const AbstractFormPage: React.FC = () => {
               presentations.
             </p>
           </section>
-          <InfiniteRibbon text="Thank you for your overwhelming response! Abstract submissions for Pharmanecia 4.E are now officially closed." />
+          <InfiniteRibbon text="Abstact Submission Closing Soon....." />
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div className="space-y-8">
