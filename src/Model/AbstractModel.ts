@@ -27,6 +27,9 @@ const abstractSchema = new Schema({
     enum: ["Oral", "E-Poster"],
     default: null,
   },
+
+  presentationFileUrl: { type: String },
+  presentationFileStatus: { type: String, default: "InReview" },
   createdAt: { type: Date, default: Date.now },
   updatedAt: { type: Date, default: Date.now },
 });
