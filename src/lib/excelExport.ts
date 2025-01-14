@@ -120,6 +120,8 @@ export interface Abstract {
   articleType: string;
   createdAt: string;
   updatedAt: string;
+  presentationFileUrl: string;
+  presentationFileStatus: string;
 }
 
 export const exportAbstractsToExcel = (
