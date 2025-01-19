@@ -29,7 +29,7 @@ const abstractSchema = new Schema({
   },
 
   presentationFileUrl: { type: String },
-  presentationFileStatus: { type: String, default: "InReview" },
+  presentationFileStatus: { type: String, default: "Pending" },
   createdAt: { type: Date, default: Date.now },
   updatedAt: { type: Date, default: Date.now },
 });
