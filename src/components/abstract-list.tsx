@@ -92,6 +92,48 @@ export function AbstractList() {
     }
   };
 
+  const handlePresentationStatusUpdate = async (
+    abstractId: string,
+    newStatus: string,
+    comment?: string
+  ) => {
+    try {
+      const response = await fetch(
+        `/api/updatePresentationStatus?id=${abstractId}`,
+        {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            status: newStatus,
+            _id: abstractId,
+            comment,
+          }),
+        }
+      );
+
+      if (response.ok) {
+        setAbstracts((prevAbstracts) =>
+          prevAbstracts.map((a) =>
+            a._id === abstractId
+              ? {
+                  ...a,
+                  presentationFileStatus: newStatus,
+                }
+              : a
+          )
+        );
+        toast.success(`Presentation status updated to ${newStatus}`);
+      } else {
+        const data = await response.json();
+        throw new Error(data.message);
+      }
+    } catch (err) {
+      toast.error("Failed to update presentation status. Please try again.");
+    }
+  };
+
   const handleExportToExcel = () => {
     if (abstracts.length === 0) {
       toast.error("No abstracts to export.");
@@ -259,6 +301,7 @@ export function AbstractList() {
             error={error}
             filters={filters}
             handleStatusUpdate={handleStatusUpdate}
+            handlePresentationStatusUpdate={handlePresentationStatusUpdate}
           />
         </div>
       </main>

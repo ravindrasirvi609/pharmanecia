@@ -4,7 +4,11 @@ import EmailTemplate from "./EmailTemplate";
 import AbstractModel from "@/Model/AbstractModel";
 import RegistrationModel from "@/Model/RegistrationModel";
 
-type EmailType = "SUBMITTED" | "UPDATE_STATUS" | "REGISTRATION_SUCCESS";
+type EmailType =
+  | "SUBMITTED"
+  | "UPDATE_STATUS"
+  | "REGISTRATION_SUCCESS"
+  | "UPDATE_PERSENTATION_STATUS";
 
 interface SendEmailParams {
   _id: string;
@@ -17,20 +21,19 @@ export const sendEmail = async ({
 }: SendEmailParams): Promise<any> => {
   try {
     if (
-      !["SUBMITTED", "UPDATE_STATUS", "REGISTRATION_SUCCESS"].includes(
-        emailType
-      )
+      ![
+        "SUBMITTED",
+        "UPDATE_STATUS",
+        "REGISTRATION_SUCCESS",
+        "UPDATE_PERSENTATION_STATUS",
+      ].includes(emailType)
     ) {
-      throw new Error(
-        "Invalid emailType. It should be either 'SUBMITTED', 'UPDATE_STATUS', or 'REGISTRATION_SUCCESS'."
-      );
+      throw new Error("Invalid emailType");
     }
 
     const apiKey = process.env.RESEND_API_KEY;
     if (!apiKey) {
-      throw new Error(
-        "Missing Resend API key. Set the RESEND_API_KEY environment variable."
-      );
+      throw new Error("Missing Resend API key");
     }
 
     const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
@@ -60,6 +63,7 @@ export const sendEmail = async ({
     let subject: string = "";
     let buttonText: string = "";
     let buttonUrl: string = "";
+
     if (emailType === "SUBMITTED") {
       content = (
         <>
@@ -171,6 +175,68 @@ export const sendEmail = async ({
       );
       subject = `Registration Successful - ${registration.registrationCode}`;
       buttonText = "View Registration Details";
+      buttonUrl = submissionDetailsUrl;
+    } else if (emailType === "UPDATE_PERSENTATION_STATUS") {
+      let statusSpecificContent: React.ReactNode = null;
+      let codeToShow = abstract.AbstractCode || abstract.temporyAbstractCode;
+
+      if (abstract.presentationFileStatus === "Approved") {
+        statusSpecificContent = (
+          <>
+            <Text>
+              Congratulations! Your presentation file has been approved.
+            </Text>
+            <Text>
+              You are now ready to present at the conference. Please make sure
+              to check the conference schedule for your presentation time slot.
+            </Text>
+          </>
+        );
+      } else if (
+        abstract.presentationFileStatus === "Revision" &&
+        abstract.presentationRejectionComment
+      ) {
+        statusSpecificContent = (
+          <>
+            <Text>
+              We regret to inform you that your presentation file needs
+              revision. Please review the following comments and submit an
+              updated version.
+            </Text>
+            <Text>
+              <strong>
+                Reviewer Comments: {abstract.presentationRejectionComment}
+              </strong>
+            </Text>
+          </>
+        );
+      } else if (abstract.presentationFileStatus === "InReview") {
+        statusSpecificContent = (
+          <Text>
+            Your presentation file is currently under review. We will notify you
+            once the review is complete.
+          </Text>
+        );
+      }
+
+      content = (
+        <>
+          <Text>
+            There has been an update to your presentation submission (Abstract
+            Code: <strong>{codeToShow}</strong>).
+          </Text>
+          <Text>
+            Current Status: <strong>{abstract.presentationFileStatus}</strong>
+          </Text>
+          {statusSpecificContent}
+          <Text>
+            If you have any questions about this update, please contact our
+            support team.
+          </Text>
+        </>
+      );
+      subject = `Presentation Status Update - ${codeToShow}`;
+      buttonText = "View Submission Details";
       buttonUrl = submissionDetailsUrl;
     }
 

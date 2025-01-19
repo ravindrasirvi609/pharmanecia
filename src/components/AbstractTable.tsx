@@ -24,6 +24,11 @@ interface AbstractTableProps {
     comment?: string,
     presentationType?: string
   ) => Promise<void>;
+  handlePresentationStatusUpdate: (
+    abstractId: string,
+    newStatus: string,
+    comment?: string
+  ) => void;
 }
 
 const AbstractTable: React.FC<AbstractTableProps> = ({
@@ -32,6 +37,7 @@ const AbstractTable: React.FC<AbstractTableProps> = ({
   error,
   filters,
   handleStatusUpdate,
+  handlePresentationStatusUpdate,
 }) => {
   // Filter out abstracts with status "Delete"
   const filteredAbstracts = abstracts.filter(
@@ -233,7 +239,8 @@ const AbstractTable: React.FC<AbstractTableProps> = ({
             <th className="py-3 px-6 text-left">Registration Status</th>
             <th className="py-3 px-6 text-left">Registration Code</th>
             <th className="py-3 px-6 text-left">Status</th>
-            <th className="py-3 px-6 text-center">Actions</th>
+            <th className="py-3 px-6 text-left">Presentation Status</th>
+            <th className="py-3 px-6 text-left">Actions</th>
           </tr>
         </thead>
         <tbody className="text-gray-600 text-sm font-light">
@@ -290,6 +297,63 @@ const AbstractTable: React.FC<AbstractTableProps> = ({
                 >
                   {abstract.Status}
                 </span>
+              </td>
+              <td className="px-6 py-4 whitespace-nowrap">
+                <span
+                  className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${
+                    abstract.presentationFileStatus === "Approved"
+                      ? "bg-green-100 text-green-800"
+                      : abstract.presentationFileStatus === "InReview"
+                      ? "bg-yellow-100 text-yellow-800"
+                      : abstract.presentationFileStatus === "Rejected"
+                      ? "bg-red-100 text-red-800"
+                      : "bg-gray-100 text-gray-800"
+                  }`}
+                >
+                  {abstract.presentationFileStatus || "Not Uploaded"}
+                </span>
+              </td>
+              <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                {abstract.presentationFileUrl && (
+                  <div className="flex space-x-2">
+                    <select
+                      onChange={(e) => {
+                        if (e.target.value === "Rejected") {
+                          const comment = window.prompt(
+                            "Please provide a rejection reason:"
+                          );
+                          if (comment) {
+                            handlePresentationStatusUpdate(
+                              abstract._id,
+                              e.target.value,
+                              comment
+                            );
+                          }
+                        } else {
+                          handlePresentationStatusUpdate(
+                            abstract._id,
+                            e.target.value
+                          );
+                        }
+                      }}
+                      value={abstract.presentationFileStatus || ""}
+                      className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                    >
+                      <option value="">Select Status</option>
+                      <option value="InReview">In Review</option>
+                      <option value="Approved">Approved</option>
+                      <option value="Rejected">Rejected</option>
+                    </select>
+                    <a
+                      href={abstract.presentationFileUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-indigo-600 hover:text-indigo-900"
+                    >
+                      View File
+                    </a>
+                  </div>
+                )}
               </td>
               <td className="py-3 px-6 text-center">
                 <div className="flex item-center justify-center">
