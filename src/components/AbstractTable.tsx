@@ -238,9 +238,10 @@ const AbstractTable: React.FC<AbstractTableProps> = ({
             <th className="py-3 px-6 text-left">Article Type</th>
             <th className="py-3 px-6 text-left">Registration Status</th>
             <th className="py-3 px-6 text-left">Registration Code</th>
-            <th className="py-3 px-6 text-left">Status</th>
+            <th className="py-3 px-6 text-left">Abstract Status</th>
             <th className="py-3 px-6 text-left">Presentation Status</th>
-            <th className="py-3 px-6 text-left">Actions</th>
+            <th className="py-3 px-6 text-left">Abstract Actions</th>
+            <th className="py-3 px-6 text-left">Presentation Actions</th>
           </tr>
         </thead>
         <tbody className="text-gray-600 text-sm font-light">
@@ -305,7 +306,7 @@ const AbstractTable: React.FC<AbstractTableProps> = ({
                       ? "bg-green-100 text-green-800"
                       : abstract.presentationFileStatus === "InReview"
                       ? "bg-yellow-100 text-yellow-800"
-                      : abstract.presentationFileStatus === "Rejected"
+                      : abstract.presentationFileStatus === "Revision"
                       ? "bg-red-100 text-red-800"
                       : "bg-gray-100 text-gray-800"
                   }`}
@@ -313,14 +314,34 @@ const AbstractTable: React.FC<AbstractTableProps> = ({
                   {abstract.presentationFileStatus || "Not Uploaded"}
                 </span>
               </td>
+              <td className="py-3 px-6 text-center">
+                <div className="flex item-center justify-center">
+                  <button
+                    onClick={() => handleDownload(abstract)}
+                    className="bg-green hover:bg-green text-white rounded-full p-2 mx-1"
+                    title="Download Abstract"
+                  >
+                    <Download size={16} />
+                  </button>
+                  <button
+                    onClick={() =>
+                      setStatusModal({ isOpen: true, abstractId: abstract._id })
+                    }
+                    className="bg-gray-200 hover:bg-gray-300 text-gray-800 rounded-full p-2 mx-1"
+                    title="Change Abstract Status"
+                  >
+                    <MoreVertical size={16} />
+                  </button>
+                </div>
+              </td>
               <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                {abstract.presentationFileUrl && (
+                {abstract.presentationFileUrl ? (
                   <div className="flex space-x-2">
                     <select
                       onChange={(e) => {
-                        if (e.target.value === "Rejected") {
+                        if (e.target.value === "Revision") {
                           const comment = window.prompt(
-                            "Please provide a rejection reason:"
+                            "Please provide a revision reason:"
                           );
                           if (comment) {
                             handlePresentationStatusUpdate(
@@ -343,38 +364,21 @@ const AbstractTable: React.FC<AbstractTableProps> = ({
                       <option value="InReview">In Review</option>
                       <option value="Approved">Approved</option>
                       <option value="Revision">Revision</option>
+                      <option value="Pending">Pending</option>
                     </select>
                     <a
                       href={abstract.presentationFileUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-indigo-600 hover:text-indigo-900"
+                      className="bg-blue-500 hover:bg-blue-600 text-white rounded-full p-2"
+                      title="View Presentation"
                     >
-                      View File
+                      <Eye size={16} />
                     </a>
                   </div>
+                ) : (
+                  <span className="text-gray-400">No file uploaded</span>
                 )}
-              </td>
-              <td className="py-3 px-6 text-center">
-                <div className="flex item-center justify-center">
-                  <button
-                    onClick={() => handleDownload(abstract)}
-                    className="bg-green hover:bg-green text-white rounded-full p-2 mx-1"
-                    title="Download"
-                  >
-                    <Download size={16} />
-                  </button>
-
-                  <button
-                    onClick={() =>
-                      setStatusModal({ isOpen: true, abstractId: abstract._id })
-                    }
-                    className="bg-gray-200 hover:bg-gray-300 text-gray-800 rounded-full p-2 mx-1"
-                    title="More Actions"
-                  >
-                    <MoreVertical size={16} />
-                  </button>
-                </div>
               </td>
             </tr>
           ))}

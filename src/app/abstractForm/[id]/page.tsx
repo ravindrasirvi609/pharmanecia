@@ -115,8 +115,10 @@ const AbstractForm: React.FC<StudentPageProps> = ({ params }) => {
         const updatedData = await updateRes.json();
         setRegistrationInfo((prevState) => ({
           ...prevState!,
-          presentation: updatedData.presentation,
+          abstract: updatedData.abstract,
         }));
+
+        alert("Your file has been uploaded successfully!");
       } else {
         throw new Error("Failed to update presentation");
       }
@@ -400,42 +402,49 @@ const AbstractForm: React.FC<StudentPageProps> = ({ params }) => {
                           </div>
                         )}
 
-                        <h3 className="text-xl font-bold mb-4 text-danger">
-                          {abstract.presentationFileUrl ? "Update" : "Upload"}{" "}
-                          Presentation File
-                        </h3>
-                        <div
-                          {...getRootPropsPpt()}
-                          className={`w-full p-6 border-2 border-dashed rounded-lg text-center cursor-pointer transition-colors duration-200 ease-in-out ${
-                            isDragActivePpt
-                              ? "border-danger bg-red-50"
-                              : "border-gray-300 hover:border-danger hover:bg-gray-50"
-                          }`}
-                        >
-                          <input {...getInputPropsPpt()} />
-                          <p className="text-gray-700">
-                            {isDragActivePpt
-                              ? "Drop the file here..."
-                              : "Drag & drop your presentation file here, or click to select"}
-                          </p>
-                          <p className="text-sm text-gray-500 mt-2">
-                            Supported formats: .ppt, .pptx (Max size: 5MB)
-                          </p>
-                        </div>
+                        {(abstract.presentationFileStatus === "Pending" ||
+                          abstract.presentationFileStatus ===
+                            "Not Uploaded") && (
+                          <div>
+                            <h3 className="text-xl font-bold mb-4 text-danger">
+                              Upload Presentation File
+                            </h3>
+                            <div
+                              {...getRootPropsPpt()}
+                              className={`w-full p-6 border-2 border-dashed rounded-lg text-center cursor-pointer transition-colors duration-200 ease-in-out ${
+                                isDragActivePpt
+                                  ? "border-danger bg-red-50"
+                                  : "border-gray-300 hover:border-danger hover:bg-gray-50"
+                              }`}
+                            >
+                              <input {...getInputPropsPpt()} />
+                              <p className="text-gray-700">
+                                {isDragActivePpt
+                                  ? "Drop the file here..."
+                                  : "Drag & drop your presentation file here, or click to select"}
+                              </p>
+                              <p className="text-sm text-gray-500 mt-2">
+                                Supported formats: .ppt, .pptx (Max size: 5MB)
+                              </p>
+                            </div>
 
-                        {presentationFile && (
-                          <div className="flex items-center space-x-2 text-sm text-gray-700 mt-2">
-                            <span>{presentationFile.name}</span>
+                            {presentationFile && (
+                              <div className="flex items-center space-x-2 text-sm text-gray-700 mt-2">
+                                <span>{presentationFile.name}</span>
+                              </div>
+                            )}
+
+                            <button
+                              onClick={handlePresentationUpload}
+                              disabled={!presentationFile || isUploading}
+                              className="mt-4 w-full bg-danger text-white py-2 px-4 rounded-md hover:bg-red-700 transition-colors duration-200 ease-in-out disabled:opacity-50 disabled:cursor-not-allowed"
+                            >
+                              {isUploading
+                                ? "Uploading..."
+                                : "Upload Presentation"}
+                            </button>
                           </div>
                         )}
-
-                        <button
-                          onClick={handlePresentationUpload}
-                          disabled={!presentationFile || isUploading}
-                          className="mt-4 w-full bg-danger text-white py-2 px-4 rounded-md hover:bg-red-700 transition-colors duration-200 ease-in-out disabled:opacity-50 disabled:cursor-not-allowed"
-                        >
-                          {isUploading ? "Uploading..." : "Upload Presentation"}
-                        </button>
                       </div>
                     )}
                 </div>
