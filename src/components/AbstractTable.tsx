@@ -342,7 +342,7 @@ const AbstractTable: React.FC<AbstractTableProps> = ({
                       <option value="">Select Status</option>
                       <option value="InReview">In Review</option>
                       <option value="Approved">Approved</option>
-                      <option value="Rejected">Rejected</option>
+                      <option value="Revision">Revision</option>
                     </select>
                     <a
                       href={abstract.presentationFileUrl}
