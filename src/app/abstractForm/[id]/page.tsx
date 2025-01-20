@@ -42,7 +42,12 @@ const AbstractForm: React.FC<StudentPageProps> = ({ params }) => {
   }, [id]);
 
   const onDrop = useCallback((acceptedFiles: File[]) => {
-    setAbstractFile(acceptedFiles[0]);
+    console.log("Accepted files:", acceptedFiles);
+    if (acceptedFiles.length > 0) {
+      console.log("Accepted file:", acceptedFiles[0]);
+
+      setAbstractFile(acceptedFiles[0]);
+    }
   }, []);
 
   const {
@@ -321,7 +326,7 @@ const AbstractForm: React.FC<StudentPageProps> = ({ params }) => {
 
                       <div className="mt-6">
                         <h3 className="text-xl font-bold mb-4 text-danger">
-                          Update Abstract File
+                          Upload Abstract File
                         </h3>
                         <div
                           {...getRootPropsAbstract()}
@@ -341,6 +346,18 @@ const AbstractForm: React.FC<StudentPageProps> = ({ params }) => {
                             Supported formats: .doc, .docx (Max size: 5MB)
                           </p>
                         </div>
+                        {abstractFile && (
+                          <div className="mt-2 text-gray-700">
+                            <span>Selected File: {abstractFile.name}</span>
+                          </div>
+                        )}
+                        <button
+                          onClick={handleFileUpload}
+                          disabled={!abstractFile || isUploading}
+                          className="mt-4 w-full bg-danger text-white py-2 px-4 rounded-md hover:bg-red-700 transition-colors duration-200 ease-in-out disabled:opacity-50 disabled:cursor-not-allowed"
+                        >
+                          {isUploading ? "Uploading..." : "Upload Abstract"}
+                        </button>
                       </div>
                     </div>
                   )}
