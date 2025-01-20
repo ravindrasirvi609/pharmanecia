@@ -70,7 +70,7 @@ export const EmailTemplate: React.FC<EmailTemplateProps> = ({
           </Button>
           <Hr className="border-gray-300 my-4" />
           <Text className="text-center text-gray-500 text-xs">
-            © 2024 Operant Pharmacy Federation. All rights reserved.
+            © 2025 Operant Pharmacy Federation. All rights reserved.
           </Text>
         </Container>
       </Body>
