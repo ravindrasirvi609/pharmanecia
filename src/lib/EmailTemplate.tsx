@@ -38,7 +38,7 @@ export const EmailTemplate: React.FC<EmailTemplateProps> = ({
       <Body className="bg-gray-100 font-sans">
         <Container className="bg-white mx-auto p-4 my-8 rounded-lg shadow-lg">
           <Img
-            src="https://your-logo-url.com/logo.png"
+            src="/logoP.jpeg"
             width="170"
             height="50"
             alt="Pharmanecia"
