@@ -96,6 +96,38 @@ const AbstractFormPage: React.FC = () => {
             <div className="space-y-8">
               <section className="bg-white p-6 rounded-lg shadow-md">
                 <h3 className="text-xl font-semibold text-[#021373] mb-4">
+                  <span className="mb-2 text-danger">*</span>{" "}
+                  <span className="underline font-extrabold">
+                    Presentation Guidelines & Rewards{" "}
+                  </span>
+                  <span className="mb-2 text-danger">*</span>{" "}
+                  <span className="text-rose-700 font-black">NEW</span>
+                </h3>
+                <ul className="list-disc pl-5 text-gray-900 font-bold space-y-2">
+                  <li>
+                    Detailed guidelines for Poster and Oral presentations will
+                    be provided upon acceptance of the abstract.
+                  </li>
+                  <li>
+                    Presenters must be registered delegates of Pharmanecia 4.E.
+                  </li>
+                  <li>
+                    The best Poster and/or Oral presentations in each category
+                    will receive a certificate and a memento.
+                  </li>
+                </ul>
+                <div className="mt-4 space-x-4">
+                  <a
+                    href="https://drive.google.com/drive/u/0/folders/19JGAfEhPDAY4A-ctnPVRntosFSCf1lE0"
+                    className="text-[#034C8C] hover:text-[#000000] font-bold underline transition duration-300"
+                    target="_blank"
+                  >
+                    PHARMANECIA MODEL PRESENTATIONS
+                  </a>
+                </div>
+              </section>
+              <section className="bg-white p-6 rounded-lg shadow-md">
+                <h3 className="text-xl font-semibold text-[#021373] mb-4">
                   Submission Instructions
                 </h3>
                 <ul className="list-disc pl-5 text-gray-600 space-y-2">
@@ -142,25 +174,6 @@ const AbstractFormPage: React.FC = () => {
                     The best Poster and/or Oral presentations will be selected
                     from each category and announced during the valedictory
                     function.
-                  </li>
-                </ul>
-              </section>
-
-              <section className="bg-white p-6 rounded-lg shadow-md">
-                <h3 className="text-xl font-semibold text-[#021373] mb-4">
-                  Presentation Guidelines & Rewards
-                </h3>
-                <ul className="list-disc pl-5 text-gray-600 space-y-2">
-                  <li>
-                    Detailed guidelines for Poster and Oral presentations will
-                    be provided upon acceptance of the abstract.
-                  </li>
-                  <li>
-                    Presenters must be registered delegates of Pharmanecia 4.E.
-                  </li>
-                  <li>
-                    The best Poster and/or Oral presentations in each category
-                    will receive a certificate and a memento.
                   </li>
                 </ul>
               </section>
