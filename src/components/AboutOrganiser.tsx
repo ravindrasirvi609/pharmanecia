@@ -26,8 +26,8 @@ const AboutOrganiser = () => {
             quality pharmacy education at Diploma, graduate, post graduate and
             doctoral levels. The college is affiliated to JSS Academy of Higher
             Education & Research, Mysuru, which is accredited A+ Grade by NAAC.
-            The College is ranked 6th in India by NIRF, MHRD, Govt. of India.
-            The institution is accredited ‘A+’ grade by the National Assessment
+            The College is ranked 4th in India by NIRF, MHRD, Govt. of India.
+            The institution is accredited ‘A++’ grade by the National Assessment
             and Accreditation Council, New Dehli, for Pharm D Program and
             certified by ACPE, USA and approved by AICTE and Pharmacy Council of
             India. The institution deepened its roots by its state-of-the-art
