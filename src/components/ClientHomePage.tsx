@@ -77,7 +77,9 @@ const ClientHomePage = () => {
           className="relative z-10 text-light text-center max-w-4xl px-4 py-8 bg-black bg-opacity-70 backdrop-filter backdrop-blur-sm rounded-lg shadow-lg"
           ref={contentRef}
         >
-          <p className="text-lg font-bold text-yellow-400">ANRF Sponsored</p>
+          <p className="text-lg font-bold text-yellow-400">
+            ANRF & DBT Sponsored
+          </p>
           <h1 className="text-5xl md:text-7xl text-yellow-400 font-extrabold mb-4 bg-clip-text bg-gradient-to-r from-accent to-secondary">
             Pharmanecia 4.E
           </h1>
