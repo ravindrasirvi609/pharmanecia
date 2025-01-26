@@ -117,13 +117,38 @@ const AbstractFormPage: React.FC = () => {
                   </li>
                 </ul>
                 <div className="mt-4 space-x-4">
-                  <a
-                    href="https://drive.google.com/drive/u/0/folders/19JGAfEhPDAY4A-ctnPVRntosFSCf1lE0"
-                    className="text-[#034C8C] hover:text-[#000000] font-bold underline transition duration-300"
-                    target="_blank"
-                  >
-                    PHARMANECIA MODEL PRESENTATIONS
-                  </a>
+                  <div className="space-x-4">
+                    <a
+                      href="https://drive.google.com/file/d/1snS7wVgvWNMpYcspm64NGdut7Scaw4EH/view?usp=drive_link"
+                      className="text-[#034C8C] hover:text-[#000000] font-bold underline transition duration-300"
+                      target="_blank"
+                    >
+                      E-Poster Guidelines
+                    </a>
+                    <a
+                      href="https://drive.google.com/file/d/1Il3gOfu8gX08YNSMIYg-5BvhBHF2xIjC/view?usp=drive_link"
+                      className="text-[#034C8C] hover:text-[#000000] font-bold underline transition duration-300"
+                      target="_blank"
+                    >
+                      Oral Presentation Guidelines
+                    </a>
+                  </div>
+                  <div className="space-x-4">
+                    <a
+                      href="https://docs.google.com/presentation/d/1pkbJpXhOLFmKiG9b6LShlvDu5yk-pmDH/edit?usp=drive_link&ouid=103671804461735791187&rtpof=true&sd=true"
+                      className="text-[#034C8C] hover:text-[#000000] font-bold underline transition duration-300"
+                      target="_blank"
+                    >
+                      E-Poster Template
+                    </a>
+                    <a
+                      href="https://docs.google.com/presentation/d/102BO878wzDGZkZrsZOegjKnE57GtOqEv/edit?usp=drive_link&ouid=103671804461735791187&rtpof=true&sd=true"
+                      className="text-[#034C8C] hover:text-[#000000] font-bold underline transition duration-300"
+                      target="_blank"
+                    >
+                      Oral Presentation Template
+                    </a>
+                  </div>
                 </div>
               </section>
               <section className="bg-white p-6 rounded-lg shadow-md">
