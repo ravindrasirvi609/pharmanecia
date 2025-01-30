@@ -60,7 +60,7 @@ const Registration = () => {
             All prices mentioned are inclusive of GST.{" "}
           </p>
         </div>
-        <InfiniteRibbon text="Early Bird offer is valid until January 31, 2025." />
+        <InfiniteRibbon text="Regular Registration is valid until January 31, 2025." />
         {/* Registration Plans */}
         <RegistrationPlans />
       </div>
