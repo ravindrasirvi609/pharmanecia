@@ -86,7 +86,7 @@ async function generateAbstractCode(
     clinicalPharmacy: "CP",
     pharmaceuticalEducation: "PE",
     drugRegulatoryAffairs: "DR",
-    pharmacoeconomics: "PC",
+    pharmacoeconomics: "EEC",
     aiBioinformatics: "AI",
   };
 
