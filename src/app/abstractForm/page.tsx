@@ -205,7 +205,7 @@ const AbstractFormPage: React.FC = () => {
             </div>
           </div>
 
-          <section className="mt-8 bg-[#D94814] p-6 rounded-lg shadow-md text-white">
+          {/* <section className="mt-8 bg-[#D94814] p-6 rounded-lg shadow-md text-white">
             <h3 className="text-xl font-semibold mb-4">Submit Abstract</h3>
             <button
               onClick={handleSubmitClick}
@@ -213,7 +213,7 @@ const AbstractFormPage: React.FC = () => {
             >
               Submit Abstract
             </button>
-          </section>
+          </section> */}
 
           {showDialog && (
             <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
