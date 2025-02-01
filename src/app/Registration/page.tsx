@@ -54,7 +54,7 @@ const Registration = () => {
             </Link>
           </p>
           <p className="text-lg leading-relaxed text-justify mb-4 font-bold">
-            Early Bird offer is valid until February 31, 2025.{" "}
+            Regular Registration is valid until February 31, 2025.{" "}
           </p>
           <p className="text-lg leading-relaxed text-justify mb-4">
             All prices mentioned are inclusive of GST.{" "}
