@@ -1,8 +1,8 @@
 import React from "react";
-import { Users } from "lucide-react";
 import Image from "next/image";
+import { confSpeakers } from "@/data";
 
-type SpeakerType = {
+export type SpeakerType = {
   name: string;
   designation: string;
   institution: string;
@@ -12,361 +12,73 @@ type SpeakerType = {
 };
 
 const Speakers: React.FC = () => {
-  const speakers: SpeakerType[] = [
-    {
-      name: "Dr. Praveen Kumar Soni",
-      designation: "Principal",
-      institution: "School of Pharmacy, Sangam University, Bhilwada",
-      role: "Chairperson",
-      isConfirmed: true,
-      imageUrl: "/speakers/dr-praveen-kumar.jpg",
-    },
-    {
-      name: "Dr. MD Salahhuddin",
-      designation: "Principal",
-      institution: "Al Ameen College of Pharmacy, Bangalore",
-      role: "Chairperson",
-      isConfirmed: true,
-      imageUrl: "/speakers/dr-md-salahhuddin.jpg",
-    },
-    {
-      name: "Dr. Navin Dhingra",
-      designation: "Registrar",
-      institution: "Sage University, Bhopal",
-      role: "Chairperson",
-      isConfirmed: true,
-      imageUrl: "/speakers/dr-navin-dhingra.jpg",
-    },
-    {
-      name: "Dr. Jitendra Banweer",
-      designation: "Dean",
-      institution: "Faculty of Pharmacy, Sage University, Bhopal",
-      role: "Chairperson",
-      isConfirmed: false,
-      imageUrl: "/speakers/dr-jitendra-banweer.jpg",
-    },
-    {
-      name: "Dr. K. L Senthilkumar",
-      designation: "Principal",
-      institution: "Sri Vijaya Vidyalaya College of Pharmacy, Dharamapuri",
-      role: "Chairperson",
-      isConfirmed: false,
-      imageUrl: "/speakers/dr-kl-senthilkumar.jpg",
-    },
-    {
-      name: "Dr. Vivek Puri",
-      designation: "Asst Prof",
-      institution: "Chitkara University",
-      role: "Chairperson",
-      isConfirmed: false,
-      imageUrl: "/speakers/dr-vivek-puri.jpg",
-    },
-    {
-      name: "Dr. Raghvendra Singh Bhadauria",
-      designation: "Principal",
-      institution: "Sunrise College of Pharmacy, Udaipur",
-      role: "Chairperson",
-      isConfirmed: true,
-      imageUrl: "/speakers/dr-raghvendra-singh.jpg",
-    },
-    {
-      name: "Dr. B. Jaykar",
-      designation: "Director - Clinical Trials",
-      institution: "Vinayaka Mission's Research Foundation",
-      role: "Chairperson",
-      isConfirmed: false,
-      imageUrl: "/speakers/dr-b-jaykar.jpg",
-    },
-    {
-      name: "Dr. Radha Chafle",
-      designation: "Group Registration - 20",
-      institution: "Singhad IPS, Lonawala",
-      role: "Evaluator",
-      isConfirmed: false,
-      imageUrl: "/speakers/dr-radha-chafle.jpg",
-    },
-    {
-      name: "Dr. Tushar",
-      designation: "Group Registration - 50",
-      institution: "Yashwantrao Bhosale COP, Sawantwadi",
-      role: "Evaluator",
-      isConfirmed: false,
-      imageUrl: "/speakers/dr-tushar.jpg",
-    },
-    {
-      name: "Prof. Chetna Modi",
-      designation: "Professor",
-      institution: "Anand Pharmacy College",
-      role: "Evaluator",
-      isConfirmed: false,
-      imageUrl: "/speakers/prof-chetna-modi.jpg",
-    },
-    {
-      name: "Dr Rokeya Sultana",
-      designation: "",
-      institution: "",
-      role: "Evaluator",
-      isConfirmed: true,
-      imageUrl: "/speakers/dr-rokeya-sultana.jpg",
-    },
-    {
-      name: "Dr. Sneha Ambwani",
-      designation: "Professor",
-      institution: "AIIMS Jodhpur",
-      role: "Keynote Speaker",
-      isConfirmed: true,
-      imageUrl: "/speakers/dr-sneha-ambwani.jpg",
-    },
-    {
-      name: "Dr. B. Suresh",
-      designation: "Pro Vice Chancellor",
-      institution: "JSS AHER",
-      role: "Keynote Speaker",
-      isConfirmed: true,
-      imageUrl: "/speakers/dr-b-suresh.jpg",
-    },
-    {
-      name: "Dr. Sameer Agarwal",
-      designation: "Executive Vice President",
-      institution: "Molecule AI",
-      role: "Speaker",
-      isConfirmed: true,
-      imageUrl: "/speakers/dr-sameer-agarwal.jpg",
-    },
-    {
-      name: "Dr. Sunil Bothara",
-      designation: "Professor",
-      institution: "Govt. Pharmacy College, Ch Sambhajinagar",
-      role: "Speaker",
-      isConfirmed: true,
-      imageUrl: "/speakers/dr-sunil-bothara.jpg",
-    },
-    {
-      name: "Dr. Rakesh K Mishra",
-      designation: "Director",
-      institution: "Tata Institute for Genetics & Society",
-      role: "Speaker",
-      isConfirmed: true,
-      imageUrl: "/speakers/dr-rakesh-mishra.jpg",
-    },
-    {
-      name: "Dr. Rajesh Ramasamy",
-      designation: "Associate Professor",
-      institution: "Universiti Putra Malaysia",
-      role: "Speaker",
-      isConfirmed: true,
-      imageUrl: "/speakers/dr-rajesh-ramasamy.jpg",
-    },
-    {
-      name: "Dr. Keerti Jain",
-      designation: "Assistant Professor",
-      institution: "NIPER - R",
-      role: "Speaker",
-      isConfirmed: true,
-      imageUrl: "/speakers/dr-keerti-jain.jpg",
-    },
-    {
-      name: "Dr. Ravinder Kumar Kaundal",
-      designation: "Head, Regulatory Toxicology",
-      institution: "NIPER - R",
-      role: "Speaker",
-      isConfirmed: true,
-      imageUrl: "/speakers/dr-ravinder-kaundal.jpg",
-    },
-    {
-      name: "Dr. Rahul Shukla",
-      designation: "Assistant Professor",
-      institution: "NIPER - R",
-      role: "Speaker",
-      isConfirmed: true,
-      imageUrl: "/speakers/dr-rahul-shukla.jpg",
-    },
-    {
-      name: "Mr. S. Rajalingam",
-      designation: "Data Scientist",
-      institution: "HCL",
-      role: "Speaker",
-      isConfirmed: true,
-      imageUrl: "/speakers/mr-s-rajalingam.jpg",
-    },
-    {
-      name: "Dr. Nirmal Robinson",
-      designation: "Head",
-      institution:
-        "Cellular Stress and Immune Response Laboratory, Centre for Cancer Biology, University of South Australia Adelaide, Australia",
-      role: "Speaker",
-      isConfirmed: true,
-      imageUrl: "/speakers/dr-nirmal-robinson.jpg",
-    },
-    {
-      name: "Dr. Rajpal Singh Kashyap",
-      designation: "Director, Research",
-      institution: "Central India Institute of Medical Sciences (CIIMS)",
-      role: "Speaker",
-      isConfirmed: true,
-      imageUrl: "/speakers/dr-rajpal-kashyap.jpg",
-    },
-    {
-      name: "Dr. Shital Panchal",
-      designation: "Associate Professor",
-      institution: "Institute of Pharmacy, Nirma University, Ahmedabad",
-      role: "Speaker",
-      isConfirmed: true,
-      imageUrl: "/speakers/dr-shital-panchal.jpg",
-    },
-    {
-      name: "Dr. Shital Butani",
-      designation: "Associate Professor",
-      institution: "Institute of Pharmacy, Nirma University, Ahmedabad",
-      role: "Speaker",
-      isConfirmed: true,
-      imageUrl: "/speakers/dr-shital-butani.jpg",
-    },
-    {
-      name: "Dr. R. Raghu",
-      designation: "CEO",
-      institution: "Molecular Solutions Software Pvt. Ltd.",
-      role: "Speaker",
-      isConfirmed: true,
-      imageUrl: "/speakers/dr-r-raghu.jpg",
-    },
-    {
-      name: "Dr. Suresh Mohankumar",
-      designation: "Associate Professor",
-      institution: "Swansea University, UK",
-      role: "Speaker",
-      isConfirmed: false,
-      imageUrl: "/speakers/dr-suresh-mohankumar.jpg",
-    },
-    {
-      name: "Dr. Amarjot Kaur Grewal",
-      designation: "Associate Professor",
-      institution: "Chitkara University",
-      role: "Speaker",
-      isConfirmed: false,
-      imageUrl: "/speakers/dr-amarjot-grewal.jpg",
-    },
-    {
-      name: "Dr. Thakur Gurjeet Singh",
-      designation: "Dean & Professor",
-      institution: "Chitkara University",
-      role: "Speaker",
-      isConfirmed: false,
-      imageUrl: "/speakers/dr-gurjeet-singh.jpg",
-    },
-    {
-      name: "Dr. Wu Yuan Seng",
-      designation: "",
-      institution: "Sunway University, Malaysia",
-      role: "Speaker",
-      isConfirmed: true,
-      imageUrl: "/speakers/dr-wu-yuan-seng.jpg",
-    },
-    {
-      name: "Dr. A K GNANACHANDRAN",
-      designation: "Professor & Principal",
-      institution:
-        "Pranav Institute of Pharmaceutical Sciences and Research, Gwalior",
-      role: "Speaker",
-      isConfirmed: false,
-      imageUrl: "/speakers/dr-gnanachandran.jpg",
-    },
-    {
-      name: "Dr. Shoban",
-      designation: "",
-      institution: "",
-      role: "Speaker",
-      isConfirmed: true,
-      imageUrl: "/speakers/dr-shoban.jpg",
-    },
-    {
-      name: "Dr. Deepa Arora",
-      designation: "CEO",
-      institution: "Clinexel Lifescince Pvt. Ltd.",
-      role: "Speaker",
-      isConfirmed: true,
-      imageUrl: "/speakers/dr-deepa-arora.jpg",
-    },
-    {
-      name: "Dr. Prabhakar Reddy Veerareddy",
-      designation: "",
-      institution: "",
-      role: "Speaker",
-      isConfirmed: true,
-      imageUrl: "/speakers/dr-prabhakar-reddy.jpg",
-    },
-    {
-      name: "Mr. C. S. Mujeebuddin",
-      designation: "",
-      institution: "",
-      role: "Speaker",
-      isConfirmed: false,
-      imageUrl: "/speakers/mr-cs-mujeebuddin.jpg",
-    },
-  ];
-
   const roleColors: { [key: string]: string } = {
-    Chairperson: "bg-blue-100 text-blue-800",
-    Evaluator: "bg-green-100 text-green-800",
-    "Keynote Speaker": "bg-purple-100 text-purple-800",
-    Speaker: "bg-orange-100 text-orange-800",
+    Chairperson: "text-blue-400",
+    Evaluator: "text-green-400",
+    "Keynote Speaker": "text-purple-400",
+    Speaker: "text-orange-400",
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 py-8">
+    <div className="min-h-screen bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900 py-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">
+        <div className="text-center mb-16">
+          <h1 className="text-5xl font-bold bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent mb-4">
             Conference Speakers
           </h1>
-          <p className="text-lg text-gray-600">
-            Distinguished speakers from around the world
+          <p className="text-lg text-white/80 font-light">
+            Distinguished Innovators & Visionary Thought Leaders
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {speakers.map((speaker, index) => (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {confSpeakers.map((speaker, index) => (
             <div
               key={index}
-              className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300"
+              className="relative group bg-white/5 backdrop-blur-lg rounded-2xl p-6 shadow-xl hover:shadow-2xl transition-all duration-300 hover:bg-white/10 border border-white/10 hover:border-white/20"
             >
-              <div className="p-6">
-                <div className="flex items-center justify-between mb-4">
-                  <span
-                    className={`px-3 py-1 rounded-full text-sm font-medium ${
-                      roleColors[speaker.role] || "bg-gray-100 text-gray-800"
-                    }`}
-                  >
-                    {speaker.role}
-                  </span>
-                  {speaker.isConfirmed && (
-                    <span className="text-green-600 text-sm font-medium">
-                      Confirmed
-                    </span>
-                  )}
+              <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-blue-500/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl" />
+
+              <div className="flex flex-col items-center text-center">
+                <div className="relative mb-6">
+                  <div className="absolute inset-0 bg-blue-400/20 blur-3xl rounded-full -z-10" />
+                  <Image
+                    src={speaker.imageUrl}
+                    alt={speaker.name}
+                    className="w-32 h-32 rounded-full object-cover border-4 border-white/20 hover:border-cyan-400/30 transition-all duration-300 transform group-hover:scale-110"
+                    width={128}
+                    height={128}
+                  />
                 </div>
 
-                <div className="flex items-start space-x-4">
-                  <div className="flex-shrink-0">
-                    <Image
-                      src={speaker.imageUrl}
-                      alt={speaker.name}
-                      className="w-12 h-12 rounded-full object-cover"
-                      width={48}
-                      height={48}
-                    />
-                  </div>
+                <div className="mb-4">
+                  <span
+                    className={`px-4 py-1.5 rounded-full text-sm font-semibold ${
+                      roleColors[speaker.designation] || "text-gray-400"
+                    } bg-white/5 backdrop-blur-sm border border-white/10`}
+                  >
+                    {speaker.designation}
+                  </span>
+                </div>
 
-                  <div>
-                    <h3 className="text-lg font-semibold text-gray-900">
-                      {speaker.name}
-                    </h3>
-                    <p className="text-sm font-medium text-gray-700 mt-1">
-                      {speaker.designation}
-                    </p>
-                    <p className="text-sm text-gray-600 mt-1">
-                      {speaker.institution}
-                    </p>
+                <h3 className="text-2xl font-bold text-white mb-2">
+                  {speaker.name}
+                </h3>
+                <p className="text-sm text-white/80 font-light mb-2">
+                  {speaker.institution}
+                </p>
+                <div className="text-cyan-400/90 font-medium text-sm">
+                  {speaker.role}
+                </div>
+
+                <div className="mt-4 pt-4 border-t border-white/10 w-full">
+                  <div className="flex justify-center space-x-2">
+                    <button className="text-white/60 hover:text-cyan-400 hover:bg-white/5 px-4 py-1.5 rounded-full transition-all duration-300 text-sm">
+                      View Profile
+                    </button>
+                    <button className="text-white/60 hover:text-purple-400 hover:bg-white/5 px-4 py-1.5 rounded-full transition-all duration-300 text-sm">
+                      Abstract
+                    </button>
                   </div>
                 </div>
               </div>
