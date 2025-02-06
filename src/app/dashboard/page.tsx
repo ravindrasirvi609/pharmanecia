@@ -112,11 +112,11 @@ function Dashboard() {
           </h1>
           <nav className="flex space-x-3">
             {[
-              "Abstract List",
-              "Registration List",
-              "Nomination List",
-              "Analytics",
-              "Contact List",
+              "abstract List",
+              "registration List",
+              "nomination List",
+              "analytics",
+              "contact List",
             ].map((item) => (
               <Link
                 key={item}

@@ -134,8 +134,8 @@ const AbstractForm: React.FC<StudentPageProps> = ({ params }) => {
 
   if (!registrationInfo) {
     return (
-      <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-orange-100 to-indigo-200">
-        <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-danger"></div>
+      <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-purple-400 via-pink-500 to-red-500">
+        <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-white"></div>
       </div>
     );
   }
@@ -149,80 +149,87 @@ const AbstractForm: React.FC<StudentPageProps> = ({ params }) => {
     label: string;
     value: React.ReactNode;
   }) => (
-    <div className="mb-4">
-      <span className="font-semibold text-danger">{label}</span>
+    <div className="mb-4 backdrop-blur-md bg-white/30 rounded-lg p-4 shadow-lg transition-all duration-300 hover:bg-white/40">
+      <span className="font-semibold text-purple-700">{label}</span>
       <p className="mt-1 text-gray-800">{value || "N/A"}</p>
     </div>
   );
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-orange-100 to-indigo-200 py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-6xl mx-auto">
-        <div className="bg-white rounded-2xl shadow-2xl overflow-hidden">
-          <div className="p-8 bg-danger text-white">
-            <h1 className="text-4xl font-bold text-center">
+    <div className="min-h-screen bg-gradient-to-br from-purple-400 via-pink-400 to-red py-8 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto">
+        <div className="backdrop-blur-xl bg-white/30 rounded-3xl shadow-2xl overflow-hidden transition-all duration-500 hover:shadow-3xl">
+          <div className="p-8 bg-gradient-to-r from-purple-600 to-pink-600 text-white">
+            <h1 className="text-4xl font-bold text-center tracking-wide">
               Participant Information
             </h1>
           </div>
 
-          <div className="flex flex-col md:flex-row">
-            <div className="md:w-1/3 p-4 md:p-8 bg-gray-50">
+          <div className="flex flex-col lg:flex-row">
+            {/* Left Panel */}
+            <div className="lg:w-1/3 p-6 backdrop-blur-lg bg-white/20">
               {registration?.imageUrl && (
                 <div className="mb-8 flex justify-center">
-                  <Image
-                    src={registration?.imageUrl}
-                    alt="Participant"
-                    width={200}
-                    height={200}
-                    className="rounded-full shadow-lg border-4 border-white"
-                    unoptimized
-                  />
+                  <div className="relative w-48 h-48 rounded-full overflow-hidden shadow-2xl border-4 border-white/50">
+                    <Image
+                      src={registration.imageUrl}
+                      alt="Participant"
+                      layout="fill"
+                      objectFit="cover"
+                      className="transition-transform duration-300 hover:scale-110"
+                      unoptimized
+                    />
+                  </div>
                 </div>
               )}
 
-              <InfoItem
-                label="Name"
-                value={registration?.name || abstract?.name}
-              />
-              <InfoItem
-                label="Email"
-                value={registration?.email || abstract?.email}
-              />
-              <InfoItem
-                label="Registration Code"
-                value={registration?.registrationCode}
-              />
-              <InfoItem
-                label="Registration Type"
-                value={registration?.registrationType}
-              />
+              <div className="space-y-6">
+                <InfoItem
+                  label="Name"
+                  value={registration?.name || abstract?.name}
+                />
+                <InfoItem
+                  label="Email"
+                  value={registration?.email || abstract?.email}
+                />
+                <InfoItem
+                  label="Registration Code"
+                  value={registration?.registrationCode}
+                />
+                <InfoItem
+                  label="Registration Type"
+                  value={registration?.registrationType}
+                />
+              </div>
 
-              <div className="mt-8">
-                <h2 className="text-2xl font-bold mb-4 text-danger">
+              {/* QR Code Section */}
+              <div className="mt-8 backdrop-blur-md bg-white/30 rounded-xl p-6">
+                <h2 className="text-2xl font-bold mb-4 text-purple-700 text-center">
                   Participant QR Code
                 </h2>
                 {(abstract?.qrCodeUrl || registration?.qrCodeUrl) && (
                   <div className="flex justify-center">
-                    <Image
-                      src={abstract?.qrCodeUrl || registration?.qrCodeUrl || ""}
-                      alt="QR Code"
-                      width={150}
-                      height={150}
-                      className="rounded-lg shadow-md"
-                      unoptimized
-                    />
+                    <div className="relative w-40 h-40">
+                      <Image
+                        src={
+                          abstract?.qrCodeUrl || registration?.qrCodeUrl || ""
+                        }
+                        alt="QR Code"
+                        layout="fill"
+                        className="rounded-xl shadow-lg"
+                        unoptimized
+                      />
+                    </div>
                   </div>
                 )}
-                <p className="mt-4 text-center font-semibold">
+                <p className="mt-4 text-center font-semibold text-purple-800">
                   {abstract?.AbstractCode ||
                     abstract?.temporyAbstractCode ||
                     "N/A"}
                 </p>
-                <p className="mt-2 text-sm text-center text-gray-600">
-                  Scan to check abstract updates
-                </p>
               </div>
 
+              {/* ID Card Section */}
               <div className="mt-8">
                 {registration && (
                   <IdCard
@@ -234,21 +241,21 @@ const AbstractForm: React.FC<StudentPageProps> = ({ params }) => {
               </div>
             </div>
 
-            <div className="md:w-2/3 p-4 md:p-8">
+            <div className="lg:w-2/3 p-6 backdrop-blur-lg bg-white/10">
               {abstract && (
                 <div className="mb-12">
-                  <h2 className="text-2xl md:text-3xl font-bold mb-4 text-danger">
+                  <h2 className="text-3xl font-bold mb-6 text-purple-700">
                     Scientific Abstract
                   </h2>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <InfoItem
                       label="Status"
                       value={
                         <span
-                          className={`px-3 py-1 rounded-full text-sm font-semibold ${
+                          className={`px-4 py-2 rounded-full text-sm font-semibold ${
                             abstract.Status === "Pending"
                               ? "bg-yellow-200 text-yellow-800"
-                              : "bg-green-200 text-green-800"
+                              : "bg-green text-white"
                           }`}
                         >
                           {abstract.Status}
@@ -316,49 +323,39 @@ const AbstractForm: React.FC<StudentPageProps> = ({ params }) => {
 
                   {(abstract.Status === "Revision" ||
                     abstract.Status === "Rejected") && (
-                    <div className="mt-8 bg-red-50 border border-red-200 rounded-lg p-4">
-                      <h3 className="text-xl font-bold mb-2 text-danger">
-                        Rejection Comment
+                    <div className="mt-8 backdrop-blur-md bg-white/30 rounded-xl p-6">
+                      <h3 className="text-xl font-bold mb-4 text-purple-700">
+                        Upload Abstract File
                       </h3>
-                      <p className="text-gray-800">
-                        {abstract.rejectionComment || "No comment provided"}
-                      </p>
-
-                      <div className="mt-6">
-                        <h3 className="text-xl font-bold mb-4 text-danger">
-                          Upload Abstract File
-                        </h3>
-                        <div
-                          {...getRootPropsAbstract()}
-                          className={`w-full p-6 border-2 border-dashed rounded-lg text-center cursor-pointer transition-colors duration-200 ease-in-out ${
-                            isDragActiveAbstract
-                              ? "border-danger bg-red-50"
-                              : "border-gray-300 hover:border-danger hover:bg-gray-50"
-                          }`}
-                        >
-                          <input {...getInputPropsAbstract()} />
-                          <p className="text-gray-700">
-                            {isDragActiveAbstract
-                              ? "Drop the file here..."
-                              : "Drag & drop your abstract file here, or click to select"}
-                          </p>
-                          <p className="text-sm text-gray-500 mt-2">
-                            Supported formats: .doc, .docx (Max size: 5MB)
-                          </p>
-                        </div>
-                        {abstractFile && (
-                          <div className="mt-2 text-gray-700">
-                            <span>Selected File: {abstractFile.name}</span>
-                          </div>
-                        )}
-                        <button
-                          onClick={handleFileUpload}
-                          disabled={!abstractFile || isUploading}
-                          className="mt-4 w-full bg-danger text-white py-2 px-4 rounded-md hover:bg-red-700 transition-colors duration-200 ease-in-out disabled:opacity-50 disabled:cursor-not-allowed"
-                        >
-                          {isUploading ? "Uploading..." : "Upload Abstract"}
-                        </button>
+                      <div
+                        {...getRootPropsAbstract()}
+                        className={`w-full p-6 border-2 border-dashed rounded-xl text-center cursor-pointer transition-all duration-300 ${
+                          isDragActiveAbstract
+                            ? "border-purple-500 bg-purple-50/50"
+                            : "border-gray-300 hover:border-purple-500 hover:bg-white/20"
+                        }`}
+                      >
+                        <input {...getInputPropsAbstract()} />
+                        <p className="text-gray-700">
+                          {isDragActiveAbstract
+                            ? "Drop the file here..."
+                            : "Drag & drop your abstract file here, or click to select"}
+                        </p>
                       </div>
+
+                      {abstractFile && (
+                        <div className="mt-4 text-purple-700">
+                          Selected: {abstractFile.name}
+                        </div>
+                      )}
+
+                      <button
+                        onClick={handleFileUpload}
+                        disabled={!abstractFile || isUploading}
+                        className="mt-4 w-full bg-gradient-to-r from-purple-600 to-pink-600 text-white py-3 px-6 rounded-xl hover:opacity-90 transition-all duration-300 disabled:opacity-50"
+                      >
+                        {isUploading ? "Uploading..." : "Upload Abstract"}
+                      </button>
                     </div>
                   )}
 
@@ -379,8 +376,8 @@ const AbstractForm: React.FC<StudentPageProps> = ({ params }) => {
                                   ? "bg-blue-200 text-blue-800"
                                   : abstract.presentationFileStatus ===
                                     "Approved"
-                                  ? "bg-green-200 text-green"
-                                  : "bg-red-200 text-red"
+                                  ? "bg-green text-white"
+                                  : "bg-red text-white"
                               }`}
                             >
                               {abstract.presentationFileStatus ||
@@ -466,8 +463,8 @@ const AbstractForm: React.FC<StudentPageProps> = ({ params }) => {
               )}
 
               {registration && (
-                <div>
-                  <h2 className="text-3xl font-bold mb-6 text-danger">
+                <div className="backdrop-blur-md bg-white/30 rounded-xl p-6 mt-8">
+                  <h2 className="text-3xl font-bold mb-6 text-purple-700">
                     Registration Details
                   </h2>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -529,12 +526,12 @@ const AbstractForm: React.FC<StudentPageProps> = ({ params }) => {
           </div>
         </div>
 
-        <div className="mt-8 text-center text-gray-600">
-          <p>
-            For any queries, please contact our support team at{" "}
+        <div className="mt-8 text-center text-white">
+          <p className="backdrop-blur-md bg-white/10 inline-block px-6 py-3 rounded-full">
+            For queries, contact us at{" "}
             <a
               href="mailto:psc@pharmanecia.org"
-              className="text-danger hover:underline"
+              className="text-purple-200 hover:text-white transition-colors duration-300"
             >
               psc@pharmanecia.org
             </a>
