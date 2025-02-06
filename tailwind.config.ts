@@ -13,6 +13,11 @@ const config: Config = {
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
+      backdropBlur: {
+        sm: "4px",
+        lg: "16px",
+        xl: "24px",
+      },
       colors: {
         black: "#231F20",
         green: "#2C5F2D",

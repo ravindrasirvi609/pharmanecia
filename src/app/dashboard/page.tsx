@@ -50,16 +50,18 @@ const StatCard: React.FC<{
   icon: React.ReactNode;
 }> = ({ title, value, icon }) => (
   <motion.div
-    className="bg-white overflow-hidden shadow-lg rounded-lg transition-all duration-300 hover:shadow-xl"
-    whileHover={{ scale: 1.05 }}
-    whileTap={{ scale: 0.95 }}
+    className="bg-white/30 backdrop-blur-lg rounded-xl p-6 border border-white/30 shadow-lg shadow-indigo-100 hover:shadow-indigo-200 transition-all duration-300"
+    whileHover={{ scale: 1.02 }}
+    whileTap={{ scale: 0.98 }}
   >
-    <div className="px-4 py-5 sm:p-6 flex items-center justify-between">
+    <div className="flex items-center justify-between">
       <div>
-        <h3 className="text-lg font-medium text-gray-900">{title}</h3>
-        <p className="mt-1 text-3xl font-semibold text-indigo-600">{value}</p>
+        <h3 className="text-lg font-semibold text-slate-700">{title}</h3>
+        <p className="mt-2 text-3xl font-bold text-indigo-600">{value}</p>
       </div>
-      <div className="text-4xl text-indigo-500">{icon}</div>
+      <div className="text-3xl text-indigo-500/80 p-3 bg-white/30 rounded-lg">
+        {icon}
+      </div>
     </div>
   </motion.div>
 );
@@ -102,22 +104,24 @@ function Dashboard() {
   const { stats, chartData, recentRegistrations } = dashboardData;
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-indigo-50 to-purple-100">
-      <header className="bg-white shadow-md">
-        <div className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8 flex justify-between items-center">
-          <h1 className="text-3xl font-bold text-indigo-900">Dashboard</h1>
-          <nav className="flex space-x-4">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-purple-50">
+      <header className="bg-white/80 backdrop-blur-sm border-b border-slate-100 shadow-sm">
+        <div className="max-w-7xl mx-auto py-5 px-4 sm:px-6 lg:px-8 flex justify-between items-center">
+          <h1 className="text-2xl font-bold text-slate-800">
+            Conference Dashboard
+          </h1>
+          <nav className="flex space-x-3">
             {[
-              "abstract List",
-              "registration List",
-              "nomination List",
-              "analytics",
-              "contact List",
+              "Abstract List",
+              "Registration List",
+              "Nomination List",
+              "Analytics",
+              "Contact List",
             ].map((item) => (
               <Link
                 key={item}
                 href={`/admin/${item.replace(" ", "")}`}
-                className="text-indigo-600 hover:bg-indigo-100 px-3 py-2 rounded-md text-sm font-medium transition duration-300"
+                className="text-slate-600 hover:bg-white/50 px-4 py-2 rounded-lg text-sm font-medium transition duration-300 border border-transparent hover:border-slate-200"
               >
                 {item}
               </Link>
@@ -125,100 +129,97 @@ function Dashboard() {
           </nav>
         </div>
       </header>
+
       <main className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
+          transition={{ duration: 0.4 }}
         >
-          {/* Statistics */}
-          <div className="px-4 py-6 sm:px-0">
-            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-              <StatCard
-                title="Total Registrations"
-                value={stats.totalRegistrations}
-                icon={<FaUsers />}
-              />
-              <StatCard
-                title="Total Abstracts"
-                value={stats.totalAbstracts}
-                icon={<FaFileAlt />}
-              />
-              <StatCard
-                title="Completed Payments"
-                value={stats.completedPayments}
-                icon={<FaMoneyCheckAlt />}
-              />
-              <StatCard
-                title="Pending Payments"
-                value={stats.pendingPayments}
-                icon={<FaHourglassHalf />}
-              />
-            </div>
+          {/* Statistics Grid */}
+          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4 px-4">
+            <StatCard
+              title="Total Registrations"
+              value={stats.totalRegistrations}
+              icon={<FaUsers />}
+            />
+            <StatCard
+              title="Total Abstracts"
+              value={stats.totalAbstracts}
+              icon={<FaFileAlt />}
+            />
+            <StatCard
+              title="Completed Payments"
+              value={stats.completedPayments}
+              icon={<FaMoneyCheckAlt />}
+            />
+            <StatCard
+              title="Pending Payments"
+              value={stats.pendingPayments}
+              icon={<FaHourglassHalf />}
+            />
           </div>
 
-          {/* Charts */}
+          {/* Charts Section */}
           <motion.div
+            className="mt-8 bg-white/30 backdrop-blur-lg rounded-xl border border-white/30 shadow-lg shadow-indigo-100/50"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2, duration: 0.5 }}
+            transition={{ delay: 0.2, duration: 0.4 }}
           >
             <DashboardCharts data={chartData} />
           </motion.div>
 
-          {/* Recent Registrations */}
+          {/* Recent Registrations Table */}
           <motion.div
-            className="mt-8 bg-white shadow-lg rounded-lg overflow-hidden"
+            className="mt-8 bg-white/30 backdrop-blur-lg rounded-xl border border-white/30 shadow-lg shadow-indigo-100/50"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.4, duration: 0.5 }}
+            transition={{ delay: 0.4, duration: 0.4 }}
           >
-            <div className="px-4 py-5 sm:px-6">
-              <h2 className="text-lg font-medium text-gray-900">
+            <div className="px-6 py-4 border-b border-white/30">
+              <h2 className="text-lg font-semibold text-slate-700">
                 Recent Registrations
               </h2>
             </div>
             <div className="overflow-x-auto">
-              <table className="min-w-full divide-y divide-gray-200">
-                <thead className="bg-gray-50">
+              <table className="w-full">
+                <thead className="bg-white/40">
                   <tr>
-                    {["Name", "Email", "Registration Type", "Status"].map(
-                      (header) => (
-                        <th
-                          key={header}
-                          scope="col"
-                          className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-                        >
-                          {header}
-                        </th>
-                      )
-                    )}
+                    {["Name", "Email", "Type", "Status"].map((header) => (
+                      <th
+                        key={header}
+                        className="px-6 py-3 text-left text-sm font-medium text-slate-600"
+                      >
+                        {header}
+                      </th>
+                    ))}
                   </tr>
                 </thead>
-                <tbody className="bg-white divide-y divide-gray-200">
+                <tbody className="divide-y divide-white/20">
                   {recentRegistrations.map((registration) => (
                     <motion.tr
                       key={registration.id}
+                      className="hover:bg-white/30 transition-colors duration-200"
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1 }}
                       transition={{ duration: 0.3 }}
-                      whileHover={{ backgroundColor: "#f3f4f6" }}
                     >
-                      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                      <td className="px-6 py-4 text-sm text-slate-700 font-medium">
                         {registration.name}
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                      <td className="px-6 py-4 text-sm text-slate-600">
                         {registration.email}
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                      <td className="px-6 py-4 text-sm text-slate-600">
                         {registration.registrationType}
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap">
+                      <td className="px-6 py-4">
                         <span
-                          className={`px-2 py-1 inline-flex text-xs leading-5 font-semibold rounded-full ${
+                          className={`px-3 py-1 rounded-full text-xs font-medium ${
                             registration.registrationStatus === "Confirmed"
-                              ? "bg-green-100 text-green-800"
-                              : "bg-yellow-100 text-yellow-800"
+                              ? "bg-green text-white"
+                              : "bg-amber-100/50 text-amber-700"
                           }`}
                         >
                           {registration.registrationStatus}
