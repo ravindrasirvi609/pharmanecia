@@ -161,7 +161,10 @@ export function AbstractList() {
         (abstract) =>
           abstract.title.toLowerCase().includes(searchLower) ||
           abstract.name.toLowerCase().includes(searchLower) ||
-          abstract.email.toLowerCase().includes(searchLower)
+          abstract.email.toLowerCase().includes(searchLower) ||
+          abstract.temporyAbstractCode.toLowerCase().includes(searchLower) ||
+          abstract.AbstractCode?.toLowerCase().includes(searchLower) ||
+          abstract.registrationCode?.toLowerCase().includes(searchLower)
       );
     }
 
