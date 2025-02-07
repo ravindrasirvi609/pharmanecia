@@ -11,6 +11,8 @@ import {
   FaHourglassHalf,
 } from "react-icons/fa";
 import LoadingExample from "@/components/Loader";
+import AbstractCharts from "@/components/AbstractCharts";
+import { Abstract } from "@/lib/excelExport";
 
 // Define types for the dashboard data
 interface DashboardStats {
@@ -70,6 +72,8 @@ function Dashboard() {
   const [dashboardData, setDashboardData] = useState<DashboardData | null>(
     null
   );
+  const [abstracts, setAbstracts] = useState<Abstract[]>([]);
+
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -89,7 +93,56 @@ function Dashboard() {
     };
 
     fetchDashboardData();
+    fetchAbstracts();
   }, []);
+
+  const fetchAbstracts = async () => {
+    try {
+      setIsLoading(true);
+      const response = await fetch(`/api/abstractList`);
+      const data = await response.json();
+
+      if (response.ok) {
+        setAbstracts(data.abstracts);
+      } else {
+        throw new Error(data.message);
+      }
+    } catch (err) {
+      setError("An error occurred while fetching abstracts.");
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  // Calculate the required data for the charts
+  const completedRegistrations = abstracts.filter(
+    (abstract) => abstract.registrationCompleted
+  ).length;
+
+  const acceptedAbstracts = abstracts.filter(
+    (abstract) => abstract.Status === "Accepted"
+  ).length;
+
+  const pendingRegistrations = abstracts.filter(
+    (abstract) => !abstract.registrationCompleted
+  ).length;
+
+  const acceptedNoPresentation = abstracts.filter(
+    (abstract) =>
+      abstract.Status === "Accepted" && !abstract.presentationFileUrl
+  ).length;
+
+  const acceptedPresentations = abstracts.filter(
+    (abstract) => abstract.presentationFileStatus === "Approved"
+  ).length;
+
+  const dashboardChartData = {
+    completedRegistrations,
+    acceptedAbstracts,
+    pendingRegistrations,
+    acceptedNoPresentation,
+    acceptedPresentations,
+  };
 
   if (isLoading)
     return (
@@ -169,6 +222,7 @@ function Dashboard() {
           >
             <DashboardCharts data={chartData} />
           </motion.div>
+          <AbstractCharts data={dashboardChartData} />
 
           {/* Recent Registrations Table */}
           <motion.div
