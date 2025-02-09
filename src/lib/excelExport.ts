@@ -145,6 +145,8 @@ export const exportAbstractsToExcel = (
     Status: item.Status,
     "Abstract File URL": item.abstractFileUrl,
     "Presentation Type": item.presentationType,
+    presentationFileUrl: item.presentationFileUrl,
+    presentationFileStatus: item.presentationFileStatus,
     Address: item.address,
     City: item.city,
     State: item.state,
