@@ -27,6 +27,7 @@ export interface RegistrationFormData {
 
 export interface RegistrationInfo {
   abstract: {
+    _id?: string;
     url?: string;
     qrCodeUrl?: string;
     temporyAbstractCode?: string;

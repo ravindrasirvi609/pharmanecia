@@ -6,6 +6,7 @@ import { useDropzone } from "react-dropzone";
 import { formatDate } from "@/lib/utils";
 import { RegistrationInfo } from "@/lib/interface";
 import IdCard from "@/components/idCard";
+import Link from "next/link";
 
 interface StudentPageProps {
   params: {
@@ -439,7 +440,6 @@ const AbstractForm: React.FC<StudentPageProps> = ({ params }) => {
                                   Supported formats: .ppt, .pptx (Max size: 5MB)
                                 </p>
                               </div>
-
                               {presentationFile && (
                                 <div className="flex items-center space-x-2 text-sm text-gray-700 mt-2">
                                   <span>{presentationFile.name}</span>
@@ -455,6 +455,28 @@ const AbstractForm: React.FC<StudentPageProps> = ({ params }) => {
                                   ? "Uploading..."
                                   : "Upload Presentation"}
                               </button>
+                              {abstract.AbstractCode && (
+                                <Link
+                                  href={`/abstractForm/${abstract._id}`}
+                                  className="mt-4 w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition-colors duration-200 ease-in-out flex items-center justify-center"
+                                >
+                                  <svg
+                                    className="w-4 h-4 mr-2"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    viewBox="0 0 24 24"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                  >
+                                    <path
+                                      strokeLinecap="round"
+                                      strokeLinejoin="round"
+                                      strokeWidth={2}
+                                      d="M13 9l3 3m0 0l-3 3m3-3H8m13 0a9 9 0 11-18 0 9 9 0 0118 0z"
+                                    />
+                                  </svg>
+                                  if Uploading issues, click here and upload
+                                </Link>
+                              )}
                             </div>
                           )}
                       </div>
