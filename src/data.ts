@@ -5,173 +5,194 @@ import { Plan } from "./lib/interface";
 export const schedule = {
   day1: [
     {
-      time: "09:00",
-      event: "Opening Remarks",
+      time: "09:00 AM",
+      event: "Registrations of Delegates and Guests",
+      venue: "Registration Counters",
       speakers: [],
     },
     {
-      time: "09:30",
-      event:
-        "Keynote Address 1: Artificial Intelligence and Machine learning driven drug discovery",
-      speakers: ["To be announced"],
-    },
-    {
-      time: "10:00",
-      event:
-        "Keynote Address 2: Breaking the barriers in Pharmaceutical Research",
-      speakers: ["To be announced"],
-    },
-    {
-      time: "10:30",
-      event: "Coffee / Tea Break",
+      time: "10:00 AM",
+      event: "Inauguration",
+      venue: "Auditorium",
       speakers: [],
     },
     {
-      time: "10:45",
-      event:
-        "Panel Discussion 1: AI-driven target identification and Validation / Machine learning models for predicting drug-target interactions",
-      speakers: ["To be announced"],
+      time: "10:45 AM",
+      event: "Keynote Session 01",
+      venue: "Auditorium",
+      speakers: ["Dr. B. Suresh (Pro Chancellor, JSS AHER, Mysuru)"],
     },
     {
-      time: "11:45",
-      event:
-        "Plenary Session 1: Inclusive Pharmaceutical Education & Research: Bridging Educational & Research Gaps Worldwide",
-      speakers: ["To be announced"],
-    },
-    {
-      time: "12:30",
-      event: "Lunch Cum Networking Break",
+      time: "11:30 AM",
+      event: "Tea Break",
+      venue: "",
       speakers: [],
     },
     {
-      time: "13:30 - 15:45",
-      event: "Concurrent Parallel Sessions",
+      time: "11:45 AM",
+      event: "Keynote Session 02",
+      venue: "Auditorium",
+      speakers: ["Dr. R. Raghu (CEO, Molecular Solutions Software Pvt. Ltd.)"],
+    },
+    {
+      time: "12:30 PM",
+      event: "Keynote Session 03",
+      venue: "Auditorium",
+      speakers: [
+        "Dr. Nirmal Robinson (Head, Centre for Cancer Biology, University of South Australia)",
+      ],
+    },
+    {
+      time: "12:30 PM",
+      event: "Plenary Session 01",
+      venue: "Seminar Hall",
+      speakers: ["Mr. C. S. Mujeebuddin (CEO, Clinosol Research Pvt. Ltd)"],
+    },
+    {
+      time: "1:15 PM",
+      event: "Network cum Lunch Break",
+      venue: "Food Court",
+      speakers: [],
+    },
+    {
+      time: "2:00 PM",
+      event: "Keynote Session 04",
+      venue: "Auditorium",
+      speakers: [
+        "Dr. Sneha Ambwani (Professor & Head, Pharmacology, AIIMS Jodhpur)",
+      ],
+    },
+    {
+      time: "2:40 PM",
+      event: "Keynote Session 05",
+      venue: "Auditorium",
+      speakers: ["Dr. Rajpal Singh Kashyap (Director - Research, CIIMS)"],
+    },
+    {
+      time: "3:20 PM",
+      event: "Networking cum High Tea",
+      venue: "",
+      speakers: [],
+    },
+    {
+      time: "3:35 PM",
+      event: "Plenary Session 01 (Continued)",
+      venue: "Auditorium",
+      speakers: [
+        "Dr. Sunil Bothara (Professor, Govt. Pharmacy College, Ch Sambhajinagar)",
+        "Dr. Shoban Babu (Associate Professor, AIIMS Jodhpur)",
+        "Dr. Shital Panchal (Associate Professor, Nirma University, Ahmedabad)",
+      ],
+    },
+    {
+      time: "3:00 PM - 5:30 PM",
+      event: "E-Poster/Oral Presentation Session (Parallel Tracks)",
+      venue: "Halls 3, 4, 5, 6, 7 & 8",
       speakers: [],
       subEvents: [
         {
           track: "Track A",
-          title:
-            "Future of Pharmacy Education & Research: Breaking the International barriers in Education",
           sessions: [
-            { time: "13:30", event: "Plenary Session 2" },
-            { time: "14:15", event: "Plenary Session 4" },
-            { time: "15:00", event: "Plenary Session 6" },
-          ],
-        },
-        {
-          track: "Track B",
-          title:
-            "Regulatory intelligence: The impact of artificial intelligence in regulatory operations",
-          sessions: [
-            { time: "13:30", event: "Plenary Session 3" },
-            { time: "14:15", event: "Plenary Session 5" },
-            { time: "15:00", event: "Plenary Session 7" },
+            {
+              time: "2:00 PM",
+              event: "Plenary Session 02",
+              venue: "Seminar Hall",
+              speakers: [
+                "Dr. Shital Butani (Associate Professor, Nirma University)",
+              ],
+            },
+            {
+              time: "2:40 PM",
+              event: "Plenary Session 03",
+              venue: "Seminar Hall",
+              speakers: ["Dr. Rahul Shukla (Assistant Professor, NIPER-R)"],
+            },
+            {
+              time: "3:35 PM",
+              event: "Plenary Session 04",
+              venue: "Seminar Hall",
+              speakers: ["Dr. Keerti Jain (Assistant Professor, NIPER-R)"],
+            },
           ],
         },
       ],
-    },
-    {
-      time: "15:45",
-      event: "High Tea",
-      speakers: [],
-    },
-    {
-      time: "16:00",
-      event: "Concurrent Parallel Oral Presentations",
-      speakers: [],
-    },
-    {
-      time: "16:00",
-      event: "Concurrent Parallel E-Poster Presentations",
-      speakers: [],
-    },
-    {
-      time: "19:00",
-      event: "Networking Cum Gala Dinner",
-      speakers: [],
     },
   ],
   day2: [
     {
-      time: "09:00",
-      event:
-        "Keynote Address 3: Standardisation of Phytopharmaceuticals in Modern Era: Need for sophisticated analytical Techniques",
-      speakers: ["To be announced"],
-    },
-    {
-      time: "09:30",
-      event:
-        "Keynote Address 4: Exploring Natural Products for Drug Discovery : Global Perspectives",
-      speakers: ["To be announced"],
-    },
-    {
-      time: "10:00",
-      event:
-        "Keynote Address 5: Targeted drug delivery system, QbD in formulation",
-      speakers: ["To be announced"],
-    },
-    {
-      time: "10:30",
-      event: "Coffee / Tea Break",
-      speakers: [],
-    },
-    {
-      time: "10:45",
-      event:
-        "Panel Discussion 2: AI applications in high-throughput Screening, Lead optimization and Deep learning approaches in de novo Drug Design",
-      speakers: ["To be announced"],
-    },
-    {
-      time: "11:45",
-      event:
-        "Panel Discussion 3: Ethical considerations and regulatory challenges in AI-driven Drug Discovery",
-      speakers: ["To be announced"],
-    },
-    {
-      time: "12:30",
-      event: "Lunch Cum Networking Break",
-      speakers: [],
-    },
-    {
-      time: "13:30 - 15:45",
-      event: "Concurrent Parallel Sessions",
-      speakers: [],
-      subEvents: [
-        {
-          track: "Track C",
-          title:
-            "Natural Products and Traditional Medicines in Modern Healthcare",
-          sessions: [
-            { time: "13:30", event: "Plenary Session - 8" },
-            { time: "14:15", event: "Plenary Session - 10" },
-            { time: "15:00", event: "Plenary Session - 12" },
-          ],
-        },
-        {
-          track: "Track D",
-          title:
-            "Next-Generation Therapeutics: Gene and Cell Therapy based Approaches",
-          sessions: [
-            { time: "13:30", event: "Plenary Session 9" },
-            { time: "14:15", event: "Plenary Session 11" },
-            { time: "15:00", event: "Plenary Session 13" },
-          ],
-        },
+      time: "10:00 AM",
+      event: "Keynote Session 06",
+      venue: "Auditorium",
+      speakers: [
+        "Dr. Rajesh Ramasamy (Associate Professor, Universiti Putra Malaysia)",
       ],
     },
     {
-      time: "15:45",
-      event: "High Tea",
+      time: "10:40 AM",
+      event: "Keynote Session 07 (Virtual)",
+      venue: "Auditorium",
+      speakers: ["Dr. Brett Simmonds (Chair, FIP Regulators Advisory Group)"],
+    },
+    {
+      time: "11:15 AM",
+      event: "Tea Break",
+      venue: "",
       speakers: [],
     },
     {
-      time: "16:00",
-      event: "Closing Ceremony & Awards Distribution",
+      time: "11:30 AM",
+      event: "Keynote Session 08",
+      venue: "Auditorium",
+      speakers: [
+        "Dr. Suresh Mohankumar (Associate Professor, Swansea University, UK)",
+      ],
+    },
+    {
+      time: "11:15 AM - 1:00 PM",
+      event: "E-Poster/Oral Presentation Session (Parallel Tracks)",
+      venue: "Halls 3, 4, 5, 6, 7 & 8",
       speakers: [],
     },
     {
-      time: "17:00",
-      event: "Certificate Distribution",
+      time: "12:15 PM",
+      event: "Plenary Session 05",
+      venue: "Auditorium",
+      speakers: ["Dr. Sameer Agarwal (EVP, Molecule AI)"],
+    },
+    {
+      time: "1:15 PM",
+      event: "Lunch Break",
+      venue: "Food Court",
+      speakers: [],
+    },
+    {
+      time: "2:00 PM",
+      event: "Plenary Session 06",
+      venue: "Auditorium",
+      speakers: ["Dr. D. Guru Kumar (JSSAHER, Mysuru)"],
+    },
+    {
+      time: "2:40 PM",
+      event: "Plenary Session 07",
+      venue: "Auditorium",
+      speakers: ["Mr. S. Rajalingam (Data Scientist, HCL, Chennai)"],
+    },
+    {
+      time: "3:20 PM",
+      event: "Plenary Session 08",
+      venue: "Auditorium",
+      speakers: ["Dr. Prabhakar Reddy Veerareddy (Palamuru University)"],
+    },
+    {
+      time: "3:45 PM",
+      event: "Tea Break",
+      venue: "",
+      speakers: [],
+    },
+    {
+      time: "4:00 PM",
+      event: "Valedictory Function & Prize Distribution",
+      venue: "Auditorium",
       speakers: [],
     },
   ],

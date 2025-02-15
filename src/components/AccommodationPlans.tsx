@@ -11,19 +11,19 @@ interface AccommodationPlan {
 const accommodationPlans: AccommodationPlan[] = [
   {
     type: "Single Occupancy",
-    price: 2400,
+    price: 2000,
     features: ["Private room"],
     razorpayLink: "https://rzp.io/rzp/EalAJRt",
   },
   {
     type: "Double Occupancy",
-    price: 1200,
+    price: 1000,
     features: ["Shared room for two"],
     razorpayLink: "https://rzp.io/rzp/HnJK1HW",
   },
   {
     type: "Dormitory",
-    price: 800,
+    price: 600,
     features: ["Shared room for 3-6 people"],
     razorpayLink: "https://rzp.io/rzp/DJ4cMLE",
   },
