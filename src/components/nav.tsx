@@ -205,6 +205,14 @@ const Navbar: React.FC = () => {
               </li>
               <li>
                 <Link
+                  href="/speaker"
+                  className="hover:text-ochre transition duration-300"
+                >
+                  Speakers
+                </Link>
+              </li>
+              <li>
+                <Link
                   href="/Schedule"
                   className="block hover:text-ochre transition duration-300"
                 >
