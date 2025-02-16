@@ -114,14 +114,14 @@ const Navbar: React.FC = () => {
                   Schedule
                 </Link>
               </li>
-              {/* <li>
+              <li>
                 <Link
                   href="/speaker"
                   className="hover:text-ochre transition duration-300"
                 >
                   Speakers
                 </Link>
-              </li> */}
+              </li>
               <li>
                 <Link
                   href="/Sponsors"
