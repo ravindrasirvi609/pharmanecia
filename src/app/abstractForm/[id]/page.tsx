@@ -43,10 +43,7 @@ const AbstractForm: React.FC<StudentPageProps> = ({ params }) => {
   }, [id]);
 
   const onDrop = useCallback((acceptedFiles: File[]) => {
-    console.log("Accepted files:", acceptedFiles);
     if (acceptedFiles.length > 0) {
-      console.log("Accepted file:", acceptedFiles[0]);
-
       setAbstractFile(acceptedFiles[0]);
     }
   }, []);
@@ -248,12 +245,12 @@ const AbstractForm: React.FC<StudentPageProps> = ({ params }) => {
                   <h2 className="text-3xl font-bold mb-6 text-purple-700">
                     Scientific Abstract
                   </h2>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-4 sm:gap-6">
                     <InfoItem
                       label="Status"
                       value={
                         <span
-                          className={`px-4 py-2 rounded-full text-sm font-semibold ${
+                          className={`inline-block px-3 sm:px-4 py-1 sm:py-2 rounded-full text-xs sm:text-sm font-semibold ${
                             abstract.Status === "Pending"
                               ? "bg-yellow-200 text-yellow-800"
                               : "bg-green text-white"
@@ -263,8 +260,18 @@ const AbstractForm: React.FC<StudentPageProps> = ({ params }) => {
                         </span>
                       }
                     />
-                    <InfoItem label="Title" value={abstract.title} />
-                    <InfoItem label="Co-Author" value={abstract.coAuthor} />
+                    <InfoItem
+                      label="Title"
+                      value={
+                        <div className="break-words">{abstract.title}</div>
+                      }
+                    />
+                    <InfoItem
+                      label="Co-Author"
+                      value={
+                        <div className="break-words">{abstract.coAuthor}</div>
+                      }
+                    />
                     <InfoItem
                       label="Submitted On"
                       value={
@@ -277,7 +284,11 @@ const AbstractForm: React.FC<StudentPageProps> = ({ params }) => {
                     />
                     <InfoItem
                       label="Affiliation"
-                      value={abstract.affiliation}
+                      value={
+                        <div className="break-words">
+                          {abstract.affiliation}
+                        </div>
+                      }
                     />
                     <InfoItem
                       label="Article Type"
@@ -289,7 +300,7 @@ const AbstractForm: React.FC<StudentPageProps> = ({ params }) => {
                         abstract.createdAt && formatDate(abstract.createdAt)
                       }
                     />
-                    <div className="col-span-2">
+                    <div className="col-span-1 sm:col-span-2">
                       <InfoItem
                         label="Abstract File"
                         value={
@@ -298,10 +309,10 @@ const AbstractForm: React.FC<StudentPageProps> = ({ params }) => {
                               href={abstract.abstractFileUrl}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="text-blue-600 hover:text-blue-800 underline flex items-center"
+                              className="text-blue-600 hover:text-blue-800 underline flex items-center flex-wrap"
                             >
                               <svg
-                                className="w-4 h-4 mr-2"
+                                className="w-4 h-4 mr-2 flex-shrink-0"
                                 fill="currentColor"
                                 viewBox="0 0 20 20"
                                 xmlns="http://www.w3.org/2000/svg"
@@ -312,7 +323,9 @@ const AbstractForm: React.FC<StudentPageProps> = ({ params }) => {
                                   clipRule="evenodd"
                                 />
                               </svg>
-                              Download Abstract
+                              <span className="break-all">
+                                Download Abstract
+                              </span>
                             </a>
                           ) : (
                             "Not uploaded"
