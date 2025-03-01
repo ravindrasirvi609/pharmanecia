@@ -73,9 +73,6 @@ export const exportToExcel = (
     "Registration Status": item.registrationStatus,
     "Created At": new Date(item.createdAt).toLocaleString(),
     "Updated At": new Date(item.updatedAt).toLocaleString(),
-    "Payment Amount": item.paymentAmount,
-    "Payment Date": new Date(item.paymentDate).toLocaleString(),
-    "Transaction ID": item.transactionId,
     "Full Address": item.fullAddress,
   }));
 
