@@ -54,13 +54,13 @@ const Registration = () => {
             </Link>
           </p>
           <p className="text-lg leading-relaxed text-justify mb-4 font-bold">
-            Regular Registration is valid until February 15, 2025.{" "}
+            Regular Registration is valid until February 28, 2025.{" "}
           </p>
           <p className="text-lg leading-relaxed text-justify mb-4">
             All prices mentioned are inclusive of GST.{" "}
           </p>
         </div>
-        <InfiniteRibbon text="Regular Registration is valid until February 15, 2025." />
+        <InfiniteRibbon text="Regular Registration is valid until February 28, 2025." />
         {/* Registration Plans */}
         <RegistrationPlans />
       </div>
