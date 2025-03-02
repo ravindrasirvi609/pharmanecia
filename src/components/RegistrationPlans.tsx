@@ -438,7 +438,7 @@ const RegistrationPlans: React.FC = () => {
                       Submitting...
                     </div>
                   ) : (
-                    `Register and Pay (₹${selectedPlan?.earlyBird})`
+                    `Register and Pay (₹${selectedPlan?.spot})`
                   )}
                 </button>
                 <button
