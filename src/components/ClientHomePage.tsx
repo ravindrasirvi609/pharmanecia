@@ -112,17 +112,22 @@ const ClientHomePage = () => {
                 Register Now
               </button>
             </Link>
-            <Link href="/abstractForm">
+            {/* <Link href="/abstractForm">
               <button
                 className="bg-primary text-light px-8 py-3 rounded-full text-lg font-semibold hover:bg-danger transition duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-accent focus:ring-opacity-50 border-danger border-2"
                 onClick={handleSubmitAbstractClick}
               >
                 Abstract
               </button>
-            </Link>
-            <Link href="#accommodation">
+            </Link> */}
+            <Link href="https://docs.google.com/spreadsheets/d/13sDTucRm_zBFMm3w9jYzGpmEoJFsSPPlucPHkF0kSMk/edit?usp=sharing">
               <button className="bg-primary text-light px-8 py-3 m-2 rounded-full text-lg font-semibold hover:bg-danger transition duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-accent focus:ring-opacity-50 border-danger border-2">
-                Book Accommodation
+                Poster Schedule
+              </button>
+            </Link>
+            <Link href="https://docs.google.com/spreadsheets/d/1pB-DcLLU5gda1ZHdyYMJs2QN6pc_g6ZsicB1duVtDWY/edit?usp=sharing">
+              <button className="bg-primary text-light px-8 py-3 m-2 rounded-full text-lg font-semibold hover:bg-danger transition duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-accent focus:ring-opacity-50 border-danger border-2">
+                Oral Schedule
               </button>
             </Link>
           </div>
