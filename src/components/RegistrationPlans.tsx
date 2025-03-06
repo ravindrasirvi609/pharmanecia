@@ -338,8 +338,7 @@ const RegistrationPlans: React.FC = () => {
               <p className="text-gray-600 mb-4">
                 Access Food Area and lunch, No Entry for scientific session
               </p>
-              <PriceDisplay label="Early Bird" price={1416} />
-              <PriceDisplay label="Regular" price={1416} />
+              
               <PriceDisplay label="Spot" price={1770} />
               <div className="mt-6">
                 <Link href={"https://rzp.io/l/g60dnQz"}>
