@@ -306,16 +306,7 @@ const RegistrationPlans: React.FC = () => {
       </div>
       <div className="p-6">
         <p className="text-gray-600 mb-4">{plan.description}</p>
-        <PriceDisplay
-          label="Early Bird "
-          className="line-through"
-          price={plan.earlyBird}
-        />
-        <PriceDisplay
-          label="Regular"
-          price={plan.regular}
-          className="line-through"
-        />
+        
         <PriceDisplay label="Spot" price={plan.spot} />
         <div className="mt-6">
           <button
