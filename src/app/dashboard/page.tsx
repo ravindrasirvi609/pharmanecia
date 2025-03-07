@@ -237,45 +237,7 @@ function Dashboard() {
               value={stats.pendingPayments}
               icon={<FaHourglassHalf />}
             />
-            {/* New Total Amount Card */}
-            <StatCard
-              title="Total Revenue"
-              value={totalAmountData?.totalAmount || 0}
-              icon={<FaMoneyCheckAlt />}
-            />
           </div>
-
-          {/* Add Registration Type Summary */}
-          <motion.div
-            className="mt-8 bg-white/30 backdrop-blur-lg rounded-xl border border-white/30 shadow-lg p-6"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2, duration: 0.4 }}
-          >
-            <h2 className="text-lg font-semibold text-slate-700 mb-4">
-              Registration Type Summary
-            </h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-              {totalAmountData?.typeWiseSummary.map((type) => (
-                <div
-                  key={type._id}
-                  className="bg-white/50 rounded-lg p-4 shadow-sm"
-                >
-                  <h3 className="text-md font-medium text-slate-600">
-                    {type._id || "Unknown"}
-                  </h3>
-                  <div className="mt-2 flex justify-between">
-                    <span className="text-sm text-slate-500">
-                      Count: {type.count}
-                    </span>
-                    <span className="text-sm font-medium text-indigo-600">
-                      ₹{type.amount}
-                    </span>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </motion.div>
 
           {/* Charts Section */}
           <motion.div
@@ -347,6 +309,54 @@ function Dashboard() {
                   ))}
                 </tbody>
               </table>
+            </div>
+          </motion.div>
+
+          {/* Add Registration Type Summary */}
+          <motion.div
+            className="mt-8 bg-white/30 backdrop-blur-lg rounded-xl border border-white/30 shadow-lg p-6"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2, duration: 0.4 }}
+          >
+            <h2 className="text-lg font-semibold text-slate-700 mb-4">
+              Registration Type Summary
+            </h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+              <div
+                key={"total"}
+                className="bg-white/50 rounded-lg p-4 shadow-sm"
+              >
+                <h3 className="text-md font-medium text-slate-600">
+                  {"Total"}
+                </h3>
+                <div className="mt-2 flex justify-between">
+                  <span className="text-sm text-slate-500">
+                    Count: {totalAmountData?.totalCompletedRegistrations}
+                  </span>
+                  <span className="text-sm font-medium text-indigo-600">
+                    ₹{totalAmountData?.totalAmount}
+                  </span>
+                </div>
+              </div>
+              {totalAmountData?.typeWiseSummary.map((type) => (
+                <div
+                  key={type._id}
+                  className="bg-white/50 rounded-lg p-4 shadow-sm"
+                >
+                  <h3 className="text-md font-medium text-slate-600">
+                    {type._id || "Unknown"}
+                  </h3>
+                  <div className="mt-2 flex justify-between">
+                    <span className="text-sm text-slate-500">
+                      Count: {type.count}
+                    </span>
+                    <span className="text-sm font-medium text-indigo-600">
+                      ₹{type.amount}
+                    </span>
+                  </div>
+                </div>
+              ))}
             </div>
           </motion.div>
         </motion.div>
