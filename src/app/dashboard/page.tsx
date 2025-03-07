@@ -13,6 +13,7 @@ import {
 import LoadingExample from "@/components/Loader";
 import AbstractCharts from "@/components/AbstractCharts";
 import { Abstract } from "@/lib/excelExport";
+import GroupRegistrationChart from "@/components/GroupRegistrationChart";
 
 // Define types for the dashboard data
 interface DashboardStats {
@@ -56,6 +57,14 @@ interface TotalAmountData {
   }[];
 }
 
+// Add this to your existing interfaces
+interface GroupData {
+  _id: string;
+  count: number;
+  totalAmount: number;
+  completedPayments: number;
+}
+
 // Utility components
 const StatCard: React.FC<{
   title: string;
@@ -86,6 +95,7 @@ function Dashboard() {
   const [abstracts, setAbstracts] = useState<Abstract[]>([]);
   const [totalAmountData, setTotalAmountData] =
     useState<TotalAmountData | null>(null);
+  const [groupData, setGroupData] = useState<GroupData[]>([]);
 
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
@@ -108,6 +118,7 @@ function Dashboard() {
     fetchDashboardData();
     fetchAbstracts();
     fetchTotalAmount();
+    fetchGroupData();
   }, []);
 
   const fetchAbstracts = async () => {
@@ -137,6 +148,18 @@ function Dashboard() {
       }
     } catch (error) {
       console.error("Error fetching total amount:", error);
+    }
+  };
+
+  const fetchGroupData = async () => {
+    try {
+      const response = await fetch("/api/registration/groupCount");
+      const data = await response.json();
+      if (data.success) {
+        setGroupData(data.data);
+      }
+    } catch (error) {
+      console.error("Error fetching group data:", error);
     }
   };
 
@@ -216,7 +239,7 @@ function Dashboard() {
           transition={{ duration: 0.4 }}
         >
           {/* Statistics Grid */}
-          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-5 px-4">
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4 px-4">
             <StatCard
               title="Total Registrations"
               value={stats.totalRegistrations}
@@ -358,6 +381,57 @@ function Dashboard() {
                 </div>
               ))}
             </div>
+          </motion.div>
+
+          {/* Group Registration Summary */}
+          <motion.div
+            className="mt-8 bg-white/30 backdrop-blur-lg rounded-xl border border-white/30 shadow-lg p-6"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2, duration: 0.4 }}
+          >
+            <h2 className="text-lg font-semibold text-slate-700 mb-4">
+              Group Registration Summary
+            </h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
+              {groupData.map((group) => (
+                <div
+                  key={group._id}
+                  className="bg-white/50 rounded-lg p-4 shadow-sm"
+                >
+                  <h3 className="text-md font-medium text-slate-600">
+                    {group._id || "No Group"}
+                  </h3>
+                  <div className="mt-2 space-y-1">
+                    <div className="flex justify-between">
+                      <span className="text-sm text-slate-500">
+                        Total Registrations:
+                      </span>
+                      <span className="text-sm font-medium text-indigo-600">
+                        {group.count}
+                      </span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-sm text-slate-500">
+                        Completed Payments:
+                      </span>
+                      <span className="text-sm font-medium text-green-600">
+                        {group.completedPayments}
+                      </span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-sm text-slate-500">
+                        Total Amount:
+                      </span>
+                      <span className="text-sm font-medium text-indigo-600">
+                        ₹{group.totalAmount}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+            <GroupRegistrationChart groupData={groupData} />
           </motion.div>
         </motion.div>
       </main>
