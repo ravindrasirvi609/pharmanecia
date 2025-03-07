@@ -45,6 +45,17 @@ interface DashboardData {
   recentRegistrations: Registration[];
 }
 
+// Add this interface to your existing interfaces
+interface TotalAmountData {
+  totalAmount: number;
+  totalCompletedRegistrations: number;
+  typeWiseSummary: {
+    _id: string;
+    count: number;
+    amount: number;
+  }[];
+}
+
 // Utility components
 const StatCard: React.FC<{
   title: string;
@@ -73,6 +84,8 @@ function Dashboard() {
     null
   );
   const [abstracts, setAbstracts] = useState<Abstract[]>([]);
+  const [totalAmountData, setTotalAmountData] =
+    useState<TotalAmountData | null>(null);
 
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
@@ -94,6 +107,7 @@ function Dashboard() {
 
     fetchDashboardData();
     fetchAbstracts();
+    fetchTotalAmount();
   }, []);
 
   const fetchAbstracts = async () => {
@@ -111,6 +125,18 @@ function Dashboard() {
       setError("An error occurred while fetching abstracts.");
     } finally {
       setIsLoading(false);
+    }
+  };
+
+  const fetchTotalAmount = async () => {
+    try {
+      const response = await fetch("/api/registration/totalAmount");
+      const data = await response.json();
+      if (data.success) {
+        setTotalAmountData(data.data);
+      }
+    } catch (error) {
+      console.error("Error fetching total amount:", error);
     }
   };
 
@@ -190,7 +216,7 @@ function Dashboard() {
           transition={{ duration: 0.4 }}
         >
           {/* Statistics Grid */}
-          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4 px-4">
+          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-5 px-4">
             <StatCard
               title="Total Registrations"
               value={stats.totalRegistrations}
@@ -211,7 +237,45 @@ function Dashboard() {
               value={stats.pendingPayments}
               icon={<FaHourglassHalf />}
             />
+            {/* New Total Amount Card */}
+            <StatCard
+              title="Total Revenue"
+              value={totalAmountData?.totalAmount || 0}
+              icon={<FaMoneyCheckAlt />}
+            />
           </div>
+
+          {/* Add Registration Type Summary */}
+          <motion.div
+            className="mt-8 bg-white/30 backdrop-blur-lg rounded-xl border border-white/30 shadow-lg p-6"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2, duration: 0.4 }}
+          >
+            <h2 className="text-lg font-semibold text-slate-700 mb-4">
+              Registration Type Summary
+            </h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+              {totalAmountData?.typeWiseSummary.map((type) => (
+                <div
+                  key={type._id}
+                  className="bg-white/50 rounded-lg p-4 shadow-sm"
+                >
+                  <h3 className="text-md font-medium text-slate-600">
+                    {type._id || "Unknown"}
+                  </h3>
+                  <div className="mt-2 flex justify-between">
+                    <span className="text-sm text-slate-500">
+                      Count: {type.count}
+                    </span>
+                    <span className="text-sm font-medium text-indigo-600">
+                      ₹{type.amount}
+                    </span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </motion.div>
 
           {/* Charts Section */}
           <motion.div

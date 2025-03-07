@@ -66,6 +66,8 @@ export const exportToExcel = (
     "Abstract Submitted": item.abstractSubmitted ? "Yes" : "No",
     "Abstract ID": item.abstractId,
     "Payment Status": item.paymentStatus,
+    paymentAmount: item.paymentAmount,
+    "Payment Date": new Date(item.paymentDate).toLocaleString(),
     "Need Accommodation": item.needAccommodation ? "Yes" : "No",
     "Include Gala Dinner": item.includeGalaDinner ? "Yes" : "No",
     "Dietary Requirements": item.dietaryRequirements,
