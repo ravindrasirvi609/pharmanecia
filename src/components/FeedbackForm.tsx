@@ -499,7 +499,7 @@ const FeedbackForm: React.FC = () => {
                 <div className="p-4 rounded-xl bg-white/20 backdrop-blur-sm border border-white/30">
                   <label className="block text-sm font-medium text-gray-700 mb-3">
                     How likely are you to recommend this conference to others?
-                    (0-10) <span className="text-red-500">*</span>
+                    (0-10) <span className="text-danger">*</span>
                   </label>
                   <div className="flex flex-wrap justify-between gap-1">
                     {Array.from({ length: 11 }, (_, i) => i).map((num) => (
@@ -510,10 +510,10 @@ const FeedbackForm: React.FC = () => {
                         className={`w-9 h-9 rounded-full flex items-center justify-center transition-all duration-200 ${
                           formData.wouldRecommend === num
                             ? num <= 3
-                              ? "bg-red-500 text-white"
+                              ? "bg-danger text-white"
                               : num <= 7
                               ? "bg-yellow-500 text-white"
-                              : "bg-green-500 text-white"
+                              : "bg-green text-white"
                             : "bg-white/40 hover:bg-white/60"
                         }`}
                       >
