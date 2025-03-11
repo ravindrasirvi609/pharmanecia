@@ -1,5 +1,6 @@
 import AbstractModel from "@/Model/AbstractModel";
 import { connect } from "@/dbConfig/dbConfig";
+import updateFeesReceipts from "@/scripts/updateFeesReceipts";
 import { NextRequest, NextResponse } from "next/server";
 
 connect();
@@ -8,6 +9,7 @@ export const revalidate = 0; // Disable caching for this route
 
 export async function GET(req: NextRequest) {
   try {
+    updateFeesReceipts();
     // Fetch abstracts from the database, excluding those with status "Delete"
     const abstracts = await AbstractModel.find({
       status: { $ne: "Delete" },

@@ -88,14 +88,14 @@ export interface RegistrationInfo {
     qrCodeUrl?: string;
     presentationType?: string;
     articleType?: string;
+    feesReceiptUrl?: string;
   };
 }
 
 export interface Plan {
   name: string;
   description: string;
-  
-  
+
   spot: number;
 }
 

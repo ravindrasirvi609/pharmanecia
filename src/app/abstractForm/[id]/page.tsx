@@ -7,6 +7,7 @@ import { formatDate } from "@/lib/utils";
 import { RegistrationInfo } from "@/lib/interface";
 import IdCard from "@/components/idCard";
 import Link from "next/link";
+import { FaFileDownload, FaFileUpload } from "react-icons/fa";
 
 interface StudentPageProps {
   params: {
@@ -494,6 +495,32 @@ const AbstractForm: React.FC<StudentPageProps> = ({ params }) => {
                           )}
                       </div>
                     )}
+                </div>
+              )}
+
+              {/* Add Fees Receipt Button */}
+              {registration && registration.registrationCode && (
+                <div className="col-span-1 md:col-span-2 mt-4">
+                  <span className="font-semibold text-danger">
+                    Registration Receipt
+                  </span>
+                  <div className="mt-2">
+                    {registration.feesReceiptUrl ? (
+                      <a
+                        href={registration.feesReceiptUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center px-4 py-2 bg-danger text-white rounded-md hover:bg-red-700 transition-colors duration-300"
+                      >
+                        <FaFileDownload className="mr-2" />
+                        Download Registration Receipt
+                      </a>
+                    ) : (
+                      <p className="text-gray-600 italic">
+                        Receipt will be available soon. Please check back later.
+                      </p>
+                    )}
+                  </div>
                 </div>
               )}
 
