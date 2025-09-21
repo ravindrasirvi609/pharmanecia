@@ -117,220 +117,352 @@ const SocialMediaPostGenerator: React.FC<
   };
 
   return (
-    <div className="max-w-4xl mx-auto p-6 space-y-8">
-      <div className="text-center">
-        <h1 className="text-3xl font-bold text-gray-800 mb-2">
-          Create Your Social Media Post
-        </h1>
-        <p className="text-gray-600">
-          Fill in your details to generate a custom 74th Indian Pharmaceutical
-          Congress 2025 social media post
-        </p>
-      </div>
-
-      {/* Form Section */}
-      <div className="bg-white rounded-lg shadow-lg p-6">
-        <h2 className="text-xl font-semibold mb-4">Enter Your Information</h2>
-        <div className="space-y-4">
-          <div>
-            <label
-              htmlFor="name"
-              className="block text-sm font-medium text-gray-700 mb-1"
-            >
-              Name *
-            </label>
-            <input
-              type="text"
-              id="name"
-              name="name"
-              value={formData.name}
-              onChange={handleInputChange}
-              placeholder="Enter your full name"
-              className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
-              required
-            />
-          </div>
-
-          <div>
-            <label
-              htmlFor="affiliation"
-              className="block text-sm font-medium text-gray-700 mb-1"
-            >
-              College/Company Name
-            </label>
-            <input
-              type="text"
-              id="affiliation"
-              name="affiliation"
-              value={formData.affiliation}
-              onChange={handleInputChange}
-              placeholder="Enter your college or company name"
-              className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
-            />
-          </div>
-
-          <div>
-            <label
-              htmlFor="designation"
-              className="block text-sm font-medium text-gray-700 mb-1"
-            >
-              Designation
-            </label>
-            <input
-              type="text"
-              id="designation"
-              name="designation"
-              value={formData.designation}
-              onChange={handleInputChange}
-              placeholder="Enter your designation (e.g., Student, Professor, Researcher)"
-              className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
-            />
-          </div>
-
-          <div>
-            <label
-              htmlFor="image"
-              className="block text-sm font-medium text-gray-700 mb-1"
-            >
-              Profile Image *
-            </label>
-            <div className="space-y-2">
-              <input
-                type="file"
-                id="image"
-                accept="image/*"
-                onChange={handleImageUpload}
-                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100"
-                required
-              />
-              {imagePreview && (
-                <div className="flex items-center space-x-4">
-                  <div className="relative">
-                    <Image
-                      src={imagePreview}
-                      alt="Preview"
-                      width={64}
-                      height={64}
-                      className="w-16 h-16 rounded-full object-cover border-2 border-indigo-200"
-                    />
-                    <button
-                      onClick={handleRemoveImage}
-                      className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs hover:bg-red-600"
-                      title="Remove image"
-                    >
-                      ×
-                    </button>
-                  </div>
-                  <div className="text-sm text-gray-600">
-                    <p>Image uploaded successfully</p>
-                    <p className="text-xs text-gray-500">
-                      {imageFile?.name} (
-                      {(imageFile?.size || 0) / 1024 / 1024 < 1
-                        ? `${Math.round((imageFile?.size || 0) / 1024)} KB`
-                        : `${((imageFile?.size || 0) / 1024 / 1024).toFixed(
-                            1
-                          )} MB`}
-                      )
-                    </p>
-                  </div>
-                </div>
-              )}
-              <p className="text-xs text-gray-500">
-                Upload a profile image (max 5MB). Supported formats: JPG, PNG,
-                GIF, WebP
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Preview Section */}
-      <div className="bg-white rounded-lg shadow-lg p-6">
-        <h2 className="text-xl font-semibold mb-4">Preview</h2>
-        <div className="flex justify-center">
-          <div
-            className="border-2 border-gray-200 rounded-lg overflow-hidden"
-            style={{ width: "300px", height: "300px" }}
-          >
-            <SocialMediaPost
-              name={formData.name || "Your Name"}
-              affiliation={formData.affiliation || "Your College/Company"}
-              designation={formData.designation || "Your Designation"}
-              imageUrl={imagePreview || "/default-avatar.png"}
-            />
-          </div>
-        </div>
-        <p className="text-sm text-gray-500 text-center mt-2">
-          This is a scaled preview. The downloaded image will be high-resolution
-          (1080x1080).
-        </p>
-      </div>
-
-      {/* Action Section */}
-      <div className="text-center space-y-4">
-        <button
-          onClick={handleDownload}
-          disabled={isLoading || !formData.name.trim() || !imageFile}
-          className={`px-8 py-4 bg-gradient-to-r from-[#021373] to-[#D94814] text-white font-semibold rounded-full hover:from-[#D94814] hover:to-[#021373] transition-all duration-300 flex items-center space-x-2 shadow-lg mx-auto ${
-            isLoading || !formData.name.trim() || !imageFile
-              ? "opacity-50 cursor-not-allowed"
-              : ""
-          }`}
-        >
-          {isLoading ? (
-            <svg className="animate-spin h-6 w-6" viewBox="0 0 24 24">
-              <circle
-                className="opacity-25"
-                cx="12"
-                cy="12"
-                r="10"
-                stroke="currentColor"
-                strokeWidth="4"
-              ></circle>
-              <path
-                className="opacity-75"
-                fill="currentColor"
-                d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-              ></path>
-            </svg>
-          ) : (
+    <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-white to-purple-50 py-8 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-6xl mx-auto space-y-8">
+        {/* Header Section */}
+        <div className="text-center space-y-4">
+          <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-r from-[#021373] to-[#D94814] rounded-full mb-4 shadow-lg">
             <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-6 w-6"
+              className="w-10 h-10 text-white"
               fill="none"
-              viewBox="0 0 24 24"
               stroke="currentColor"
+              viewBox="0 0 24 24"
             >
               <path
                 strokeLinecap="round"
                 strokeLinejoin="round"
                 strokeWidth={2}
-                d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"
+                d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
               />
             </svg>
-          )}
-          <span>
-            {isLoading ? "Generating..." : "Download Social Media Post"}
-          </span>
-        </button>
+          </div>
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold bg-gradient-to-r from-[#021373] to-[#D94814] bg-clip-text text-transparent mb-2">
+            Create Your Social Media Post
+          </h1>
+          <p className="text-gray-600 text-lg sm:text-xl max-w-2xl mx-auto leading-relaxed">
+            Fill in your details to generate a custom 74th Indian Pharmaceutical
+            Congress 2025 social media post
+          </p>
+        </div>
 
-        <div className="text-center text-lg text-gray-600 max-w-md mx-auto">
-          <p>
-            Download and share this image on LinkedIn to showcase your
-            participation in 74th Indian Pharmaceutical Congress 2025!
-          </p>
-          <p className="mt-2">
-            Don&apos;t forget to tag{" "}
-            <span className="font-bold">
-              Association of Pharmaceutical Teachers of India
-            </span>{" "}
-            and use the hashtag{" "}
-            <span className="font-semibold text-blue-600">#IPC2025</span>.
-          </p>
-          <p className="mt-2 text-indigo-600 font-bold">
-            Lucky participants who share will be eligible for exciting prizes on
-            the day of the conference!
-          </p>
+        {/* Form Section */}
+        <div className="max-w-4xl mx-auto">
+          <div className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-xl border border-white/20 p-6 sm:p-8">
+            <div className="flex items-center space-x-3 mb-6">
+              <div className="w-10 h-10 bg-gradient-to-r from-[#021373] to-[#D94814] rounded-lg flex items-center justify-center">
+                <svg
+                  className="w-6 h-6 text-white"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                  />
+                </svg>
+              </div>
+              <h2 className="text-2xl font-bold text-gray-800">
+                Enter Your Information
+              </h2>
+            </div>
+
+            <div className="space-y-6">
+              {/* Name Field */}
+              <div className="space-y-2">
+                <label
+                  htmlFor="name"
+                  className="flex items-center text-sm font-semibold text-gray-700"
+                >
+                  <span className="bg-gradient-to-r from-[#021373] to-[#D94814] bg-clip-text text-transparent">
+                    Name
+                  </span>
+                  <span className="text-red-500 ml-1">*</span>
+                </label>
+                <div className="relative">
+                  <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    value={formData.name}
+                    onChange={handleInputChange}
+                    placeholder="Enter your full name"
+                    className="w-full px-4 py-3 pl-12 border-2 border-gray-200 rounded-xl focus:ring-4 focus:ring-indigo-100 focus:border-indigo-400 transition-all duration-200 text-gray-800 placeholder-gray-400"
+                    required
+                  />
+                  <svg
+                    className="w-5 h-5 text-gray-400 absolute left-3 top-3.5"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+                    />
+                  </svg>
+                </div>
+              </div>
+
+              {/* Affiliation Field */}
+              <div className="space-y-2">
+                <label
+                  htmlFor="affiliation"
+                  className="block text-sm font-semibold text-gray-700"
+                >
+                  College/Company Name
+                </label>
+                <div className="relative">
+                  <input
+                    type="text"
+                    id="affiliation"
+                    name="affiliation"
+                    value={formData.affiliation}
+                    onChange={handleInputChange}
+                    placeholder="Enter your college or company name"
+                    className="w-full px-4 py-3 pl-12 border-2 border-gray-200 rounded-xl focus:ring-4 focus:ring-indigo-100 focus:border-indigo-400 transition-all duration-200 text-gray-800 placeholder-gray-400"
+                  />
+                  <svg
+                    className="w-5 h-5 text-gray-400 absolute left-3 top-3.5"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"
+                    />
+                  </svg>
+                </div>
+              </div>
+
+              {/* Designation Field */}
+              <div className="space-y-2">
+                <label
+                  htmlFor="designation"
+                  className="block text-sm font-semibold text-gray-700"
+                >
+                  Designation
+                </label>
+                <div className="relative">
+                  <input
+                    type="text"
+                    id="designation"
+                    name="designation"
+                    value={formData.designation}
+                    onChange={handleInputChange}
+                    placeholder="e.g., Student, Professor, Researcher"
+                    className="w-full px-4 py-3 pl-12 border-2 border-gray-200 rounded-xl focus:ring-4 focus:ring-indigo-100 focus:border-indigo-400 transition-all duration-200 text-gray-800 placeholder-gray-400"
+                  />
+                  <svg
+                    className="w-5 h-5 text-gray-400 absolute left-3 top-3.5"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m8 0V8a2 2 0 01-2 2H8a2 2 0 01-2-2V6m8 0H8m0 0V4"
+                    />
+                  </svg>
+                </div>
+              </div>
+
+              {/* Image Upload Field */}
+              <div className="space-y-3">
+                <label
+                  htmlFor="image"
+                  className="flex items-center text-sm font-semibold text-gray-700"
+                >
+                  <span className="bg-gradient-to-r from-[#021373] to-[#D94814] bg-clip-text text-transparent">
+                    Profile Image
+                  </span>
+                  <span className="text-red-500 ml-1">*</span>
+                </label>
+                <div className="relative">
+                  <input
+                    type="file"
+                    id="image"
+                    accept="image/*"
+                    onChange={handleImageUpload}
+                    className="w-full px-4 py-3 pl-12 border-2 border-gray-200 rounded-xl focus:ring-4 focus:ring-indigo-100 focus:border-indigo-400 transition-all duration-200 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-gradient-to-r file:from-[#021373] file:to-[#D94814] file:text-white hover:file:from-[#D94814] hover:file:to-[#021373] file:transition-all file:duration-200"
+                    required
+                  />
+                  <svg
+                    className="w-5 h-5 text-gray-400 absolute left-3 top-3.5"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
+                    />
+                  </svg>
+                </div>
+
+                {imagePreview && (
+                  <div className="bg-gradient-to-r from-green-50 to-emerald-50 border-2 border-green-200 rounded-xl p-4">
+                    <div className="flex items-center space-x-4">
+                      <div className="relative group">
+                        <Image
+                          src={imagePreview}
+                          alt="Preview"
+                          width={80}
+                          height={80}
+                          className="w-20 h-20 rounded-full object-cover border-4 border-white shadow-lg"
+                        />
+                        <button
+                          onClick={handleRemoveImage}
+                          className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center text-sm hover:bg-red-600 transition-colors duration-200 shadow-lg opacity-0 group-hover:opacity-100"
+                          title="Remove image"
+                        >
+                          ×
+                        </button>
+                      </div>
+                      <div className="flex-1">
+                        <p className="text-green-700 font-semibold">
+                          ✓ Image uploaded successfully
+                        </p>
+                        <p className="text-sm text-green-600">
+                          {imageFile?.name} •{" "}
+                          {(imageFile?.size || 0) / 1024 / 1024 < 1
+                            ? `${Math.round((imageFile?.size || 0) / 1024)} KB`
+                            : `${((imageFile?.size || 0) / 1024 / 1024).toFixed(
+                                1
+                              )} MB`}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                <p className="text-xs text-gray-500 bg-gray-50 px-3 py-2 rounded-lg">
+                  📸 Upload a profile image (max 5MB). Supported formats: JPG,
+                  PNG, GIF, WebP
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Action Section */}
+        <div className="text-center space-y-6">
+          <div className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-xl border border-white/20 p-6 sm:p-8">
+            <button
+              onClick={handleDownload}
+              disabled={isLoading || !formData.name.trim() || !imageFile}
+              className={`group relative px-8 py-4 bg-gradient-to-r from-[#021373] to-[#D94814] text-white font-bold rounded-2xl hover:from-[#D94814] hover:to-[#021373] transition-all duration-300 flex items-center space-x-3 shadow-xl mx-auto transform hover:scale-105 disabled:hover:scale-100 ${
+                isLoading || !formData.name.trim() || !imageFile
+                  ? "opacity-50 cursor-not-allowed"
+                  : "hover:shadow-2xl"
+              }`}
+            >
+              <div className="absolute inset-0 bg-gradient-to-r from-[#021373] to-[#D94814] rounded-2xl blur-lg opacity-0 group-hover:opacity-30 transition-opacity duration-300"></div>
+              <div className="relative flex items-center space-x-3">
+                {isLoading ? (
+                  <svg className="animate-spin h-6 w-6" viewBox="0 0 24 24">
+                    <circle
+                      className="opacity-25"
+                      cx="12"
+                      cy="12"
+                      r="10"
+                      stroke="currentColor"
+                      strokeWidth="4"
+                    ></circle>
+                    <path
+                      className="opacity-75"
+                      fill="currentColor"
+                      d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                    ></path>
+                  </svg>
+                ) : (
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-6 w-6"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"
+                    />
+                  </svg>
+                )}
+                <span className="text-lg">
+                  {isLoading ? "Generating..." : "Download Social Media Post"}
+                </span>
+              </div>
+            </button>
+
+            <div className="max-w-2xl mx-auto space-y-4">
+              <div className="bg-gradient-to-r from-indigo-50 to-purple-50 border border-indigo-200 rounded-xl p-6">
+                <div className="flex items-start space-x-3 mb-3">
+                  <div className="w-8 h-8 bg-gradient-to-r from-[#021373] to-[#D94814] rounded-full flex items-center justify-center flex-shrink-0">
+                    <svg
+                      className="w-4 h-4 text-white"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M13 10V3L4 14h7v7l9-11h-7z"
+                      />
+                    </svg>
+                  </div>
+                  <div>
+                    <h3 className="font-bold text-gray-800 text-lg">
+                      Share & Win Prizes!
+                    </h3>
+                    <p className="text-gray-600 mt-1">
+                      Download and share this image on LinkedIn to showcase your
+                      participation in 74th Indian Pharmaceutical Congress 2025!
+                    </p>
+                  </div>
+                </div>
+
+                <div className="bg-white/50 rounded-lg p-4 space-y-2">
+                  <p className="text-sm text-gray-700">
+                    <span className="font-semibold">
+                      Don&apos;t forget to tag:
+                    </span>{" "}
+                    <span className="font-bold text-[#021373]">
+                      Association of Pharmaceutical Teachers of India
+                    </span>{" "}
+                    and{" "}
+                    <span className="font-bold text-[#D94814]">
+                      Operant Pharmacy Federation
+                    </span>
+                  </p>
+                  <p className="text-sm text-gray-700">
+                    <span className="font-semibold">Use hashtags:</span>{" "}
+                    <span className="font-bold text-[#D94814]">#IPC2025</span>{" "}
+                    <span className="font-bold text-[#021373]">#OPF</span>
+                  </p>
+                  <p className="text-sm font-bold text-indigo-600 bg-indigo-100 px-3 py-1 rounded-full inline-block">
+                    🎁 Lucky participants who share will be eligible for
+                    exciting prizes on the day of the conference!
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
