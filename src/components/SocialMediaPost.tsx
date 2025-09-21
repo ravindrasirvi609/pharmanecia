@@ -1,7 +1,7 @@
 import Image from "next/image";
 import React from "react";
 
-const SocialMediaPost = ({ name, affiliation, imageUrl }: any) => {
+const SocialMediaPost = ({ name, affiliation, designation, imageUrl }: any) => {
   return (
     <div
       style={{
@@ -27,7 +27,7 @@ const SocialMediaPost = ({ name, affiliation, imageUrl }: any) => {
             fontWeight: "bold",
           }}
         >
-          Pharmanecia 4.E
+          74th Indian Pharmaceutical Congress 2025
         </h1>
 
         <p
@@ -36,7 +36,7 @@ const SocialMediaPost = ({ name, affiliation, imageUrl }: any) => {
             margin: "0 0 20px",
           }}
         >
-          International Research Conference on
+          AI &amp; TECHNOLOGY IN PHARMA: EDUCATE, INNOVATE, EMPOWER
         </p>
 
         <h2
@@ -47,8 +47,7 @@ const SocialMediaPost = ({ name, affiliation, imageUrl }: any) => {
             lineHeight: "1.4",
           }}
         >
-          &quot;Recent Advances in Artificial Intelligence and Machine Learning
-          Driven Drug Discovery&quot;
+          Location: BIEC Bengaluru
         </h2>
 
         <p
@@ -57,17 +56,21 @@ const SocialMediaPost = ({ name, affiliation, imageUrl }: any) => {
             margin: "0 0 40px",
           }}
         >
-          7<sup>th</sup> and 8<sup>th</sup> March, 2025
+          Dec 19-21, 2025
+          <br />
+          Friday-Sunday
         </p>
       </div>
 
-      {/* <div
+      <div
         style={{
           width: "200px",
           height: "200px",
           overflow: "hidden",
           margin: "0 auto",
           position: "relative",
+          borderRadius: "50%",
+          border: "4px solid #FFD700",
         }}
       >
         <Image
@@ -77,7 +80,7 @@ const SocialMediaPost = ({ name, affiliation, imageUrl }: any) => {
           objectFit="cover"
           objectPosition="center"
         />
-      </div> */}
+      </div>
 
       <h3
         style={{
@@ -89,6 +92,19 @@ const SocialMediaPost = ({ name, affiliation, imageUrl }: any) => {
       >
         {name}
       </h3>
+
+      {designation && (
+        <p
+          style={{
+            color: "#FFA500",
+            fontSize: "24px",
+            margin: "0 0 10px",
+            fontWeight: "bold",
+          }}
+        >
+          {designation}
+        </p>
+      )}
 
       <p
         style={{
@@ -108,7 +124,7 @@ const SocialMediaPost = ({ name, affiliation, imageUrl }: any) => {
           margin: "0",
         }}
       >
-        Hey! I&apos;m Attending Pharmanecia 4.E
+        Hey! I&apos;m Attending 74th IPC 2025
       </p>
 
       <div
@@ -118,10 +134,12 @@ const SocialMediaPost = ({ name, affiliation, imageUrl }: any) => {
         }}
       >
         <p style={{ margin: "5px 0" }}>
-          Organized by Department of Pharmaceutical Chemistry,
+          Organized by: Indian Pharmaceutical Congress Association
         </p>
-        <p style={{ margin: "5px 0" }}>JSS College of Pharmacy, Ooty</p>
-        <p style={{ margin: "5px 0" }}>Hosted by Operant Pharmacy Federation</p>
+        <p style={{ margin: "5px 0" }}>
+          Hosted by: Association of Pharmaceutical Teachers of India
+        </p>
+        <p style={{ margin: "5px 0" }}>Location: BIEC Bengaluru</p>
       </div>
 
       <p
@@ -130,8 +148,8 @@ const SocialMediaPost = ({ name, affiliation, imageUrl }: any) => {
           marginTop: "20px",
         }}
       >
-        #Pharmanecia4E #AIinDrugDiscovery #MachineLearning
-        #PharmaceuticalSciences
+        #IPC2025 #PharmaTech #AIinPharma #PharmaceuticalCongress
+        #PharmaInnovation
       </p>
     </div>
   );

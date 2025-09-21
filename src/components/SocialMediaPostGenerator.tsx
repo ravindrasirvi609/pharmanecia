@@ -13,6 +13,7 @@ const SocialMediaPostGenerator: React.FC<
   const [formData, setFormData] = useState({
     name: "",
     affiliation: "",
+    designation: "",
   });
   const [imageFile, setImageFile] = useState<File | null>(null);
   const [imagePreview, setImagePreview] = useState<string>("");
@@ -63,6 +64,11 @@ const SocialMediaPostGenerator: React.FC<
       return;
     }
 
+    if (!imageFile) {
+      alert("Please upload a profile image");
+      return;
+    }
+
     setIsLoading(true);
     try {
       // Create a temporary div to render the SocialMediaPost
@@ -76,6 +82,7 @@ const SocialMediaPostGenerator: React.FC<
         <SocialMediaPost
           name={formData.name}
           affiliation={formData.affiliation}
+          designation={formData.designation}
           imageUrl={imagePreview}
         />
       );
@@ -164,10 +171,28 @@ const SocialMediaPostGenerator: React.FC<
 
           <div>
             <label
+              htmlFor="designation"
+              className="block text-sm font-medium text-gray-700 mb-1"
+            >
+              Designation
+            </label>
+            <input
+              type="text"
+              id="designation"
+              name="designation"
+              value={formData.designation}
+              onChange={handleInputChange}
+              placeholder="Enter your designation (e.g., Student, Professor, Researcher)"
+              className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+            />
+          </div>
+
+          <div>
+            <label
               htmlFor="image"
               className="block text-sm font-medium text-gray-700 mb-1"
             >
-              Profile Image (Optional)
+              Profile Image *
             </label>
             <div className="space-y-2">
               <input
@@ -176,6 +201,7 @@ const SocialMediaPostGenerator: React.FC<
                 accept="image/*"
                 onChange={handleImageUpload}
                 className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100"
+                required
               />
               {imagePreview && (
                 <div className="flex items-center space-x-4">
@@ -229,7 +255,8 @@ const SocialMediaPostGenerator: React.FC<
             <SocialMediaPost
               name={formData.name || "Your Name"}
               affiliation={formData.affiliation || "Your College/Company"}
-              imageUrl={imagePreview}
+              designation={formData.designation || "Your Designation"}
+              imageUrl={imagePreview || "/default-avatar.png"}
             />
           </div>
         </div>
@@ -243,9 +270,9 @@ const SocialMediaPostGenerator: React.FC<
       <div className="text-center space-y-4">
         <button
           onClick={handleDownload}
-          disabled={isLoading || !formData.name.trim()}
+          disabled={isLoading || !formData.name.trim() || !imageFile}
           className={`px-8 py-4 bg-gradient-to-r from-[#021373] to-[#D94814] text-white font-semibold rounded-full hover:from-[#D94814] hover:to-[#021373] transition-all duration-300 flex items-center space-x-2 shadow-lg mx-auto ${
-            isLoading || !formData.name.trim()
+            isLoading || !formData.name.trim() || !imageFile
               ? "opacity-50 cursor-not-allowed"
               : ""
           }`}
