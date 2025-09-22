@@ -5,6 +5,25 @@ import Html2Canvas from "html2canvas";
 import Image from "next/image";
 import SocialMediaPost from "./SocialMediaPost";
 
+const badgeTypes = {
+  speaker: "Keynote Speaker",
+  panelist: "Panelist",
+  moderator: "Moderator",
+  organizer: "Organizer",
+  sponsor: "Sponsor",
+  attendee: "Attendee",
+  student: "Student",
+  researcher: "Researcher",
+} as const;
+
+const backgroundPatterns = {
+  none: "none",
+  dots: "dots",
+  lines: "lines",
+  hexagon: "hexagon",
+  molecules: "molecules",
+} as const;
+
 interface SocialMediaPostGeneratorProps {}
 
 const SocialMediaPostGenerator: React.FC<
@@ -16,13 +35,19 @@ const SocialMediaPostGenerator: React.FC<
     designation: "",
     gradientStart: "#300060",
     gradientEnd: "#530060",
+    badge: "" as keyof typeof badgeTypes | "",
+    backgroundPattern: "none" as keyof typeof backgroundPatterns,
+    aspectRatio: "square" as "square" | "story" | "banner",
+    customMessage: "",
   });
   const [imageFile, setImageFile] = useState<File | null>(null);
   const [imagePreview, setImagePreview] = useState<string>("");
   const [isLoading, setIsLoading] = useState(false);
 
   const handleInputChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
+    >
   ) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
@@ -88,8 +113,15 @@ const SocialMediaPostGenerator: React.FC<
           affiliation={formData.affiliation}
           designation={formData.designation}
           imageUrl={imagePreview}
-          gradientStart={formData.gradientStart}
-          gradientEnd={formData.gradientEnd}
+          theme="default"
+          badge={formData.badge || undefined}
+          backgroundPattern={formData.backgroundPattern}
+          aspectRatio={formData.aspectRatio}
+          customMessage={formData.customMessage || undefined}
+          customColors={{
+            gradientStart: formData.gradientStart,
+            gradientEnd: formData.gradientEnd,
+          }}
         />
       );
       await new Promise((resolve) => {
@@ -97,16 +129,24 @@ const SocialMediaPostGenerator: React.FC<
       });
 
       // Use html2canvas to capture the rendered component
+      const canvasDimensions = {
+        square: { width: 1080, height: 1080 },
+        story: { width: 1080, height: 1920 },
+        banner: { width: 1920, height: 1080 },
+      };
+
+      const dimensions = canvasDimensions[formData.aspectRatio];
+
       const canvas = await Html2Canvas(tempDiv, {
         scale: 2, // Increase scale for better quality
         useCORS: true, // Enable CORS for image loading
-        width: 1080,
-        height: 1080,
+        width: dimensions.width,
+        height: dimensions.height,
       });
 
       // Create and trigger download
       const link = document.createElement("a");
-      link.download = `ipc2025-post-${formData.name
+      link.download = `ipc2025-${formData.aspectRatio}-post-${formData.name
         .replace(/\s+/g, "-")
         .toLowerCase()}.png`;
       link.href = canvas.toDataURL("image/png");
@@ -280,6 +320,189 @@ const SocialMediaPostGenerator: React.FC<
                     />
                   </svg>
                 </div>
+              </div>
+
+              {/* Professional Badge Selection */}
+              <div className="space-y-4">
+                <label className="block text-sm font-semibold text-gray-700">
+                  🏷️ Professional Badge (Optional)
+                </label>
+                <select
+                  name="badge"
+                  value={formData.badge}
+                  onChange={handleInputChange}
+                  className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-4 focus:ring-indigo-100 focus:border-indigo-400 transition-all duration-200 text-gray-800"
+                >
+                  <option value="">No Badge</option>
+                  {Object.entries(badgeTypes).map(([key, label]) => (
+                    <option key={key} value={key}>
+                      {label}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+              {/* Background Pattern Selection */}
+              <div className="space-y-4">
+                <label className="block text-sm font-semibold text-gray-700">
+                  🎭 Background Pattern
+                </label>
+                <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
+                  {Object.entries(backgroundPatterns).map(([key, pattern]) => (
+                    <button
+                      key={key}
+                      type="button"
+                      onClick={() => {
+                        setFormData((prev) => ({
+                          ...prev,
+                          backgroundPattern:
+                            key as keyof typeof backgroundPatterns,
+                        }));
+                      }}
+                      className={`p-3 rounded-xl border-2 transition-all duration-200 bg-white ${
+                        formData.backgroundPattern === key
+                          ? "border-indigo-400 ring-4 ring-indigo-100"
+                          : "border-gray-200 hover:border-gray-300"
+                      }`}
+                    >
+                      <div className="text-center">
+                        <div className="text-sm font-semibold text-gray-800 capitalize">
+                          {key}
+                        </div>
+                        <div className="text-xs text-gray-500 mt-1">
+                          {key === "none"
+                            ? "Clean"
+                            : key === "dots"
+                            ? "Subtle dots"
+                            : key === "lines"
+                            ? "Diagonal lines"
+                            : key === "hexagon"
+                            ? "Scientific"
+                            : "Molecular"}
+                        </div>
+                      </div>
+                      {formData.backgroundPattern === key && (
+                        <div className="absolute -top-1 -right-1 bg-indigo-500 text-white rounded-full w-5 h-5 flex items-center justify-center">
+                          <svg
+                            className="w-2 h-2"
+                            fill="currentColor"
+                            viewBox="0 0 20 20"
+                          >
+                            <path
+                              fillRule="evenodd"
+                              d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                              clipRule="evenodd"
+                            />
+                          </svg>
+                        </div>
+                      )}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {/* Aspect Ratio Selection */}
+              <div className="space-y-4">
+                <label className="block text-sm font-semibold text-gray-700">
+                  📱 Social Media Format
+                </label>
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                  <button
+                    type="button"
+                    onClick={() =>
+                      setFormData((prev) => ({
+                        ...prev,
+                        aspectRatio: "square",
+                      }))
+                    }
+                    className={`p-4 rounded-xl border-2 transition-all duration-200 ${
+                      formData.aspectRatio === "square"
+                        ? "border-indigo-400 ring-4 ring-indigo-100 bg-indigo-50"
+                        : "border-gray-200 hover:border-gray-300 bg-white"
+                    }`}
+                  >
+                    <div className="text-center">
+                      <div className="w-12 h-12 bg-gray-300 rounded mx-auto mb-2"></div>
+                      <div className="font-semibold text-gray-800">Square</div>
+                      <div className="text-xs text-gray-500">
+                        Instagram • LinkedIn
+                      </div>
+                      <div className="text-xs text-gray-400">1080 × 1080</div>
+                    </div>
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() =>
+                      setFormData((prev) => ({ ...prev, aspectRatio: "story" }))
+                    }
+                    className={`p-4 rounded-xl border-2 transition-all duration-200 ${
+                      formData.aspectRatio === "story"
+                        ? "border-indigo-400 ring-4 ring-indigo-100 bg-indigo-50"
+                        : "border-gray-200 hover:border-gray-300 bg-white"
+                    }`}
+                  >
+                    <div className="text-center">
+                      <div className="w-8 h-12 bg-gray-300 rounded mx-auto mb-2"></div>
+                      <div className="font-semibold text-gray-800">Story</div>
+                      <div className="text-xs text-gray-500">
+                        Instagram • Facebook
+                      </div>
+                      <div className="text-xs text-gray-400">1080 × 1920</div>
+                    </div>
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() =>
+                      setFormData((prev) => ({
+                        ...prev,
+                        aspectRatio: "banner",
+                      }))
+                    }
+                    className={`p-4 rounded-xl border-2 transition-all duration-200 ${
+                      formData.aspectRatio === "banner"
+                        ? "border-indigo-400 ring-4 ring-indigo-100 bg-indigo-50"
+                        : "border-gray-200 hover:border-gray-300 bg-white"
+                    }`}
+                  >
+                    <div className="text-center">
+                      <div className="w-12 h-8 bg-gray-300 rounded mx-auto mb-2"></div>
+                      <div className="font-semibold text-gray-800">Banner</div>
+                      <div className="text-xs text-gray-500">
+                        LinkedIn • Twitter
+                      </div>
+                      <div className="text-xs text-gray-400">1920 × 1080</div>
+                    </div>
+                  </button>
+                </div>
+              </div>
+
+              {/* Custom Message */}
+              <div className="space-y-3">
+                <label
+                  htmlFor="customMessage"
+                  className="block text-sm font-semibold text-gray-700"
+                >
+                  💬 Custom Message (Optional)
+                </label>
+                <div className="relative">
+                  <textarea
+                    id="customMessage"
+                    name="customMessage"
+                    value={formData.customMessage}
+                    onChange={handleInputChange}
+                    placeholder="e.g., Excited to share my research at IPC 2025!"
+                    maxLength={100}
+                    rows={3}
+                    className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-4 focus:ring-indigo-100 focus:border-indigo-400 transition-all duration-200 text-gray-800 placeholder-gray-400 resize-none"
+                  />
+                  <div className="absolute bottom-2 right-2 text-xs text-gray-400">
+                    {formData.customMessage.length}/100
+                  </div>
+                </div>
+                <p className="text-xs text-gray-500">
+                  Leave empty to use default message: &quot;Hey! I&apos;m
+                  Attending 74th IPC 2025&quot;
+                </p>
               </div>
 
               {/* Background Gradient Selection */}
@@ -512,6 +735,79 @@ const SocialMediaPostGenerator: React.FC<
             </div>
           </div>
         </div>
+
+        {/* Live Preview Section */}
+        {formData.name && imagePreview && (
+          <div className="max-w-4xl mx-auto">
+            <div className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-xl border border-white/20 p-6 sm:p-8">
+              <div className="flex items-center space-x-3 mb-6">
+                <div className="w-10 h-10 bg-gradient-to-r from-[#021373] to-[#D94814] rounded-lg flex items-center justify-center">
+                  <svg
+                    className="w-6 h-6 text-white"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+                    />
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
+                    />
+                  </svg>
+                </div>
+                <h2 className="text-2xl font-bold text-gray-800">
+                  Live Preview
+                </h2>
+              </div>
+
+              <div className="bg-gray-100 rounded-xl p-6 overflow-x-auto">
+                <div className="flex justify-center">
+                  <div
+                    style={{
+                      transform:
+                        formData.aspectRatio === "banner"
+                          ? "scale(0.15)"
+                          : formData.aspectRatio === "story"
+                          ? "scale(0.25)"
+                          : "scale(0.35)",
+                      transformOrigin: "top center",
+                    }}
+                  >
+                    <SocialMediaPost
+                      name={formData.name}
+                      affiliation={formData.affiliation}
+                      designation={formData.designation}
+                      imageUrl={imagePreview}
+                      theme="default"
+                      badge={formData.badge || undefined}
+                      backgroundPattern={formData.backgroundPattern}
+                      aspectRatio={formData.aspectRatio}
+                      customMessage={formData.customMessage || undefined}
+                      customColors={{
+                        gradientStart: formData.gradientStart,
+                        gradientEnd: formData.gradientEnd,
+                      }}
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <div className="mt-4 text-center">
+                <p className="text-sm text-gray-600">
+                  ✨ This is how your social media post will look! Scroll down
+                  to download.
+                </p>
+              </div>
+            </div>
+          </div>
+        )}
 
         {/* Action Section */}
         <div className="text-center space-y-6">
