@@ -45,9 +45,10 @@ const SocialMediaPost = ({ name, affiliation, designation, imageUrl }: any) => {
             margin: "0 0 20px",
             padding: "0 100px",
             lineHeight: "1.4",
+            fontWeight: "bold",
           }}
         >
-          Location: BIEC Bengaluru
+          Venue: BIEC Bengaluru
         </h2>
 
         <p
@@ -64,22 +65,32 @@ const SocialMediaPost = ({ name, affiliation, designation, imageUrl }: any) => {
 
       <div
         style={{
-          width: "200px",
-          height: "200px",
-          overflow: "hidden",
+          width: "300px",
+          height: "300px",
           margin: "0 auto",
           position: "relative",
           borderRadius: "50%",
           border: "4px solid #FFD700",
+          padding: "4px",
+          backgroundColor: "#FFD700",
         }}
       >
-        <Image
-          src={imageUrl}
-          alt={name}
-          layout="fill"
-          objectFit="cover"
-          objectPosition="center"
-        />
+        <div
+          style={{
+            width: "100%",
+            height: "100%",
+            position: "relative",
+            borderRadius: "50%",
+            overflow: "hidden",
+          }}
+        >
+          <Image
+            src={imageUrl}
+            alt={name}
+            fill
+            style={{ objectFit: "cover", objectPosition: "center" }}
+          />
+        </div>
       </div>
 
       <h3
@@ -120,7 +131,7 @@ const SocialMediaPost = ({ name, affiliation, designation, imageUrl }: any) => {
         style={{
           color: "#FFA500",
           fontSize: "40px",
-          fontWeight: "black",
+          fontWeight: "900",
           margin: "0",
         }}
       >
@@ -139,7 +150,6 @@ const SocialMediaPost = ({ name, affiliation, designation, imageUrl }: any) => {
         <p style={{ margin: "5px 0" }}>
           Hosted by: Association of Pharmaceutical Teachers of India
         </p>
-        <p style={{ margin: "5px 0" }}>Location: BIEC Bengaluru</p>
       </div>
 
       <p
