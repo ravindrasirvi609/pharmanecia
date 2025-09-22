@@ -231,7 +231,7 @@ const SocialMediaPost = ({
         <div
           style={{
             position: "absolute",
-            top: "20px",
+            top: "12px",
             right: "20px",
             backgroundColor: selectedTheme.accentColor,
             color: "#000",
@@ -241,6 +241,10 @@ const SocialMediaPost = ({
             fontWeight: "bold",
             zIndex: 10,
             boxShadow: "0 4px 8px rgba(0,0,0,0.3)",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            minHeight: "10px",
           }}
         >
           {badgeTypes[badge]}
@@ -258,7 +262,7 @@ const SocialMediaPost = ({
                 : layout === "minimal"
                 ? "72px"
                 : "60px",
-            margin: "0 0 10px",
+            margin: "0 0 14px",
             fontWeight: "bold",
             textShadow: "2px 2px 4px rgba(0,0,0,0.5)",
             lineHeight: "1.0",
@@ -270,7 +274,7 @@ const SocialMediaPost = ({
         <p
           style={{
             fontSize: layout === "compact" ? "20px" : "24px",
-            margin: "0 0 12px",
+            margin: "0 0 8px",
             fontWeight: "600",
             textShadow: "1px 1px 2px rgba(0,0,0,0.5)",
           }}
@@ -281,7 +285,7 @@ const SocialMediaPost = ({
         <h2
           style={{
             fontSize: layout === "compact" ? "24px" : "28px",
-            margin: "0 0 12px",
+            margin: "0 0 10px",
             padding: "0 100px",
             lineHeight: "1.4",
             fontWeight: "bold",
@@ -295,7 +299,7 @@ const SocialMediaPost = ({
         <p
           style={{
             fontSize: layout === "compact" ? "20px" : "24px",
-            margin: "0 0 24px",
+            margin: "0 0 14px",
             fontWeight: "600",
           }}
         >
@@ -365,7 +369,7 @@ const SocialMediaPost = ({
                 : layout === "featured"
                 ? "56px"
                 : "48px",
-            margin: "10px 0 6px",
+            margin: "4px 0 6px",
             fontWeight: "bold",
             textShadow: "2px 2px 4px rgba(0,0,0,0.5)",
           }}
