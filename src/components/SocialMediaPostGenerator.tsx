@@ -14,12 +14,16 @@ const SocialMediaPostGenerator: React.FC<
     name: "",
     affiliation: "",
     designation: "",
+    gradientStart: "#300060",
+    gradientEnd: "#530060",
   });
   const [imageFile, setImageFile] = useState<File | null>(null);
   const [imagePreview, setImagePreview] = useState<string>("");
   const [isLoading, setIsLoading] = useState(false);
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
       ...prev,
@@ -84,6 +88,8 @@ const SocialMediaPostGenerator: React.FC<
           affiliation={formData.affiliation}
           designation={formData.designation}
           imageUrl={imagePreview}
+          gradientStart={formData.gradientStart}
+          gradientEnd={formData.gradientEnd}
         />
       );
       await new Promise((resolve) => {
@@ -273,6 +279,157 @@ const SocialMediaPostGenerator: React.FC<
                       d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m8 0V8a2 2 0 01-2 2H8a2 2 0 01-2-2V6m8 0H8m0 0V4"
                     />
                   </svg>
+                </div>
+              </div>
+
+              {/* Background Gradient Selection */}
+              <div className="space-y-4">
+                <label className="block text-sm font-semibold text-gray-700">
+                  Background Gradient
+                </label>
+
+                {/* Predefined Gradient Options */}
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                  {[
+                    {
+                      name: "Purple (Default)",
+                      start: "#300060",
+                      end: "#530060",
+                    },
+                    { name: "Blue Ocean", start: "#1e3a8a", end: "#3b82f6" },
+                    { name: "Red Sunset", start: "#7f1d1d", end: "#dc2626" },
+                    { name: "Green Forest", start: "#14532d", end: "#16a34a" },
+                    { name: "Orange Fire", start: "#9a3412", end: "#ea580c" },
+                    { name: "Pink Rose", start: "#831843", end: "#ec4899" },
+                    { name: "Teal Ocean", start: "#134e4a", end: "#14b8a6" },
+                    { name: "Indigo Night", start: "#312e81", end: "#6366f1" },
+                  ].map((gradient) => (
+                    <button
+                      key={gradient.name}
+                      type="button"
+                      onClick={() => {
+                        setFormData((prev) => ({
+                          ...prev,
+                          gradientStart: gradient.start,
+                          gradientEnd: gradient.end,
+                        }));
+                      }}
+                      className={`relative p-3 rounded-xl border-2 transition-all duration-200 ${
+                        formData.gradientStart === gradient.start &&
+                        formData.gradientEnd === gradient.end
+                          ? "border-indigo-400 ring-4 ring-indigo-100"
+                          : "border-gray-200 hover:border-gray-300"
+                      }`}
+                      style={{
+                        background: `linear-gradient(135deg, ${gradient.start} 0%, ${gradient.end} 100%)`,
+                      }}
+                    >
+                      <div className="h-8 rounded-lg"></div>
+                      <div className="absolute inset-0 bg-black bg-opacity-20 rounded-xl flex items-center justify-center">
+                        <span className="text-white text-xs font-medium text-center px-1">
+                          {gradient.name}
+                        </span>
+                      </div>
+                      {formData.gradientStart === gradient.start &&
+                        formData.gradientEnd === gradient.end && (
+                          <div className="absolute -top-1 -right-1 bg-indigo-500 text-white rounded-full w-6 h-6 flex items-center justify-center">
+                            <svg
+                              className="w-3 h-3"
+                              fill="currentColor"
+                              viewBox="0 0 20 20"
+                            >
+                              <path
+                                fillRule="evenodd"
+                                d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                clipRule="evenodd"
+                              />
+                            </svg>
+                          </div>
+                        )}
+                    </button>
+                  ))}
+                </div>
+
+                {/* Custom Color Inputs */}
+                <div className="bg-gray-50 rounded-xl p-4 space-y-3">
+                  <h4 className="text-sm font-semibold text-gray-700">
+                    Custom Gradient Colors
+                  </h4>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div className="space-y-2">
+                      <label
+                        htmlFor="gradientStart"
+                        className="block text-xs font-medium text-gray-600"
+                      >
+                        Start Color
+                      </label>
+                      <div className="flex items-center space-x-2">
+                        <input
+                          type="color"
+                          id="gradientStart"
+                          name="gradientStart"
+                          value={formData.gradientStart}
+                          onChange={handleInputChange}
+                          className="w-12 h-10 border-2 border-gray-200 rounded-lg cursor-pointer"
+                        />
+                        <input
+                          type="text"
+                          value={formData.gradientStart}
+                          onChange={(e) =>
+                            setFormData((prev) => ({
+                              ...prev,
+                              gradientStart: e.target.value,
+                            }))
+                          }
+                          className="flex-1 px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-100 focus:border-indigo-400"
+                          placeholder="#300060"
+                        />
+                      </div>
+                    </div>
+                    <div className="space-y-2">
+                      <label
+                        htmlFor="gradientEnd"
+                        className="block text-xs font-medium text-gray-600"
+                      >
+                        End Color
+                      </label>
+                      <div className="flex items-center space-x-2">
+                        <input
+                          type="color"
+                          id="gradientEnd"
+                          name="gradientEnd"
+                          value={formData.gradientEnd}
+                          onChange={handleInputChange}
+                          className="w-12 h-10 border-2 border-gray-200 rounded-lg cursor-pointer"
+                        />
+                        <input
+                          type="text"
+                          value={formData.gradientEnd}
+                          onChange={(e) =>
+                            setFormData((prev) => ({
+                              ...prev,
+                              gradientEnd: e.target.value,
+                            }))
+                          }
+                          className="flex-1 px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-100 focus:border-indigo-400"
+                          placeholder="#530060"
+                        />
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Gradient Preview */}
+                  <div className="mt-3">
+                    <label className="block text-xs font-medium text-gray-600 mb-2">
+                      Preview
+                    </label>
+                    <div
+                      className="h-16 rounded-lg border-2 border-gray-200"
+                      style={{
+                        background: `linear-gradient(180deg, ${formData.gradientStart} 0%, ${formData.gradientEnd} 100%)`,
+                      }}
+                    ></div>
+                  </div>
                 </div>
               </div>
 

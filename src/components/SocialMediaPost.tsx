@@ -1,13 +1,27 @@
 import Image from "next/image";
 import React from "react";
 
-const SocialMediaPost = ({ name, affiliation, designation, imageUrl }: any) => {
+const SocialMediaPost = ({
+  name,
+  affiliation,
+  designation,
+  imageUrl,
+  gradientStart = "#300060",
+  gradientEnd = "#530060",
+}: {
+  name: string;
+  affiliation: string;
+  designation?: string;
+  imageUrl: string;
+  gradientStart?: string;
+  gradientEnd?: string;
+}) => {
   return (
     <div
       style={{
         width: "1080px",
         height: "1080px",
-        background: "linear-gradient(180deg, #300060 0%, #530060 100%)",
+        background: `linear-gradient(180deg, ${gradientStart} 0%, ${gradientEnd} 100%)`,
         fontFamily: "Arial, sans-serif",
         color: "white",
         textAlign: "center",
