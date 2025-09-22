@@ -42,6 +42,7 @@ const SocialMediaPostGenerator: React.FC<
   });
   const [imageFile, setImageFile] = useState<File | null>(null);
   const [imagePreview, setImagePreview] = useState<string>("");
+  const [isDragOver, setIsDragOver] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
   const handleInputChange = (
@@ -59,26 +60,50 @@ const SocialMediaPostGenerator: React.FC<
   const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
-      // Validate file type
-      if (!file.type.startsWith("image/")) {
-        alert("Please select a valid image file");
-        return;
-      }
+      processImageFile(file);
+    }
+  };
 
-      // Validate file size (max 5MB)
-      if (file.size > 5 * 1024 * 1024) {
-        alert("Image size should be less than 5MB");
-        return;
-      }
+  const processImageFile = (file: File) => {
+    // Validate file type
+    if (!file.type.startsWith("image/")) {
+      alert("Please select a valid image file");
+      return;
+    }
 
-      setImageFile(file);
+    // Validate file size (max 5MB)
+    if (file.size > 5 * 1024 * 1024) {
+      alert("Image size should be less than 5MB");
+      return;
+    }
 
-      // Create preview URL
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        setImagePreview(e.target?.result as string);
-      };
-      reader.readAsDataURL(file);
+    setImageFile(file);
+
+    // Create preview URL
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      setImagePreview(e.target?.result as string);
+    };
+    reader.readAsDataURL(file);
+  };
+
+  const handleDragOver = (e: React.DragEvent) => {
+    e.preventDefault();
+    setIsDragOver(true);
+  };
+
+  const handleDragLeave = (e: React.DragEvent) => {
+    e.preventDefault();
+    setIsDragOver(false);
+  };
+
+  const handleDrop = (e: React.DragEvent) => {
+    e.preventDefault();
+    setIsDragOver(false);
+
+    const file = e.dataTransfer.files?.[0];
+    if (file) {
+      processImageFile(file);
     }
   };
 
@@ -657,8 +682,8 @@ const SocialMediaPostGenerator: React.FC<
                 </div>
               </div>
 
-              {/* Image Upload Field */}
-              <div className="space-y-3">
+              {/* Modern Image Upload Field */}
+              <div className="space-y-4">
                 <label
                   htmlFor="image"
                   className="flex items-center text-sm font-semibold text-gray-700"
@@ -668,148 +693,214 @@ const SocialMediaPostGenerator: React.FC<
                   </span>
                   <span className="text-red-500 ml-1">*</span>
                 </label>
-                <div className="relative">
-                  <input
-                    type="file"
-                    id="image"
-                    accept="image/*"
-                    onChange={handleImageUpload}
-                    className="w-full px-4 py-3 pl-12 border-2 border-gray-200 rounded-xl focus:ring-4 focus:ring-indigo-100 focus:border-indigo-400 transition-all duration-200 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-gradient-to-r file:from-[#021373] file:to-[#D94814] file:text-white hover:file:from-[#D94814] hover:file:to-[#021373] file:transition-all file:duration-200"
-                    required
-                  />
-                  <svg
-                    className="w-5 h-5 text-gray-400 absolute left-3 top-3.5"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
-                    />
-                  </svg>
-                </div>
 
-                {imagePreview && (
-                  <div className="bg-gradient-to-r from-green-50 to-emerald-50 border-2 border-green-200 rounded-xl p-4">
-                    <div className="flex items-center space-x-4">
-                      <div className="relative group">
-                        <Image
-                          src={imagePreview}
-                          alt="Preview"
-                          width={80}
-                          height={80}
-                          className="w-20 h-20 rounded-full object-cover border-4 border-white shadow-lg"
-                        />
+                {!imagePreview ? (
+                  <div
+                    className={`relative border-2 border-dashed rounded-2xl transition-all duration-300 cursor-pointer group overflow-hidden ${
+                      isDragOver
+                        ? "border-indigo-500 bg-indigo-50 scale-102"
+                        : "border-gray-300 hover:border-indigo-400 hover:bg-gray-50"
+                    }`}
+                    onDragOver={handleDragOver}
+                    onDragLeave={handleDragLeave}
+                    onDrop={handleDrop}
+                    onClick={() => document.getElementById("image")?.click()}
+                  >
+                    <div className="px-8 py-12 text-center">
+                      <div className="mx-auto w-16 h-16 mb-4 relative">
+                        <div className="absolute inset-0 bg-gradient-to-br from-[#021373] to-[#D94814] rounded-2xl opacity-10 group-hover:opacity-20 transition-opacity duration-300"></div>
+                        <div className="relative flex items-center justify-center w-full h-full">
+                          <svg
+                            className="w-8 h-8 text-gray-400 group-hover:text-indigo-500 transition-colors duration-300"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth={1.5}
+                              d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"
+                            />
+                          </svg>
+                        </div>
+                      </div>
+
+                      <div className="space-y-2">
+                        <h3 className="text-lg font-semibold text-gray-700 group-hover:text-indigo-600 transition-colors duration-300">
+                          {isDragOver
+                            ? "Drop your image here"
+                            : "Upload Profile Image"}
+                        </h3>
+                        <p className="text-sm text-gray-500">
+                          Drag and drop your image here, or{" "}
+                          <span className="text-indigo-600 font-medium group-hover:text-indigo-700">
+                            click to browse
+                          </span>
+                        </p>
+                        <div className="flex items-center justify-center space-x-4 text-xs text-gray-400 mt-4">
+                          <span className="flex items-center">
+                            <svg
+                              className="w-4 h-4 mr-1"
+                              fill="currentColor"
+                              viewBox="0 0 20 20"
+                            >
+                              <path
+                                fillRule="evenodd"
+                                d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z"
+                                clipRule="evenodd"
+                              />
+                            </svg>
+                            Max 5MB
+                          </span>
+                          <span className="flex items-center">
+                            <svg
+                              className="w-4 h-4 mr-1"
+                              fill="currentColor"
+                              viewBox="0 0 20 20"
+                            >
+                              <path
+                                fillRule="evenodd"
+                                d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z"
+                                clipRule="evenodd"
+                              />
+                            </svg>
+                            JPG, PNG, GIF, WebP
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <input
+                      type="file"
+                      id="image"
+                      accept="image/*"
+                      onChange={handleImageUpload}
+                      className="hidden"
+                      required
+                    />
+                  </div>
+                ) : (
+                  <div className="bg-gradient-to-br from-green-50 to-emerald-50 border-2 border-green-200 rounded-2xl p-6 transition-all duration-300">
+                    <div className="flex items-start space-x-6">
+                      <div className="relative group flex-shrink-0">
+                        <div className="relative">
+                          <Image
+                            src={imagePreview}
+                            alt="Profile Preview"
+                            width={100}
+                            height={100}
+                            className="w-24 h-24 rounded-2xl object-cover border-4 border-white shadow-xl ring-2 ring-green-200"
+                          />
+                          <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-10 rounded-2xl transition-all duration-200"></div>
+                        </div>
                         <button
                           onClick={handleRemoveImage}
-                          className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center text-sm hover:bg-red-600 transition-colors duration-200 shadow-lg opacity-0 group-hover:opacity-100"
+                          className="absolute -top-2 -right-2 bg-red-500 hover:bg-red-600 text-white rounded-full w-8 h-8 flex items-center justify-center text-lg font-bold shadow-lg transform hover:scale-110 transition-all duration-200 ring-2 ring-white"
                           title="Remove image"
                         >
                           ×
                         </button>
                       </div>
-                      <div className="flex-1">
-                        <p className="text-green-700 font-semibold">
-                          ✓ Image uploaded successfully
-                        </p>
-                        <p className="text-sm text-green-600">
-                          {imageFile?.name} •{" "}
-                          {(imageFile?.size || 0) / 1024 / 1024 < 1
-                            ? `${Math.round((imageFile?.size || 0) / 1024)} KB`
-                            : `${((imageFile?.size || 0) / 1024 / 1024).toFixed(
-                                1
-                              )} MB`}
-                        </p>
+
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-center space-x-2 mb-2">
+                          <div className="flex-shrink-0">
+                            <svg
+                              className="w-5 h-5 text-green-600"
+                              fill="currentColor"
+                              viewBox="0 0 20 20"
+                            >
+                              <path
+                                fillRule="evenodd"
+                                d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                                clipRule="evenodd"
+                              />
+                            </svg>
+                          </div>
+                          <h4 className="text-green-800 font-semibold text-sm">
+                            Image uploaded successfully
+                          </h4>
+                        </div>
+
+                        <div className="space-y-1">
+                          <p className="text-sm text-green-700 font-medium truncate">
+                            {imageFile?.name}
+                          </p>
+                          <div className="flex items-center space-x-4 text-xs text-green-600">
+                            <span className="flex items-center">
+                              <svg
+                                className="w-3 h-3 mr-1"
+                                fill="currentColor"
+                                viewBox="0 0 20 20"
+                              >
+                                <path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z" />
+                              </svg>
+                              {(imageFile?.size || 0) / 1024 / 1024 < 1
+                                ? `${Math.round(
+                                    (imageFile?.size || 0) / 1024
+                                  )} KB`
+                                : `${(
+                                    (imageFile?.size || 0) /
+                                    1024 /
+                                    1024
+                                  ).toFixed(1)} MB`}
+                            </span>
+                            <span className="flex items-center">
+                              <svg
+                                className="w-3 h-3 mr-1"
+                                fill="currentColor"
+                                viewBox="0 0 20 20"
+                              >
+                                <path
+                                  fillRule="evenodd"
+                                  d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z"
+                                  clipRule="evenodd"
+                                />
+                              </svg>
+                              {imageFile?.type.split("/")[1]?.toUpperCase()}
+                            </span>
+                          </div>
+                        </div>
+
+                        <button
+                          onClick={() =>
+                            document.getElementById("image")?.click()
+                          }
+                          className="mt-3 inline-flex items-center px-3 py-1.5 text-xs font-medium text-indigo-700 bg-indigo-100 hover:bg-indigo-200 rounded-lg transition-colors duration-200"
+                        >
+                          <svg
+                            className="w-3 h-3 mr-1"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth={2}
+                              d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"
+                            />
+                          </svg>
+                          Change Image
+                        </button>
                       </div>
                     </div>
+
+                    <input
+                      type="file"
+                      id="image"
+                      accept="image/*"
+                      onChange={handleImageUpload}
+                      className="hidden"
+                      required
+                    />
                   </div>
                 )}
-
-                <p className="text-xs text-gray-500 bg-gray-50 px-3 py-2 rounded-lg">
-                  📸 Upload a profile image (max 5MB). Supported formats: JPG,
-                  PNG, GIF, WebP
-                </p>
               </div>
             </div>
           </div>
         </div>
-
-        {/* Live Preview Section */}
-        {formData.name && imagePreview && (
-          <div className="max-w-4xl mx-auto">
-            <div className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-xl border border-white/20 p-6 sm:p-8">
-              <div className="flex items-center space-x-3 mb-6">
-                <div className="w-10 h-10 bg-gradient-to-r from-[#021373] to-[#D94814] rounded-lg flex items-center justify-center">
-                  <svg
-                    className="w-6 h-6 text-white"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
-                    />
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
-                    />
-                  </svg>
-                </div>
-                <h2 className="text-2xl font-bold text-gray-800">
-                  Live Preview
-                </h2>
-              </div>
-
-              <div className="bg-gray-100 rounded-xl p-6 overflow-x-auto">
-                <div className="flex justify-center">
-                  <div
-                    style={{
-                      transform:
-                        formData.aspectRatio === "banner"
-                          ? "scale(0.15)"
-                          : formData.aspectRatio === "story"
-                          ? "scale(0.25)"
-                          : "scale(0.35)",
-                      transformOrigin: "top center",
-                    }}
-                  >
-                    <SocialMediaPost
-                      name={formData.name}
-                      affiliation={formData.affiliation}
-                      designation={formData.designation}
-                      imageUrl={imagePreview}
-                      theme="default"
-                      layout="classic"
-                      badge={formData.badge || undefined}
-                      backgroundPattern={formData.backgroundPattern}
-                      aspectRatio={formData.aspectRatio}
-                      customMessage={formData.customMessage || undefined}
-                      customColors={{
-                        gradientStart: formData.gradientStart,
-                        gradientEnd: formData.gradientEnd,
-                      }}
-                    />
-                  </div>
-                </div>
-              </div>
-
-              <div className="mt-4 text-center">
-                <p className="text-sm text-gray-600">
-                  ✨ This is how your social media post will look! Scroll down
-                  to download.
-                </p>
-              </div>
-            </div>
-          </div>
-        )}
 
         {/* Action Section */}
         <div className="text-center space-y-6">
