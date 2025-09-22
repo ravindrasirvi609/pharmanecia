@@ -1,4 +1,3 @@
-import Image from "next/image";
 import React from "react";
 
 // Theme presets for different post styles
@@ -236,7 +235,7 @@ const SocialMediaPost = ({
             right: "20px",
             backgroundColor: selectedTheme.accentColor,
             color: "#000",
-            padding: "8px 16px",
+            padding: "8px 8px",
             borderRadius: "20px",
             fontSize: "16px",
             fontWeight: "bold",
@@ -259,10 +258,10 @@ const SocialMediaPost = ({
                 : layout === "minimal"
                 ? "72px"
                 : "60px",
-            margin: "0 0 20px",
+            margin: "0 0 10px",
             fontWeight: "bold",
             textShadow: "2px 2px 4px rgba(0,0,0,0.5)",
-            lineHeight: "1.2",
+            lineHeight: "1.0",
           }}
         >
           74th Indian Pharmaceutical Congress 2025
@@ -271,7 +270,7 @@ const SocialMediaPost = ({
         <p
           style={{
             fontSize: layout === "compact" ? "20px" : "24px",
-            margin: "0 0 20px",
+            margin: "0 0 12px",
             fontWeight: "600",
             textShadow: "1px 1px 2px rgba(0,0,0,0.5)",
           }}
@@ -282,7 +281,7 @@ const SocialMediaPost = ({
         <h2
           style={{
             fontSize: layout === "compact" ? "24px" : "28px",
-            margin: "0 0 20px",
+            margin: "0 0 12px",
             padding: "0 100px",
             lineHeight: "1.4",
             fontWeight: "bold",
@@ -296,7 +295,7 @@ const SocialMediaPost = ({
         <p
           style={{
             fontSize: layout === "compact" ? "20px" : "24px",
-            margin: "0 0 40px",
+            margin: "0 0 24px",
             fontWeight: "600",
           }}
         >
@@ -340,11 +339,17 @@ const SocialMediaPost = ({
             overflow: "hidden",
           }}
         >
-          <Image
+          <img
             src={imageUrl}
             alt={name}
-            fill
-            style={{ objectFit: "cover", objectPosition: "center" }}
+            style={{
+              objectFit: "cover",
+              objectPosition: "center",
+              width: "100%",
+              height: "100%",
+              borderRadius: "50%",
+              display: "block",
+            }}
           />
         </div>
       </div>
@@ -360,7 +365,7 @@ const SocialMediaPost = ({
                 : layout === "featured"
                 ? "56px"
                 : "48px",
-            margin: "20px 0 10px",
+            margin: "10px 0 6px",
             fontWeight: "bold",
             textShadow: "2px 2px 4px rgba(0,0,0,0.5)",
           }}
@@ -385,7 +390,7 @@ const SocialMediaPost = ({
           style={{
             color: selectedTheme.accentColor,
             fontSize: layout === "compact" ? "18px" : "20px",
-            margin: "0 0 20px",
+            margin: "0 0 10px",
             maxWidth: "80%",
             marginLeft: "auto",
             marginRight: "auto",
@@ -399,11 +404,43 @@ const SocialMediaPost = ({
             color: selectedTheme.accentColor,
             fontSize: layout === "compact" ? "32px" : "40px",
             fontWeight: "900",
-            margin: "0",
+            margin: "0 0 12px",
             textShadow: "2px 2px 4px rgba(0,0,0,0.5)",
           }}
         >
           {customMessage || "Hey! I'm Attending 74th IPC 2025"}
+        </p>
+
+        {/* Footer Information */}
+        <div
+          style={{
+            fontSize: layout === "compact" ? "14px" : "16px",
+            marginTop: "12px",
+            zIndex: 5,
+            position: "relative",
+          }}
+        >
+          <p style={{ margin: "3px 0", opacity: 0.9 }}>
+            Organized by: Indian Pharmaceutical Congress Association
+          </p>
+          <p style={{ margin: "3px 0", opacity: 0.9 }}>
+            Hosted by: Association of Pharmaceutical Teachers of India
+          </p>
+        </div>
+
+        {/* Hashtags */}
+        <p
+          style={{
+            fontSize: layout === "compact" ? "14px" : "16px",
+            marginTop: "8px",
+            color: selectedTheme.titleColor,
+            fontWeight: "600",
+            zIndex: 5,
+            position: "relative",
+          }}
+        >
+          #IPC2025 #PharmaTech #AIinPharma #PharmaceuticalCongress
+          #PharmaInnovation
         </p>
       </div>
 
@@ -430,38 +467,6 @@ const SocialMediaPost = ({
           QR CODE
         </div>
       )}
-
-      {/* Footer Information */}
-      <div
-        style={{
-          fontSize: layout === "compact" ? "14px" : "16px",
-          marginTop: layout === "minimal" ? "40px" : "30px",
-          zIndex: 5,
-          position: "relative",
-        }}
-      >
-        <p style={{ margin: "5px 0", opacity: 0.9 }}>
-          Organized by: Indian Pharmaceutical Congress Association
-        </p>
-        <p style={{ margin: "5px 0", opacity: 0.9 }}>
-          Hosted by: Association of Pharmaceutical Teachers of India
-        </p>
-      </div>
-
-      {/* Hashtags */}
-      <p
-        style={{
-          fontSize: layout === "compact" ? "14px" : "16px",
-          marginTop: "20px",
-          color: selectedTheme.titleColor,
-          fontWeight: "600",
-          zIndex: 5,
-          position: "relative",
-        }}
-      >
-        #IPC2025 #PharmaTech #AIinPharma #PharmaceuticalCongress
-        #PharmaInnovation
-      </p>
     </div>
   );
 };

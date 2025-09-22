@@ -114,6 +114,7 @@ const SocialMediaPostGenerator: React.FC<
           designation={formData.designation}
           imageUrl={imagePreview}
           theme="default"
+          layout="classic"
           badge={formData.badge || undefined}
           backgroundPattern={formData.backgroundPattern}
           aspectRatio={formData.aspectRatio}
@@ -786,6 +787,7 @@ const SocialMediaPostGenerator: React.FC<
                       designation={formData.designation}
                       imageUrl={imagePreview}
                       theme="default"
+                      layout="classic"
                       badge={formData.badge || undefined}
                       backgroundPattern={formData.backgroundPattern}
                       aspectRatio={formData.aspectRatio}
