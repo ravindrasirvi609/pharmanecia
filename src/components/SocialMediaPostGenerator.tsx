@@ -519,7 +519,7 @@ const SocialMediaPostGenerator: React.FC<
             <button
               onClick={handleDownload}
               disabled={isLoading || !formData.name.trim() || !imageFile}
-              className={`group relative px-8 py-4 bg-gradient-to-r from-[#021373] to-[#D94814] text-white font-bold rounded-2xl hover:from-[#D94814] hover:to-[#021373] transition-all duration-300 flex items-center space-x-3 shadow-xl mx-auto transform hover:scale-105 disabled:hover:scale-100 ${
+              className={`group relative px-8 py-4 bg-gradient-to-r from-[#021373] to-[#D94814] text-white font-bold rounded-2xl hover:from-[#D94814] hover:to-[#021373] transition-all duration-300 flex items-center space-x-3 shadow-xl mx-auto transform hover:scale-105 disabled:hover:scale-100 mb-8 ${
                 isLoading || !formData.name.trim() || !imageFile
                   ? "opacity-50 cursor-not-allowed"
                   : "hover:shadow-2xl"
