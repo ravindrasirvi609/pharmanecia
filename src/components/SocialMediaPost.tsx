@@ -285,7 +285,7 @@ const SocialMediaPost = ({
             margin: "0 0 8px",
             fontWeight: "600",
             textShadow: "1px 1px 2px rgba(0,0,0,0.5)",
-            color: "#dc2626",
+            color: "#ea580c",
           }}
         >
           AI &amp; TECHNOLOGY IN PHARMA: EDUCATE, INNOVATE, EMPOWER
@@ -298,8 +298,7 @@ const SocialMediaPost = ({
             padding: "0 100px",
             lineHeight: "1.4",
             fontWeight: "bold",
-            color: "#0f766e",
-            textShadow: "2px 2px 4px rgba(0,0,0,0.5)",
+            color: "#ea580c",
           }}
         >
           Venue: BIEC Bengaluru
@@ -310,7 +309,7 @@ const SocialMediaPost = ({
             fontSize: layout === "compact" ? "20px" : "24px",
             margin: "0 0 14px",
             fontWeight: "600",
-            color: "#db2777",
+            color: "#ea580c",
           }}
         >
           Dec 19-21, 2025
@@ -348,7 +347,6 @@ const SocialMediaPost = ({
                 ? "350px"
                 : "300px",
             position: "relative",
-            borderRadius: "50%",
             border: `4px solid ${selectedTheme.titleColor}`,
             padding: "4px",
             backgroundColor: selectedTheme.titleColor,
@@ -361,7 +359,6 @@ const SocialMediaPost = ({
               width: "100%",
               height: "100%",
               position: "relative",
-              borderRadius: "50%",
               overflow: "hidden",
             }}
           >
@@ -369,11 +366,10 @@ const SocialMediaPost = ({
               src={imageUrl}
               alt={name}
               style={{
-                objectFit: "cover",
+                objectFit: "contain",
                 objectPosition: "center",
                 width: "100%",
                 height: "100%",
-                borderRadius: "50%",
                 display: "block",
               }}
             />
@@ -409,7 +405,7 @@ const SocialMediaPost = ({
           {designation && (
             <p
               style={{
-                color: "#0369a1",
+                color: "#b91c1c",
                 fontSize: layout === "compact" ? "20px" : "24px",
                 margin: "0 0 10px",
                 fontWeight: "bold",
@@ -421,7 +417,7 @@ const SocialMediaPost = ({
 
           <p
             style={{
-              color: "#15803d",
+              color: "#b91c1c",
               fontSize: layout === "compact" ? "18px" : "20px",
               margin: "0",
               maxWidth: "400px",
@@ -436,7 +432,7 @@ const SocialMediaPost = ({
       <div style={{ zIndex: 5, position: "relative", marginTop: "auto" }}>
         <p
           style={{
-            color: "#7c2d12",
+            color: "#15803d",
             fontSize: layout === "compact" ? "32px" : "40px",
             fontWeight: "900",
             margin: "0 0 12px",
@@ -467,7 +463,7 @@ const SocialMediaPost = ({
           style={{
             fontSize: layout === "compact" ? "14px" : "16px",
             marginTop: "8px",
-            color: "#6b21a8",
+            color: "#15803d",
             fontWeight: "600",
           }}
         >
