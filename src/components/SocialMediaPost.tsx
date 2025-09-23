@@ -172,15 +172,27 @@ const SocialMediaPost = ({
   const layoutStyles = getLayoutStyles();
 
   // Combine gradient and pattern for background
-  const backgroundStyle =
-    backgroundPattern === "none"
-      ? {
-          background: `linear-gradient(180deg, ${selectedTheme.gradientStart} 0%, ${selectedTheme.gradientEnd} 100%)`,
-        }
-      : {
-          backgroundImage: `${backgroundPatterns[backgroundPattern]}, linear-gradient(180deg, ${selectedTheme.gradientStart} 0%, ${selectedTheme.gradientEnd} 100%)`,
-          backgroundSize: "100px 100px, cover",
-        };
+  const backgroundStyle = {
+    background: `
+      ${
+        backgroundPattern !== "none"
+          ? backgroundPatterns[backgroundPattern] + ","
+          : ""
+      }
+      linear-gradient(180deg, ${selectedTheme.gradientStart} 0%, ${
+      selectedTheme.gradientEnd
+    } 100%),
+      radial-gradient(circle at center, transparent 50%, rgba(0,0,0,0.2) 80%, rgba(0,0,0,0.4) 100%),
+      url('/bgbanglore.jpeg')
+    `,
+    backgroundSize:
+      backgroundPattern !== "none"
+        ? "100px 100px, cover, cover, cover"
+        : "cover, cover, cover",
+    backgroundPosition: "center, center, center, center",
+    backgroundBlendMode: "normal, overlay, normal, normal",
+    opacity: 0.9,
+  };
 
   return (
     <div
