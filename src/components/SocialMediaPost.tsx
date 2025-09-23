@@ -96,10 +96,10 @@ interface SocialMediaPostProps {
 }
 
 const SocialMediaPost = ({
-  name,
-  affiliation,
-  designation,
-  imageUrl,
+  name = "Dr. John Doe",
+  affiliation = "XYZ University",
+  designation = "Professor",
+  imageUrl = "https://via.placeholder.com/300",
   theme = "default",
   layout = "classic",
   badge,
@@ -251,7 +251,7 @@ const SocialMediaPost = ({
         </div>
       )}
 
-      {/* Main Content */}
+      {/* Header Content */}
       <div style={{ zIndex: 5, position: "relative" }}>
         <h1
           style={{
@@ -309,100 +309,121 @@ const SocialMediaPost = ({
         </p>
       </div>
 
-      {/* Profile Image with enhanced styling */}
+      {/* Middle Section with Image on Left and Details on Right */}
       <div
         style={{
-          width:
-            layout === "compact"
-              ? "250px"
-              : layout === "featured"
-              ? "350px"
-              : "300px",
-          height:
-            layout === "compact"
-              ? "250px"
-              : layout === "featured"
-              ? "350px"
-              : "300px",
-          margin: "0 auto",
-          position: "relative",
-          borderRadius: "50%",
-          border: `4px solid ${selectedTheme.titleColor}`,
-          padding: "4px",
-          backgroundColor: selectedTheme.titleColor,
-          boxShadow: `0 8px 16px rgba(0,0,0,0.3), 0 0 0 8px ${selectedTheme.accentColor}40`,
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          gap: layout === "compact" ? "30px" : "50px",
+          margin: "20px 0",
           zIndex: 5,
+          position: "relative",
+          flex: 1,
         }}
       >
+        {/* Profile Image on Left */}
         <div
           style={{
-            width: "100%",
-            height: "100%",
+            width:
+              layout === "compact"
+                ? "250px"
+                : layout === "featured"
+                ? "350px"
+                : "300px",
+            height:
+              layout === "compact"
+                ? "250px"
+                : layout === "featured"
+                ? "350px"
+                : "300px",
             position: "relative",
             borderRadius: "50%",
-            overflow: "hidden",
+            border: `4px solid ${selectedTheme.titleColor}`,
+            padding: "4px",
+            backgroundColor: selectedTheme.titleColor,
+            boxShadow: `0 8px 16px rgba(0,0,0,0.3), 0 0 0 8px ${selectedTheme.accentColor}40`,
+            flexShrink: 0,
           }}
         >
-          <img
-            src={imageUrl}
-            alt={name}
+          <div
             style={{
-              objectFit: "cover",
-              objectPosition: "center",
               width: "100%",
               height: "100%",
+              position: "relative",
               borderRadius: "50%",
-              display: "block",
+              overflow: "hidden",
             }}
-          />
+          >
+            <img
+              src={imageUrl}
+              alt={name}
+              style={{
+                objectFit: "cover",
+                objectPosition: "center",
+                width: "100%",
+                height: "100%",
+                borderRadius: "50%",
+                display: "block",
+              }}
+            />
+          </div>
         </div>
-      </div>
 
-      {/* Name and Details */}
-      <div style={{ zIndex: 5, position: "relative" }}>
-        <h3
+        {/* Name and Details on Right */}
+        <div
           style={{
-            color: selectedTheme.accentColor,
-            fontSize:
-              layout === "compact"
-                ? "36px"
-                : layout === "featured"
-                ? "56px"
-                : "48px",
-            margin: "4px 0 6px",
-            fontWeight: "bold",
-            textShadow: "2px 2px 4px rgba(0,0,0,0.5)",
+            textAlign: "left",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
           }}
         >
-          {name}
-        </h3>
+          <h3
+            style={{
+              color: selectedTheme.accentColor,
+              fontSize:
+                layout === "compact"
+                  ? "36px"
+                  : layout === "featured"
+                  ? "56px"
+                  : "48px",
+              margin: "0 0 10px",
+              fontWeight: "bold",
+              textShadow: "2px 2px 4px rgba(0,0,0,0.5)",
+            }}
+          >
+            {name}
+          </h3>
 
-        {designation && (
+          {designation && (
+            <p
+              style={{
+                color: selectedTheme.accentColor,
+                fontSize: layout === "compact" ? "20px" : "24px",
+                margin: "0 0 10px",
+                fontWeight: "bold",
+              }}
+            >
+              {designation}
+            </p>
+          )}
+
           <p
             style={{
               color: selectedTheme.accentColor,
-              fontSize: layout === "compact" ? "20px" : "24px",
-              margin: "0 0 10px",
-              fontWeight: "bold",
+              fontSize: layout === "compact" ? "18px" : "20px",
+              margin: "0",
+              maxWidth: "400px",
             }}
           >
-            {designation}
+            {affiliation}
           </p>
-        )}
+        </div>
+      </div>
 
-        <p
-          style={{
-            color: selectedTheme.accentColor,
-            fontSize: layout === "compact" ? "18px" : "20px",
-            margin: "0 0 10px",
-            maxWidth: "80%",
-            marginLeft: "auto",
-            marginRight: "auto",
-          }}
-        >
-          {affiliation}
-        </p>
-
+      {/* Bottom Content */}
+      <div style={{ zIndex: 5, position: "relative", marginTop: "auto" }}>
         <p
           style={{
             color: selectedTheme.accentColor,
@@ -420,8 +441,6 @@ const SocialMediaPost = ({
           style={{
             fontSize: layout === "compact" ? "14px" : "16px",
             marginTop: "12px",
-            zIndex: 5,
-            position: "relative",
           }}
         >
           <p style={{ margin: "3px 0", opacity: 0.9 }}>
@@ -439,8 +458,6 @@ const SocialMediaPost = ({
             marginTop: "8px",
             color: selectedTheme.titleColor,
             fontWeight: "600",
-            zIndex: 5,
-            position: "relative",
           }}
         >
           #IPC2025 #PharmaTech #AIinPharma #PharmaceuticalCongress
