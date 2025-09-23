@@ -33,8 +33,8 @@ const SocialMediaPostGenerator: React.FC<
     name: "",
     affiliation: "",
     designation: "",
-    gradientStart: "#300060",
-    gradientEnd: "#530060",
+    gradientStart: "#F5F5F5",
+    gradientEnd: "#FFFFFF",
     badge: "" as keyof typeof badgeTypes | "",
     backgroundPattern: "none" as keyof typeof backgroundPatterns,
     aspectRatio: "square" as "square" | "story" | "banner",
@@ -541,17 +541,17 @@ const SocialMediaPostGenerator: React.FC<
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
                   {[
                     {
-                      name: "Purple (Default)",
-                      start: "#300060",
-                      end: "#530060",
+                      name: "Light Gray (Default)",
+                      start: "#F5F5F5",
+                      end: "#FFFFFF",
                     },
-                    { name: "Blue Ocean", start: "#1e3a8a", end: "#3b82f6" },
-                    { name: "Red Sunset", start: "#7f1d1d", end: "#dc2626" },
-                    { name: "Green Forest", start: "#14532d", end: "#16a34a" },
-                    { name: "Orange Fire", start: "#9a3412", end: "#ea580c" },
-                    { name: "Pink Rose", start: "#831843", end: "#ec4899" },
-                    { name: "Teal Ocean", start: "#134e4a", end: "#14b8a6" },
-                    { name: "Indigo Night", start: "#312e81", end: "#6366f1" },
+                    { name: "Light Blue", start: "#E0F7FA", end: "#B2EBF2" },
+                    { name: "Light Green", start: "#E8F5E8", end: "#C8E6C9" },
+                    { name: "Light Orange", start: "#FFF3E0", end: "#FFE0B2" },
+                    { name: "Light Purple", start: "#F3E5F5", end: "#E1BEE7" },
+                    { name: "Light Pink", start: "#FCE4EC", end: "#F8BBD9" },
+                    { name: "Light Teal", start: "#E0F2F1", end: "#B2DFDB" },
+                    { name: "Light Indigo", start: "#E8EAF6", end: "#C5CAE9" },
                   ].map((gradient) => (
                     <button
                       key={gradient.name}
@@ -631,7 +631,7 @@ const SocialMediaPostGenerator: React.FC<
                             }))
                           }
                           className="flex-1 px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-100 focus:border-indigo-400"
-                          placeholder="#300060"
+                          placeholder="#F5F5F5"
                         />
                       </div>
                     </div>
@@ -661,7 +661,7 @@ const SocialMediaPostGenerator: React.FC<
                             }))
                           }
                           className="flex-1 px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-100 focus:border-indigo-400"
-                          placeholder="#530060"
+                          placeholder="#FFFFFF"
                         />
                       </div>
                     </div>

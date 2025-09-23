@@ -3,39 +3,39 @@ import React from "react";
 // Theme presets for different post styles
 const themes = {
   default: {
-    gradientStart: "#300060",
-    gradientEnd: "#530060",
-    titleColor: "#FFD700",
-    accentColor: "#FFA500",
-    textColor: "white",
+    gradientStart: "#F5F5F5",
+    gradientEnd: "#FFFFFF",
+    titleColor: "#1e40af",
+    accentColor: "#3730a3",
+    textColor: "#1e40af",
   },
   pharmaBlue: {
-    gradientStart: "#0A4D68",
-    gradientEnd: "#2E8B8B",
-    titleColor: "#00E5FF",
-    accentColor: "#FFF176",
-    textColor: "white",
+    gradientStart: "#E0F7FA",
+    gradientEnd: "#B2EBF2",
+    titleColor: "#0c4a6e",
+    accentColor: "#0369a1",
+    textColor: "#0c4a6e",
   },
   medicalGreen: {
-    gradientStart: "#1B5E20",
-    gradientEnd: "#4CAF50",
-    titleColor: "#C8E6C9",
-    accentColor: "#FFEB3B",
-    textColor: "white",
+    gradientStart: "#E8F5E8",
+    gradientEnd: "#C8E6C9",
+    titleColor: "#166534",
+    accentColor: "#15803d",
+    textColor: "#166534",
   },
   innovationOrange: {
-    gradientStart: "#E65100",
-    gradientEnd: "#FF9800",
-    titleColor: "#FFF3E0",
-    accentColor: "#FFEB3B",
-    textColor: "white",
+    gradientStart: "#FFF3E0",
+    gradientEnd: "#FFE0B2",
+    titleColor: "#ea580c",
+    accentColor: "#c2410c",
+    textColor: "#ea580c",
   },
   royal: {
-    gradientStart: "#4A148C",
-    gradientEnd: "#7B1FA2",
-    titleColor: "#FFD700",
-    accentColor: "#FF6F00",
-    textColor: "white",
+    gradientStart: "#F3E5F5",
+    gradientEnd: "#E1BEE7",
+    titleColor: "#7c3aed",
+    accentColor: "#6d28d9",
+    textColor: "#7c3aed",
   },
 };
 
@@ -267,7 +267,6 @@ const SocialMediaPost = ({
       <div style={{ zIndex: 5, position: "relative" }}>
         <h1
           style={{
-            color: selectedTheme.titleColor,
             fontSize:
               layout === "compact"
                 ? "48px"
@@ -280,7 +279,11 @@ const SocialMediaPost = ({
             lineHeight: "1.2",
           }}
         >
-          74th Indian Pharmaceutical Congress 2025
+          <span style={{ color: "#8B4513" }}>74th</span>{" "}
+          <span style={{ color: "#1e40af" }}>Indian</span>{" "}
+          <span style={{ color: "#166534" }}>Pharmaceutical</span>{" "}
+          <span style={{ color: "#7c3aed" }}>Congress</span>{" "}
+          <span style={{ color: "#ea580c" }}>2025</span>
         </h1>
 
         <p
@@ -289,6 +292,7 @@ const SocialMediaPost = ({
             margin: "0 0 8px",
             fontWeight: "600",
             textShadow: "1px 1px 2px rgba(0,0,0,0.5)",
+            color: "#dc2626",
           }}
         >
           AI &amp; TECHNOLOGY IN PHARMA: EDUCATE, INNOVATE, EMPOWER
@@ -301,7 +305,7 @@ const SocialMediaPost = ({
             padding: "0 100px",
             lineHeight: "1.4",
             fontWeight: "bold",
-            color: selectedTheme.titleColor,
+            color: "#0f766e",
             textShadow: "2px 2px 4px rgba(0,0,0,0.5)",
           }}
         >
@@ -313,6 +317,7 @@ const SocialMediaPost = ({
             fontSize: layout === "compact" ? "20px" : "24px",
             margin: "0 0 14px",
             fontWeight: "600",
+            color: "#db2777",
           }}
         >
           Dec 19-21, 2025
@@ -393,7 +398,7 @@ const SocialMediaPost = ({
         >
           <h3
             style={{
-              color: selectedTheme.accentColor,
+              color: "#b91c1c",
               fontSize:
                 layout === "compact"
                   ? "36px"
@@ -411,7 +416,7 @@ const SocialMediaPost = ({
           {designation && (
             <p
               style={{
-                color: selectedTheme.accentColor,
+                color: "#0369a1",
                 fontSize: layout === "compact" ? "20px" : "24px",
                 margin: "0 0 10px",
                 fontWeight: "bold",
@@ -423,7 +428,7 @@ const SocialMediaPost = ({
 
           <p
             style={{
-              color: selectedTheme.accentColor,
+              color: "#15803d",
               fontSize: layout === "compact" ? "18px" : "20px",
               margin: "0",
               maxWidth: "400px",
@@ -438,7 +443,7 @@ const SocialMediaPost = ({
       <div style={{ zIndex: 5, position: "relative", marginTop: "auto" }}>
         <p
           style={{
-            color: selectedTheme.accentColor,
+            color: "#7c2d12",
             fontSize: layout === "compact" ? "32px" : "40px",
             fontWeight: "900",
             margin: "0 0 12px",
@@ -453,6 +458,7 @@ const SocialMediaPost = ({
           style={{
             fontSize: layout === "compact" ? "14px" : "16px",
             marginTop: "12px",
+            color: "#4b5563",
           }}
         >
           <p style={{ margin: "3px 0", opacity: 0.9 }}>
@@ -468,7 +474,7 @@ const SocialMediaPost = ({
           style={{
             fontSize: layout === "compact" ? "14px" : "16px",
             marginTop: "8px",
-            color: selectedTheme.titleColor,
+            color: "#6b21a8",
             fontWeight: "600",
           }}
         >
