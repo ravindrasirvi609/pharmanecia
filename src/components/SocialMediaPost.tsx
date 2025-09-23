@@ -238,30 +238,23 @@ const SocialMediaPost = ({
         }}
       />
 
-      {/* Badge */}
-      {badge && (
-        <div
-          style={{
-            position: "absolute",
-            top: "12px",
-            right: "20px",
-            backgroundColor: selectedTheme.accentColor,
-            color: "#000",
-            padding: "8px 8px",
-            borderRadius: "20px",
-            fontSize: "16px",
-            fontWeight: "bold",
-            zIndex: 10,
-            boxShadow: "0 4px 8px rgba(0,0,0,0.3)",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            minHeight: "10px",
-          }}
-        >
-          {badgeTypes[badge]}
-        </div>
-      )}
+      {/* APTI Logo */}
+      <img
+        src="/apti_logo.png"
+        alt="APTI Logo"
+        style={{
+          position: "absolute",
+          backgroundColor: "white",
+          borderRadius: "10px",
+          top: "20px",
+          right: "20px",
+          width: "120px",
+          height: "120px",
+          objectFit: "contain",
+          zIndex: 10,
+          opacity: 0.9,
+        }}
+      />
 
       {/* Header Content */}
       <div style={{ zIndex: 5, position: "relative" }}>
@@ -279,10 +272,10 @@ const SocialMediaPost = ({
             lineHeight: "1.2",
           }}
         >
-          <span style={{ color: "#8B4513" }}>74th</span>{" "}
-          <span style={{ color: "#1e40af" }}>Indian</span>{" "}
-          <span style={{ color: "#166534" }}>Pharmaceutical</span>{" "}
-          <span style={{ color: "#7c3aed" }}>Congress</span>{" "}
+          <span style={{ color: "#ea580c" }}>74th</span>{" "}
+          <span style={{ color: "#ea580c" }}>Indian</span>{" "}
+          <span style={{ color: "#ea580c" }}>Pharmaceutical</span>{" "}
+          <span style={{ color: "#ea580c" }}>Congress</span>{" "}
           <span style={{ color: "#ea580c" }}>2025</span>
         </h1>
 
@@ -527,7 +520,7 @@ const SocialMediaPost = ({
           position: "absolute",
           backgroundColor: "white",
           borderRadius: "10px",
-          bottom: "20px",
+          top: "20px",
           left: "20px",
           width: "120px",
           height: "120px",
