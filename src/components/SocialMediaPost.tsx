@@ -465,29 +465,59 @@ const SocialMediaPost = ({
         </p>
       </div>
 
-      {/* QR Code */}
-      {showQRCode && qrCodeUrl && (
-        <div
-          style={{
-            position: "absolute",
-            bottom: "20px",
-            left: "20px",
-            width: "100px",
-            height: "100px",
-            backgroundColor: "white",
-            borderRadius: "8px",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            fontSize: "12px",
-            color: "#000",
-            zIndex: 10,
-            boxShadow: "0 4px 8px rgba(0,0,0,0.3)",
-          }}
-        >
-          QR CODE
-        </div>
-      )}
+      {/* Powered By Text */}
+      <div
+        style={{
+          position: "absolute",
+          bottom: "150px",
+          right: "22px",
+          color: selectedTheme.titleColor,
+          fontSize: "14px",
+          fontWeight: "bold",
+          textShadow: "1px 1px 2px rgba(0,0,0,0.5)",
+          zIndex: 10,
+          textAlign: "center",
+          width: "120px",
+        }}
+      >
+        Powered By
+      </div>
+
+      {/* OPF Logo */}
+      <img
+        src="/opflogo.png"
+        alt="OPF Logo"
+        style={{
+          position: "absolute",
+          backgroundColor: "white",
+          borderRadius: "10px",
+          bottom: "20px",
+          right: "20px",
+          width: "120px",
+          height: "120px",
+          objectFit: "contain",
+          zIndex: 10,
+          opacity: 0.9,
+        }}
+      />
+
+      {/* IPC Logo */}
+      <img
+        src="/ipclogo.jpg"
+        alt="IPC Logo"
+        style={{
+          position: "absolute",
+          backgroundColor: "white",
+          borderRadius: "10px",
+          bottom: "20px",
+          left: "20px",
+          width: "120px",
+          height: "120px",
+          objectFit: "contain",
+          zIndex: 10,
+          opacity: 0.9,
+        }}
+      />
     </div>
   );
 };
