@@ -262,10 +262,10 @@ const SocialMediaPost = ({
                 : layout === "minimal"
                 ? "72px"
                 : "60px",
-            margin: "0 0 14px",
+            margin: "0 0 28px",
             fontWeight: "bold",
             textShadow: "2px 2px 4px rgba(0,0,0,0.5)",
-            lineHeight: "1.0",
+            lineHeight: "1.2",
           }}
         >
           74th Indian Pharmaceutical Congress 2025
