@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import Html2Canvas from "html2canvas";
 import Image from "next/image";
-import SocialMediaPost from "./SocialMediaPost";
+import SocialMediaPost from "./NewSocialMediaPost";
 
 const badgeTypes = {
   speaker: "Keynote Speaker",
