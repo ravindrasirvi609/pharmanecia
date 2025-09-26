@@ -281,7 +281,7 @@ const SocialMediaPost = ({
           flex: 1,
         }}
       >
-        {/* Profile Image on Left */}
+        {/* Profile Image on Left - Fixed to prevent stretching */}
         <div
           style={{
             width:
@@ -302,6 +302,7 @@ const SocialMediaPost = ({
             backgroundColor: selectedTheme.titleColor,
             boxShadow: `0 8px 16px rgba(0,0,0,0.3), 0 0 0 8px ${selectedTheme.accentColor}40`,
             flexShrink: 0,
+            borderRadius: "8px",
           }}
         >
           <div
@@ -310,17 +311,20 @@ const SocialMediaPost = ({
               height: "100%",
               position: "relative",
               overflow: "hidden",
+              borderRadius: "4px",
+              backgroundColor: "#f3f4f6",
             }}
           >
             <img
               src={imageUrl}
               alt={name}
               style={{
-                objectFit: "contain",
-                objectPosition: "center",
                 width: "100%",
                 height: "100%",
+                objectFit: "cover", // Changed from 'contain' to 'cover'
+                objectPosition: "center", // Centers the image
                 display: "block",
+                borderRadius: "4px",
               }}
             />
           </div>

@@ -348,160 +348,6 @@ const SocialMediaPostGenerator: React.FC<
                 </div>
               </div>
 
-              {/* Professional Badge Selection */}
-              <div className="space-y-4">
-                <label className="block text-sm font-semibold text-gray-700">
-                  🏷️ Professional Badge (Optional)
-                </label>
-                <select
-                  name="badge"
-                  value={formData.badge}
-                  onChange={handleInputChange}
-                  className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-4 focus:ring-indigo-100 focus:border-indigo-400 transition-all duration-200 text-gray-800"
-                >
-                  <option value="">No Badge</option>
-                  {Object.entries(badgeTypes).map(([key, label]) => (
-                    <option key={key} value={key}>
-                      {label}
-                    </option>
-                  ))}
-                </select>
-              </div>
-
-              {/* Background Pattern Selection */}
-              <div className="space-y-4">
-                <label className="block text-sm font-semibold text-gray-700">
-                  🎭 Background Pattern
-                </label>
-                <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
-                  {Object.entries(backgroundPatterns).map(([key, pattern]) => (
-                    <button
-                      key={key}
-                      type="button"
-                      onClick={() => {
-                        setFormData((prev) => ({
-                          ...prev,
-                          backgroundPattern:
-                            key as keyof typeof backgroundPatterns,
-                        }));
-                      }}
-                      className={`p-3 rounded-xl border-2 transition-all duration-200 bg-white ${
-                        formData.backgroundPattern === key
-                          ? "border-indigo-400 ring-4 ring-indigo-100"
-                          : "border-gray-200 hover:border-gray-300"
-                      }`}
-                    >
-                      <div className="text-center">
-                        <div className="text-sm font-semibold text-gray-800 capitalize">
-                          {key}
-                        </div>
-                        <div className="text-xs text-gray-500 mt-1">
-                          {key === "none"
-                            ? "Clean"
-                            : key === "dots"
-                            ? "Subtle dots"
-                            : key === "lines"
-                            ? "Diagonal lines"
-                            : key === "hexagon"
-                            ? "Scientific"
-                            : "Molecular"}
-                        </div>
-                      </div>
-                      {formData.backgroundPattern === key && (
-                        <div className="absolute -top-1 -right-1 bg-indigo-500 text-white rounded-full w-5 h-5 flex items-center justify-center">
-                          <svg
-                            className="w-2 h-2"
-                            fill="currentColor"
-                            viewBox="0 0 20 20"
-                          >
-                            <path
-                              fillRule="evenodd"
-                              d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                              clipRule="evenodd"
-                            />
-                          </svg>
-                        </div>
-                      )}
-                    </button>
-                  ))}
-                </div>
-              </div>
-
-              {/* Aspect Ratio Selection */}
-              <div className="space-y-4">
-                <label className="block text-sm font-semibold text-gray-700">
-                  📱 Social Media Format
-                </label>
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                  <button
-                    type="button"
-                    onClick={() =>
-                      setFormData((prev) => ({
-                        ...prev,
-                        aspectRatio: "square",
-                      }))
-                    }
-                    className={`p-4 rounded-xl border-2 transition-all duration-200 ${
-                      formData.aspectRatio === "square"
-                        ? "border-indigo-400 ring-4 ring-indigo-100 bg-indigo-50"
-                        : "border-gray-200 hover:border-gray-300 bg-white"
-                    }`}
-                  >
-                    <div className="text-center">
-                      <div className="w-12 h-12 bg-gray-300 rounded mx-auto mb-2"></div>
-                      <div className="font-semibold text-gray-800">Square</div>
-                      <div className="text-xs text-gray-500">
-                        Instagram • LinkedIn
-                      </div>
-                      <div className="text-xs text-gray-400">1080 × 1080</div>
-                    </div>
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() =>
-                      setFormData((prev) => ({ ...prev, aspectRatio: "story" }))
-                    }
-                    className={`p-4 rounded-xl border-2 transition-all duration-200 ${
-                      formData.aspectRatio === "story"
-                        ? "border-indigo-400 ring-4 ring-indigo-100 bg-indigo-50"
-                        : "border-gray-200 hover:border-gray-300 bg-white"
-                    }`}
-                  >
-                    <div className="text-center">
-                      <div className="w-8 h-12 bg-gray-300 rounded mx-auto mb-2"></div>
-                      <div className="font-semibold text-gray-800">Story</div>
-                      <div className="text-xs text-gray-500">
-                        Instagram • Facebook
-                      </div>
-                      <div className="text-xs text-gray-400">1080 × 1920</div>
-                    </div>
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() =>
-                      setFormData((prev) => ({
-                        ...prev,
-                        aspectRatio: "banner",
-                      }))
-                    }
-                    className={`p-4 rounded-xl border-2 transition-all duration-200 ${
-                      formData.aspectRatio === "banner"
-                        ? "border-indigo-400 ring-4 ring-indigo-100 bg-indigo-50"
-                        : "border-gray-200 hover:border-gray-300 bg-white"
-                    }`}
-                  >
-                    <div className="text-center">
-                      <div className="w-12 h-8 bg-gray-300 rounded mx-auto mb-2"></div>
-                      <div className="font-semibold text-gray-800">Banner</div>
-                      <div className="text-xs text-gray-500">
-                        LinkedIn • Twitter
-                      </div>
-                      <div className="text-xs text-gray-400">1920 × 1080</div>
-                    </div>
-                  </button>
-                </div>
-              </div>
-
               {/* Custom Message */}
               <div className="space-y-3">
                 <label
@@ -529,157 +375,6 @@ const SocialMediaPostGenerator: React.FC<
                   Leave empty to use default message: &quot;Hey! I&apos;m
                   Attending 74th IPC 2025&quot;
                 </p>
-              </div>
-
-              {/* Background Gradient Selection */}
-              <div className="space-y-4">
-                <label className="block text-sm font-semibold text-gray-700">
-                  Background Gradient
-                </label>
-
-                {/* Predefined Gradient Options */}
-                <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-                  {[
-                    {
-                      name: "Light Gray (Default)",
-                      start: "#F5F5F5",
-                      end: "#FFFFFF",
-                    },
-                    { name: "Light Blue", start: "#E0F7FA", end: "#B2EBF2" },
-                    { name: "Light Green", start: "#E8F5E8", end: "#C8E6C9" },
-                    { name: "Light Orange", start: "#FFF3E0", end: "#FFE0B2" },
-                    { name: "Light Purple", start: "#F3E5F5", end: "#E1BEE7" },
-                    { name: "Light Pink", start: "#FCE4EC", end: "#F8BBD9" },
-                    { name: "Light Teal", start: "#E0F2F1", end: "#B2DFDB" },
-                    { name: "Light Indigo", start: "#E8EAF6", end: "#C5CAE9" },
-                  ].map((gradient) => (
-                    <button
-                      key={gradient.name}
-                      type="button"
-                      onClick={() => {
-                        setFormData((prev) => ({
-                          ...prev,
-                          gradientStart: gradient.start,
-                          gradientEnd: gradient.end,
-                        }));
-                      }}
-                      className={`relative p-3 rounded-xl border-2 transition-all duration-200 ${
-                        formData.gradientStart === gradient.start &&
-                        formData.gradientEnd === gradient.end
-                          ? "border-indigo-400 ring-4 ring-indigo-100"
-                          : "border-gray-200 hover:border-gray-300"
-                      }`}
-                      style={{
-                        background: `linear-gradient(135deg, ${gradient.start} 0%, ${gradient.end} 100%)`,
-                      }}
-                    >
-                      <div className="h-8 rounded-lg"></div>
-                      <div className="absolute inset-0 bg-black bg-opacity-20 rounded-xl flex items-center justify-center">
-                        <span className="text-white text-xs font-medium text-center px-1">
-                          {gradient.name}
-                        </span>
-                      </div>
-                      {formData.gradientStart === gradient.start &&
-                        formData.gradientEnd === gradient.end && (
-                          <div className="absolute -top-1 -right-1 bg-indigo-500 text-white rounded-full w-6 h-6 flex items-center justify-center">
-                            <svg
-                              className="w-3 h-3"
-                              fill="currentColor"
-                              viewBox="0 0 20 20"
-                            >
-                              <path
-                                fillRule="evenodd"
-                                d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                                clipRule="evenodd"
-                              />
-                            </svg>
-                          </div>
-                        )}
-                    </button>
-                  ))}
-                </div>
-
-                {/* Custom Color Inputs */}
-                <div className="bg-gray-50 rounded-xl p-4 space-y-3">
-                  <h4 className="text-sm font-semibold text-gray-700">
-                    Custom Gradient Colors
-                  </h4>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div className="space-y-2">
-                      <label
-                        htmlFor="gradientStart"
-                        className="block text-xs font-medium text-gray-600"
-                      >
-                        Start Color
-                      </label>
-                      <div className="flex items-center space-x-2">
-                        <input
-                          type="color"
-                          id="gradientStart"
-                          name="gradientStart"
-                          value={formData.gradientStart}
-                          onChange={handleInputChange}
-                          className="w-12 h-10 border-2 border-gray-200 rounded-lg cursor-pointer"
-                        />
-                        <input
-                          type="text"
-                          value={formData.gradientStart}
-                          onChange={(e) =>
-                            setFormData((prev) => ({
-                              ...prev,
-                              gradientStart: e.target.value,
-                            }))
-                          }
-                          className="flex-1 px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-100 focus:border-indigo-400"
-                          placeholder="#F5F5F5"
-                        />
-                      </div>
-                    </div>
-                    <div className="space-y-2">
-                      <label
-                        htmlFor="gradientEnd"
-                        className="block text-xs font-medium text-gray-600"
-                      >
-                        End Color
-                      </label>
-                      <div className="flex items-center space-x-2">
-                        <input
-                          type="color"
-                          id="gradientEnd"
-                          name="gradientEnd"
-                          value={formData.gradientEnd}
-                          onChange={handleInputChange}
-                          className="w-12 h-10 border-2 border-gray-200 rounded-lg cursor-pointer"
-                        />
-                        <input
-                          type="text"
-                          value={formData.gradientEnd}
-                          onChange={(e) =>
-                            setFormData((prev) => ({
-                              ...prev,
-                              gradientEnd: e.target.value,
-                            }))
-                          }
-                          className="flex-1 px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-100 focus:border-indigo-400"
-                          placeholder="#FFFFFF"
-                        />
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Gradient Preview */}
-                  <div className="mt-3">
-                    <label className="block text-xs font-medium text-gray-600 mb-2">
-                      Preview
-                    </label>
-                    <div
-                      className="h-16 rounded-lg border-2 border-gray-200"
-                      style={{
-                        background: `linear-gradient(180deg, ${formData.gradientStart} 0%, ${formData.gradientEnd} 100%)`,
-                      }}
-                    ></div>
-                  </div>
-                </div>
               </div>
 
               {/* Modern Image Upload Field */}
@@ -766,6 +461,20 @@ const SocialMediaPostGenerator: React.FC<
                               />
                             </svg>
                             JPG, PNG, GIF, WebP
+                          </span>
+                          <span className="flex items-center">
+                            <svg
+                              className="w-4 h-4 mr-1"
+                              fill="currentColor"
+                              viewBox="0 0 20 20"
+                            >
+                              <path
+                                fillRule="evenodd"
+                                d="M3 4a1 1 0 011-1h12a1 1 0 010 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 010 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 010 2H4a1 1 0 01-1-1z"
+                                clipRule="evenodd"
+                              />
+                            </svg>
+                            1:1 aspect ratio
                           </span>
                         </div>
                       </div>
