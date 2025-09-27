@@ -231,11 +231,11 @@ const SocialMediaPost = ({
 
         <p
           style={{
-            fontSize: layout === "compact" ? "20px" : "24px",
+            fontSize: layout === "compact" ? "28px" : "32px",
             margin: "0 0 8px",
             fontWeight: "800",
             textShadow: "1px 1px 2px rgba(0,0,0,0.5)",
-            color: "#1e3a8a",
+            color: "#4b5563",
           }}
         >
           AI &amp; TECHNOLOGY IN PHARMA: EDUCATE, INNOVATE, EMPOWER
