@@ -179,7 +179,7 @@ const SocialMediaPost = ({
           ? backgroundPatterns[backgroundPattern] + ","
           : ""
       }
-      url('/JOB FAIR.png')
+      url('/IPC Post.png')
     `,
     backgroundSize:
       backgroundPattern !== "none" ? "100px 100px, cover" : "cover",
@@ -233,9 +233,9 @@ const SocialMediaPost = ({
           style={{
             fontSize: layout === "compact" ? "20px" : "24px",
             margin: "0 0 8px",
-            fontWeight: "600",
+            fontWeight: "800",
             textShadow: "1px 1px 2px rgba(0,0,0,0.5)",
-            color: "#ea580c",
+            color: "#1e3a8a",
           }}
         >
           AI &amp; TECHNOLOGY IN PHARMA: EDUCATE, INNOVATE, EMPOWER
@@ -248,7 +248,7 @@ const SocialMediaPost = ({
             padding: "0 100px",
             lineHeight: "1.4",
             fontWeight: "bold",
-            color: "#ea580c",
+            color: "#1e3a8a",
           }}
         >
           Venue: BIEC Bengaluru
@@ -259,7 +259,7 @@ const SocialMediaPost = ({
             fontSize: layout === "compact" ? "20px" : "24px",
             margin: "0 0 14px",
             fontWeight: "600",
-            color: "#ea580c",
+            color: "#1e3a8a",
           }}
         >
           Dec 19-21, 2025
