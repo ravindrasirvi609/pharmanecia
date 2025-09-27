@@ -235,7 +235,7 @@ const SocialMediaPost = ({
             margin: "0 0 8px",
             fontWeight: "800",
             textShadow: "1px 1px 2px rgba(0,0,0,0.5)",
-            color: "#4b5563",
+            color: "#15803d",
           }}
         >
           AI &amp; TECHNOLOGY IN PHARMA: EDUCATE, INNOVATE, EMPOWER
